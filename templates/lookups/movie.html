@@ -1,0 +1,10 @@
+{% if movie.image_url %}
+<div style="float:left; max-width:128px; max-height: 128px;">
+    <img src="{{ movie.image_url }}" style="max-height: 128px;">
+</div>
+{% endif %}
+<div style="float: left;">
+    {{ movie.title_en|safe }} ({{ movie.year }})
+    <em>{{ movie.imdb_id }}</em>
+</div>
+<div style="clear: both;"></div>

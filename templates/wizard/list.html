@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% block body %}
+    <script src="{{ STATIC_URL }}js/wizard.js"></script>
+    <div class="container">
+        <div class="row">
+            {% for movie in movies %}
+                <div class="span4">
+                    {% include 'wizard/movie.html' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

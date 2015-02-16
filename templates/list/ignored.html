@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% block body %}
+<div class="row">
+    <div class="span4">
+        <ul class="nav nav-list">
+          <li class="nav-header">{% trans "Friends" %}</li>
+          {% for friend in user.friends.all %}
+          <li><a href="/list/{{ friend.username }}/watched/">{{ friend.username }}</a></li>
+          {% endfor %}
+        </ul>
+    </div>
+    <div class="span8">
+        <h3>{{ user }}'s ignored movies</h3>
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="/list/{{ user.username }}/watched/">{% trans 'Watched' %}</a>
+          </li>
+          <li><a href="/list/{{ user.username }}/plantowatch/">{% trans 'Plan to watch' %}</a></li>
+          <li class="active"><a href="/list/{{ user.username }}/ignored/">{% trans 'Ignored' %}</a></li>
+        </ul>
+        {% include 'list/stats.html' %}
+        {% include 'list/list.html' %}
+    </div>
+</div>
+{% endblock %}

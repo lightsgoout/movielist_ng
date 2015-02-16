@@ -1,0 +1,5 @@
+SPHINX_SEARCH = 'Sphinx search'
+
+ENABLED_FEATURES = {
+    SPHINX_SEARCH,
+}

@@ -1,0 +1,4 @@
+{% load i18n %}
+{% blocktrans %}
+Activate your movies.musdb.net account - you have {{ expiration_days }} days!
+{% endblocktrans %}

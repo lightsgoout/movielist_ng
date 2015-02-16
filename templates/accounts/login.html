@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% block body %}
+    <div class="container" style="width: 562px">
+    <h6>{% trans 'Enter your login and password' %}</h6>
+        <form action="{% url 'login' %}" method="POST" style="width:277px;">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+            {% if error %}
+                <div class="alert alert-error" style="width: 265px;">
+                <p>{{ error }}</p>
+                </div>
+            {% endif %}
+            <div class="alert alert-info" style="float: left; padding: 8px 35px 8px 14px;">{% trans "Don't have an account?" %} <a href="/accounts/register/">{% trans 'Sign up' %}</a></div>
+            <p style="float: right;"><input class="btn btn-mini" type="submit" value="Sign in" style=""></p>
+        </form>
+    <h6 style="clear: both;">{% trans 'Sign in via social networks' %}</h6>
+<link rel="stylesheet" href="{{ STATIC_URL }}css/social-buttons.css">
+<a class="btn btn-mini btn-facebook" href="{% url "socialauth_begin" "facebook" %}"><i class="icon-facebook"></i> | {% trans 'Connect with Facebook' %}</a>
+<a class="btn btn-mini btn-github" href="{% url "socialauth_begin" "github" %}"><i class="icon-github"></i> | {% trans 'Connect with Github' %}</a>
+<a class="btn btn-mini btn-vk" href="{% url "socialauth_begin" "vk" %}"><i class="icon-vk"></i> | {% trans 'Connect with VK' %}</a>
+<a class="btn btn-mini btn-twitter" href="{% url "socialauth_begin" "twitter" %}"><i class="icon-twitter"></i> | {% trans 'Connect with Twitter' %}</a>
+
+   </div>
+{% endblock %}

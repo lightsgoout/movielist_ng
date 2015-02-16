@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% block body %}
+    <div class="container">
+        <div class="hero-unit">
+          <h1>{% trans 'Make your own movie list' %}</h1>
+          <p>{% trans 'If your list gets big you could brag about it.' %}</p>
+          <p>{% trans 'Also achievements.' %}</p>
+          <p>
+            <a class="btn btn-primary btn-large">
+              Learn more
+            </a>
+          </p>
+        </div>
+   </div>
+{% endblock %}

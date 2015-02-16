@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <img src="{{ movie.image_url }}">
+            </div>
+            <div class="span8">
+                <h1>{{ movie.title }}</h1>
+                <blockquote>{{ movie.full_plot}}</blockquote>
+                <div class="movie-info">
+            <div class="movie-genres">
+
+                    <a href="/genre//"><span class="label label-info"></span></a>
+
+                    <a href="/genre//"><span class="label label-info"></span></a>
+
+                    <a href="/genre//"><span class="label label-info"></span></a>
+
+            </div>
+            <div class="movie-director">
+                Director:
+
+                    <a href="/person/10120/">Christopher Nolan</a>
+
+            </div>
+            <div class="movie-actors">
+                Starring:
+
+                    <a href="/person/2107/">Michael Caine</a>,
+
+                    <a href="/person/5417/">Christian Bale</a>,
+
+                    <a href="/person/10066/">Heath Ledger</a>,
+
+                    <a href="/person/9089/">Aaron Eckhart</a>
+
+            </div>
+        </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
