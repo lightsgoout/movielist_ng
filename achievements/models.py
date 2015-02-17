@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import m2m_changed, post_save
@@ -76,6 +77,10 @@ def is_achievement_satisfied(achievement, user):
     @type achievement Achievement
     @type user accounts.models.MovielistUser
     """
+    if achievement.condition_deadline:
+        if datetime.date.today() > achievement.condition_deadline:
+            return False
+
     if achievement.condition_movie:
         if not user.movies.filter(usertomovie__status=UserToMovie.WATCHED).exists():
             return False

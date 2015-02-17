@@ -8,12 +8,14 @@ django-model-utils==2.2
 django-registration-redux==1.1
 django-shell-plus==1.1.5
 django-social-auth==0.7.28
+freezegun==0.3.1
 gnureadline==6.3.3
 httplib2==0.9
 ipdb==0.8
 ipython==2.4.1
 model-mommy==1.2.3
 oauth2==1.5.211
+python-dateutil==2.4.0
 python-openid==2.2.5
 requests==2.5.1
 six==1.9.0
