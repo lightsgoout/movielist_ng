@@ -130,7 +130,7 @@ class Command(BaseCommand):
                                     role_name = name[name.index("(") + 1:name.rindex(")")].strip()
                                     writer_role, _ = WriterRole.objects.get_or_create(
                                         name_en=role_name)
-                                    person_name = name[0:name.index("(")]
+                                    person_name = name[0:name.index("(")].strip()
 
                                 person, _ = Person.objects.get_or_create(name_en=person_name)
                                 WriterToMovie.objects.create(
