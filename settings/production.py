@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'django_extensions',
 
+    'achievements',
     'accounts',
     'common',
     'imports',
@@ -124,5 +125,6 @@ OMDB_LOGIN = 'enderstd@gmail.com'
 ACCOUNT_ACTIVATION_DAYS = 7
 
 AJAX_LOOKUP_CHANNELS = {
-    'movie': ('movies.lookups', 'MovieLookup')
+    'movie': ('movies.lookups', 'MovieLookup'),
+    'person': ('movies.lookups', 'PersonLookup'),
 }

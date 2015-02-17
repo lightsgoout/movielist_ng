@@ -4,7 +4,7 @@ from django.db import models
 class Person(models.Model):
     name_en = models.CharField(max_length=255, unique=True)
     name_ru = models.CharField(max_length=255, blank=True)
-    birth_date = models.DateField(null=True)
+    birth_date = models.DateField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name_en

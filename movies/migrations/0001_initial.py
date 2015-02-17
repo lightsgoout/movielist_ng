@@ -2,8 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 import django.core.validators
+import common.fields
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -60,7 +61,7 @@ class Migration(migrations.Migration):
                 ('rating_imdb', models.DecimalField(db_index=True, null=True, max_digits=3, decimal_places=1, blank=True)),
                 ('rating_metacritic', models.PositiveSmallIntegerField(blank=True, null=True, db_index=True, validators=[django.core.validators.MaxValueValidator(100), django.core.validators.MinValueValidator(0)])),
                 ('image_imdb', models.URLField(max_length=512, blank=True)),
-                ('rated', models.CharField(blank=True, max_length=5, db_index=True, choices=[(b'G', b'G'), (b'PG', b'PG'), (b'PG-13', b'PG-13'), (b'R', b'R'), (b'NC-17', b'NC-17')])),
+                ('rated', common.fields.MovieRatedField(blank=True, max_length=5, db_index=True, choices=[(b'G', b'G'), (b'PG', b'PG'), (b'PG-13', b'PG-13'), (b'R', b'R'), (b'NC-17', b'NC-17')])),
                 ('votes_imdb', models.PositiveIntegerField(db_index=True, null=True, blank=True)),
                 ('votes_kinopoisk', models.PositiveIntegerField(db_index=True, null=True, blank=True)),
                 ('is_trashed', models.BooleanField(default=False, db_index=True)),
@@ -87,7 +88,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name_en', models.CharField(unique=True, max_length=255)),
                 ('name_ru', models.CharField(max_length=255, blank=True)),
-                ('birth_date', models.DateField(null=True)),
+                ('birth_date', models.DateField(null=True, blank=True)),
             ],
             options={
             },

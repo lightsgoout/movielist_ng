@@ -3,14 +3,12 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.utils.timezone
-from django.conf import settings
 import django.core.validators
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('common', '0001_initial'),
     ]
 
     operations = [
@@ -25,8 +23,6 @@ class Migration(migrations.Migration):
                 ('date_of_birth', models.DateField()),
                 ('is_active', models.BooleanField(default=True)),
                 ('is_admin', models.BooleanField(default=False)),
-                ('country', models.ForeignKey(blank=True, to='common.Country', null=True)),
-                ('friends', models.ManyToManyField(related_name='friends_rel_+', to=settings.AUTH_USER_MODEL, blank=True)),
             ],
             options={
                 'abstract': False,

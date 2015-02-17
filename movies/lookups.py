@@ -3,19 +3,18 @@ from django.db.models import Q
 from django.template import Context
 from django.template.loader import get_template
 from common.feature_framework import feature_enabled
-from movies.models import Movie
+from movies import models
 from settings.features import SPHINX_SEARCH
 
 
 class MovieLookup(LookupChannel):
-
-    model = Movie
+    model = models.Movie
 
     def get_query(self, query, request):
         if feature_enabled(SPHINX_SEARCH):
-            results = Movie.search.query(query)
+            results = models.Movie.search.query(query)
         else:
-            results = Movie.objects.filter(
+            results = models.Movie.objects.filter(
                 Q(title_en__icontains=query) |
                 Q(title_ru__icontains=query)
             )
@@ -23,7 +22,7 @@ class MovieLookup(LookupChannel):
             '-votes_imdb',
             '-rating_imdb',
             '-year',
-        )[0:5]
+        )[:5]
 
     def get_result(self, obj):
         """
@@ -44,3 +43,45 @@ class MovieLookup(LookupChannel):
         return get_template('lookups/movie.html').render(Context({
             'movie': obj
         }))
+
+
+class PersonLookup(LookupChannel):
+    model = models.Person
+
+    def get_query(self, q, request):
+        if feature_enabled(SPHINX_SEARCH):
+            results = models.Person.search.query(q)
+        else:
+            results = models.Person.objects.filter(
+                Q(name_en__icontains=q) |
+                Q(name_ru__icontains=q)
+            )
+        # return results.order_by(
+        #     '-starred_movies__rating_imdb',
+        # )[0:5]
+        return results[:5]
+
+    def get_result(self, obj):
+        """
+        @type obj movies.models.Person
+        """
+        return obj.name_en
+
+    def format_match(self, obj):
+        """
+        @type obj movies.models.Person
+        """
+        return self.format_item_display(obj)
+
+    def format_item_display(self, obj):
+        """
+        @type obj movies.models.Person
+        """
+        return u'{actor} ({top_movies})'.format(
+            actor=obj.name_en,
+            top_movies=u', '.join(
+                obj.starred_movies.all().
+                order_by('-rating_imdb').
+                values_list('title_en', flat=True)[0:7]
+            )
+        )

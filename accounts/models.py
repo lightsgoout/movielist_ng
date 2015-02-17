@@ -71,8 +71,15 @@ class MovielistUser(AbstractBaseUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['date_of_birth', 'email']
 
-    movies = models.ManyToManyField('movies.Movie', through='movies.UserToMovie', blank=True)
     friends = models.ManyToManyField('self', related_name='friends', blank=True)
+    movies = models.ManyToManyField(
+        'movies.Movie',
+        through='movies.UserToMovie',
+        blank=True,)
+    achievements = models.ManyToManyField(
+        'achievements.Achievement',
+        through='achievements.UserToAchievement',
+        blank=True,)
 
     def get_full_name(self):
         # The user is identified by their email address

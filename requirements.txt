@@ -12,6 +12,7 @@ gnureadline==6.3.3
 httplib2==0.9
 ipdb==0.8
 ipython==2.4.1
+model-mommy==1.2.3
 oauth2==1.5.211
 python-openid==2.2.5
 requests==2.5.1

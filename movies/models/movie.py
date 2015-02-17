@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import QuerySet
 from django.utils import translation
 from model_utils.managers import PassThroughManager
+from common import fields
 
 
 class MovieQuerySet(QuerySet):
@@ -95,19 +96,7 @@ class Movie(models.Model):
 
     image_imdb = models.URLField(blank=True, max_length=512)
 
-    RATINGS = (
-        ('G', 'G'),
-        ('PG', 'PG'),
-        ('PG-13', 'PG-13'),
-        ('R', 'R'),
-        ('NC-17', 'NC-17'),
-    )
-    rated = models.CharField(
-        choices=RATINGS,
-        max_length=5,
-        blank=True,
-        db_index=True,
-    )
+    rated = fields.MovieRatedField(blank=True, db_index=True)
 
     votes_imdb = models.PositiveIntegerField(null=True, blank=True, db_index=True)
     votes_kinopoisk = models.PositiveIntegerField(null=True, blank=True, db_index=True)
