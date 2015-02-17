@@ -4,11 +4,17 @@
     <script src="{{ STATIC_URL }}js/wizard.js"></script>
     <div class="container">
         <div class="row">
-            {% for movie in movies %}
-                <div class="span4">
-                    {% include 'wizard/movie.html' %}
-                </div>
-            {% endfor %}
+            <div class="span3">
+                <ul class="nav nav-tabs nav-stacked">
+                  <li class="active"><a href="#">{% trans 'Top by rating' %}</a></li>
+                  <li><a href="#">{% trans 'Top by genre' %}</a></li>
+                  <li><a href="#">{% trans 'Top by actors' %}</a></li>
+                  <li><a href="#">{% trans 'Top by director' %}</a></li>
+                </ul>
+            </div>
+            <div class="span9">
+                {% include 'wizard/movie.html' %}
+            </div>
         </div>
     </div>
 {% endblock %}

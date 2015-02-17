@@ -73,11 +73,16 @@ def wizard(request, mode=M_IMDB_TOP):
     else:
         raise Http404()
 
-    movies = movies.exclude(pk__in=[w.pk for w in watched])
+    try:
+        movie = movies.exclude(pk__in=[w.pk for w in watched])[0]
+    except IndexError:
+        # TODO: remember to handle this at frontend
+        raise Http404()
+
     return render(
         request,
         'wizard/list.html',
         {
-            'movies': movies[:3],
+            'movie': movie,
         }
     )

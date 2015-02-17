@@ -11,13 +11,13 @@
                     <a href="/genre/{{ genre.title_en }}/"><span class="label label-info">{{ genre.title }}</span></a>
                 {% endfor %}
             </div>
-            <div class="movie-director">
+            <div class="movie-director movie-info-entry">
                 {% trans 'Director' %}:
                 {% for person in movie.directors.all %}
                     <a href="/person/{{ person.pk }}/">{{ person.title }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </div>
-            <div class="movie-actors">
+            <div class="movie-actors movie-info-entry">
                 {% trans 'Starring' %}:
                 {% for person in movie.cast.all %}
                     <a href="/person/{{ person.pk }}/">{{ person.title }}</a>{% if not forloop.last %}, {% endif %}
@@ -25,8 +25,8 @@
             </div>
         </div>
         <div class="movie-actions">
-            <a class="btn btn-mini btn-success add-to-list add-to-watched" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> {% trans 'Working...' %}" data-status="W" data-movie-id="{{ movie.pk }}" href="#"><i class="icon-plus"></i> {% trans 'Watched'%}</a>
-            <a class="btn btn-mini add-to-list add-to-ptw" data-status="P" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#"><i class="icon-plus"></i> {% trans 'Plan to watch' %}</a>
-            <a class="btn btn-mini btn-link add-to-list add-to-ignored" data-status="I" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#">{% trans 'Ignore' %}</a>
+            <a class="btn btn-success add-to-list add-to-watched" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> {% trans 'Working...' %}" data-status="W" data-movie-id="{{ movie.pk }}" href="#"><i class="icon-plus"></i> {% trans 'Watched'%}</a>
+            <a class="btn add-to-list add-to-ptw" data-status="P" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#"><i class="icon-plus"></i> {% trans 'Plan to watch' %}</a>
+            <a class="btn btn-link add-to-list add-to-ignored" data-status="I" data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#">{% trans 'Ignore' %}</a>
         </div>
     </div>
