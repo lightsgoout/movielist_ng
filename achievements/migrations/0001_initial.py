@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('unlocked_on', models.DateField(auto_now_add=True)),
-                ('is_active', models.BooleanField(default=True, db_index=True)),
+                ('is_locked', models.BooleanField(default=False, db_index=True)),
                 ('achievement', models.ForeignKey(to='achievements.Achievement')),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],

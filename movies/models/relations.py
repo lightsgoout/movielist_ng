@@ -1,4 +1,5 @@
 from django.db import models
+from movies import constants
 
 
 class UserToMovie(models.Model):
@@ -24,13 +25,10 @@ class UserToMovie(models.Model):
         ('10.0', '10.0'),
     )
 
-    WATCHED = 'W'
-    PLAN_TO_WATCH = 'P'
-    IGNORED = 'I'
     STATUS_CHOICES = (
-        (WATCHED, 'Watched'),
-        (PLAN_TO_WATCH, 'Plan to watch'),
-        (IGNORED, 'Ignored'),
+        (constants.WATCHED, 'Watched'),
+        (constants.PLAN_TO_WATCH, 'Plan to watch'),
+        (constants.IGNORED, 'Ignored'),
     )
 
     user = models.ForeignKey('accounts.MovielistUser')
@@ -38,7 +36,10 @@ class UserToMovie(models.Model):
     score = models.DecimalField(decimal_places=1, max_digits=3,
                                 choices=SCORE_CHOICES, null=True, blank=True)
     status = models.CharField(
-        choices=STATUS_CHOICES, max_length=1, default=WATCHED, db_index=True)
+        choices=STATUS_CHOICES,
+        max_length=1,
+        default=constants.WATCHED,
+        db_index=True)
 
     class Meta:
         app_label = 'movies'

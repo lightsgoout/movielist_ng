@@ -6,7 +6,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
-from movies.models import UserToMovie, Movie
+from movies import constants
+from movies.models import Movie
 import json as sjson
 from suggestions.imdb import IMDBSuggester
 
@@ -41,18 +42,14 @@ class ApiFail(JsonResponse):
 
 @csrf_exempt
 @login_required
-def add_to_list(request, movie_id, status=UserToMovie.WATCHED):
+def add_to_list(request, movie_id, status=constants.WATCHED):
     """
     @type request django.http.request.HttpRequest
     @type movie_id int
     @type status str
     """
     try:
-        UserToMovie.objects.get_or_create(
-            movie_id=movie_id,
-            user=request.user,
-            status=status
-        )
+        request.user.add_movie(movie_id, status)
     except IntegrityError:
         return ApiFail(_(u'Movie does not exist'))
 
@@ -61,7 +58,7 @@ def add_to_list(request, movie_id, status=UserToMovie.WATCHED):
 
 @csrf_exempt
 @login_required
-def suggest_another_movie(request, movie_id, status=UserToMovie.WATCHED):
+def suggest_another_movie(request, movie_id, status=constants.WATCHED):
     """
     @type request django.http.request.HttpRequest
     @type movie_id int movie that was just added to list
@@ -74,7 +71,7 @@ def suggest_another_movie(request, movie_id, status=UserToMovie.WATCHED):
     else:
         shown_ids = []
     suggester = IMDBSuggester(request.user, shown_ids=shown_ids)
-    if status in {UserToMovie.WATCHED, UserToMovie.PLAN_TO_WATCH}:
+    if status in {constants.WATCHED, constants.PLAN_TO_WATCH}:
         # User liked the movie or looking forward to it.
         # Suggest another from the series.
         choice = suggester.next_in_series(movie)

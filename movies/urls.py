@@ -1,19 +1,19 @@
 from django.conf.urls import patterns, url
-from movies.models import UserToMovie
+from movies import constants
 
 urlpatterns = patterns(
     '',
     url(r'^list/(?P<username>[\w.@+-]+)/watched/$',
         'movies.views.show_list',
-        {'status': UserToMovie.WATCHED},
+        {'status': constants.WATCHED},
         name='list_watched'),
     url(r'^list/(?P<username>[\w.@+-]+)/plantowatch/$',
         'movies.views.show_list',
-        {'status': UserToMovie.PLAN_TO_WATCH},
+        {'status': constants.PLAN_TO_WATCH},
         name='list_plantowatch'),
     url(r'^list/(?P<username>[\w.@+-]+)/ignored/$',
         'movies.views.show_list',
-        {'status': UserToMovie.IGNORED},
+        {'status': constants.IGNORED},
         name='list_ignored'),
     url(r'^movie/(?P<movie_id>[\d]+)/$',
         'movies.views.show_movie',

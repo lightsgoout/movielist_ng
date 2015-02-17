@@ -2,11 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from accounts.models import MovielistUser
-from movies.models import Movie, UserToMovie
-
-
-def runtime_in_days(movie_list):
-    return sum([m.runtime for m in movie_list if m.runtime])/60/24
+from movies import constants
+from movies.models import Movie
 
 
 def index(request):
@@ -18,13 +15,13 @@ def index(request):
 
 def show_list(request, username, status):
     user = get_object_or_404(MovielistUser, username=username)
-    watched = user.movies.filter(usertomovie__status=status)
+    movies = user.get_movies(status)
 
-    if status == UserToMovie.WATCHED:
+    if status == constants.WATCHED:
         template = 'list/watched.html'
-    elif status == UserToMovie.PLAN_TO_WATCH:
+    elif status == constants.PLAN_TO_WATCH:
         template = 'list/plan_to_watch.html'
-    elif status == UserToMovie.IGNORED:
+    elif status == constants.IGNORED:
         template = 'list/ignored.html'
     else:
         raise Http404()
@@ -33,8 +30,8 @@ def show_list(request, username, status):
         request,
         template,
         {
-            'movies': watched,
-            'days': runtime_in_days(watched),
+            'movies': movies,
+            'days': user.get_total_movie_runtime(constants.WATCHED)/60/24,
             'user': user,
         },
     )

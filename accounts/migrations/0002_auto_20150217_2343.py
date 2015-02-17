@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='movielistuser',
             name='achievements',
-            field=models.ManyToManyField(to='achievements.Achievement', through='achievements.UserToAchievement', blank=True),
+            field=models.ManyToManyField(related_name='users', through='achievements.UserToAchievement', to='achievements.Achievement', blank=True),
             preserve_default=True,
         ),
         migrations.AddField(

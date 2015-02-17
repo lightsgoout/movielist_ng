@@ -1,0 +1,3 @@
+WATCHED = 'W'
+PLAN_TO_WATCH = 'P'
+IGNORED = 'I'

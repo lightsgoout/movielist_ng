@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+from achievements.models.user_mixins import UserAchievementsMixin
+from movies.models.user_mixins import UserMoviesMixin
 
 
 class MovielistUserManager(BaseUserManager):
@@ -43,7 +45,7 @@ class MovielistUserManager(BaseUserManager):
         return user
 
 
-class MovielistUser(AbstractBaseUser):
+class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
     username = models.CharField(
         'username',
         max_length=30,
@@ -72,14 +74,6 @@ class MovielistUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['date_of_birth', 'email']
 
     friends = models.ManyToManyField('self', related_name='friends', blank=True)
-    movies = models.ManyToManyField(
-        'movies.Movie',
-        through='movies.UserToMovie',
-        blank=True,)
-    achievements = models.ManyToManyField(
-        'achievements.Achievement',
-        through='achievements.UserToAchievement',
-        blank=True,)
 
     def get_full_name(self):
         # The user is identified by their email address
@@ -93,18 +87,17 @@ class MovielistUser(AbstractBaseUser):
         return self.username
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
+        """Does the user have a specific permission?"""
         # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
+        """Does the user have permissions to view the app `app_label`?"""
         # Simplest possible answer: Yes, always
         return True
 
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
+        """Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin
-

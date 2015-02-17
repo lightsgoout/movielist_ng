@@ -1,13 +1,6 @@
-from model_mommy.recipe import Recipe, foreign_key
-from accounts.mommy_recipes import user
-from movies.models import Movie, UserToMovie
+from model_mommy.recipe import Recipe
+from movies.models import Movie
 
 movie = Recipe(
     Movie,
-)
-
-user_to_movie = Recipe(
-    UserToMovie,
-    user=foreign_key(user),
-    movie=foreign_key(movie),
 )

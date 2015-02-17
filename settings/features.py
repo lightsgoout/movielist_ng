@@ -1,5 +1,7 @@
 SPHINX_SEARCH = 'Sphinx search'
+ACHIEVEMENTS = 'Achievements'
 
 ENABLED_FEATURES = {
     SPHINX_SEARCH,
+    ACHIEVEMENTS,
 }
