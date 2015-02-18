@@ -1,7 +1,8 @@
 {% extends 'main.html' %}
 {% load i18n %}
+{% load static %}
 {% block body %}
-    <script src="{{ STATIC_URL }}js/wizard.js"></script>
+    <script src="{% static "js/wizard.js" %}"></script>
     <div class="container">
         <div class="row">
             <div class="span3">

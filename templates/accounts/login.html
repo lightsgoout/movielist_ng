@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load i18n %}
+{% load static %}
 {% block body %}
     <div class="container" style="width: 562px">
     <h6>{% trans 'Enter your login and password' %}</h6>
@@ -15,7 +16,7 @@
             <p style="float: right;"><input class="btn btn-mini" type="submit" value="Sign in" style=""></p>
         </form>
     <h6 style="clear: both;">{% trans 'Sign in via social networks' %}</h6>
-<link rel="stylesheet" href="{{ STATIC_URL }}css/social-buttons.css">
+<link rel="stylesheet" href="{% static "css/social-buttons.css" %}">
 <a class="btn btn-mini btn-facebook" href="{% url "socialauth_begin" "facebook" %}"><i class="icon-facebook"></i> | {% trans 'Connect with Facebook' %}</a>
 <a class="btn btn-mini btn-github" href="{% url "socialauth_begin" "github" %}"><i class="icon-github"></i> | {% trans 'Connect with Github' %}</a>
 <a class="btn btn-mini btn-vk" href="{% url "socialauth_begin" "vk" %}"><i class="icon-vk"></i> | {% trans 'Connect with VK' %}</a>

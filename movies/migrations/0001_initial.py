@@ -7,6 +7,7 @@ import common.fields
 from django.conf import settings
 
 
+# noinspection PySetFunctionToLiteral
 class Migration(migrations.Migration):
 
     dependencies = [

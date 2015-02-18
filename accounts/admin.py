@@ -13,7 +13,13 @@ class MovielistUserAdmin(UserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('username', 'email', 'date_of_birth', 'country', 'is_admin')
+    list_display = (
+        'username',
+        'email',
+        'date_of_birth',
+        'country',
+        'is_admin',
+    )
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
@@ -25,8 +31,14 @@ class MovielistUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'date_of_birth', 'country', 'password1', 'password2')}
-        ),
+            'fields': (
+                'username',
+                'email',
+                'date_of_birth',
+                'country',
+                'password1',
+                'password2',
+            )}),
     )
     search_fields = ('username', 'email',)
     ordering = ('username',)

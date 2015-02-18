@@ -101,6 +101,7 @@ STATICFILES_DIRS = (
     'static',
 )
 
+# noinspection PyUnresolvedReferences
 STATIC_ROOT = 'compiledstatic'
 
 TEMPLATE_DIRS = (

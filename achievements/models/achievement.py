@@ -136,6 +136,7 @@ def unlock_achievements(user, movie, score, **kwargs):
             user.add_achievement(movie_achievement)
 
 
+# noinspection PyUnusedLocal
 @receiver(signals.user_removed_movie)
 @feature_framework.is_enabled(features.ACHIEVEMENTS)
 def lock_achievements(user, movie, score, **kwargs):

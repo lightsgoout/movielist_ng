@@ -6,6 +6,7 @@ import django.utils.timezone
 import django.core.validators
 
 
+# noinspection PyPep8
 class Migration(migrations.Migration):
 
     dependencies = [

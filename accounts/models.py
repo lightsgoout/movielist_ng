@@ -45,6 +45,7 @@ class MovielistUserManager(BaseUserManager):
         return user
 
 
+# noinspection PyMethodMayBeStatic
 class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
     username = models.CharField(
         'username',
@@ -86,6 +87,7 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
     def __str__(self):              # __unicode__ on Python 2
         return self.username
 
+    # noinspection PyUnusedLocal
     def has_perm(self, perm, obj=None):
         """Does the user have a specific permission?"""
         # Simplest possible answer: Yes, always
