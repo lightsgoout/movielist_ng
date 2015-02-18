@@ -26,12 +26,14 @@ def show_list(request, username, status):
     else:
         raise Http404()
 
+    total_runtime = user.get_total_movie_runtime(constants.WATCHED) or 0
+
     return render(
         request,
         template,
         {
             'movies': movies,
-            'days': user.get_total_movie_runtime(constants.WATCHED)/60/24,
+            'days': total_runtime/60/24,
             'user': user,
         },
     )

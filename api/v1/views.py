@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize, json
-from django.db import IntegrityError
 from django.db.models.query import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -49,8 +48,8 @@ def add_to_list(request, movie_id, status=constants.WATCHED):
     @type status str
     """
     try:
-        request.user.add_movie(movie_id, status)
-    except IntegrityError:
+        request.user.add_movie(Movie.objects.get(pk=movie_id), status)
+    except Movie.DoesNotExist:
         return ApiFail(_(u'Movie does not exist'))
 
     return ApiOk(_(u'Movie added'))
