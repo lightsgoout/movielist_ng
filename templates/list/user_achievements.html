@@ -13,15 +13,14 @@
     <div class="span8">
         <h3>{{ user.username }}'s movie list</h3>
         <ul class="nav nav-tabs">
-          <li class="active">
-            <a href="{% url "list_watched" user.username %}">{% trans 'Watched' %}</a>
-          </li>
+            <li><a href="{% url "list_watched" user.username %}">{% trans 'Watched' %}</a></li>
           <li><a href="{% url "list_plantowatch" user.username %}">{% trans 'Plan to watch' %}</a></li>
           <li><a href="{% url "list_ignored" user.username %}">{% trans 'Ignored' %}</a></li>
-          <li><a href="{% url "list_user_achievements" user.username %}">{% trans 'Achievements' %}</a></li>
+            <li class="active">
+              <a href="{% url "list_user_achievements" user.username %}">{% trans 'Achievements' %}</a>
+            </li>
         </ul>
-        {% include 'list/stats.html' %}
-        {% include 'list/list.html' %}
+        {% include 'list/achievements.html' %}
     </div>
 </div>
 {% endblock %}

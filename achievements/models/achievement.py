@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 from django.db.models import Q
 from django.dispatch import receiver
+from django.utils import translation
 from common import fields, feature_framework
 from movies import constants, signals
 from settings import features
@@ -59,6 +60,22 @@ class Achievement(models.Model):
     )
 
     condition_times = models.PositiveSmallIntegerField(null=True, blank=True)
+
+    @property
+    def title(self):
+        cur_language = translation.get_language()
+        if cur_language == 'ru':
+            return self.title_ru
+        else:
+            return self.title_en
+
+    @property
+    def description(self):
+        cur_language = translation.get_language()
+        if cur_language == 'ru':
+            return self.description_ru
+        else:
+            return self.description_en
 
     class Meta:
         app_label = 'achievements'

@@ -39,6 +39,20 @@ def show_list(request, username, status):
     )
 
 
+def list_user_achievements(request, username, is_locked):
+    user = get_object_or_404(MovielistUser, username=username)
+    achievements = user.get_achievements(is_locked=is_locked)
+
+    return render(
+        request,
+        'list/user_achievements.html',
+        {
+            'achievements': achievements,
+            'user': user,
+        }
+    )
+
+
 def show_movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     return render(
