@@ -12,27 +12,8 @@
         <script src="{% static "js/bootstrap.min.js" %}"></script>
     </head>
 <body>
-<header>
-    <div class="navbar">
-      <div class="navbar-inner">
-        <a class="brand" href="/">Movie list</a>
-        <ul class="nav">
-            {% if request.user.is_authenticated %}
-                <li>
-                <p class="navbar-text">{% trans 'Hello' %}, {{ request.user.username }}</p>
-                </li>
-          <li><a href="/list/{{ request.user.username }}/watched/">{% trans 'My list' %}</a></li>
-          <li><a href="{% url 'wizard' %}"><i class="icon-plus"></i> {% trans 'Add movies to the list' %}</a></li>
-          <li><a href="{% url 'logout' %}"><i class="icon-signout"></i> {% trans 'Logout' %}</a></li>
-            {% else %}
-                <li><a href="{% url 'registration_register' %}">{% trans 'Sign up' %}</a></li>
-                <li><a href="{% url 'login' %}"><i class="icon-signin"></i> {% trans 'Login' %}</a></li>
-            {% endif %}
-        </ul>
-      </div>
-    </div>
-</header>
-<div class="main-container">
+{% include 'navbar.html' %}
+<div class="container">
 {% block body %}
 {% endblock %}
 </div>

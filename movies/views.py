@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
@@ -16,25 +17,17 @@ def index(request):
 def show_list(request, username, status):
     user = get_object_or_404(MovielistUser, username=username)
     movies = user.get_movies(status)
-
-    if status == constants.WATCHED:
-        template = 'list/watched.html'
-    elif status == constants.PLAN_TO_WATCH:
-        template = 'list/plan_to_watch.html'
-    elif status == constants.IGNORED:
-        template = 'list/ignored.html'
-    else:
-        raise Http404()
-
-    total_runtime = user.get_total_movie_runtime(constants.WATCHED) or 0
+    total_runtime = user.get_total_movie_runtime(status) or 0
 
     return render(
         request,
-        template,
+        'list/list.html',
         {
             'movies': movies,
-            'days': total_runtime/60/24,
+            'days': (Decimal(total_runtime)/60/24).quantize(Decimal('0.1')),
             'user': user,
+            'status': status,
+            'constants': constants,
         },
     )
 
@@ -45,10 +38,11 @@ def list_user_achievements(request, username, is_locked):
 
     return render(
         request,
-        'list/user_achievements.html',
+        'list/list.html',
         {
             'achievements': achievements,
             'user': user,
+            'constants': constants,
         }
     )
 

@@ -1,98 +1,39 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
 body {
-    /*padding:100px 100px;*/
-    font-size: 15px;
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
 }
 
-td {
 
-    line-height: 1.5em;
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
 }
 
-label {
-    display: inline !important;
-    font-size: 11px !important;
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
-select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-display: inline-block;
-height: 16px;
-padding: 3px 6px;
-margin-bottom: 0;
-font-size: 11px;
-line-height: 11px;
-color: #555;
-vertical-align: middle;
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
-}
-
-.alert {
-padding: 9px 0 0 8px;
-margin-bottom: 10px;
-}
-
-.span4 {
-    width: 380px;
-    height: 180px;
-}
-
-.movie-item > .movie-poster {
-    overflow: hidden;
-    width: 300px;
-    height: 380px;
-    float: left;
-}
-
-.movie-item > .movie-actions {
-    max-width: 350px;
-    float: left;
-    margin-left: 10px;
-}
-
-.movie-item > .movie-info {
-    float: left;
-    max-width: 300px;
-    margin-left: 10px;
-    margin-top:5px;
-    height: 380px;
-}
-
-.movie-info h5 {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: normal;
-    font-size: 17px;
-    display: inline-block;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-}
-
-.movie-info > .movie-actors {
-}
-
-.movie-info-entry {
-    margin-top: 5px;
-    font-size: 15px;
-}
-
-.container {
-    width: 1200px;
-}
-
-.form-horizontal .control-group {
-    margin-bottom: 0;
-}
-
-.form-horizontal .control-label {
-    width: 95px;
-    text-align: left;
-}
-
-.form-horizontal .controls {
-    margin-left: 100px;
-}
-
-.control-group {
-    width: 700px;
+code {
+  font-size: 80%;
 }

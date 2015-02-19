@@ -1,56 +1,27 @@
-{% extends 'main.html' %}
-{% load i18n %}
-{% load static %}
-{% block body %}
-    <div class="container" style="width: 562px;">
-    <h6>{% trans 'Enter your login and password' %}</h6>
-        <form class="form form-horizontal" action="/accounts/register/" method="POST" style="width:320px;">
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-            <div class="control-group {% if form.username.errors %}error{% endif %}">
-                <label class="control-label" for="input-username">{% trans 'Username' %}:</label>
-                <div class="controls">
-                    <input type="text" id="input-username" name="username" autofocus="autofocus" value="{{ form.username.value|default_if_none:''}}">
-                    {% if form.username.errors %}
-                    <span class="help-inline">{{ form.username.errors.as_text }}</span>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="control-group {% if form.email.errors %}error{% endif %}">
-                <label class="control-label" for="input-email">{% trans 'Email' %}:</label>
-                <div class="controls">
-                    <input type="email" id="input-email" name="email" value="{{ form.email.value|default_if_none:''}}">
-                    {% if form.email.errors %}
-                    <span class="help-inline">{{ form.email.errors.as_text }}</span>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="control-group {% if form.password1.errors %}error{% endif %}">
-                <label class="control-label" for="input-password1">{% trans 'Password' %}:</label>
-                <div class="controls">
-                    <input type="password" id="input-password1" name="password1">
-                    {% if form.password1.errors %}
-                        <span class="help-inline">{{ form.password1.errors.as_text }}</span>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="control-group {% if form.password2.errors %}error{% endif %}">
-                <label class="control-label" for="input-password2">{% trans 'Password (again)' %}:</label>
-                <div class="controls">
-                    <input type="password" id="input-password2" name="password2">
-                    {% if form.password2.errors %}
-                        <span class="help-inline">{{ form.password2.errors.as_text }}</span>
-                    {% endif %}
-                </div>
-            </div>
-            <p style="float: right;"><input class="btn btn-mini" type="submit" value="Sign up" style=""></p>
-        </form>
-    <h6 style="clear: both;">{% trans 'Sign up via social networks' %}</h6>
-<link rel="stylesheet" href="{% static "css/social-buttons.css" %}">
-<a class="btn btn-mini btn-facebook" href="{% url "socialauth_begin" "facebook" %}"><i class="icon-facebook"></i> | {% trans 'Connect with Facebook' %}</a>
-<a class="btn btn-mini btn-github" href="{% url "socialauth_begin" "github" %}"><i class="icon-github"></i> | {% trans 'Connect with Github' %}</a>
-<a class="btn btn-mini btn-vk" href="{% url "socialauth_begin" "vk" %}"><i class="icon-vk"></i> | {% trans 'Connect with VK' %}</a>
-<a class="btn btn-mini btn-twitter" href="{% url "socialauth_begin" "twitter" %}"><i class="icon-twitter"></i> | {% trans 'Connect with Twitter' %}</a>
-
-   </div>
-{% endblock %}
+<form method="POST">
+    {% csrf_token %}
+    <fieldset>
+    <legend class="">Sign up</legend>
+    <div class="form-group">
+        <label for="signup-email" class="control-label">Email</label>
+        <input id="signup-email" type="email" class="form-control" name="email"  value="" required="" title="Please enter you email" placeholder="example@gmail.com">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="signup-username" class="control-label">Username</label>
+        <input id="signup-username" type="text" class="form-control" name="username"  value="" required="" title="Please enter you username" placeholder="">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="signup-password" class="control-label">Password</label>
+        <input id="signup-password" type="password" class="form-control" name="password" value="" required="" title="Please enter your password">
+        <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+        <label for="signup-password2" class="control-label">Confirm password</label>
+        <input id="signup-password2" type="password" class="form-control" name="password2" value="" required="" title="Please enter your password">
+        <span class="help-block">Please confirm password</span>
+    </div>
+    <button type="submit" class="btn btn-success ">Sign up</button>
+    </fieldset>
+</form>

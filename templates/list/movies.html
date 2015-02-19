@@ -1,0 +1,18 @@
+{% load i18n %}
+{% if movies %}
+    <table class="table table-striped table-condensed">
+    {% for movie in movies %}
+        <tr>
+            <!--<td><img src="{{ movie.image_imdb }}" style="max-width:64px; max-height: 64px;"></td>-->
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.year }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% else %}
+<div>
+  <p>{% trans "List is empty" %}</p>
+  <a class="btn btn-success" href="/add/">Add</a>
+</div>
+{% endif %}

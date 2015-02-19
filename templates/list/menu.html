@@ -1,0 +1,15 @@
+{% load i18n %}
+<ul class="nav nav-tabs">
+  <li {% if status == constants.WATCHED %}class="active"{% endif %}>
+    <a href="{% url "list_watched" user.username %}">{% trans 'Watched' %}</a>
+  </li>
+  <li {% if status == constants.PLAN_TO_WATCH %}class="active"{% endif %}>
+      <a href="{% url "list_plantowatch" user.username %}">{% trans 'Plan to watch' %}</a>
+  </li>
+  <li {% if status == constants.IGNORED %}class="active"{% endif %}>
+      <a href="{% url "list_ignored" user.username %}">{% trans 'Ignored' %}</a>
+  </li>
+  <li {% if achievements %}class="active"{% endif %}>
+      <a href="{% url "list_user_achievements" user.username %}">{% trans 'Achievements' %}</a>
+  </li>
+</ul>
