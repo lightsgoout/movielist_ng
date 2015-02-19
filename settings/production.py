@@ -129,3 +129,8 @@ AJAX_LOOKUP_CHANNELS = {
     'movie': ('movies.lookups', 'MovieLookup'),
     'person': ('movies.lookups', 'PersonLookup'),
 }
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailBackend',
+)

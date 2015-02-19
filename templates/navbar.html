@@ -24,8 +24,7 @@
           <li><a href="{% url 'wizard' %}"><i class="glyphicon glyphicon-plus"></i> {% trans 'Add movies to the list' %}</a></li>
           <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-signout"></i> {% trans 'Logout' %}</a></li>
         {% else %}
-            <li><a href="{% url 'registration_register' %}">{% trans 'Sign up' %}</a></li>
-            <li><a href="{% url 'login' %}"><i class="glyphicon glyphicon-signin"></i> {% trans 'Login' %}</a></li>
+            <li><a href="{% url 'login' %}"><i class="glyphicon glyphicon-signin"></i> {% trans 'Login/Register' %}</a></li>
         {% endif %}
       </ul>
     </div><!-- /.navbar-collapse -->

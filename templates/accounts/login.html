@@ -9,6 +9,11 @@
                   {% csrf_token %}
                   <fieldset>
                   <legend class="">Sign in</legend>
+                    {% if error %}
+                        <div class="alert alert-danger" style="width: 265px;">
+                        <p>{{ error }}</p>
+                        </div>
+                    {% endif %}
                   <div class="form-group">
                       <label for="signin-username" class="control-label">Username or email</label>
                       <input id="signin-username" autofocus="autofocus" type="text" class="form-control" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
