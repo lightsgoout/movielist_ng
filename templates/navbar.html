@@ -26,6 +26,9 @@
         {% else %}
             <li><a href="{% url 'login' %}"><i class="glyphicon glyphicon-signin"></i> {% trans 'Login/Register' %}</a></li>
         {% endif %}
+        <li>
+            {% include '_blocks/language_selector.html' %}
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

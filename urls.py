@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^api/', include('api.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^wizard/$', 'movies.views.wizard', name='wizard'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 )
