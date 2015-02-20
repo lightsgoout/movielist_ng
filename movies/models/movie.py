@@ -21,9 +21,9 @@ class TopManager(models.Manager):
         return self.get_queryset().filter(
             votes_imdb__isnull=False,
             rating_imdb__isnull=False,
-        ).order_by(
-            '-votes_imdb',
-            '-rating_imdb',
+        ).extra(
+            select={'imdb_points': 'votes_imdb * rating_imdb'},
+            order_by=['-imdb_points']
         )
 
 
