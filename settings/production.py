@@ -108,7 +108,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
-    'pipeline.finders.PipelineFinder',
 )
 
 # noinspection PyUnresolvedReferences
@@ -122,7 +121,7 @@ BOWER_INSTALLED_APPS = (
     'angular#1.3.14',
     'angular-ui-utils#0.2.2',
     'angular-resource#1.3.14',
-    'ng-infinite-scroller-origin#1.2.0',
+    'ngInfiniteScroll#1.2.0',
     'bootstrap#3.3.2',
     'bootstrap-social#4.8.0',
     'jquery#2.1.3',
