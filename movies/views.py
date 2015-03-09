@@ -25,7 +25,7 @@ def show_list(request, username, status):
 
     return render(
         request,
-        'list/list.html',
+        'list/list_ng.html',
         {
             'movies': movies,
             'days': (Decimal(total_runtime)/60/24).quantize(Decimal('0.1')),

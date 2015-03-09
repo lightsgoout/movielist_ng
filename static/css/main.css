@@ -37,3 +37,8 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+.movie-poster > img {
+    max-height: 350px;
+    min-height: 350px;
+}
