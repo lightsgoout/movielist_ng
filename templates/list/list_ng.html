@@ -26,6 +26,11 @@
                               </a>
                             </th>
                             <th>
+                              <a href="#" ng-click="orderByField='score'; reverseSort = !reverseSort">
+                              Score <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                              </a>
+                            </th>
+                            <th>
                               <a href="#" ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
                                 Year <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
                               </a>
@@ -37,12 +42,13 @@
                                     {% verbatim %}
                                     <td>{{ $index+1 }}</td>
                                     <td><a href="{{ user_to_movie.movie.movie_page_url }}">{{ user_to_movie.movie.title }}</a></td>
+                                    <td>{{ user_to_movie.score || 'No score' }}</td>
 
                                     <td>{{ user_to_movie.movie.year }} </td>
 
                                     {% endverbatim %}
                                 </tr>
-                                <tr ng-show='loader.busy'><td colspan="3">Loading data...</td></tr>
+                                <tr ng-show='loader.busy'><td colspan="999">Loading data...</td></tr>
                             </div>
                         </tbody>
                     </table>
