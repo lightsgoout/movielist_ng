@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'registration',
     'ajax_select',
     'django_extensions',
+    'djangobower',
 
     'achievements',
     'accounts',
@@ -103,8 +104,30 @@ STATICFILES_DIRS = (
     'static',
 )
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
 # noinspection PyUnresolvedReferences
 STATIC_ROOT = 'compiledstatic'
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
+
+BOWER_INSTALLED_APPS = (
+    'angular#1.3.14',
+    'angular-ui-utils#0.2.2',
+    'angular-resource#1.3.14',
+    'ng-infinite-scroller-origin#1.2.0',
+    'bootstrap#3.3.2',
+    'bootstrap-social#4.8.0',
+    'jquery#2.1.3',
+    'font-awesome#4.2.0'
+)
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
