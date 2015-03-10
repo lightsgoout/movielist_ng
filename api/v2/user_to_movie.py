@@ -10,7 +10,13 @@ from movies.models import UserToMovie
 
 class UserToMovieResource(ModelResource):
 
-    movie = fields.ToOneField(MovieResource, 'movie', full=True, null=True)
+    movie = fields.ToOneField(
+        MovieResource,
+        'movie',
+        full=True,
+        null=True,
+        readonly=True,
+    )
 
     class Meta:
         queryset = UserToMovie.objects.all().select_related('movie').order_by('-id')
@@ -36,7 +42,3 @@ class UserToMovieResource(ModelResource):
         built_filters = super(UserToMovieResource, self).build_filters(filters)
         built_filters['user'] = user
         return built_filters
-
-    # def dehydrate(self, bundle):
-    #     bundle.data['score'] = "2.5"
-    #     return bundle
