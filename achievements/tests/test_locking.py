@@ -3,6 +3,7 @@ from accounts import mommy_recipes as accounts_recipes
 from movies import mommy_recipes as movies_recipes
 from achievements import mommy_recipes as achievements_recipes
 
+
 class LockingTest(TestCase):
 
     def setUp(self):

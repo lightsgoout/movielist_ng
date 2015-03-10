@@ -113,8 +113,6 @@ STATICFILES_FINDERS = (
 # noinspection PyUnresolvedReferences
 STATIC_ROOT = 'compiledstatic'
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
 
 BOWER_INSTALLED_APPS = (
@@ -125,7 +123,8 @@ BOWER_INSTALLED_APPS = (
     'bootstrap#3.3.2',
     'bootstrap-social#4.8.0',
     'jquery#2.1.3',
-    'font-awesome#4.2.0'
+    'font-awesome#4.2.0',
+    'angular-xeditable#0.1.8',
 )
 
 TEMPLATE_DIRS = (

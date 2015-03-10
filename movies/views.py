@@ -18,7 +18,6 @@ def show_list(request, username, status):
     user = get_object_or_404(MovielistUser, username=username)
 
     # TODO: usertomovie relation should not be exposed
-    # TODO: try to hide implementation 'usertomovie' details
     movies = user.get_movies(status).order_by('-usertomovie__id')
 
     total_runtime = user.get_total_movie_runtime(status) or 0
