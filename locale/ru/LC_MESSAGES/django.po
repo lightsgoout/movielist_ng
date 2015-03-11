@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-20 01:17+0000\n"
+"POT-Creation-Date: 2015-03-10 21:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr "Если список будет большим, ты сможешь и�
 msgid "Also achievements."
 msgstr "А еще у нас есть ачивки."
 
-#: templates/list/achievements.html:21 templates/list/movies.html:14
+#: templates/list/achievements.html:21
 msgid "List is empty"
 msgstr "Список пуст"
 

@@ -19,12 +19,15 @@ class UserToMovieResource(ModelResource):
     )
 
     class Meta:
-        queryset = UserToMovie.objects.all().select_related('movie').order_by('-id')
+        queryset = UserToMovie.objects.all().\
+            select_related('movie').\
+            prefetch_related('movie__genres').\
+            order_by('-id')
         resource_name = 'user_to_movie'
         authentication = Authentication()
         authorization = Authorization()
         list_allowed_methods = ['get']
-        limit = 50
+        limit = 1000
         filtering = {
             'status': ('exact',),
         }
@@ -42,3 +45,8 @@ class UserToMovieResource(ModelResource):
         built_filters = super(UserToMovieResource, self).build_filters(filters)
         built_filters['user'] = user
         return built_filters
+
+    def dehydrate_score(self, bundle):
+        if bundle.obj.score:
+            return float(bundle.obj.score)
+        return bundle.obj.score
