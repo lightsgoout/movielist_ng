@@ -37,3 +37,19 @@
 /*.score_1 {*/
     /*color: #FF0000;*/
 /*}*/
+
+.rating {
+  padding: 0 0.5em;
+}
+
+.rating > a {
+  text-decoration: none;
+}
+
+.rating .rating-highlight, .rating.rating-highlight:hover {
+  color: #F4914E;
+}
+
+.rating .rating-normal, .rating.rating-normal:hover {
+  color: #3C3C3C;
+}

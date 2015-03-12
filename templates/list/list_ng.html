@@ -51,9 +51,9 @@
                         <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
                             <tr ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
                                 {% verbatim %}
-                                <td><a href="{{ user_to_movie.movie.movie_page_url }}">{{ user_to_movie.movie.title }}</a></td>
+                                <td class="pull-right"><a href="{{ user_to_movie.movie.movie_page_url }}">{{ user_to_movie.movie.title }}</a></td>
                                 <td>{{ user_to_movie.movie.year }} </td>
-                                <td><a href="#" editable-select="user_to_movie.score" e-name="score" e-ng-options="s as s for s in SCORE_CHOICES" onaftersave="save()"><span class="ng-scope score_{{ user_to_movie.score }}">{{ showScore() }}</span></a></td>
+                                <td><div rating score="user_to_movie.score" max="10" class="pull-left"></div></td>
                                 <td>{{ user_to_movie.movie.rating_imdb }}</td>
                                 {% endverbatim %}
                             </tr>
