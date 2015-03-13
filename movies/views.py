@@ -61,6 +61,10 @@ def show_movie(request, movie_id):
     )
 
 
+def show_person(request, movie_id):
+    raise NotImplementedError()
+
+
 
 M_IMDB_TOP = 'imdb'
 M_KINOPOISK = 'kp'

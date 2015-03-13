@@ -21,13 +21,17 @@ class UserToMovieResource(ModelResource):
     class Meta:
         queryset = UserToMovie.objects.all().\
             select_related('movie').\
-            prefetch_related('movie__genres').\
-            order_by('-id')
+            prefetch_related(
+                'movie__genres',
+                'movie__countries',
+                'movie__directors',
+                'movie__cast',
+            ).order_by('-id')
         resource_name = 'user_to_movie'
         authentication = Authentication()
         authorization = Authorization()
         list_allowed_methods = ['get']
-        limit = 1000
+        limit = 25
         filtering = {
             'status': ('exact',),
         }

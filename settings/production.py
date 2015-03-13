@@ -125,6 +125,7 @@ BOWER_INSTALLED_APPS = (
     'jquery#2.1.3',
     'font-awesome#4.2.0',
     'angular-xeditable#0.1.8',
+    'flag-icon-css#0.7.0',
 )
 
 TEMPLATE_DIRS = (

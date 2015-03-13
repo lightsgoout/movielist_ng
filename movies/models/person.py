@@ -10,7 +10,7 @@ class Person(models.Model):
         return self.name_en
 
     @property
-    def title(self):
+    def name(self):
         from django.utils import translation
         cur_language = translation.get_language()
         if cur_language == 'ru':

@@ -26,4 +26,7 @@ urlpatterns = patterns(
     url(r'^movie/(?P<movie_id>[\d]+)/$',
         'movies.views.show_movie',
         name='movie'),
+    url(r'^person/(?P<person_id>[\d]+)/$',
+        'movies.views.show_person',
+        name='person'),
 )

@@ -21,7 +21,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($sco
     $scope.showScore = function() {
         //var selected = $filter('filter')($scope.SCORE_CHOICES, $scope.user_to_movie.score);
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
-        return $scope.user_to_movie.score || 'Not set';
+        return $scope.user_to_movie.score || 'Set score';
     };
 
 
