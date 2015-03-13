@@ -119,6 +119,7 @@ BOWER_INSTALLED_APPS = (
     'angular#1.3.14',
     'angular-ui-utils#0.2.2',
     'angular-resource#1.3.14',
+    'angular-route#1.3.14',
     'ngInfiniteScroll#1.2.0',
     'bootstrap#3.3.2',
     'bootstrap-social#4.8.0',

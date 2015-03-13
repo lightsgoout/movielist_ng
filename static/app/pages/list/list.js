@@ -1,10 +1,17 @@
-app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable']);
+app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable', "ngRoute"]);
 
 app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
     return TastyResource({
         url: "/api/v2/user_to_movie/",
         cache: true
     });
+}]);
+
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    $routeProvider
+    .when('/', {templateUrl: '/static/app/pages/list/list.html', controller: 'UserToMovieListController'})
+    .when('/autism', {templateUrl: '/static/app/pages/list/list_table.html', controller: 'UserToMovieListController'})
+    .otherwise({redirectTo: '/'});
 }]);
 
 app.run(function(editableOptions) {
@@ -28,7 +35,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($sco
 }]);
 
 
-app.controller("UserToMovieListController", function($scope, Loader) {
+app.controller("UserToMovieListController", function($scope, Loader, $location) {
 
     $scope.init = function(username, status) {
         //This function is sort of private constructor for controller
@@ -47,6 +54,10 @@ app.controller("UserToMovieListController", function($scope, Loader) {
             9,
             10
         ];
+    };
+
+    $scope.isActive = function(route) {
+        return route === $location.path();
     };
 });
 
