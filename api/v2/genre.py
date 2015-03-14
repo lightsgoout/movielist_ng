@@ -10,10 +10,11 @@ class GenreResource(ModelResource):
 
     class Meta:
         queryset = Genre.objects.all()
-        resource_name = 'movie'
+        resource_name = 'genre'
         authentication = SessionAuthentication()
         authorization = Authorization()
         list_allowed_methods = ['get']
+        include_resource_uri = False
 
         fields = [
             'id',

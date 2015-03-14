@@ -1,4 +1,4 @@
-app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable', "ngRoute"]);
+app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable', "ngRoute", 'ngTagsInput']);
 
 app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
     return TastyResource({
@@ -7,10 +7,17 @@ app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
     });
 }]);
 
+app.factory("Genre", ["TastyResource", function(TastyResource) {
+    return TastyResource({
+        url: "/api/v2/genre/",
+        cache: true
+    })
+}]);
+
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {templateUrl: '/static/app/pages/list/list.html', controller: 'UserToMovieListController'})
-    .when('/autism', {templateUrl: '/static/app/pages/list/list_table.html', controller: 'UserToMovieListController'})
+    .when('/table', {templateUrl: '/static/app/pages/list/list_table.html', controller: 'UserToMovieListController'})
     .otherwise({redirectTo: '/'});
 }]);
 
@@ -35,7 +42,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($sco
 }]);
 
 
-app.controller("UserToMovieListController", function($scope, Loader, $location) {
+app.controller("UserToMovieListController", function($scope, Loader, $location, Genre) {
 
     $scope.init = function(username, status) {
         //This function is sort of private constructor for controller
@@ -54,6 +61,8 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
             9,
             10
         ];
+
+        $scope.genres = ['Action', 'Mystery'];
     };
 
     $scope.isActive = function(route) {
@@ -102,3 +111,18 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
 
     return Loader;
 }]);
+
+app.filter('filterByGenre', function () {
+    return function (items, genres) {
+        var filtered = []; // Put here only items that match
+        (items || []).forEach(function (item) { // Check each item
+            var matches = genres.some(function (genre) {          // If there is some tag
+                return (item.movie.genres.indexOf(tag.text) > -1);
+            });                                               // we have a match
+            if (matches) {           // If it matches
+                filtered.push(item); // put it into the `filtered` array
+            }
+        });
+        return filtered; // Return the array with items that match any tag
+    };
+});
