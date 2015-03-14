@@ -1,7 +1,7 @@
 <section class="col-md-12" infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
     <div ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
         <div class="media">
-            <div class="pull-left" style="width: 75%;">
+            <div class="pull-left" style="width: 65%;">
                 <div class="media-left">
                     <a href="{{ user_to_movie.movie.page_url }}">
                         <img class="media-object" src="{{ user_to_movie.movie.image_url }}" alt="{{ user_to_movie.movie.title }}" style="width: 64px;">
@@ -21,14 +21,21 @@
                     </div>
                     <div>
                         Director:
-                        <span ng-repeat="person in user_to_movie.movie.directors">
+                        <span ng-repeat="person in user_to_movie.movie.directors | orderBy:'name'">
                             <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
                         </span>
                     </div>
                     <div>
                         Cast:
-                        <span ng-repeat="person in user_to_movie.movie.cast">
+                        <span ng-repeat="person in user_to_movie.movie.cast | orderBy:'name'">
                             <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
+                        </span>
+                    </div>
+                    <div>
+                        <span ng-repeat="genre in user_to_movie.movie.genres | orderBy:'toString()'">
+                            <span class="label label-success">
+                                {{ genre }}
+                            </span>&nbsp;
                         </span>
                     </div>
                 </div>
@@ -44,10 +51,21 @@
                     </a>
                 </div>
             </div>
-            <div class="pull-left">
+            <div class="pull-left" style="height:100px;">
                 <div class="imdb-score">
+                    <div>
                     IMDB:
                     <span class="ng-scope imdb-score-digit lead">{{ user_to_movie.movie.rating_imdb }}</span>
+                    </div>
+                    <div ng-show="{{ user_to_movie.movie.rating_tomatoes }}">
+                        <div style="display: inline;" ng-if="user_to_movie.movie.tomatoes_fresh == true">
+                            <img src="/static/app/pages/list/tomato.png" alt="fresh" style="width: 16px; margin-bottom: 8px;">
+                        </div>
+                        <div style="display: inline;" ng-if="user_to_movie.movie.tomatoes_fresh == false">
+                            <img src="/static/app/pages/list/splat.png" alt="splat" style="width: 16px; margin-bottom: 8px;">
+                        </div>
+                    <span class="ng-scope tomatoes-score-digit lead">{{ user_to_movie.movie.rating_tomatoes }}%</span>
+                    </div>
                 </div>
             </div>
         </div>

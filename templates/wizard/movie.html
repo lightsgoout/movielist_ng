@@ -8,19 +8,19 @@
             <h5 class="movie-title"><a href="/movie/{{ movie.pk }}/">{{ movie.title }}</a> ({{ movie.year }})</h5>
             <div class="movie-genres">
                 {% for genre in movie.genres.all %}
-                    <a href="/genre/{{ genre.title_en }}/"><span class="label label-info">{{ genre.title }}</span></a>
+                    <a href="/genre/{{ genre.name_en }}/"><span class="label label-info">{{ genre.name }}</span></a>
                 {% endfor %}
             </div>
             <div class="movie-director movie-info-entry">
                 {% trans 'Director' %}:
                 {% for person in movie.directors.all %}
-                    <a href="/person/{{ person.pk }}/">{{ person.title }}</a>{% if not forloop.last %}, {% endif %}
+                    <a href="/person/{{ person.pk }}/">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </div>
             <div class="movie-actors movie-info-entry">
                 {% trans 'Starring' %}:
                 {% for person in movie.cast.all %}
-                    <a href="/person/{{ person.pk }}/">{{ person.title }}</a>{% if not forloop.last %}, {% endif %}
+                    <a href="/person/{{ person.pk }}/">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </div>
         </div>
