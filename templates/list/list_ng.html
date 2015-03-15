@@ -30,8 +30,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" class="form-control search-query" placeholder="Search" ng-model="query" id="search-bar">
-                        <hr>
+                        {% verbatim %}
+                        <div ng-show="loader.user_to_movies.length">
+                            <input type="text" class="form-control search-query" placeholder="Search" ng-model="query" id="search-bar">
+                            <hr>
+                        </div>
+                        {% endverbatim %}
                         <div ng-view></div>
                     </div>
                 </div>
