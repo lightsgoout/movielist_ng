@@ -1,0 +1,64 @@
+.user-score-10 {
+    color: #12c100;
+    font-size: 48pt !important;
+}
+
+.user-score-9 {
+    color: #21a500;
+    font-size: 48pt !important;
+}
+
+.user-score-8 {
+    color: #439300;
+    font-size: 48pt !important;
+}
+
+.user-score-7 {
+    color: #659300;
+    font-size: 48pt !important;
+}
+
+.user-score-6 {
+    color: #7f9300;
+    font-size: 48pt !important;
+}
+
+.user-score-5 {
+    color: #936e00;
+    font-size: 48pt !important;
+}
+
+.user-score-4 {
+    color: #FF8C00;
+    font-size: 48pt !important;
+}
+
+.user-score-3 {
+    color: #FF5700;
+    font-size: 48pt !important;
+
+}
+
+.user-score-2 {
+    color: #FF3400;
+    font-size: 48pt !important;
+
+}
+
+.user-score-1 {
+    color: #FF0000;
+    font-size: 48pt !important;
+}
+
+div.odd {
+    background-color: #efefef;
+}
+
+.user-score {
+    font-size: 18pt;
+    line-height:90px;
+}
+
+.user-score-digit {
+    font-size: 16pt;
+}

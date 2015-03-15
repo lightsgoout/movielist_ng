@@ -17,16 +17,12 @@ def index(request):
 def show_list(request, username, status):
     user = get_object_or_404(MovielistUser, username=username)
 
-    # TODO: usertomovie relation should not be exposed
-    movies = user.get_movies(status).order_by('-usertomovie__id')
-
     total_runtime = user.get_total_movie_runtime(status) or 0
 
     return render(
         request,
         'list/list_ng.html',
         {
-            'movies': movies,
             'days': (Decimal(total_runtime)/60/24).quantize(Decimal('0.1')),
             'user': user,
             'status': status,
@@ -41,7 +37,7 @@ def list_user_achievements(request, username, is_locked):
 
     return render(
         request,
-        'list/list.html',
+        'list/achievements.html',
         {
             'achievements': achievements,
             'user': user,
@@ -59,6 +55,10 @@ def show_movie(request, movie_id):
             'movie': movie,
         }
     )
+
+
+def show_person(request, movie_id):
+    raise NotImplementedError()
 
 
 

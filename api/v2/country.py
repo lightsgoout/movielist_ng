@@ -2,23 +2,24 @@ from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
-from movies.models import Genre
+from common.models import Country
 
 
-class GenreResource(ModelResource):
+class CountryResource(ModelResource):
     name = fields.CharField(readonly=True)
 
     class Meta:
-        queryset = Genre.objects.all()
-        resource_name = 'genre'
+        queryset = Country.objects.all()
+        resource_name = 'country'
         authentication = SessionAuthentication()
         authorization = Authorization()
         list_allowed_methods = ['get']
         include_resource_uri = False
 
+        # TODO: store iso data at the frontend, don't send it via API.
         fields = [
-            'id',
             'name',
+            'iso_code',
         ]
 
     def dehydrate_name(self, bundle):

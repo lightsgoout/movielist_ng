@@ -51,6 +51,7 @@ class Movie(models.Model):
 
     kinopoisk_id = models.IntegerField(unique=True, null=True, blank=True)
     imdb_id = models.CharField(max_length=16, unique=True)
+    omdb_id = models.IntegerField(unique=True, null=True, blank=True)
 
     directors = models.ManyToManyField('movies.Person', related_name='directed_movies', blank=True)
     writers = models.ManyToManyField('movies.Person', related_name='written_movies', blank=True, through='movies.WriterToMovie')
@@ -91,8 +92,16 @@ class Movie(models.Model):
         validators=[
             validators.MaxValueValidator(100),
             validators.MinValueValidator(0),
-        ]
-    )
+        ])
+    rating_tomatoes = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        db_index=True,
+        validators=[
+            validators.MaxValueValidator(100),
+            validators.MinValueValidator(0),
+        ])
+    tomatoes_fresh = models.NullBooleanField(blank=True)
 
     image_imdb = models.URLField(blank=True, max_length=512)
 
