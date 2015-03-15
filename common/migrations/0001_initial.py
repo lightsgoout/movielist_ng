@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name_en', models.CharField(unique=True, max_length=256)),
                 ('name_ru', models.CharField(max_length=256, blank=True)),
+                ('iso_code', models.CharField(max_length=2, unique=True, null=True, blank=True)),
             ],
             options={
                 'ordering': ('name_en',),

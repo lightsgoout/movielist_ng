@@ -6,7 +6,6 @@ from django.conf import settings
 import common.fields
 
 
-# noinspection PyPep8
 class Migration(migrations.Migration):
 
     dependencies = [
