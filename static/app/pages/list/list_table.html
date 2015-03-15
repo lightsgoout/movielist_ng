@@ -1,38 +1,40 @@
-<section class="col-md-12">
-    <table class="table table-striped table-condensed">
-        <thead>
-            <tr>
-                <th>
-                  <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
-                  Movie <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                  </a>
-                </th>
-                <th>
-                  <a ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
-                    Year <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                  </a>
-                </th>
+<div ng-show="loader.user_to_movies.length">
+    <section class="col-md-12">
+        <table class="table table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>
+                      <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
+                      Movie <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      </a>
+                    </th>
+                    <th>
+                      <a ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
+                        Year <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      </a>
+                    </th>
 
-                <th>
-                  <a ng-click="orderByField='score'; reverseSort = !reverseSort">
-                  Score <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                  </a>
-                </th>
-                <th>
-                  <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
-                  IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                  </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-            <tr ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
-                <td><a href="{{ user_to_movie.movie.movie_page_url }}">{{ user_to_movie.movie.title }}</a></td>
-                <td>{{ user_to_movie.movie.year }} </td>
-                <td><a href="#" editable-select="user_to_movie.score" e-name="score" e-ng-options="s as s for s in SCORE_CHOICES" onaftersave="save()"><span class="ng-scope score_{{ user_to_movie.score }}">{{ showScore() }}</span></a></td>
-                <td>{{ user_to_movie.movie.rating_imdb }}</td>
-            </tr>
-            <tr ng-show='loader.busy'><td colspan="999">Loading data...</td></tr>
-        </tbody>
-    </table>
-</section>
+                    <th>
+                      <a ng-click="orderByField='score'; reverseSort = !reverseSort">
+                      Score <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      </a>
+                    </th>
+                    <th>
+                      <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
+                      IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
+                <tr ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
+                    <td><a href="{{ user_to_movie.movie.movie_page_url }}">{{ user_to_movie.movie.title }}</a></td>
+                    <td>{{ user_to_movie.movie.year }} </td>
+                    <td><a href="#" editable-select="user_to_movie.score" e-name="score" e-ng-options="s as s for s in SCORE_CHOICES" onaftersave="save()"><span class="ng-scope score_{{ user_to_movie.score }}">{{ showScore() }}</span></a></td>
+                    <td>{{ user_to_movie.movie.rating_imdb }}</td>
+                </tr>
+                <tr ng-show='loader.busy'><td colspan="999">Loading data...</td></tr>
+            </tbody>
+        </table>
+    </section>
+</div>

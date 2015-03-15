@@ -78,6 +78,7 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
         this.exhausted = false;
         this.username = username;
         this.status = status;
+        this.first_loading = true;
     };
 
     Loader.prototype.nextPage = function() {
@@ -106,6 +107,7 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
             if (!response.data.meta.next) {
                 self.exhausted = true;
             }
+            self.first_loading = false;
         });
     };
 

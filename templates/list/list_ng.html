@@ -25,17 +25,22 @@
                 <div class="row text-center" style="margin-bottom: 15px;">
                 <ul class="nav nav-pills" style="display: inline-block; margin-top: 20px;">
                   <li role="presentation" ng-class="{active:isActive('/')}"><a href="#/">Standard mode</a></li>
-                  <li role="presentation" ng-class="{active:isActive('/table')}"><a href="#table"><i class="fa fa-table"></i> As table</a></li>
+                  <li role="presentation" ng-class="{active:isActive('/table')}"><a href="#/table"><i class="fa fa-table"></i> As table</a></li>
                 </ul>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        {% verbatim %}
                         <div ng-show="loader.user_to_movies.length">
                             <input type="text" class="form-control search-query" placeholder="Search" ng-model="query" id="search-bar">
                             <hr>
                         </div>
-                        {% endverbatim %}
+                        <div ng-show="!loader.user_to_movies.length && !loader.first_loading">
+                            <div class="jumbotron col-md-4 animate-show text-center" style="margin: 0 auto; width: 50%; float: none;">
+                                <h2>{% trans 'The list is empty' %}</h2>
+                                <p>...</p>
+                                <p><a class="btn btn-primary btn-lg" href="{% url 'wizard' %}" role="button"><i class="fa fa-plus"></i> Add movies</a></p>
+                            </div>
+                        </div>
                         <div ng-view></div>
                     </div>
                 </div>
