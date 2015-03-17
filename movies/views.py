@@ -91,7 +91,7 @@ def wizard(request, mode=M_IMDB_TOP):
 
     return render(
         request,
-        'wizard/list.html',
+        'wizard/wizard.html',
         {
             'movie': movie,
         }

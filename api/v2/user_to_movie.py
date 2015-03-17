@@ -8,8 +8,13 @@ from api.v2.movie import MovieResource
 from movies.models import UserToMovie
 
 
-class UserToMovieResource(ModelResource):
+class UserObjectsOnlyAuthorization(Authorization):
+    def update_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
 
+
+class UserToMovieResource(ModelResource):
+    movie_id = fields.IntegerField()
     movie = fields.ToOneField(
         MovieResource,
         'movie',
@@ -29,8 +34,9 @@ class UserToMovieResource(ModelResource):
             ).order_by('-id')
         resource_name = 'user_to_movie'
         authentication = Authentication()
-        authorization = Authorization()
-        list_allowed_methods = ['get']
+        authorization = UserObjectsOnlyAuthorization()
+        list_allowed_methods = ['get', 'post']
+        detail_allowed_methods = ['put', 'get']
         limit = 25
         filtering = {
             'status': ('exact',),
@@ -54,3 +60,9 @@ class UserToMovieResource(ModelResource):
         if bundle.obj.score:
             return float(bundle.obj.score)
         return bundle.obj.score
+
+    def hydrate(self, bundle):
+        bundle = super(UserToMovieResource, self).hydrate(bundle)
+        bundle.obj.user = bundle.request.user
+        bundle.obj.movie_id = bundle.data['movie_id']
+        return bundle
