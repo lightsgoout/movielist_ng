@@ -124,7 +124,7 @@ class Movie(models.Model):
     def title(self):
         cur_language = translation.get_language()
         if cur_language == 'ru':
-            return self.title_ru
+            return self.title_ru or self.title_en
         else:
             return self.title_en
 
