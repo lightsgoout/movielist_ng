@@ -1,7 +1,6 @@
 # coding=utf-8
-from django.contrib.admin import ModelAdmin
 from common.utils import admincolumn, SphinxModelAdmin
-from movies.admin.movie import filters
+from movies.admin.movie import filters, actions
 
 
 class MovieAdmin(SphinxModelAdmin):
@@ -43,8 +42,7 @@ class MovieAdmin(SphinxModelAdmin):
     )
 
     actions = [
-        # mark_as_watched,
-        # fetch_imdb_image,
+        actions.kinopoisk_fetch_movie_info,
     ]
 
     @admincolumn(u'Режиссер')

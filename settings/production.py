@@ -173,3 +173,6 @@ LOCALE_PATHS = (
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ['json']
