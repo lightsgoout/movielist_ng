@@ -1,0 +1,63 @@
+<div class="col-md-3">
+    <div class="movie-question text-center" style="position: absolute; left: 30px; top: 300px;">
+        <p class="lead">Did you watch this movie?</p>
+    </div>
+</div>
+<div class="col-md-6 text-center">
+    <div class="movie-item">
+        <div class="jumbotron">
+            <div class="movie-poster">
+               <img src="{{ movie.image_url }}" style="max-height: 445px; min-height: 445px;">
+            </div>
+            <div class="movie-info font-large">
+                <h4 class="movie-title"><a href="{{ movie.page_url }}">{{ movie.title }}</a> ({{ movie.year }})</h4>
+                <div class="movie-genres">
+                    <span ng-repeat="genre in movie.genres | orderBy:'toString()'">
+                        <span class="label label-success">
+                            {{ genre }}
+                        </span>&nbsp;
+                    </span>
+                </div>
+                <div class="movie-director movie-info-entry">
+                    <span ng-switch="movie.directors.length">
+                        <span ng-switch-when="1">Director:</span>
+                        <span ng-switch-default>Directors:</span>
+                    </span>
+                    <span ng-repeat="person in movie.directors | orderBy:'name'">
+                        <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
+                    </span>
+                </div>
+                <div class="movie-actors movie-info-entry">
+                    Starring:
+                    <span ng-repeat="person in movie.cast | orderBy:'name'">
+                        <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
+                    </span>
+                </div>
+            </div>
+            <div class="movie-actions">
+                <a class="btn btn-success add-to-list add-to-watched"
+                   ng-click="nextMovie(movie.id, 'W');"
+                   href="#">
+                    <i class="glyphicon glyphicon-plus"></i> Watched</a>
+                <a class="btn add-to-list add-to-ptw"
+                   ng-click="nextMovie(movie.id, 'P');"
+                   href="#">
+                    <i class="glyphicon glyphicon-plus"></i> Plan to watch</a>
+                <a class="btn btn-link add-to-list add-to-ignored"
+                   ng-click="nextMovie(movie.id, 'I');"
+                   href="#">Ignore</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="movie-question text-center" style="position: absolute; left: 100px; top: 250px;">
+        <p class="text-muted lead">This movie is recommended to you because:</p>
+        <p class="lead">
+            <span ng-switch="movie.suggestion_factor">
+                <span ng-switch-when="IMDB_TOP">Top 250 IMDB movie</span>
+                <span ng-switch-when="SAME_SERIES">Part of the series you watched</span>
+            </span>
+        </p>
+    </div>
+</div>

@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'django_extensions',
     'djangobower',
+    'django_nose',
 
     'achievements',
     'accounts',
@@ -117,11 +118,12 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
 
 BOWER_INSTALLED_APPS = (
     'angular#1.3.14',
+    'angular-animate#1.3.14',
     'angular-ui-utils#0.2.2',
     'angular-resource#1.3.14',
     'angular-route#1.3.14',
     'ngInfiniteScroll#1.2.0',
-    'ng-tags-input#1.2.0',
+    'ng-tags-input#2.2.0',
     'bootstrap#3.3.2',
     'bootstrap-social#4.8.0',
     'jquery#2.1.3',
@@ -169,3 +171,5 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

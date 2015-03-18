@@ -20,7 +20,10 @@
                         </span>
                     </div>
                     <div>
-                        Director:
+                        <span ng-switch="user_to_movie.movie.directors.length">
+                            <span ng-switch-when="1">Director:</span>
+                            <span ng-switch-default>Directors:</span>
+                        </span>
                         <span ng-repeat="person in user_to_movie.movie.directors | orderBy:'name'">
                             <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
                         </span>
@@ -40,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pull-left" style="margin-left: 15px; height: 100px;">
+            <div class="pull-left" style="margin-left: 15px; height: 100px;" ng-show="loader.status == 'W'">
                 <div class="user-score">
                     <a href="#"
                        editable-select="user_to_movie.score"

@@ -10,14 +10,12 @@
     <link href="{% static "angular-xeditable/dist/css/xeditable.css" %}" rel="stylesheet">
     <link href="{% static "flag-icon-css/css/flag-icon.min.css" %}" rel="stylesheet">
     <script src="{% static "angular-xeditable/dist/js/xeditable.js" %}" type="text/javascript"></script>
-    <script src="{% static "ng-tags-input/ng-tags-input.min.js" %}" type="text/javascript"></script>
-    <link href="{% static "ng-tags-input/ng-tags-input.min.css" %}" rel="stylesheet">
 
 
     <script src="{% static "app/utils/tasty-resource.js" %}" type="text/javascript"></script>
     <script src="{% static "app/pages/list/list.js" %}" type="text/javascript"></script>
     <link href="{% static "app/pages/list/list.css" %}" rel="stylesheet">
-    <div class="row"  ng-app="UserToMovie">
+    <div class="row" ng-app="UserToMovie">
         <div class="col-md-10">
             <h3>{{ user.username }}'s movie list</h3>
             {% include 'list/menu.html' %}

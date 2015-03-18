@@ -1,32 +1,47 @@
-{% load i18n %}
-
+<div class="col-md-3">
+    <div class="movie-question text-center" style="position: absolute; left: 30px; top: 300px;">
+        <p class="lead">Did you watch this movie?</p>
+{#                    <p class="text-muted">This page will help you create your list faster.</p>#}
+    </div>
+</div>
+<div class="col-md-6 text-center">
     <div class="movie-item">
-        <div class="movie-poster">
-           <img src="{{ movie.image_url }}">
-        </div>
-        <div class="movie-info">
-            <h5 class="movie-title"><a href="/movie/{{ movie.pk }}/">{{ movie.title }}</a> ({{ movie.year }})</h5>
-            <div class="movie-genres">
-                {% for genre in movie.genres.all %}
-                    <a href="/genre/{{ genre.name_en }}/"><span class="label label-info">{{ genre.name }}</span></a>
-                {% endfor %}
+        <div class="jumbotron">
+            <div class="movie-poster">
+               <img src="{{ movie.image_url }}" style="max-height: 445px; min-height: 445px;">
             </div>
-            <div class="movie-director movie-info-entry">
-                {% trans 'Director' %}:
-                {% for person in movie.directors.all %}
-                    <a href="/person/{{ person.pk }}/">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
+            <div class="movie-info font-large">
+                <h4 class="movie-title"><a href="/movie/{{ movie.pk }}/">{{ movie.title }}</a> ({{ movie.year }})</h4>
+                <div class="movie-genres">
+                    {% for genre in movie.genres.all %}
+                        <a href="/genre/{{ genre.name_en }}/" class="label label-info">{{ genre.name }}</a>
+                    {% endfor %}
+                </div>
+                <div class="movie-director movie-info-entry">
+                    {% trans 'Director' %}:
+                    {% for person in movie.directors.all %}
+                        <a href="/person/{{ person.pk }}/">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="movie-actors movie-info-entry">
+                    {% trans 'Starring' %}:
+                    {% for person in movie.cast.all %}
+                        <a href="/person/{{ person.pk }}/">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-            <div class="movie-actors movie-info-entry">
-                {% trans 'Starring' %}:
-                {% for person in movie.cast.all %}
-                    <a href="/person/{{ person.pk }}/">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
+            <div class="movie-actions">
+                <a class="btn btn-success add-to-list add-to-watched" data-loading-text="<i class='glyphicon glyphicon-spinner glyphicon glyphicon-spin glyphicon glyphicon-large'></i> {% trans 'Working...' %}" data-status="W" data-movie-id="{{ movie.pk }}" href="#"><i class="glyphicon glyphicon-plus"></i> {% trans 'Watched'%}</a>
+                <a class="btn add-to-list add-to-ptw" data-status="P" data-loading-text="<i class='glyphicon glyphicon-spinner glyphicon glyphicon-spin glyphicon glyphicon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#"><i class="glyphicon glyphicon-plus"></i> {% trans 'Plan to watch' %}</a>
+                <a class="btn btn-link add-to-list add-to-ignored" data-status="I" data-loading-text="<i class='glyphicon glyphicon-spinner glyphicon glyphicon-spin glyphicon glyphicon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#">{% trans 'Ignore' %}</a>
             </div>
-        </div>
-        <div class="movie-actions">
-            <a class="btn btn-success add-to-list add-to-watched" data-loading-text="<i class='glyphicon glyphicon-spinner glyphicon glyphicon-spin glyphicon glyphicon-large'></i> {% trans 'Working...' %}" data-status="W" data-movie-id="{{ movie.pk }}" href="#"><i class="glyphicon glyphicon-plus"></i> {% trans 'Watched'%}</a>
-            <a class="btn add-to-list add-to-ptw" data-status="P" data-loading-text="<i class='glyphicon glyphicon-spinner glyphicon glyphicon-spin glyphicon glyphicon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#"><i class="glyphicon glyphicon-plus"></i> {% trans 'Plan to watch' %}</a>
-            <a class="btn btn-link add-to-list add-to-ignored" data-status="I" data-loading-text="<i class='glyphicon glyphicon-spinner glyphicon glyphicon-spin glyphicon glyphicon-large'></i> {% trans 'Working...' %}" data-movie-id="{{ movie.pk }}" href="#">{% trans 'Ignore' %}</a>
         </div>
     </div>
+</div>
+<div class="col-md-3">
+    <div class="movie-question text-center" style="position: absolute; left: 100px; top: 250px;">
+        <p class="text-muted lead">This movie is recommended to you because:</p>
+        <p class="lead">Top 250 IMDB movie</p>
+        <a href="/todo">Report bad suggestion</a>
+    </div>
+</div>

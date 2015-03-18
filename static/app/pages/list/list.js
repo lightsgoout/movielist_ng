@@ -1,4 +1,4 @@
-app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable', "ngRoute", 'ngTagsInput']);
+app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable', "ngRoute"]);
 
 app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
     return TastyResource({
@@ -14,7 +14,7 @@ app.factory("Genre", ["TastyResource", function(TastyResource) {
     })
 }]);
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+app.config(['$routeProvider', '$locationProvider', function($routeProvider) {
     $routeProvider
     .when('/', {templateUrl: '/static/app/pages/list/list.html', controller: 'UserToMovieListController'})
     .when('/table', {templateUrl: '/static/app/pages/list/list_table.html', controller: 'UserToMovieListController'})
@@ -26,7 +26,7 @@ app.run(function(editableOptions) {
 });
 
 
-app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($scope, $filter) {
+app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($scope) {
 
     $scope.save = function() {
         $scope.user_to_movie.put();
@@ -42,7 +42,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($sco
 }]);
 
 
-app.controller("UserToMovieListController", function($scope, Loader, $location, Genre) {
+app.controller("UserToMovieListController", function($scope, Loader, $location) {
 
     $scope.init = function(username, status) {
         //This function is sort of private constructor for controller
@@ -61,8 +61,6 @@ app.controller("UserToMovieListController", function($scope, Loader, $location, 
             9,
             10
         ];
-
-        $scope.genres = ['Action', 'Mystery'];
     };
 
     $scope.isActive = function(route) {

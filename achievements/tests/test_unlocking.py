@@ -1,7 +1,7 @@
 from django.test import TestCase
 import freezegun
 from accounts import mommy_recipes as accounts_recipes
-from movies import mommy_recipes as movies_recipes
+from movies import mommy_recipes as movies_recipes, constants
 from achievements import mommy_recipes as achievements_recipes
 
 
@@ -93,3 +93,11 @@ class UnlockingTest(TestCase):
         self.assertNotIn(achievement, self.user.get_achievements())
         self.user.add_movie(movies[-1])
         self.assertIn(achievement, self.user.get_achievements())
+
+    def test_only_watched_movies_unlock_achievements(self):
+        movie = movies_recipes.movie.make()
+        achievement = achievements_recipes.achievement.make(
+            condition_movie=movie,
+        )
+        self.user.add_movie(movie, status=constants.PLAN_TO_WATCH)
+        self.assertNotIn(achievement, self.user.get_achievements())

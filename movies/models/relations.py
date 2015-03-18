@@ -25,18 +25,12 @@ class UserToMovie(models.Model):
         ('10.0', '10.0'),
     )
 
-    STATUS_CHOICES = (
-        (constants.WATCHED, 'Watched'),
-        (constants.PLAN_TO_WATCH, 'Plan to watch'),
-        (constants.IGNORED, 'Ignored'),
-    )
-
     user = models.ForeignKey('accounts.MovielistUser')
     movie = models.ForeignKey('movies.Movie')
     score = models.DecimalField(decimal_places=1, max_digits=3,
                                 choices=SCORE_CHOICES, null=True, blank=True)
     status = models.CharField(
-        choices=STATUS_CHOICES,
+        choices=constants.STATUS_CHOICES,
         max_length=1,
         default=constants.WATCHED,
         db_index=True)

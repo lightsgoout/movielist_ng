@@ -1,12 +1,15 @@
 from django.core.urlresolvers import reverse
+from django.conf.urls import url
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
+from tastypie.utils import trailing_slash
 from api.v2.country import CountryResource
 from api.v2.genre import GenreResource
 from api.v2.person import PersonResource
 from movies.models import Movie
+from suggestions.base import AbstractSuggester
 
 
 class MovieResource(ModelResource):
@@ -72,3 +75,34 @@ class MovieResource(ModelResource):
 
     def dehydrate_genres(self, bundle):
         return [g for g in bundle.obj.genres.all()]
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/get_suggestions%s$" % (
+                self._meta.resource_name,
+                trailing_slash()),
+                self.wrap_view('get_suggestions'),
+                name="api_get_suggestions"),
+        ]
+
+    def get_suggestions(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+        self.is_authenticated(request)
+
+        suggester = AbstractSuggester()
+        object_list = suggester.get_suggestion_list(request.user)
+        objects = []
+        for index, result in enumerate(object_list):
+            movie, factor = result
+            bundle = self.build_bundle(obj=movie, request=request)
+            bundle = self.full_dehydrate(bundle)
+            bundle.data['suggestion_factor'] = factor
+            bundle.data['suggestion_order'] = index
+            objects.append(bundle)
+
+        json_object_list = {
+            'objects': objects,
+        }
+
+        return self.create_response(request, json_object_list)
+

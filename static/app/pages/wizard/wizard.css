@@ -1,0 +1,15 @@
+.movie-info > div {
+    line-height: 25px;
+}
+
+.movie-item > .movie-actions {
+    margin-top: 5px;
+}
+
+.movie-info > .movie-genres {
+    margin-bottom: 5px;
+}
+
+.font-large {
+    font-size: 16px;
+}
