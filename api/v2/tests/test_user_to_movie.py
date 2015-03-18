@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse
+import mock
 from tastypie.test import ResourceTestCase
 from accounts import mommy_recipes as accounts_recipes
-from movies import mommy_recipes as movie_recipes
+from movies import mommy_recipes as movie_recipes, constants
 
 
 class TestUserToMovieResource(ResourceTestCase):
@@ -9,6 +10,8 @@ class TestUserToMovieResource(ResourceTestCase):
     def setUp(self):
         super(TestUserToMovieResource, self).setUp()
         self.user = accounts_recipes.user.make()
+        self.user.set_password('123')
+        self.user.save()
 
     def test_put_movie_readonly(self):
         movie = movie_recipes.movie.make(year=2005)
@@ -47,3 +50,22 @@ class TestUserToMovieResource(ResourceTestCase):
         data['score'] = 3
         resp = self.api_client.put(detail_url, data=data)
         self.assertHttpUnauthorized(resp)
+
+    def test_add_movie(self):
+        self.assertTrue(self.api_client.client.login(username=self.user.username, password='123'))
+        movie = movie_recipes.movie.make()
+
+        url = reverse('api_add_movie', kwargs={'resource_name': 'user_to_movie'})
+
+        with mock.patch('accounts.models.MovielistUser.add_movie') as m_add_movie:
+            resp = self.api_client.post(url, data={
+                'movie_id': movie.id,
+                'status': constants.WATCHED,
+            })
+
+            m_add_movie.assert_called_once_with(
+                movie,
+                constants.WATCHED
+            )
+
+            self.assertHttpOK(resp)

@@ -32,8 +32,12 @@ class UserMoviesMixin(models.Model):
             status=status,
             score=score,
         )
-        signals.user_watched_movie.send(
-            sender=self.__class__, user=self, movie=movie, score=score)
+        signals.user_added_movie.send(
+            sender=self.__class__,
+            user=self,
+            movie=movie,
+            status=status,
+            score=score)
         return u2m
 
     def remove_movie(self, movie):
@@ -43,7 +47,11 @@ class UserMoviesMixin(models.Model):
         )
         u2m.delete()
         signals.user_removed_movie.send(
-            sender=self.__class__, user=self, movie=movie, score=u2m.score)
+            sender=self.__class__,
+            user=self,
+            movie=movie,
+            status=u2m.status,
+            score=u2m.score)
         return u2m
 
     def is_movie_added(self, movie, status=constants.WATCHED):

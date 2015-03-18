@@ -130,14 +130,17 @@ def is_achievement_satisfied(achievement, user, just_added_movie):
     return True
 
 
-@receiver(signals.user_watched_movie)
+@receiver(signals.user_added_movie)
 @feature_framework.is_enabled(features.ACHIEVEMENTS)
-def unlock_achievements(user, movie, score, **kwargs):
+def unlock_achievements(user, movie, status, score, **kwargs):
     """
     @type user accounts.models.MovielistUser
     @type movie movies.models.Movie
     @type score decimal.Decimal or None
     """
+    if status != constants.WATCHED:
+        return
+
     # Collect achievements which are about certain movie conditions
     # (year, MPAA rating, etc.)
     movie_achievements = Achievement.objects.filter(

@@ -9,7 +9,7 @@ class Test(TestCase):
 
     def setUp(self):
         self.user = accounts_recipes.user.make()
-        self.suggester = IMDBSuggester(self.user)
+        self.suggester = IMDBSuggester()
 
     def test_suggest_by_top_imdb_order(self):
         movie0 = movie_recipes.movie.make(

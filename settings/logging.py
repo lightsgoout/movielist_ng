@@ -22,10 +22,10 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-        # 'django.db': {
-        #     'handlers': ['console'],
-        #     'level': 'DEBUG',
-        # }
+        'django.db': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+        }
     },
 }
 

@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'ajax_select',
     'django_extensions',
     'djangobower',
+    'django_nose',
 
     'achievements',
     'accounts',
@@ -170,3 +171,5 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

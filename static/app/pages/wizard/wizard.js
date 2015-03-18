@@ -8,50 +8,27 @@ app.factory("Suggestion", ["TastyResource", function(TastyResource) {
     })
 }]);
 
-app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
-    return TastyResource({
-        url: "/api/v2/user_to_movie/",
-        cache: false
-    });
-}]);
-
-//app.run(function(editableOptions) {
-//    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-//});
-
-app.controller("WizardController", ["$scope", "SuggestionLoader", "UserToMovie", function($scope, SuggestionLoader, UserToMovie) {
+app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", function($scope, SuggestionLoader, $http) {
 
     $scope.init = function() {
         $scope.suggestionLoader = new SuggestionLoader();
         $scope.suggestionLoader.nextBunch();
     };
 
-    //$scope.current_movie_sort_order = 0;
-    //$scope.current_movie = undefined;
-
     $scope.nextMovie = function(movie_id, status) {
+        // TODO: success/error callbacks?
+        // https://docs.angularjs.org/api/ng/service/$http
+        $http.post(
+            '/api/v2/user_to_movie/add_movie/',
+            {'movie_id': movie_id, 'status': status});
 
-        var u2m = UserToMovie;
-        u2m.movie_id = movie_id;
-        u2m.status = status;
-        u2m.post();
-
-        //if (this.current_movie_sort_order == 0) {
-        //    this.suggestionLoader.suggestions.shift();
-        //}
         var next_movie = this.suggestionLoader.suggestions.shift();
-        //$scope.current_movie_sort_order = next_movie.sort_order;
-        //$scope.current_movie = next_movie;
 
         if (this.suggestionLoader.suggestions.length == 0) {
             this.suggestionLoader.nextBunch();
         }
     };
 
-    //$scope.isCurrentMovie = function (index) {
-    //    console.log(index);
-    //    return $scope.current_movie_sort_order === index;
-    //};
 
 }]);
 
