@@ -148,5 +148,9 @@ class Movie(models.Model):
     def image_url(self):
         return self.image_imdb
 
+    @property
+    def unique_writers(self):
+        return self.writers.all().distinct()
+
     class Meta:
         app_label = 'movies'

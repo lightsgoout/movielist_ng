@@ -1,31 +1,158 @@
 {% extends 'main.html' %}
 {% load i18n %}
+{% load static %}
 {% block body %}
+    <link href="{% static "flag-icon-css/css/flag-icon.min.css" %}" rel="stylesheet">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ movie.image_url }}">
+                <img src="{{ movie.image_url }}" style="margin-top: 20px;">
             </div>
             <div class="col-md-8">
                 <h1>{{ movie.title }}</h1>
                 <blockquote>{{ movie.full_plot}}</blockquote>
-                <div class="movie-info">
-                    <div class="movie-genres">
-                        {% for genre in movie.genres.all %}
-                            <a href="/genre/"><span class="label label-info">{{ genre }}</span></a>
-                        {% endfor %}
+                <div class="row">
+                    <div class="col-md-8">
+                        <table class="table table-striped table-condensed">
+                            <caption>{% trans 'Movie information' %}</caption>
+                            <tr>
+                                <th>{% trans 'Year' %}</th>
+                                <td>{{ movie.year }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans 'Country' %}</th>
+                                <td>
+                                    {% for country in movie.countries.all %}
+                                        <span class="flag-icon flag-icon-{{ country.iso_code|lower }}" title="{{ country.name }}"></span>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% if movie.directors.all|length > 1 %}
+                                        {% trans 'Directors' %}
+                                    {% else %}
+                                        {% trans 'Director' %}
+                                    {% endif %}
+                                </th>
+                                <td>
+                                    {% for person in movie.directors.all %}
+                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% if movie.writers.all|length > 1 %}
+                                        {% trans 'Writers' %}
+                                    {% else %}
+                                        {% trans 'Writer' %}
+                                    {% endif %}
+                                </th>
+                                <td>
+                                    {% for person in movie.unique_writers %}
+                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% if movie.producers.all|length > 1 %}
+                                        {% trans 'Producers' %}
+                                    {% else %}
+                                        {% trans 'Producer' %}
+                                    {% endif %}
+                                </th>
+                                <td>
+                                    {% for person in movie.producers.all %}
+                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                        -
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% if movie.composers.all|length > 1 %}
+                                        {% trans 'Composers' %}
+                                    {% else %}
+                                        {% trans 'Composer' %}
+                                    {% endif %}
+                                </th>
+                                <td>
+                                    {% for person in movie.composers.all %}
+                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                        -
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% trans 'Genre' %}
+                                </th>
+                                <td>
+                                    {% for genre in movie.genres.all %}
+                                        <a href="#">{{ genre.name|lower }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% trans 'MPAA rating' %}
+                                </th>
+                                <td>
+                                    {{ movie.rated }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% trans 'Runtime' %}
+                                </th>
+                                <td>
+                                    {{ movie.runtime }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {% trans 'Tagline' %}
+                                </th>
+                                <td>
+                                    {% if movie.tagline %}
+                                        {{ movie.tagline }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-striped table-condensed">
+                            <caption>{% trans 'Movie ratings' %}</caption>
+                            <tr>
+                                <th>{% trans 'IMDB rating' %}</th>
+                                <td>{{ movie.rating_imdb }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans 'Metascore' %}</th>
+                                <td>{{ movie.rating_metacritic }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans 'Rotten Tomatoes' %}</th>
+                                <td>{{ movie.rating_tomatoes }}%</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="movie-director">
-                        Directors:
-                            {% for person in movie.directors.all %}
-                                <a href="{% url 'person' person.id %}">{{ person }}</a>
-                            {% endfor %}
-                    </div>
-                    <div class="movie-actors">
-                        Starring:
+                    <div class="col-md-4">
+                        <table class="table table-striped table-condensed">
+                            <caption>{% trans 'Cast' %}</caption>
                             {% for person in movie.cast.all %}
-                                <a href="{% url 'person' person.id %}">{{ person }}</a>,
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>
+                                    </td>
+                                </tr>
                             {% endfor %}
+                        </table>
                     </div>
                 </div>
             </div>

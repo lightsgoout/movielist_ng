@@ -54,3 +54,21 @@ class SphinxModelAdmin(admin.ModelAdmin):
             return super(SphinxModelAdmin, self).get_search_results(
                 request, queryset, search_term
             )
+
+
+def get_translation_stats():
+    from movies.models import Movie, Person
+    movies_total = Movie.objects.all().count()
+    movies_untranslated = Movie.objects.filter(title_ru='').count()
+    movies_translated = movies_total - movies_untranslated
+    movies_percentage = float(movies_translated) / float(movies_total) * 100
+
+    person_total = Person.objects.all().count()
+    person_untranslated = Person.objects.filter(name_ru='').count()
+    person_translated = person_total - person_untranslated
+    person_percentage = float(person_translated) / float(person_total) * 100
+
+    return {
+        'movies': round(movies_percentage, 2),
+        'person': round(person_percentage, 2),
+    }
