@@ -7,6 +7,7 @@ class Person(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     birth_year = models.PositiveSmallIntegerField(null=True, blank=True)
     kinopoisk_id = models.IntegerField(null=True, blank=True, db_index=True)
+    imdb_id = models.CharField(max_length=16, blank=True, db_index=True)
 
     def __unicode__(self):
         return self.name_en

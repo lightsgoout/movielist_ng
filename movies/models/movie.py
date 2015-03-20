@@ -49,6 +49,8 @@ class Movie(models.Model):
     year = models.PositiveSmallIntegerField(null=True, db_index=True)
     date_released = models.DateField(null=True, blank=True, db_index=True)
 
+    imdb_processed = models.BooleanField(default=False, db_index=True)
+
     kinopoisk_id = models.IntegerField(unique=True, null=True, blank=True)
     imdb_id = models.CharField(max_length=16, unique=True)
     omdb_id = models.IntegerField(unique=True, null=True, blank=True)

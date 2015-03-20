@@ -10,7 +10,7 @@ log = logging.getLogger('imports')
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        with open('imports/static_data/kinopoisk_data.json') as f_json:
+        with open('imports/static_data/kinopoisk_movies_data.json') as f_json:
             data = json.load(f_json)
             for movie_data in data:
                 upd = Movie.objects.\
