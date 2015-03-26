@@ -11,7 +11,14 @@ app.factory("Genre", ["TastyResource", function(TastyResource) {
     return TastyResource({
         url: "/api/v2/genre/",
         cache: true
-    })
+    });
+}]);
+
+app.factory("Movie", ["TastyResource", function(TastyResource) {
+    return TastyResource({
+        url: "/api/v2/movie/",
+        cache: true
+    });
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider) {
@@ -37,8 +44,6 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($sco
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
         return $scope.user_to_movie.score || 'Set score';
     };
-
-
 }]);
 
 
@@ -61,6 +66,30 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
             9,
             10
         ];
+    };
+
+    $scope.isActive = function(route) {
+        return route === $location.path();
+    };
+});
+
+
+app.controller("ListController", function($scope, Movie) {
+
+    $scope.init = function(person_id, relation) {
+        // relation can be one of 'actor' 'director' 'composer' 'writer'
+        $scope.orderByField = '-year';
+
+        var kwargs = {
+            'limit': 200
+        };
+        if (relation == 'actor') {
+            kwargs['cast'] = person_id;
+        } else if (relation == 'director') {
+            kwargs['directors'] = person_id;
+        }
+
+        $scope.movies = Movie.query(kwargs);
     };
 
     $scope.isActive = function(route) {

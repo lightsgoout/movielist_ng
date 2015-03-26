@@ -3,6 +3,7 @@ from django.conf.urls import url
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.authorization import Authorization
+from tastypie.constants import ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
 from tastypie.utils import trailing_slash
 from api.v2.country import CountryResource
@@ -51,6 +52,10 @@ class MovieResource(ModelResource):
         authentication = SessionAuthentication()
         authorization = Authorization()
         list_allowed_methods = ['get']
+        filtering = {
+            'cast': ALL_WITH_RELATIONS,
+            'directors': ALL_WITH_RELATIONS,
+        }
 
         fields = [
             'id',

@@ -1,5 +1,5 @@
 <section class="col-md-12" infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-    <div ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
+    <div ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:'-id'" ng-controller="UserToMovieController">
         <div class="media">
             <div class="pull-left" style="width: 65%;">
                 <div class="media-left">
