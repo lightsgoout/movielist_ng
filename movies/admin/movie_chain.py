@@ -31,3 +31,10 @@ class MovieChainForm(ModelForm):
 
 class MovieChainAdmin(admin.ModelAdmin):
     form = MovieChainForm
+
+    list_display = (
+        'system_name',
+        'name_en',
+        'is_direct_series',
+        'is_suggestable',
+    )

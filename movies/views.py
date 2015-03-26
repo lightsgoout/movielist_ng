@@ -4,7 +4,7 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from accounts.models import MovielistUser
 from movies import constants
-from movies.models import Movie
+from movies.models import Movie, Person
 
 
 def index(request):
@@ -53,12 +53,21 @@ def show_movie(request, movie_id):
         'pages/movie.html',
         {
             'movie': movie,
+            'cast': movie.get_top_cast(),
         }
     )
 
 
-def show_person(request, movie_id):
-    raise NotImplementedError()
+def show_person(request, person_id):
+    person = get_object_or_404(Person, pk=person_id)
+    return render(
+        request,
+        'pages/person.html',
+        {
+            'person': person,
+            'starred_movies': person.get_starred_movies(),
+        }
+    )
 
 
 

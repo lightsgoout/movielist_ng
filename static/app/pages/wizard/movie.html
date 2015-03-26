@@ -29,7 +29,7 @@
                 </div>
                 <div class="movie-actors movie-info-entry">
                     Starring:
-                    <span ng-repeat="person in movie.cast | orderBy:'name'">
+                    <span ng-repeat="person in movie.cast | orderBy:'-sort_power' | limitTo:4 ">
                         <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
                     </span>
                 </div>
@@ -51,7 +51,7 @@
     </div>
 </div>
 <div class="col-md-3">
-    <div class="movie-question text-center" style="position: absolute; left: 100px; top: 250px;">
+    <div class="movie-question text-center" style="position: absolute; left: 100px; top: 165px;">
         <p class="text-muted lead">This movie is recommended to you because:</p>
         <p class="lead">
             <span ng-switch="movie.suggestion_factor">

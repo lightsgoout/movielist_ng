@@ -1,6 +1,6 @@
 # coding=utf-8
 from common.utils import admincolumn, SphinxModelAdmin
-from movies.admin.person import actions
+from movies.admin.person import actions, filters
 
 
 class PersonAdmin(SphinxModelAdmin):
@@ -21,4 +21,8 @@ class PersonAdmin(SphinxModelAdmin):
 
     actions = [
         actions.kinopoisk_fetch_person_info,
+    ]
+
+    list_filter = [
+        filters.TranslatedFilter,
     ]

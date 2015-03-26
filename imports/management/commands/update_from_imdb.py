@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         ia = IMDb()
-        movies = Movie.top.imdb().filter(imdb_processed=False)
+        movies = Movie.objects.filter(imdb_processed=False).order_by('-votes_imdb')
         for movie in movies:
             imdb_movie = ia.get_movie(movie.imdb_id.replace('tt', ''))
 
@@ -40,20 +40,21 @@ class Command(BaseCommand):
             else:
                 print u'No soundtrack for movie {}'.format(movie)
 
-            cast = imdb_movie.data['cast']
-            for actor in cast:
-                person = get_person(actor)
-                if person is None:
-                    continue
+            if 'cast' in imdb_movie.data:
+                cast = imdb_movie.data['cast']
+                for actor in cast:
+                    person = get_person(actor)
+                    if person is None:
+                        continue
 
-                person.imdb_id = actor.personID
-                person.save()
+                    person.imdb_id = actor.personID
+                    person.save()
 
-                _, created = ActorToMovie.objects.get_or_create(person=person, movie=movie)
-                if created:
-                    print u'Added actor {} to movie {}'.format(person, movie)
-                else:
-                    print u'Actor {} already added to movie {}'.format(person, movie)
+                    _, created = ActorToMovie.objects.get_or_create(person=person, movie=movie)
+                    if created:
+                        print u'Added actor {} to movie {}'.format(person, movie)
+                    else:
+                        print u'Actor {} already added to movie {}'.format(person, movie)
 
             movie.imdb_processed = True
             movie.save(update_fields=('imdb_processed',))

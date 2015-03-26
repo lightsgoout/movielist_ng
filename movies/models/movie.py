@@ -15,6 +15,14 @@ class MovieQuerySet(QuerySet):
     def with_image(self):
         return self.exclude(image_imdb='')
 
+    def without_translation(self):
+        return self.filter(
+            title_ru=''
+        )
+
+    def with_translation(self):
+        return self.exclude(title_ru='')
+
 
 class TopManager(models.Manager):
     def imdb(self):
@@ -153,6 +161,9 @@ class Movie(models.Model):
     @property
     def unique_writers(self):
         return self.writers.all().distinct()
+
+    def get_top_cast(self):
+        return self.cast.all().order_by('-sort_power')[:15]
 
     class Meta:
         app_label = 'movies'

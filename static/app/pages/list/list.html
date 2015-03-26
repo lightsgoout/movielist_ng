@@ -28,7 +28,7 @@
                     </div>
                     <div>
                         Cast:
-                        <span ng-repeat="person in user_to_movie.movie.cast | orderBy:'name'">
+                        <span ng-repeat="person in user_to_movie.movie.cast | orderBy:'-sort_power' | limitTo:4">
                             <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
                         </span>
                     </div>
@@ -47,6 +47,7 @@
                        editable-select="user_to_movie.score"
                        e-name="score"
                        e-ng-options="s as s for s in SCORE_CHOICES"
+                       buttons="no"
                        onaftersave="save()">
                         <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
                     </a>

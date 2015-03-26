@@ -73,6 +73,11 @@ class UserToMovieResource(ModelResource):
                 trailing_slash()),
                 self.wrap_view('add_movie'),
                 name="api_add_movie"),
+            url(r"^(?P<resource_name>%s)/movie_status%s$" % (
+                self._meta.resource_name,
+                trailing_slash()),
+                self.wrap_view('movie_status'),
+                name="api_movie_status"),
         ]
 
     def add_movie(self, request, **kwargs):
@@ -93,11 +98,44 @@ class UserToMovieResource(ModelResource):
         if status not in {constants.IGNORED, constants.PLAN_TO_WATCH, constants.WATCHED}:
             raise BadRequest('Invalid status')
 
-        request.user.add_movie(movie, status)
+        u2m = request.user.add_movie(movie, status)
 
         result = {
-            'ok': True,
+            'id': u2m.id,
         }
 
         return self.create_response(request, result)
 
+    def movie_status(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+        self.is_authenticated(request)
+
+        movie_id = request.GET.get('movie_id')
+        if not movie_id:
+            raise BadRequest('Invalid movie_id')
+
+        try:
+            movie = Movie.objects.get(pk=movie_id)
+        except Movie.DoesNotExist:
+            raise Http404('Movie does not exist')
+
+        u2m = request.user.get_movie_status(movie)
+
+        if u2m:
+            result = {
+                'status': u2m.status,
+                'score': u2m.score,
+                'id': u2m.id,
+            }
+        else:
+            result = None
+
+        return self.create_response(request, result)
+
+    def hydrate(self, bundle):
+        bundle = super(UserToMovieResource, self).hydrate(bundle)
+        if bundle.data['status'] != constants.WATCHED:
+            bundle.data['score'] = None
+
+        bundle.data['user'] = bundle.request.user
+        return bundle

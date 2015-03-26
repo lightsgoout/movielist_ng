@@ -20,7 +20,8 @@ class PersonResource(ModelResource):
 
         fields = [
             'name',
-            'page_url'
+            'page_url',
+            'sort_power',
         ]
 
     def dehydrate_name(self, bundle):

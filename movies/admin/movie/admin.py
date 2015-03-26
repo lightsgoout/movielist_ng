@@ -23,6 +23,7 @@ class MovieAdmin(SphinxModelAdmin):
         'rated',
         'genres',
         filters.ImageFilter,
+        filters.TranslatedFilter,
     )
     search_fields = (
         '=id',
@@ -40,6 +41,8 @@ class MovieAdmin(SphinxModelAdmin):
         'writers',
         'directors',
     )
+
+    list_editable = ('title_ru',)
 
     actions = [
         actions.kinopoisk_fetch_movie_info,

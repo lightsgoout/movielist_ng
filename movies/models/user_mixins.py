@@ -54,12 +54,11 @@ class UserMoviesMixin(models.Model):
             score=u2m.score)
         return u2m
 
-    def is_movie_added(self, movie, status=constants.WATCHED):
-        """
-        @type movie movies.models.Movie
-        @type status str
-        """
-        return self.movies.filter(
-            usertomovie__movie=movie,
-            usertomovie__status=status
-        ).exists()
+    def get_movie_status(self, movie):
+        try:
+            return UserToMovie.objects.get(
+                user=self,
+                movie=movie
+            )
+        except UserToMovie.DoesNotExist:
+            return None

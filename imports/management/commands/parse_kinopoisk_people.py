@@ -22,12 +22,13 @@ class Command(BaseCommand):
                 person_list = KinopoiskPerson.objects.search(query)
                 guess = person_list[0]
             except IndexError:
-                print 'Could not found kinopoisk info for person {}'.format(person.id)
+                print 'Could not find kinopoisk info for person {}'.format(person.id)
+                time.sleep(1)
                 continue
             except Exception as e:
                 print e
+                time.sleep(1)
                 continue
-
 
             person.name_ru = decoder.unescape(guess.name)
             person.birth_year = guess.year_birth
