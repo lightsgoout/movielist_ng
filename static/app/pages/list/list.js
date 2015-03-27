@@ -87,6 +87,8 @@ app.controller("ListController", function($scope, Movie) {
             kwargs['cast'] = person_id;
         } else if (relation == 'director') {
             kwargs['directors'] = person_id;
+        } else if (relation == 'composer') {
+            kwargs['composers'] = person_id;
         }
 
         $scope.movies = Movie.query(kwargs);

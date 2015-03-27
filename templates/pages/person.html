@@ -104,6 +104,40 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="row" ng-app="UserToMovie">
+                    <table class="table table-striped table-condensed table-hover" ng-controller="ListController" ng-init="init({{ person.id }}, 'composer')" ng-show="movies.length">
+                        <caption>{% trans 'Composer' %}</caption>
+                        <thead>
+                            <tr>
+                                <th>
+                                  <a ng-click="orderByField='title'; reverseSort = !reverseSort">
+                                  Movie <span ng-show="orderByField == 'title'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                                  </a>
+                                </th>
+                                <th>
+                                  <a ng-click="orderByField='year'; reverseSort = !reverseSort">
+                                    Year <span ng-show="orderByField == 'year'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                                  </a>
+                                </th>
+                                <th>
+                                  <a ng-click="orderByField='rating_imdb'; reverseSort = !reverseSort">
+                                  IMDB rating <span ng-show="orderByField == 'rating_imdb'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                                  </a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="movie in movies | filter:query | orderBy:orderByField:reverseSort">
+                                {% verbatim %}
+                                <td><a href="{{ movie.page_url }}">{{ movie.title }}</a></td>
+                                <td>{{ movie.year }}</td>
+                                <td>{{ movie.rating_imdb }}</td>
+                                {% endverbatim %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

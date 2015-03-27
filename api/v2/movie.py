@@ -45,6 +45,13 @@ class MovieResource(ModelResource):
         null=True,
         readonly=True,
     )
+    composers = fields.ManyToManyField(
+        PersonResource,
+        'composers',
+        full=True,
+        null=True,
+        readonly=True,
+    )
 
     class Meta:
         queryset = Movie.objects.all()
@@ -55,6 +62,7 @@ class MovieResource(ModelResource):
         filtering = {
             'cast': ALL_WITH_RELATIONS,
             'directors': ALL_WITH_RELATIONS,
+            'composers': ALL_WITH_RELATIONS,
         }
 
         fields = [
