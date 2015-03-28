@@ -1,3 +1,4 @@
+from datetime import date
 from django.core import validators
 from django.db import models
 from django.contrib.auth.models import (
@@ -65,9 +66,14 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
         unique=True,
     )
     date_of_birth = models.DateField()
+    date_joined = models.DateField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     country = models.ForeignKey('common.Country', null=True, blank=True)
+
+    GENDER_MALE = True
+    GENDER_FEMALE = False
+    gender = models.NullBooleanField(default=None)
 
     objects = MovielistUserManager()
 
@@ -103,3 +109,9 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
         """Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    @property
+    def age(self):
+        today = date.today()
+        born = self.date_of_birth
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))

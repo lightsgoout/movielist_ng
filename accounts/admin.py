@@ -19,11 +19,12 @@ class MovielistUserAdmin(UserAdmin):
         'date_of_birth',
         'country',
         'is_admin',
+        'gender',
     )
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        ('Personal info', {'fields': ('date_of_birth', 'country',)}),
+        ('Personal info', {'fields': ('date_of_birth', 'country', 'gender',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -38,6 +39,7 @@ class MovielistUserAdmin(UserAdmin):
                 'country',
                 'password1',
                 'password2',
+                'gender',
             )}),
     )
     search_fields = ('username', 'email',)
