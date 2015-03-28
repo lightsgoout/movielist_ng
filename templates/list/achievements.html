@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        <h3>{{ user.username }}'s achievements</h3>
+        {% include 'list/user_info.html' %}
         {% include 'list/menu.html' %}
         {% if achievements %}
             <table class="table table-striped table-condensed">

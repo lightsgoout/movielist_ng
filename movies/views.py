@@ -1,4 +1,3 @@
-from decimal import Decimal
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
@@ -17,16 +16,19 @@ def index(request):
 def show_list(request, username, status):
     user = get_object_or_404(MovielistUser, username=username)
 
-    total_runtime = user.get_total_movie_runtime(status) or 0
+    compatibility = request.user.get_compatibility(user)
+    total_days = request.user.get_total_movie_runtime_days(status)
 
     return render(
         request,
         'list/list_ng.html',
         {
-            'days': (Decimal(total_runtime)/60/24).quantize(Decimal('0.1')),
             'user': user,
             'status': status,
             'constants': constants,
+            'compatibility': compatibility,
+            'editable': 'true' if request.user == user else 'false',
+            'total_days': total_days,
         },
     )
 
@@ -35,6 +37,8 @@ def list_user_achievements(request, username, is_locked):
     user = get_object_or_404(MovielistUser, username=username)
     achievements = user.get_achievements(is_locked=is_locked)
 
+    compatibility = request.user.get_compatibility(user)
+
     return render(
         request,
         'list/achievements.html',
@@ -42,6 +46,7 @@ def list_user_achievements(request, username, is_locked):
             'achievements': achievements,
             'user': user,
             'constants': constants,
+            'compatibility': compatibility,
         }
     )
 

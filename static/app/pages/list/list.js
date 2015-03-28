@@ -49,7 +49,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($sco
 
 app.controller("UserToMovieListController", function($scope, Loader, $location) {
 
-    $scope.init = function(username, status) {
+    $scope.init = function(username, status, editable) {
         //This function is sort of private constructor for controller
         $scope.loader = new Loader(username, status);
         $scope.orderByField = '-id';
@@ -66,6 +66,8 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
             9,
             10
         ];
+
+        $scope.editable = editable;
     };
 
     $scope.isActive = function(route) {
@@ -76,7 +78,7 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
 
 app.controller("ListController", function($scope, Movie) {
 
-    $scope.init = function(person_id, relation) {
+    $scope.init = function(person_id, relation, editable) {
         // relation can be one of 'actor' 'director' 'composer' 'writer'
         $scope.orderByField = '-year';
 

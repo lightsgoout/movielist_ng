@@ -1,0 +1,47 @@
+{% load i18n %}
+<h1 style="display: table-cell; vertical-align: middle;  font-size: 28px;">{{ user.username }}</h1>
+
+<p class="text-muted" style="font-size: 10pt; margin-top: 0; display: table-cell; vertical-align: middle; padding-left: 20px;">
+    {% if user.age %}
+        {{ user.age }},
+    {% endif %}
+    {% if user.gender != None %}
+        {% if user.gender %}
+            {% trans 'Male' %}
+        {% else %}
+            {% trans 'Female' %}
+        {% endif %},
+    {% endif %}
+    {% if user.country  %}
+        {{ user.country.name }},
+    {% endif %}
+    {% trans 'joined on' %} {{ user.date_joined }}
+</p>
+<ul class="nav nav-pills" style="display: table-cell; vertical-align: middle;">
+    <li><a href="#">{% trans 'Friends' %}</a></li>
+    <li><a href="#">{% trans 'Charts' %}</a></li>
+    <li><a href="#">{% trans 'Favorites' %}</a></li>
+</ul>
+<hr>
+{% if user != request.user %}
+    <div class="row" style="margin: 0;">
+
+        <div class="col-xs-2">
+            <a class="btn btn-default btn-info" href="#" role="button"><i class="fa fa-plus-square"></i> Follow</a>
+        </div>
+        <div class="col-xs-4">
+            {% if compatibility > 0 %}
+                <div class="progress" style="margin-bottom: 0;">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{ compatibility }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ compatibility }}%; min-width: 2em;">
+                      {{ compatibility }}%
+                  </div>
+                </div>
+                <small>{% trans 'Compatibility' %}: {{ compatibility }}%</small>
+            {% else %}
+                <p class="bg-warning"><i class="fa fa-exclamation-triangle"></i> Compatibility unavailable: either one or both of you haven't scored enough movies</p>
+            {% endif %}
+        </div>
+
+    </div>
+    <hr>
+{% endif %}

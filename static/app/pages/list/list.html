@@ -43,18 +43,24 @@
             </div>
             <div class="pull-left" style="margin-left: 15px; height: 100px;" ng-show="loader.status == 'W'">
                 <div class="user-score">
-                    <a href="#"
-                       title="IMDB: {{ user_to_movie.movie.rating_imdb }}, RT: {{ user_to_movie.movie.rating_tomatoes }}%"
-                       editable-select="user_to_movie.score"
-                       e-name="score"
-                       e-ng-options="s as s for s in SCORE_CHOICES"
-                       buttons="no"
-                       onaftersave="save()">
-                        <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
-                    </a>
+                    <div ng-show="editable">
+                        <a href="#"
+                           title="IMDB: {{ user_to_movie.movie.rating_imdb }}, RT: {{ user_to_movie.movie.rating_tomatoes }}%"
+                           editable-select="user_to_movie.score"
+                           e-name="score"
+                           e-ng-options="s as s for s in SCORE_CHOICES"
+                           buttons="no"
+                           onaftersave="save()">
+                            <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
+                        </a>
+                    </div>
+                    <div ng-show="!editable">
+                        <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ user_to_movie.score }}</span>
+                    </div>
                 </div>
             </div>
         </div>
         <hr>
     </div>
+    <div ng-show='loader.busy' class="loader text-center"><p class="text-muted"><i class="fa fa-spinner fa-spin"></i></p></div>
 </section>

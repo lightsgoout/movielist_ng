@@ -27,8 +27,14 @@ class UserToMovie(models.Model):
 
     user = models.ForeignKey('accounts.MovielistUser')
     movie = models.ForeignKey('movies.Movie')
-    score = models.DecimalField(decimal_places=1, max_digits=3,
-                                choices=SCORE_CHOICES, null=True, blank=True)
+    score = models.DecimalField(
+        decimal_places=1,
+        max_digits=3,
+        choices=SCORE_CHOICES,
+        null=True,
+        blank=True,
+        db_index=True,
+    )
     status = models.CharField(
         choices=constants.STATUS_CHOICES,
         max_length=1,
