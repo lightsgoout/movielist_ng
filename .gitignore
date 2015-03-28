@@ -57,3 +57,5 @@ docs/_build/
 target/
 
 bower_components/
+
+settings/local.py
