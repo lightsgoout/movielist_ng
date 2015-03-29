@@ -41,7 +41,7 @@ class UserToMovieResource(ModelResource):
         authentication = Authentication()
         authorization = UserObjectsOnlyAuthorization()
         list_allowed_methods = ['get']
-        detail_allowed_methods = ['put', 'get']
+        detail_allowed_methods = ['get']
         limit = 25
         filtering = {
             'status': ('exact',),
@@ -78,6 +78,11 @@ class UserToMovieResource(ModelResource):
                 trailing_slash()),
                 self.wrap_view('movie_status'),
                 name="api_movie_status"),
+            url(r"^(?P<resource_name>%s)/set_score%s$" % (
+                self._meta.resource_name,
+                trailing_slash()),
+                self.wrap_view('set_score'),
+                name="api_movie_set_score"),
         ]
 
     def add_movie(self, request, **kwargs):
@@ -102,6 +107,30 @@ class UserToMovieResource(ModelResource):
 
         result = {
             'id': u2m.id,
+        }
+
+        return self.create_response(request, result)
+
+    def set_score(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        self.is_authenticated(request)
+
+        try:
+            raw_json = json.loads(request.body)
+        except ValueError:
+            raise BadRequest('Invalid json')
+
+        score = raw_json.get('score')
+        if not 0 < score <= 10:
+            raise BadRequest('Invalid score')
+
+        request.user.set_movie_score(
+            raw_json.get('movie_id'),
+            raw_json.get('score'),
+        )
+
+        result = {
+            'ok': True,
         }
 
         return self.create_response(request, result)

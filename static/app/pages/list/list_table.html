@@ -37,7 +37,7 @@
                                e-name="score"
                                buttons="no"
                                e-ng-options="s as s for s in SCORE_CHOICES"
-                               onaftersave="save()">
+                               onaftersave="setScore()">
                                 <span class="ng-scope score_{{ user_to_movie.score }}">
                                     {{ showScore() }}
                                 </span>

@@ -59,6 +59,7 @@ class MovieResource(ModelResource):
         authentication = SessionAuthentication()
         authorization = Authorization()
         list_allowed_methods = ['get']
+        detail_allowed_methods = ['get']
         filtering = {
             'cast': ALL_WITH_RELATIONS,
             'directors': ALL_WITH_RELATIONS,

@@ -81,18 +81,19 @@ class Achievement(models.Model):
         app_label = 'achievements'
 
 
-def is_achievement_satisfied(achievement, user, just_added_movie):
+def is_achievement_satisfied(achievement, user, movie, score):
     """
     @type achievement Achievement
     @type user accounts.models.MovielistUser
-    @type just_added_movie movies.models.Movie
+    @type movie movies.models.Movie
+    @type score decimal.Decimal
     """
     if achievement.condition_deadline:
         if datetime.date.today() > achievement.condition_deadline:
             return False
 
     if achievement.condition_movie:
-        if just_added_movie != achievement.condition_movie:
+        if movie != achievement.condition_movie:
             return False
 
     if achievement.condition_total_runtime_more_than:
@@ -106,7 +107,7 @@ def is_achievement_satisfied(achievement, user, just_added_movie):
             return False
 
     if achievement.condition_movie_year:
-        if just_added_movie.year != achievement.condition_movie_year:
+        if movie.year != achievement.condition_movie_year:
             return False
 
         if achievement.condition_times:
@@ -117,7 +118,7 @@ def is_achievement_satisfied(achievement, user, just_added_movie):
                 return False
 
     if achievement.condition_movie_rated:
-        if just_added_movie.rated != achievement.condition_movie_rated:
+        if movie.rated != achievement.condition_movie_rated:
             return False
 
         if achievement.condition_times:
@@ -127,12 +128,20 @@ def is_achievement_satisfied(achievement, user, just_added_movie):
             ).count() != achievement.condition_times:
                 return False
 
+    if achievement.condition_rate_movie_less_than:
+        if score >= achievement.condition_rate_movie_less_than:
+            return False
+
+    if achievement.condition_rate_movie_more_than:
+        if score <= achievement.condition_rate_movie_more_than:
+            return False
+
     return True
 
 
 @receiver(signals.user_added_movie)
 @feature_framework.is_enabled(features.ACHIEVEMENTS)
-def unlock_achievements(user, movie, status, score, **kwargs):
+def unlock_movie_achievements(user, movie, status, score, **kwargs):
     """
     @type user accounts.models.MovielistUser
     @type movie movies.models.Movie
@@ -152,14 +161,14 @@ def unlock_achievements(user, movie, status, score, **kwargs):
     )
 
     for movie_achievement in movie_achievements:
-        if is_achievement_satisfied(movie_achievement, user, movie):
+        if is_achievement_satisfied(movie_achievement, user, movie, score):
             user.add_achievement(movie_achievement)
 
 
 # noinspection PyUnusedLocal
 @receiver(signals.user_removed_movie)
 @feature_framework.is_enabled(features.ACHIEVEMENTS)
-def lock_achievements(user, movie, score, **kwargs):
+def lock_movie_achievements(user, movie, status, score, **kwargs):
     """
     @type user accounts.models.MovielistUser
     @type movie movies.models.Movie
@@ -168,3 +177,25 @@ def lock_achievements(user, movie, score, **kwargs):
     user.get_achievements(
         condition_movie=movie
     ).delete()
+
+
+@receiver(signals.user_scored_movie)
+@feature_framework.is_enabled(features.ACHIEVEMENTS)
+def unlock_movie_score_achievements(user, movie, score, **kwargs):
+
+    achievements = Achievement.objects.filter(
+        Q(
+            condition_movie=movie,
+        ) &
+        Q(
+            Q(condition_rate_movie_more_than__lt=score) |
+            Q(condition_rate_movie_less_than__gt=score)
+        )
+    ).exclude(
+        users=user,
+    )
+
+    for movie_achievement in achievements:
+        if is_achievement_satisfied(movie_achievement, user, movie, score):
+            user.add_achievement(movie_achievement)
+

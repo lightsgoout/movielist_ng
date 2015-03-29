@@ -54,7 +54,31 @@ class UserMoviesMixin(models.Model):
             score=score)
         return u2m
 
+    def set_movie_score(self, movie, score):
+        """
+        @type movie movies.models.Movie
+        @type score decimal.Decimal
+        """
+        try:
+            u2m = UserToMovie.objects.get(
+                user=self,
+                movie=movie
+            )
+            u2m.score = score
+            u2m.save(update_fields=('score',))
+            signals.user_scored_movie.send(
+                sender=self.__class__,
+                user=self,
+                movie=movie,
+                score=u2m.score,
+            )
+        except UserToMovie.DoesNotExist:
+            pass
+
     def remove_movie(self, movie):
+        """
+        @type movie movies.models.Movie
+        """
         u2m = UserToMovie.objects.get(
             user=self,
             movie=movie
@@ -69,6 +93,9 @@ class UserMoviesMixin(models.Model):
         return u2m
 
     def get_movie_status(self, movie):
+        """
+        @type movie movies.models.Movie
+        """
         try:
             return UserToMovie.objects.get(
                 user=self,

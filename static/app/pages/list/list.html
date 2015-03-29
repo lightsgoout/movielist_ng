@@ -50,7 +50,7 @@
                            e-name="score"
                            e-ng-options="s as s for s in SCORE_CHOICES"
                            buttons="no"
-                           onaftersave="save()">
+                           onaftersave="setScore()">
                             <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
                         </a>
                     </div>

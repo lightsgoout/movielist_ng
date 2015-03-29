@@ -33,10 +33,15 @@ app.run(function(editableOptions) {
 });
 
 
-app.controller("UserToMovieController", ["$scope", "UserToMovie", function ($scope) {
+app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", function ($scope, UserToMovie, $http) {
 
-    $scope.save = function() {
-        $scope.user_to_movie.put();
+    $scope.setScore = function() {
+        $http.post(
+        '/api/v2/user_to_movie/set_score/',
+        {
+            movie_id: $scope.user_to_movie.movie.id,
+            score: $scope.user_to_movie.score
+        });
     };
 
     $scope.showScore = function() {
