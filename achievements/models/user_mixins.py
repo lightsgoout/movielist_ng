@@ -1,4 +1,5 @@
-from django.db import models
+from django.db import models, transaction
+from achievements import signals
 from .relations import UserToAchievement
 
 
@@ -12,19 +13,36 @@ class UserAchievementsMixin(models.Model):
         related_name='users',
         blank=True,)
 
-    def get_achievements(self, is_locked=False, **kwargs):
+    def get_achievements(self, *args, **kwargs):
         return self.achievements.filter(
-            usertoachievement__is_locked=is_locked,
+            *args,
             **kwargs
         )
 
-    def add_achievement(self, achievement, is_locked=False):
+    def add_achievement(self, achievement):
         """
         @type achievement achievements.models.Achievement
-        @type is_locked bool
         """
-        return UserToAchievement.objects.create(
-            user=self,
-            achievement=achievement,
-            is_locked=is_locked,
-        )
+        with transaction.atomic():
+            u2m = UserToAchievement.objects.create(
+                user=self,
+                achievement=achievement,
+            )
+            signals.achievement_unlocked.send(
+                sender=self.__class__,
+                achievement=achievement,
+                user=self,
+            )
+        return u2m
+
+    def remove_achievement(self, achievement):
+        with transaction.atomic():
+            UserToAchievement.objects.filter(
+                user=self,
+                achievement=achievement
+            ).delete()
+            signals.achievement_locked.send(
+                sender=self.__class__,
+                achievement=achievement,
+                user=self,
+            )

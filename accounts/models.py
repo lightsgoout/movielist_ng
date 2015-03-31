@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
+from accounts import signals
 from achievements.models.user_mixins import UserAchievementsMixin
 from movies.models.user_mixins import UserMoviesMixin
 
@@ -59,6 +60,7 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
                 r'^[\w.@+-]+$', 'Enter a valid username.', 'invalid'
             )
         ],
+        db_index=True,
     )
     email = models.EmailField(
         verbose_name='email address',
@@ -115,3 +117,31 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
         today = date.today()
         born = self.date_of_birth
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+    def is_following(self, user):
+        """
+        @type user MovielistUser
+        """
+        return self.friends.filter(id=user.id).exists()
+
+    def follow_user(self, user):
+        """
+        @type user MovielistUser
+        """
+        if not self.is_following(user):
+            self.friends.add(user)
+            signals.user_followed.send(
+                sender=self.__class__,
+                user=self,
+                friend=user)
+
+    def unfollow_user(self, user):
+        """
+        @type user MovielistUser
+        """
+        if self.is_following(user):
+            self.friends.remove(user)
+            signals.user_unfollowed.send(
+                sender=self.__class__,
+                user=self,
+                friend=user)

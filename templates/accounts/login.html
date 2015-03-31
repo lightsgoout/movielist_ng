@@ -42,8 +42,9 @@
             </div>
         </div>
     </div>
-    <div class="row">
     <hr>
+    <div class="row" style="margin-bottom: 15px;">
+
     <link rel="stylesheet" href="{% static "bootstrap-social/bootstrap-social.css" %}">
     <a class="btn btn-facebook" href="{% url "socialauth_begin" "facebook" %}"><i class="fa fa-facebook"></i> | {% trans 'Connect with Facebook' %}</a>
     <a class="btn btn-github" href="{% url "socialauth_begin" "github" %}"><i class="fa fa-github"></i> | {% trans 'Connect with Github' %}</a>

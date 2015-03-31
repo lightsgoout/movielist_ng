@@ -9,6 +9,8 @@ STATUS_CHOICES = (
 )
 
 # Movie with this score or higher considered "approved" when making comparisons
-COMPATIBILITY_MOVIE_APPROVED_SCORE = 7
+COMPATIBILITY_MOVIE_APPROVED_SCORE = 8
 # Compatibility can be calculated when both users has this minimum movies:
 COMPATIBILITY_MINIMUM_MOVIES_REQUIRED = 10
+# How many shared movies show below compatibility-meter.
+COMPATIBILITY_SHARED_MOVIES_COUNT = 5

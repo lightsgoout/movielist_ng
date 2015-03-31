@@ -1,5 +1,5 @@
 from decimal import Decimal
-from django.db import models
+from django.db import models, transaction
 from movies import constants, signals
 from .relations import UserToMovie
 
@@ -40,18 +40,19 @@ class UserMoviesMixin(models.Model):
         @type status str
         @type score decimal.Decimal
         """
-        u2m = UserToMovie.objects.create(
-            user=self,
-            movie=movie,
-            status=status,
-            score=score,
-        )
-        signals.user_added_movie.send(
-            sender=self.__class__,
-            user=self,
-            movie=movie,
-            status=status,
-            score=score)
+        with transaction.atomic():
+            u2m = UserToMovie.objects.create(
+                user=self,
+                movie=movie,
+                status=status,
+                score=score,
+            )
+            signals.user_added_movie.send(
+                sender=self.__class__,
+                user=self,
+                movie=movie,
+                status=status,
+                score=score)
         return u2m
 
     def set_movie_score(self, movie, score):
@@ -65,13 +66,14 @@ class UserMoviesMixin(models.Model):
                 movie=movie
             )
             u2m.score = score
-            u2m.save(update_fields=('score',))
-            signals.user_scored_movie.send(
-                sender=self.__class__,
-                user=self,
-                movie=movie,
-                score=u2m.score,
-            )
+            with transaction.atomic():
+                u2m.save(update_fields=('score',))
+                signals.user_scored_movie.send(
+                    sender=self.__class__,
+                    user=self,
+                    movie=movie,
+                    score=u2m.score,
+                )
         except UserToMovie.DoesNotExist:
             pass
 
@@ -83,13 +85,14 @@ class UserMoviesMixin(models.Model):
             user=self,
             movie=movie
         )
-        u2m.delete()
-        signals.user_removed_movie.send(
-            sender=self.__class__,
-            user=self,
-            movie=movie,
-            status=u2m.status,
-            score=u2m.score)
+        with transaction.atomic():
+            u2m.delete()
+            signals.user_removed_movie.send(
+                sender=self.__class__,
+                user=self,
+                movie=movie,
+                status=u2m.status,
+                score=u2m.score)
         return u2m
 
     def get_movie_status(self, movie):
@@ -107,9 +110,11 @@ class UserMoviesMixin(models.Model):
     def get_compatibility(self, user):
         """
         @type user accounts.models.MovielistUser
+
+        @rtype: tuple(int, list[hotels.models.hotel.Hotel])
         """
         if user == self:
-            return 100
+            return 100, []
 
         his_approved_movies = UserToMovie.objects.filter(
             user=user,
@@ -130,7 +135,10 @@ class UserMoviesMixin(models.Model):
         100% compatibility is when all my_approved_movies contained within
         his_approved_movies
         """
-        intersection = set(his_approved_movies) & set(my_approved_movies)
-        return int(
-            round(len(intersection) / float(len(his_approved_movies)) * 100)
+        shared_movies = set(his_approved_movies) & set(my_approved_movies)
+
+        compatibility_power = int(
+            round(len(shared_movies) / float(len(his_approved_movies)) * 100)
         )
+
+        return compatibility_power, shared_movies

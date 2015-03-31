@@ -1,5 +1,5 @@
 <section class="col-md-12" infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-    <div ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:'-id'" ng-controller="UserToMovieController"  ng-mouseenter="hover(user_to_movie)" ng-mouseleave="hover(user_to_movie)" >
+    <div ng-repeat="user_to_movie in loader.user_to_movies | orderBy:'-id'" ng-controller="UserToMovieController"  ng-mouseenter="hover(user_to_movie)" ng-mouseleave="hover(user_to_movie)" >
         <div class="media">
             <div class="pull-left" style="width: 65%;">
                 <div class="media-left">
@@ -9,7 +9,7 @@
                 </div>
                 <div class="media-body">
                     <div>
-                        <a href="{{ user_to_movie.movie.page_url }}"><h4 class="media-heading" style="display: inline-block;">{{ user_to_movie.movie.title }}</h4></a>
+                        <a href="{{ user_to_movie.movie.page_url }}"><h4 class="media-heading" style="display: inline-block;"><span ng-class="{'mark': loader.stringMatched(user_to_movie.movie.title)}">{{ user_to_movie.movie.title }}</span></h4></a>
                     </div>
                     <div>
                         {{ user_to_movie.movie.year }}
@@ -23,13 +23,13 @@
                             <span ng-switch-default>Directors:</span>
                         </span>
                         <span ng-repeat="person in user_to_movie.movie.directors | orderBy:'name'">
-                            <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
+                            <a href="{{ person.page_url }}"><span ng-class="{'mark': loader.stringMatched(person.name)}">{{ person.name }}</span></a><span ng-show="!$last">, </span>
                         </span>
                     </div>
                     <div>
                         Cast:
-                        <span ng-repeat="person in user_to_movie.movie.cast | orderBy:'-sort_power' | limitTo:4">
-                            <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
+                        <span ng-repeat="person in user_to_movie.movie.cast | orderBy:'-sort_power' | limitTo:loader.cast_limit_to">
+                            <a href="{{ person.page_url }}"><span ng-class="{'mark': loader.stringMatched(person.name)}">{{ person.name }}</span></a><span ng-show="!$last">, </span>
                         </span>
                     </div>
                     <div>

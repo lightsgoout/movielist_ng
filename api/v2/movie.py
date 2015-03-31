@@ -60,6 +60,7 @@ class MovieResource(ModelResource):
         authorization = Authorization()
         list_allowed_methods = ['get']
         detail_allowed_methods = ['get']
+        include_resource_uri = False
         filtering = {
             'cast': ALL_WITH_RELATIONS,
             'directors': ALL_WITH_RELATIONS,

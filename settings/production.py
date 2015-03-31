@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'common',
     'imports',
     'movies',
+    'timeline',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -122,6 +123,7 @@ BOWER_INSTALLED_APPS = (
     'angular-ui-utils#0.2.2',
     'angular-resource#1.3.14',
     'angular-route#1.3.14',
+    'angular-hotkeys#1.4.5',
     'ngInfiniteScroll#1.2.0',
     'ng-tags-input#2.2.0',
     'bootstrap#3.3.2',

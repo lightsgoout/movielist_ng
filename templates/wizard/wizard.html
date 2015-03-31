@@ -4,15 +4,25 @@
 {% block body %}
     <script src="{% static "angular/angular.min.js" %}" type="text/javascript"></script>
     <script src="{% static "angular-resource/angular-resource.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "angular-hotkeys/build/hotkeys.min.js" %}" type="text/javascript"></script>
+    <link href="{% static "angular-hotkeys/build/hotkeys.min.css" %}" rel="stylesheet">
     <script src="{% static "app/utils/tasty-resource.js" %}" type="text/javascript"></script>
 
     <script src="{% static "app/pages/wizard/wizard.js" %}"></script>
     <link href="{% static "app/pages/wizard/wizard.css" %}" rel="stylesheet">
-    <div class="row" ng-app="Wizard">
-        <div ng-controller="WizardController" ng-init="init()">
+    <div ng-app="Wizard" ng-controller="WizardController" ng-init="init()">
+        <div class="row">
             <div ng-repeat="movie in suggestionLoader.suggestions | orderBy:'sort_order' |limitTo:1"
                  ng-include="'/static/app/pages/wizard/movie.html'">
             </div>
         </div>
+        <div class="row" ng-show="suggestionLoader.suggestions.length > 0" style="margin: 15px auto; width: 300px;">
+            <div style="margin: 0 auto;">
+            <p>{% trans 'Press <kbd><kbd>W</kbd> <kbd>W</kbd></kbd> to mark movie as watched' %}</p>
+            <p>{% trans 'Press <kbd><kbd>P</kbd> <kbd>P</kbd></kbd> to mark movie as planned to watch' %}</p>
+            <p>{% trans 'Press <kbd>space</kbd> to ignore movie' %}</p>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-                <tr ng-repeat="user_to_movie in loader.user_to_movies | filter:query | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
+                <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
                     <td><a href="{{ user_to_movie.movie.page_url }}">{{ user_to_movie.movie.title }}</a></td>
                     <td>{{ user_to_movie.movie.year }}</td>
                     <td ng-show="loader.status == 'W'">

@@ -15,9 +15,22 @@ def index(request):
 
 def show_list(request, username, status):
     user = get_object_or_404(MovielistUser, username=username)
+    if request.user.is_authenticated():
+        compatibility_power, shared_movies = request.user.get_compatibility(user)
+        shared_movies = Movie.objects.filter(pk__in=shared_movies)
+        shared_movies = Movie.objects.filter(
+            pk__in=shared_movies
+        )[:constants.COMPATIBILITY_SHARED_MOVIES_COUNT]
+        total_shared_counter = len(shared_movies)
 
-    compatibility = request.user.get_compatibility(user)
-    total_days = request.user.get_total_movie_runtime_days(status)
+        if request.user != user:
+            following = request.user.is_following(user)
+        else:
+            following = None
+    else:
+        compatibility_power, shared_movies = -1, []
+        total_shared_counter = 0
+        following = None
 
     return render(
         request,
@@ -26,18 +39,36 @@ def show_list(request, username, status):
             'user': user,
             'status': status,
             'constants': constants,
-            'compatibility': compatibility,
+            'compatibility_power': compatibility_power,
+            'shared_movies': shared_movies,
+            'shared_movies_remainder': (
+                total_shared_counter - constants.COMPATIBILITY_SHARED_MOVIES_COUNT
+            ),
             'editable': 'true' if request.user == user else 'false',
-            'total_days': total_days,
+            'following': 'true' if following else 'false',
         },
     )
 
 
-def list_user_achievements(request, username, is_locked):
+def list_user_achievements(request, username):
     user = get_object_or_404(MovielistUser, username=username)
-    achievements = user.get_achievements(is_locked=is_locked)
+    achievements = user.get_achievements()
+    if request.user.is_authenticated():
+        compatibility_power, shared_movies = request.user.get_compatibility(user)
+        shared_movies = Movie.objects.filter(pk__in=shared_movies)
+        shared_movies = Movie.objects.filter(
+            pk__in=shared_movies
+        )[:constants.COMPATIBILITY_SHARED_MOVIES_COUNT]
+        total_shared_counter = len(shared_movies)
 
-    compatibility = request.user.get_compatibility(user)
+        if request.user != user:
+            following = request.user.is_following(user)
+        else:
+            following = None
+    else:
+        compatibility_power, shared_movies = -1, []
+        total_shared_counter = 0
+        following = None
 
     return render(
         request,
@@ -46,7 +77,13 @@ def list_user_achievements(request, username, is_locked):
             'achievements': achievements,
             'user': user,
             'constants': constants,
-            'compatibility': compatibility,
+            'compatibility_power': compatibility_power,
+            'shared_movies': shared_movies,
+            'shared_movies_remainder': (
+                total_shared_counter - constants.COMPATIBILITY_SHARED_MOVIES_COUNT
+            ),
+            'editable': 'true' if request.user == user else 'false',
+            'following': 'true' if following else 'false',
         }
     )
 
@@ -110,3 +147,7 @@ def wizard(request, mode=M_IMDB_TOP):
             'movie': movie,
         }
     )
+
+
+def compare_list(request, first_username, second_username):
+    raise NotImplementedError

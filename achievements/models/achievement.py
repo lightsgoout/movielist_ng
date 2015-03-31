@@ -159,7 +159,9 @@ def unlock_movie_achievements(user, movie, status, score, **kwargs):
     ).exclude(
         users=user,
     )
-
+    """
+    Transaction is opened at UserMixin* APIs
+    """
     for movie_achievement in movie_achievements:
         if is_achievement_satisfied(movie_achievement, user, movie, score):
             user.add_achievement(movie_achievement)
@@ -174,9 +176,14 @@ def lock_movie_achievements(user, movie, status, score, **kwargs):
     @type movie movies.models.Movie
     @type score decimal.Decimal or None
     """
-    user.get_achievements(
-        condition_movie=movie
-    ).delete()
+    """
+    Transaction is opened at UserMixin* APIs
+    """
+    achievements = user.get_achievements(
+        Q(condition_movie=movie)
+    )
+    for achievement in achievements:
+        user.remove_achievement(achievement)
 
 
 @receiver(signals.user_scored_movie)
@@ -194,7 +201,9 @@ def unlock_movie_score_achievements(user, movie, score, **kwargs):
     ).exclude(
         users=user,
     )
-
+    """
+    Transaction is opened at UserMixin* APIs
+    """
     for movie_achievement in achievements:
         if is_achievement_satisfied(movie_achievement, user, movie, score):
             user.add_achievement(movie_achievement)

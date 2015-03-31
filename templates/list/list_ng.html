@@ -21,9 +21,9 @@
             {% include 'list/user_info.html' %}
             {% include 'list/menu.html' %}
             <div ng-controller="UserToMovieListController" ng-init="init('{{ user.username }}', '{{ status }}', {{ editable }})">
-                <div class="row">
+                <div class="row" style="margin: 0;">
                     <div class="col-md-12">
-                        <div class="row" ng-show="loader.user_to_movies.length">
+                        <div class="row" ng-show="loader.user_to_movies.length || loader.query">
                             <div class="col-md-4">
                                 <ul class="nav nav-pills nav-justified mode-selector" style="display: inline-block; margin-top: 20px;">
                                   <li role="presentation" ng-class="{active:isActive('/')}"><a href="#/">Standard mode</a></li>
@@ -32,14 +32,17 @@
                             </div>
                             <div class="col-md-8">
                                 <div style="margin-top: 24px;">
-                                    <input type="text" class="form-control search-query" placeholder="Filter" ng-model="query" id="search-bar" style="width: 255px; display: inline-block;">
+                                    <input type="text" class="form-control search-query" placeholder="Filter" ng-model="query" ng-change="setFilter()" ng-model-options="{ debounce: 750 }" style="width: 255px; display: inline-block;">
 {#                                    <p style="display: inline-block; margin: 0;" class="text-muted lead">{% trans 'Avg score' %}: {{ user.get_average_movie_score }} {% trans 'Total days' %}: {{ total_days }}</p>#}
                                 </div>
                             </div>
                         </div>
-                        <hr>
-                        <div ng-show="!loader.user_to_movies.length && !loader.first_loading">
-                            <div class="jumbotron col-md-4 animate-show text-center" style="margin: 0 auto; width: 50%; float: none;">
+                        <hr ng-show="loader.user_to_movies.length || loader.query">
+                        <div ng-show="!loader.user_to_movies.length && loader.query && !loader.busy">
+                            <p class="lead text-muted text-center">{% trans 'No results' %}</p>
+                        </div>
+                        <div ng-show="!loader.user_to_movies.length && !loader.first_loading && !loader.query">
+                            <div class="jumbotron col-md-4 animate-show text-center" style="margin: 0 auto; width: 50%; float: none; margin-bottom: 50px; margin-top: 50px;">
                                 <h2>{% trans 'The list is empty' %}</h2>
                                 <p>...</p>
                                 <p><a class="btn btn-primary btn-lg" href="{% url 'wizard' %}" role="button"><i class="fa fa-plus"></i> Add movies</a></p>

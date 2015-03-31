@@ -1,7 +1,9 @@
 SPHINX_SEARCH = 'Sphinx search'
 ACHIEVEMENTS = 'Achievements'
+TIMELINE = 'Timeline'
 
 ENABLED_FEATURES = {
     SPHINX_SEARCH,
     ACHIEVEMENTS,
+    TIMELINE,
 }

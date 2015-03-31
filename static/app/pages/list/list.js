@@ -51,6 +51,50 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
     };
 }]);
 
+app.controller("FriendshipController", ["$scope", "$http", function($scope, $http) {
+
+    $scope.init = function(username, following) {
+        $scope.username = username;
+        $scope.following = following;
+    };
+
+    $scope.follow = function() {
+        $http.post(
+        '/api/v2/user/follow/',
+        {
+            username: $scope.username
+        }).success(function() {
+            $scope.following = true;
+        });
+    };
+
+    $scope.unfollow = function() {
+        $http.post(
+        '/api/v2/user/unfollow/',
+        {
+            username: $scope.username
+        }).success(function() {
+            $scope.following = false;
+        });
+    };
+
+    $scope.getButtonCaption = function() {
+        if ($scope.following) {
+            return 'Following'
+        } else {
+            return 'Follow'
+        }
+    };
+
+    $scope.onClick = function() {
+        if ($scope.following) {
+            $scope.unfollow();
+        } else {
+            $scope.follow();
+        }
+    };
+}]);
+
 
 app.controller("UserToMovieListController", function($scope, Loader, $location) {
 
@@ -77,6 +121,10 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
 
     $scope.isActive = function(route) {
         return route === $location.path();
+    };
+
+    $scope.setFilter = function() {
+        $scope.loader.setFilter($scope.query);
     };
 });
 
@@ -115,6 +163,8 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
         this.username = username;
         this.status = status;
         this.first_loading = true;
+        this.query = "";
+        this.cast_limit_to = 4;
     };
 
     Loader.prototype.nextPage = function() {
@@ -128,11 +178,18 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
 
         this.busy = true;
         var self = this;
-        UserToMovie.query({
+
+        var kwargs = {
             'username': self.username,
             'status': self.status,
             'offset': self.user_to_movies.length
-        }, function(response) {
+        };
+
+        if (self.query) {
+            kwargs['query'] = self.query;
+        }
+
+        UserToMovie.query(kwargs, function(response) {
             // Successful API call
             for (var i = 0, len = response.data.objects.length; i < len; i++) {
                 self.user_to_movies.push(
@@ -145,6 +202,22 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
             }
             self.first_loading = false;
         });
+    };
+
+    Loader.prototype.setFilter = function(query) {
+        this.query = query;
+        this.exhausted = false;
+        this.user_to_movies = [];
+        if (query) {
+            this.cast_limit_to = 100;
+        } else {
+            this.cast_limit_to = 4;
+        }
+        this.nextPage();
+    };
+
+    Loader.prototype.stringMatched = function(string) {
+        return this.query && String(string).toLowerCase().search(this.query.toLowerCase()) > -1;
     };
 
     return Loader;

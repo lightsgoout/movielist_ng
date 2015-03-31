@@ -1,5 +1,6 @@
 import json
 from django.conf.urls import url
+from django.db.models import Q
 from django.http import Http404
 from tastypie import fields
 from tastypie.authentication import Authentication
@@ -42,6 +43,7 @@ class UserToMovieResource(ModelResource):
         authorization = UserObjectsOnlyAuthorization()
         list_allowed_methods = ['get']
         detail_allowed_methods = ['get']
+        include_resource_uri = False
         limit = 25
         filtering = {
             'status': ('exact',),
@@ -61,10 +63,20 @@ class UserToMovieResource(ModelResource):
         built_filters['user'] = user
         return built_filters
 
-    def dehydrate_score(self, bundle):
-        if bundle.obj.score:
-            return float(bundle.obj.score)
-        return bundle.obj.score
+    def get_object_list(self, request):
+        object_list = super(UserToMovieResource, self).get_object_list(request)
+        query = request.GET.get('query', None)
+        if not query:
+            return object_list
+
+        return object_list.filter(
+            Q(movie__title_en__icontains=query) |
+            Q(movie__title_ru__icontains=query) |
+            Q(movie__cast__name_en__icontains=query) |
+            Q(movie__cast__name_ru__icontains=query) |
+            Q(movie__directors__name_en__icontains=query) |
+            Q(movie__directors__name_ru__icontains=query)
+        ).distinct()
 
     def prepend_urls(self):
         return [
@@ -168,3 +180,8 @@ class UserToMovieResource(ModelResource):
 
         bundle.data['user'] = bundle.request.user
         return bundle
+
+    def dehydrate_score(self, bundle):
+        if bundle.obj.score:
+            return float(bundle.obj.score)
+        return bundle.obj.score
