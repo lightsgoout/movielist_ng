@@ -82,7 +82,12 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['date_of_birth', 'email']
 
-    friends = models.ManyToManyField('self', related_name='friends', blank=True)
+    friends = models.ManyToManyField(
+        'self',
+        null=True,
+        blank=True,
+        symmetrical=False
+    )
 
     def get_full_name(self):
         # The user is identified by their email address
