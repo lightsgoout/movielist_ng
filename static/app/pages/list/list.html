@@ -55,7 +55,8 @@
                         </a>
                     </div>
                     <div ng-show="!editable">
-                        <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ user_to_movie.score }}</span>
+                        <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead" title="IMDB: {{ user_to_movie.movie.rating_imdb }}, RT: {{ user_to_movie.movie.rating_tomatoes }}%">{{ user_to_movie.score }}</span>
+                        <span style="color: #555; font-size:22pt;" class="ng-scope" ng-show="user_to_movie.score > 0 && user_to_movie.my_score > 0" title="My score">({{ user_to_movie.my_score }})</span>
                     </div>
                 </div>
             </div>

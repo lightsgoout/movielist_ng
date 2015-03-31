@@ -28,6 +28,10 @@ class UserToMovieResource(ModelResource):
         null=True,
         readonly=True,
     )
+    my_score = fields.FloatField(
+        null=True,
+        readonly=True,
+    )
 
     class Meta:
         queryset = UserToMovie.objects.all().\
@@ -37,6 +41,7 @@ class UserToMovieResource(ModelResource):
                 'movie__countries',
                 'movie__directors',
                 'movie__cast',
+                'movie__composers',
             ).order_by('-id')
         resource_name = 'user_to_movie'
         authentication = Authentication()
@@ -54,6 +59,10 @@ class UserToMovieResource(ModelResource):
         if not username:
             raise BadRequest('Username filter is required')
 
+        status = filters.get('status')
+        if not status:
+            raise BadRequest('Status filter is required')
+
         try:
             user = MovielistUser.objects.get(username=username)
         except MovielistUser.DoesNotExist:
@@ -64,6 +73,9 @@ class UserToMovieResource(ModelResource):
         return built_filters
 
     def get_object_list(self, request):
+        """
+        Overriden for filtering purposes
+        """
         object_list = super(UserToMovieResource, self).get_object_list(request)
         query = request.GET.get('query', None)
         if not query:
@@ -77,6 +89,25 @@ class UserToMovieResource(ModelResource):
             Q(movie__directors__name_en__icontains=query) |
             Q(movie__directors__name_ru__icontains=query)
         ).distinct()
+
+    def obj_get_list(self, bundle, **kwargs):
+        objects = super(UserToMovieResource, self).obj_get_list(bundle, **kwargs)
+        """
+        Now populate request.user scores.
+        We do it here to avoid N-count queries in dehydrate.
+        """
+        if bundle.request.user.is_authenticated():
+            shared_movies = UserToMovie.objects.filter(
+                user=bundle.request.user,
+                movie_id__in=objects.values_list('movie_id', flat=True),
+            ).values_list('movie_id', 'score')
+            score_map = dict()
+            for movie_id, score in shared_movies:
+                score_map[movie_id] = score
+            for obj in objects:
+                setattr(obj, 'my_score', score_map.get(obj.movie.id))
+
+        return objects
 
     def prepend_urls(self):
         return [
@@ -173,13 +204,14 @@ class UserToMovieResource(ModelResource):
 
         return self.create_response(request, result)
 
-    def hydrate(self, bundle):
-        bundle = super(UserToMovieResource, self).hydrate(bundle)
-        if bundle.data['status'] != constants.WATCHED:
-            bundle.data['score'] = None
-
-        bundle.data['user'] = bundle.request.user
-        return bundle
+    def dehydrate_my_score(self, bundle):
+        if bundle.request.user.is_authenticated():
+            """
+            obj.my_score is populated at self.obj_get_list.
+            """
+            if bundle.obj.my_score:
+                return float(bundle.obj.my_score)
+        return None
 
     def dehydrate_score(self, bundle):
         if bundle.obj.score:

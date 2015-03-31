@@ -8,14 +8,14 @@
             <div class="row" style="">
                 <div class="col-md-6">
                     <h4>Following <span class="badge">{{ following|length }}</span></h4>
-                    <hr>
+                    <hr style="margin-top: 0px;">
                     {% with following as users %}
                         {% include 'pages/user/followers/user_list.html' %}
                     {% endwith %}
                 </div>
                 <div class="col-md-6">
                     <h4>Followers <span class="badge">{{ followers|length }}</span></h4>
-                    <hr>
+                    <hr style="margin-top: 0px;">
                     {% with followers as users %}
                         {% include 'pages/user/followers/user_list.html' %}
                     {% endwith %}

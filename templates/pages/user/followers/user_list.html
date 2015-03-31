@@ -18,12 +18,14 @@
             {% endif %}
         </p>
         {% if user.last_watched_movie %}
-            <p style="margin-top: 20px;">{% trans 'Last watched:' %} <a href="{% url 'movie' user.last_watched_movie.id %}">{{ user.last_watched_movie.title }}</a></p>
+            <p style="margin-top: 10px;">{% trans 'Last watched:' %} <a href="{% url 'movie' user.last_watched_movie.id %}">{{ user.last_watched_movie.title }}</a></p>
         {% else %}
             <p class="text-muted">{% trans "User hasn't added any movies yet" %}</p>
         {% endif %}
     </div>
     {% if not forloop.last %}
-    <hr>
+        <hr>
+    {% else %}
+        <br>
     {% endif %}
 {% endfor %}

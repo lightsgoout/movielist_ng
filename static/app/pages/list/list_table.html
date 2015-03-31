@@ -19,6 +19,11 @@
                       Score <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
                       </a>
                     </th>
+                    <th ng-show="loader.status == 'W' && !editable">
+                      <a ng-click="orderByField='my_score'; reverseSort = !reverseSort">
+                      My score <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      </a>
+                    </th>
                     <th>
                       <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
                       IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
@@ -44,8 +49,11 @@
                             </a>
                         </div>
                         <div ng-show="!editable">
-                            {{ user_to_movie.score }}
+                            <strong>{{ user_to_movie.score }}</strong>
                         </div>
+                    </td>
+                    <td ng-show="loader.status == 'W' && !editable">
+                        {{ user_to_movie.my_score }}
                     </td>
                     <td>{{ user_to_movie.movie.rating_imdb }}</td>
                 </tr>
