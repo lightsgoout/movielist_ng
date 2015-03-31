@@ -26,7 +26,7 @@ def login_page(request):
 
     return render(
         request,
-        'accounts/login.html',
+        'pages/login/login.html',
         {
             'login_form': AuthenticationForm,
             'error': error,

@@ -12,6 +12,12 @@ class UserMoviesMixin(models.Model):
         'movies.Movie',
         through='movies.UserToMovie',
         blank=True,)
+    last_watched_movie = models.ForeignKey(
+        'movies.Movie',
+        null=True,
+        blank=True,
+        related_name='users_last_watched'
+    )
 
     def get_total_movie_runtime(self, status=constants.WATCHED):
         return self.movies.\
@@ -53,6 +59,9 @@ class UserMoviesMixin(models.Model):
                 movie=movie,
                 status=status,
                 score=score)
+            if status == constants.WATCHED:
+                self.last_watched_movie = movie
+                self.save(update_fields=('last_watched_movie',))
         return u2m
 
     def set_movie_score(self, movie, score):
@@ -122,7 +131,7 @@ class UserMoviesMixin(models.Model):
             score__gte=constants.COMPATIBILITY_MOVIE_APPROVED_SCORE,
         ).values_list('movie', flat=True)
         if len(his_approved_movies) < constants.COMPATIBILITY_MINIMUM_MOVIES_REQUIRED:
-            return -1
+            return -1, []
 
         my_approved_movies = UserToMovie.objects.filter(
             user=self,
@@ -130,7 +139,7 @@ class UserMoviesMixin(models.Model):
             score__gte=constants.COMPATIBILITY_MOVIE_APPROVED_SCORE,
         ).values_list('movie', flat=True)
         if len(my_approved_movies) < constants.COMPATIBILITY_MINIMUM_MOVIES_REQUIRED:
-            return -1
+            return -1, []
         """
         100% compatibility is when all my_approved_movies contained within
         his_approved_movies

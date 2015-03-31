@@ -1,38 +1,13 @@
 {% load i18n %}
-<div class="row" style="margin: 0; margin-left: 15px;">
-<h1 style="display: table-cell; vertical-align: middle;  font-size: 28px;">{{ user.username }}</h1>
 
-<p class="text-muted" style="font-size: 10pt; margin-top: 0; display: table-cell; vertical-align: middle; padding-left: 20px;">
-    {% if user.age %}
-        {{ user.age }},
-    {% endif %}
-    {% if user.gender != None %}
-        {% if user.gender %}
-            {% trans 'Male' %}
-        {% else %}
-            {% trans 'Female' %}
-        {% endif %},
-    {% endif %}
-    {% if user.country  %}
-        {{ user.country.name }},
-    {% endif %}
-    {% trans 'joined on' %} {{ user.date_joined }}
-</p>
-<ul class="nav nav-pills" style="display: table-cell; vertical-align: middle;">
-    <li><a href="#">{% trans 'Friends' %}</a></li>
-    <li><a href="#">{% trans 'Charts' %}</a></li>
-    <li><a href="#">{% trans 'Favorites' %}</a></li>
-</ul>
-</div>
-<hr>
 {% if user != request.user and request.user.is_authenticated %}
     <div class="row" style="margin: 0;">
 
         <div class="col-xs-2" ng-controller="FriendshipController" ng-init="init('{{ user.username }}', {{ following }})">
-            <a class="btn btn-default btn-info" href="" role="button" ng-click="onClick()" ng-show="!following">
+            <a class="btn btn-default btn-info" href="" role="button" ng-click="onClick()" ng-show="!following" style="min-width: 105px;">
                 <i class="fa fa-plus-square"></i> {% trans 'Follow' %}
             </a>
-            <a ng-class="{'btn btn-default btn-success': !hovering, 'btn btn-default btn-danger': hovering}" href="" role="button" ng-click="onClick()" ng-show="following" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+            <a ng-class="{'btn btn-default btn-success': !hovering, 'btn btn-default btn-danger': hovering}" style="min-width: 105px;" href="" role="button" ng-click="onClick()" ng-show="following" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
                 <i ng-class="{'fa fa-check': !hovering, 'fa fa-times': hovering}"></i> <span ng-show="!hovering">{% trans 'Following' %}</span><span ng-show="hovering">{% trans 'Unfollow' %}</span>
             </a>
         </div>
@@ -57,7 +32,7 @@
                 </small>
 
             {% else %}
-                <p class="bg-warning">&nbsp;<i class="fa fa-exclamation-triangle"></i> Compatibility unavailable: either one or both of you haven't scored enough movies</p>
+                <p class="bg-warning">&nbsp;<i class="fa fa-exclamation-triangle"></i> {% trans "Compatibility unavailable: either one or both of you haven't scored enough movies" %}</p>
             {% endif %}
         </div>
 

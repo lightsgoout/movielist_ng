@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load i18n %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-10">
+            {% include 'pages/user/header.html' %}
+            <div class="row" style="">
+                <div class="col-md-6">
+                    <h4>Following <span class="badge">{{ following|length }}</span></h4>
+                    <hr>
+                    {% with following as users %}
+                        {% include 'pages/user/followers/user_list.html' %}
+                    {% endwith %}
+                </div>
+                <div class="col-md-6">
+                    <h4>Followers <span class="badge">{{ followers|length }}</span></h4>
+                    <hr>
+                    {% with followers as users %}
+                        {% include 'pages/user/followers/user_list.html' %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

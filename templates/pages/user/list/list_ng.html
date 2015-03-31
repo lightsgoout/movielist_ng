@@ -18,8 +18,9 @@
     <link href="{% static "app/pages/list/list.css" %}" rel="stylesheet">
     <div class="row" ng-app="UserToMovie">
         <div class="col-md-10">
-            {% include 'list/user_info.html' %}
-            {% include 'list/menu.html' %}
+            {% include 'pages/user/header.html' %}
+            {% include 'pages/user/list/user_info.html' %}
+            {% include 'pages/user/list/menu.html' %}
             <div ng-controller="UserToMovieListController" ng-init="init('{{ user.username }}', '{{ status }}', {{ editable }})">
                 <div class="row" style="margin: 0;">
                     <div class="col-md-12">
@@ -33,7 +34,6 @@
                             <div class="col-md-8">
                                 <div style="margin-top: 24px;">
                                     <input type="text" class="form-control search-query" placeholder="Filter" ng-model="query" ng-change="setFilter()" ng-model-options="{ debounce: 750 }" style="width: 255px; display: inline-block;">
-{#                                    <p style="display: inline-block; margin: 0;" class="text-muted lead">{% trans 'Avg score' %}: {{ user.get_average_movie_score }} {% trans 'Total days' %}: {{ total_days }}</p>#}
                                 </div>
                             </div>
                         </div>

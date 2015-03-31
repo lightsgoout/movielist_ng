@@ -8,9 +8,22 @@ from movies.models import Movie, Person
 
 def index(request):
     if request.user.is_authenticated():
-        return render(request, 'dashboard.html')
+        return render(request, 'pages/dashboard/dashboard.html')
     else:
-        return render(request, 'landing.html')
+        return render(request, 'pages/landing/landing.html')
+
+
+def show_followers(request, username):
+    user = get_object_or_404(MovielistUser, username=username)
+    return render(
+        request,
+        'pages/user/followers/followers.html',
+        {
+            'user': user,
+            'following': user.get_following(),
+            'followers': user.get_followers(),
+        }
+    )
 
 
 def show_list(request, username, status):
@@ -34,7 +47,7 @@ def show_list(request, username, status):
 
     return render(
         request,
-        'list/list_ng.html',
+        'pages/user/list/list_ng.html',
         {
             'user': user,
             'status': status,
@@ -72,7 +85,7 @@ def list_user_achievements(request, username):
 
     return render(
         request,
-        'list/achievements.html',
+        'pages/user/list/achievements.html',
         {
             'achievements': achievements,
             'user': user,
@@ -92,7 +105,7 @@ def show_movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     return render(
         request,
-        'pages/movie.html',
+        'pages/movie/movie.html',
         {
             'movie': movie,
             'cast': movie.get_top_cast(),
@@ -104,7 +117,7 @@ def show_person(request, person_id):
     person = get_object_or_404(Person, pk=person_id)
     return render(
         request,
-        'pages/person.html',
+        'pages/person/person.html',
         {
             'person': person,
             'starred_movies': person.get_starred_movies(),
@@ -142,7 +155,7 @@ def wizard(request, mode=M_IMDB_TOP):
 
     return render(
         request,
-        'wizard/wizard.html',
+        'pages/wizard/wizard.html',
         {
             'movie': movie,
         }

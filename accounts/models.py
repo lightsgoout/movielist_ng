@@ -145,3 +145,16 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
                 sender=self.__class__,
                 user=self,
                 friend=user)
+
+    def get_followers(self):
+        return MovielistUser.objects.filter(
+            friends=self
+        ).select_related(
+            'last_watched_movie',
+        )
+
+    def get_following(self):
+        return self.friends.all(
+        ).select_related(
+            'last_watched_movie'
+        )
