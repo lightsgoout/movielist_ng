@@ -204,6 +204,14 @@ class UserToMovieResource(ModelResource):
 
         return self.create_response(request, result)
 
+    def hydrate(self, bundle):
+        bundle = super(UserToMovieResource, self).hydrate(bundle)
+        if bundle.data['status'] != constants.WATCHED:
+            bundle.data['score'] = None
+
+        bundle.data['user'] = bundle.request.user
+        return bundle
+
     def dehydrate_my_score(self, bundle):
         if bundle.request.user.is_authenticated():
             """
