@@ -45,6 +45,12 @@ def show_list(request, username, status):
         total_shared_counter = 0
         following = None
 
+    status_counters = user.get_status_counters()
+    total_watched = status_counters.get(constants.WATCHED, 0)
+    total_plan_to_watch = status_counters.get(constants.PLAN_TO_WATCH, 0)
+    total_ignored = status_counters.get(constants.IGNORED, 0)
+    total_achievements = user.get_achievements().count()
+
     return render(
         request,
         'pages/user/list/list_ng.html',
@@ -59,6 +65,10 @@ def show_list(request, username, status):
             ),
             'editable': 'true' if request.user == user else 'false',
             'following': 'true' if following else 'false',
+            'total_watched': total_watched,
+            'total_plan_to_watch': total_plan_to_watch,
+            'total_ignored': total_ignored,
+            'total_achievements': total_achievements,
         },
     )
 
@@ -83,6 +93,12 @@ def list_user_achievements(request, username):
         total_shared_counter = 0
         following = None
 
+    status_counters = user.get_status_counters()
+    total_watched = status_counters.get(constants.WATCHED, 0)
+    total_plan_to_watch = status_counters.get(constants.PLAN_TO_WATCH, 0)
+    total_ignored = status_counters.get(constants.IGNORED, 0)
+    total_achievements = user.get_achievements().count()
+
     return render(
         request,
         'pages/user/list/achievements.html',
@@ -97,6 +113,10 @@ def list_user_achievements(request, username):
             ),
             'editable': 'true' if request.user == user else 'false',
             'following': 'true' if following else 'false',
+            'total_watched': total_watched,
+            'total_plan_to_watch': total_plan_to_watch,
+            'total_ignored': total_ignored,
+            'total_achievements': total_achievements,
         }
     )
 

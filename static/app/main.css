@@ -52,6 +52,6 @@ div.row {
     margin: 0;
 }
 
-span.highlight {
-    background-color: red;
+.badge {
+    background-color: #aaa;
 }

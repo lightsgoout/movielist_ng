@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.db import models, transaction
+from django.db.models import Count
 from movies import constants, signals
 from .relations import UserToMovie
 
@@ -151,3 +152,10 @@ class UserMoviesMixin(models.Model):
         )
 
         return compatibility_power, shared_movies
+
+    def get_status_counters(self):
+        values = UserToMovie.objects.\
+            filter(user=self).\
+            values_list('status').\
+            annotate(Count('status'))
+        return dict(values)
