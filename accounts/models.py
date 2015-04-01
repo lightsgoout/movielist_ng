@@ -156,10 +156,10 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
             friends=self
         ).select_related(
             'last_watched_movie',
-        )
+        ).order_by('id')
 
     def get_following(self):
         return self.friends.all(
         ).select_related(
             'last_watched_movie'
-        )
+        ).order_by('id')

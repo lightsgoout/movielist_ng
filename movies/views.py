@@ -33,7 +33,7 @@ def show_list(request, username, status):
         shared_movies = Movie.objects.filter(pk__in=shared_movies)
         shared_movies = Movie.objects.filter(
             pk__in=shared_movies
-        )[:constants.COMPATIBILITY_SHARED_MOVIES_COUNT]
+        ).order_by('id')[:constants.COMPATIBILITY_SHARED_MOVIES_COUNT]
         total_shared_counter = len(shared_movies)
 
         if request.user != user:
@@ -81,7 +81,7 @@ def list_user_achievements(request, username):
         shared_movies = Movie.objects.filter(pk__in=shared_movies)
         shared_movies = Movie.objects.filter(
             pk__in=shared_movies
-        )[:constants.COMPATIBILITY_SHARED_MOVIES_COUNT]
+        ).order_by('id')[:constants.COMPATIBILITY_SHARED_MOVIES_COUNT]
         total_shared_counter = len(shared_movies)
 
         if request.user != user:
