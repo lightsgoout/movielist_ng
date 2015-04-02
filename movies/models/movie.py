@@ -162,8 +162,38 @@ class Movie(models.Model):
     def unique_writers(self):
         return self.writers.all().distinct()
 
+    """
+    This methods use manual slicing to make use of prefetch_related.
+    """
     def get_top_cast(self):
-        return self.cast.all().order_by('-sort_power')[:15]
+        cast = list(self.cast.all())
+        return cast[:15]
+
+    def get_short_cast(self):
+        cast = list(self.cast.all())
+        return cast[:4]
+
+    def get_series_information(self):
+        series = self.chains.filter(is_direct_series=True)
+        if len(series) > 0:
+            series = series[0]
+            movies = series.movies.all().order_by('year')
+            next_movie = None
+            prev_movie = None
+            for index, movie in enumerate(movies):
+                if self == movie:
+                    try:
+                        prev_movie = movies[index-1]
+                    except IndexError:
+                        pass
+                    try:
+                        next_movie = movies[index+1]
+                    except IndexError:
+                        pass
+                    break
+
+            return series, next_movie, prev_movie
+        return None, None, None
 
     class Meta:
         app_label = 'movies'

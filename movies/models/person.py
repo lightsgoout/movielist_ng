@@ -65,3 +65,4 @@ class Person(models.Model):
 
     class Meta:
         app_label = 'movies'
+        ordering = ['-sort_power']

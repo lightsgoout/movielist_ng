@@ -59,9 +59,28 @@
                         <table class="table table-striped table-condensed">
                             <caption>{% trans 'Movie information' %}</caption>
                             <tr>
-                                <th>{% trans 'Year' %}</th>
+                                <th style="width: 30%;">{% trans 'Year' %}</th>
                                 <td>{{ movie.year }}</td>
                             </tr>
+                            {% if series %}
+                            <tr>
+                                <th>{% trans 'Series' %}</th>
+                                <td>{{ series.title }}</td>
+                            </tr>
+                            {% endif %}
+                            {% if prev_movie %}
+                            <tr>
+                                <th>{% trans 'Previous movie' %}</th>
+                                <td><a href="{% url 'movie' prev_movie.id %}">{{ prev_movie.title }}</a></td>
+                            </tr>
+                            {% endif %}
+                            {% if next_movie %}
+                            <tr>
+                                <th>{% trans 'Next movie' %}</th>
+                                <td><a href="{% url 'movie' next_movie.id %}">{{ next_movie.title }}</a></td>
+                            </tr>
+                            {% endif %}
+
                             <tr>
                                 <th>{% trans 'Country' %}</th>
                                 <td>

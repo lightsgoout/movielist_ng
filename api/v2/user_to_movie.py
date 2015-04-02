@@ -167,10 +167,12 @@ class UserToMovieResource(ModelResource):
         if not 0 < score <= 10:
             raise BadRequest('Invalid score')
 
-        request.user.set_movie_score(
-            raw_json.get('movie_id'),
-            raw_json.get('score'),
-        )
+        try:
+            movie = Movie.objects.get(pk=raw_json.get('movie_id'))
+        except Movie.DoesNotExist:
+            raise BadRequest('Movie does not exist')
+
+        request.user.set_movie_score(movie, score)
 
         result = {
             'ok': True,

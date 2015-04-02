@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Manager
+from django.utils import translation
 
 
 class SuggestableManager(models.Manager):
@@ -17,10 +19,19 @@ class MovieChain(models.Model):
     is_direct_series = models.BooleanField(default=False, db_index=True)
     is_suggestable = models.BooleanField(default=True, db_index=True)
 
+    objects = Manager()
     suggestable = SuggestableManager()
 
     def __unicode__(self):
         return self.name_en
+
+    @property
+    def title(self):
+        cur_language = translation.get_language()
+        if cur_language == 'ru':
+            return self.name_ru or self.name_en
+        else:
+            return self.name_en
 
     class Meta:
         app_label = 'movies'

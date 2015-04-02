@@ -30,4 +30,8 @@ urlpatterns = patterns(
     url(r'^list/compare/(?P<first_username>[\w.@+-]+)/(?P<second_username>[\w.@+-]+)/$',
         'movies.views.compare_list',
         name='list_comparison'),
+    url(r'^search/',
+        'movies.views.search',
+        name='search',
+    ),
 )

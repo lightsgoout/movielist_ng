@@ -20,11 +20,19 @@
 
       <ul class="nav navbar-nav">
         {% if request.user.is_authenticated %}
-          <li><a href="/list/{{ request.user.username }}/watched/">{% trans 'My list' %}</a></li>
+          <li><a href="{% url 'list_watched' request.user.username %}">{% trans 'My list' %}</a></li>
           <li><a href="{% url 'wizard' %}"><i class="glyphicon glyphicon-plus"></i> {% trans 'Add movies to the list' %}</a></li>
-          <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-signout"></i> {% trans 'Logout' %}</a></li>
-        {% else %}
+        {% endif %}
+        <li>
+            {% include '_blocks/search.html' %}
+        </li>
+        {% if not request.user.is_authenticated %}
             <li><a href="{% url 'login' %}"><i class="glyphicon glyphicon-signin"></i> {% trans 'Login/Register' %}</a></li>
+        {% endif %}
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-signout"></i> {% trans 'Logout' %}</a></li>
         {% endif %}
         <li>
             {% include '_blocks/language_selector.html' %}

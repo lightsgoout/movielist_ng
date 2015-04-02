@@ -32,7 +32,10 @@
                 </small>
 
             {% else %}
-                <p class="bg-warning">&nbsp;<i class="fa fa-exclamation-triangle"></i> {% trans "Compatibility unavailable: either one or both of you haven't scored enough movies" %}</p>
+                <div class="alert alert-warning">
+                    <p>&nbsp;<i class="fa fa-exclamation-triangle"></i> {% trans "Compatibility unavailable: either one or both of you haven't scored enough movies" %}</p>
+                </div>
+
             {% endif %}
         </div>
 

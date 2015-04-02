@@ -55,3 +55,7 @@ div.row {
 .badge {
     background-color: #aaa;
 }
+
+mark, .mark {
+    background-color: #fcf8e3;
+}

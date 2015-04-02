@@ -54,7 +54,7 @@ class MovieResource(ModelResource):
     )
 
     class Meta:
-        queryset = Movie.objects.all()
+        queryset = Movie.objects.filter(is_trashed=False)
         resource_name = 'movie'
         authentication = SessionAuthentication()
         authorization = Authorization()

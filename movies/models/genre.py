@@ -19,3 +19,4 @@ class Genre(models.Model):
 
     class Meta:
         app_label = 'movies'
+        ordering = ['name_en']

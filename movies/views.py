@@ -1,9 +1,13 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+import re
 from accounts.models import MovielistUser
+from common.feature_framework import feature_enabled
 from movies import constants
-from movies.models import Movie, Person
+from movies.models import Movie, Person, MovieChain
+from settings import features
 
 
 def index(request):
@@ -123,12 +127,16 @@ def list_user_achievements(request, username):
 
 def show_movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
+    series, next_movie, prev_movie = movie.get_series_information()
     return render(
         request,
         'pages/movie/movie.html',
         {
             'movie': movie,
             'cast': movie.get_top_cast(),
+            'series': series,
+            'next_movie': next_movie,
+            'prev_movie': prev_movie,
         }
     )
 
@@ -184,3 +192,99 @@ def wizard(request, mode=M_IMDB_TOP):
 
 def compare_list(request, first_username, second_username):
     raise NotImplementedError
+
+
+def search(request):
+    query = request.GET.get('q')
+    if not query:
+        return redirect('/')
+
+    query = query.strip()
+
+    if len(query) < 3:
+        return render(
+            request,
+            'pages/search/search_results.html',
+            {
+                'movies': [],
+                'people': [],
+                'query': query,
+            }
+        )
+
+    """
+    If query ends with a digit e.g `Saw 3` try to find matching movie in a
+    movie chain. In this case it will be Saw III
+    """
+    if re.search(r' \d$', query):
+        base_part = query[:-1].strip()
+        chains = MovieChain.objects.filter(
+            Q(movies__title_en__icontains=base_part) |
+            Q(movies__title_ru__icontains=base_part)
+        ).distinct()
+        if len(chains) == 1:
+            """
+            We found an exact match, for example "iron_man" series for a
+            Iron Man 3 query.
+            Now we should take N'th movie from a serie.
+            """
+            n = int(query[-1]) - 1  # 0-based indexing
+            try:
+                movie = chains[0].movies.all().order_by('year')[n]
+                return redirect('movie', movie.id)
+            except IndexError:
+                """
+                When this approach doesn't work fall back to default logic.
+                """
+                pass
+
+    """
+    Movie lookup.
+    """
+    if feature_enabled(features.SPHINX_SEARCH):
+        movies = Movie.search.query(query).order_by('-rating_imdb')
+    else:
+        movies = Movie.objects.prefetch_related(
+            'genres',
+            'countries',
+            'directors',
+            'cast',
+            'composers',
+        ).filter(
+            Q(title_en__icontains=query) |
+            Q(title_ru__icontains=query)
+        ).order_by('-rating_imdb')
+
+    """
+    Person lookup.
+    """
+    if feature_enabled(features.SPHINX_SEARCH):
+        people = Person.search.query(query).order_by('-sort_power')
+    else:
+        people = Person.objects.filter(
+            Q(name_en__icontains=query) |
+            Q(name_ru__icontains=query)
+        ).order_by('-sort_power')
+
+    """
+    If only one movie found and no people then
+    redirect straight to the movie page.
+    """
+    if len(movies) == 1 and len(people) == 0:
+        return redirect('movie', movies[0].id)
+
+    """
+    Same for people.
+    """
+    if len(movies) == 0 and len(people) == 1:
+        return redirect('person', people[0].id)
+
+    return render(
+        request,
+        'pages/search/search_results.html',
+        {
+            'movies': movies,
+            'people': people,
+            'query': query,
+        }
+    )

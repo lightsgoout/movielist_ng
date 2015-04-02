@@ -14,10 +14,6 @@ app.run(function(editableOptions) {
 
 app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($scope, UserToMovie, $http) {
 
-    $scope.save = function() {
-        $scope.user_to_movie.put();
-    };
-
     $scope.showStatus = function() {
         //var selected = $filter('filter')($scope.SCORE_CHOICES, $scope.user_to_movie.score);
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
@@ -40,7 +36,12 @@ app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($
 
     $scope.save = function() {
         if ($scope.user_to_movie.id) {
-            $scope.user_to_movie.put();
+            $http.post(
+            '/api/v2/user_to_movie/set_score/',
+            {
+                movie_id: $scope.user_to_movie.movie_id,
+                score: $scope.user_to_movie.score
+            });
         } else {
             $http.post(
             '/api/v2/user_to_movie/add_movie/',
