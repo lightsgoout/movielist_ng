@@ -192,11 +192,17 @@
                             <caption>{% trans 'Movie ratings' %}</caption>
                             <tr>
                                 <th>{% trans 'IMDB rating' %}</th>
-                                <td>{{ movie.rating_imdb }}</td>
+                                <td>{{ movie.rating_imdb }} <small>({{ movie.votes_imdb }} {% trans 'votes' %}</small>)</td>
                             </tr>
                             <tr>
                                 <th>{% trans 'Metascore' %}</th>
-                                <td>{{ movie.rating_metacritic }}</td>
+                                <td>
+                                    {% if movie.rating_metacritic %}
+                                    {{ movie.rating_metacritic }}
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </td>
                             </tr>
                             <tr>
                                 <th>{% trans 'Rotten Tomatoes' %}</th>
