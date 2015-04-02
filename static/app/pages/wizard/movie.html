@@ -14,7 +14,7 @@
                 <div class="movie-genres">
                     <span ng-repeat="genre in movie.genres | orderBy:'toString()'">
                         <span class="label label-success">
-                            {{ genre }}
+                            {{ genre.name }}
                         </span>&nbsp;
                     </span>
                 </div>
