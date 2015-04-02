@@ -21,7 +21,12 @@ class Person(models.Model):
     kinopoisk_id = models.IntegerField(null=True, blank=True, db_index=True)
     imdb_id = models.CharField(max_length=16, blank=True, db_index=True)
 
-    sort_power = models.FloatField(null=True, blank=True, default=0)
+    sort_power = models.FloatField(
+        null=True,
+        blank=True,
+        default=0,
+        db_index=True
+    )
 
     objects = PassThroughManager.for_queryset_class(PersonQuerySet)()
 
