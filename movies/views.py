@@ -281,7 +281,7 @@ def search(request):
 
     return render(
         request,
-        'pages/search/search_results.html',
+        'pages/search/serp.html',
         {
             'movies': movies,
             'people': people,

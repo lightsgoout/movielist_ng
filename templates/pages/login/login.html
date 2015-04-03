@@ -1,6 +1,12 @@
 {% extends 'main.html' %}
 {% load i18n %}
 {% load static %}
+{% block title %}
+    {% trans 'Login' %}
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static "bootstrap-social/bootstrap-social.css" %}">
+{% endblock %}
 {% block body %}
 <div class="row">
       <div class="col-xs-4">
@@ -45,7 +51,6 @@
     <hr>
     <div class="row" style="margin-bottom: 15px;">
 
-    <link rel="stylesheet" href="{% static "bootstrap-social/bootstrap-social.css" %}">
     <a class="btn btn-facebook" href="{% url "socialauth_begin" "facebook" %}"><i class="fa fa-facebook"></i> | {% trans 'Connect with Facebook' %}</a>
     <a class="btn btn-github" href="{% url "socialauth_begin" "github" %}"><i class="fa fa-github"></i> | {% trans 'Connect with Github' %}</a>
     <a class="btn btn-vk" href="{% url "socialauth_begin" "vk" %}"><i class="fa fa-vk"></i> | {% trans 'Connect with VK' %}</a>
