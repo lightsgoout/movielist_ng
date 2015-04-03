@@ -89,7 +89,7 @@ class MovieResource(ModelResource):
         return reverse('movie', kwargs={'movie_id': bundle.obj.pk})
 
     def dehydrate_genres(self, bundle):
-        return [g for g in bundle.obj.genres.all()]
+        return [g.name for g in bundle.obj.genres.all()]
 
     def prepend_urls(self):
         return [
