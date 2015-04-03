@@ -1,6 +1,9 @@
+from datetime import date
 from django.db import models
 from django.db.models import Sum, QuerySet
+import itertools
 from model_utils.managers import PassThroughManager
+from movies.models import Movie
 
 
 class PersonQuerySet(QuerySet):
@@ -48,8 +51,31 @@ class Person(models.Model):
             return u'http://st.kp.yandex.net/images/actor_iphone/iphone360_{}.jpg'.format(self.kinopoisk_id)
         return None
 
-    def get_starred_movies(self):
-        return self.starred_movies.all().order_by('-year')
+    def get_top_movies(self):
+        # Make use of prefetch_related
+        starred_movies = [
+            (m.id, m.title, m.rating_imdb) for m in self.starred_movies.all()]
+        directed_movies = [
+            (m.id, m.title, m.rating_imdb) for m in self.directed_movies.all()]
+        written_movies = [
+            (m.id, m.title, m.rating_imdb) for m in self.written_movies.all()]
+        composed_movies = [
+            (m.id, m.title, m.rating_imdb) for m in self.composed_movies.all()]
+        produced_movies = [
+            (m.id, m.title, m.rating_imdb) for m in self.produced_movies.all()]
+
+        # Do manual sorting to avoid N queries for N people
+        full_list = list(itertools.chain(
+            starred_movies,
+            directed_movies,
+            written_movies,
+            composed_movies,
+            produced_movies
+        ))
+
+        # Sort by '-rating_imdb'
+        full_list.sort(key=lambda tup: tup[2], reverse=True)
+        return full_list[:4]
 
     def update_sort_power(self):
         total_starred_rating = self.starred_movies.all().\
@@ -62,6 +88,17 @@ class Person(models.Model):
                 1 * (total_movies - 1)
             )
             self.save(update_fields=('sort_power',))
+
+    @property
+    def age(self):
+        today = date.today()
+        if self.birth_date:
+            born = self.birth_date
+        elif self.birth_year:
+            born = date(self.birth_year, 1, 1)
+        else:
+            return None
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
     class Meta:
         app_label = 'movies'

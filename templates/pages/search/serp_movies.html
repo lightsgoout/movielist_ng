@@ -42,25 +42,6 @@
             </div>
         </div>
     </div>
-{#    <div class="pull-left" style="margin-left: 15px; height: 100px;" ng-show="loader.status == 'W'">#}
-{#        <div class="user-score">#}
-{#            <div ng-show="editable">#}
-{#                <a href="#"#}
-{#                   title="IMDB: {{ movie.rating_imdb }}, RT: {{ movie.rating_tomatoes }}%"#}
-{#                   editable-select="score"#}
-{#                   e-name="score"#}
-{#                   e-ng-options="s as s for s in SCORE_CHOICES"#}
-{#                   buttons="no"#}
-{#                   onaftersave="setScore()">#}
-{#                    <span class="ng-scope user-score-digit user-score-{{ score }} lead">{{ showScore() }}</span>#}
-{#                </a>#}
-{#            </div>#}
-{#            <div ng-show="!editable">#}
-{#                <span class="ng-scope user-score-digit user-score-{{ score }} lead" title="IMDB: {{ movie.rating_imdb }}, RT: {{ movie.rating_tomatoes }}%">{{ score }}</span>#}
-{#                <span style="color: #555; font-size:22pt;" class="ng-scope" ng-show="score > 0 && my_score > 0" title="My score">({{ my_score }})</span>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
 </div>
 <hr>
 {% endfor %}
