@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load i18n %}
 {% load static %}
-{% block body %}
+{% block head %}
     <script src="{% static "angular/angular.min.js" %}" type="text/javascript"></script>
     <script src="{% static "angular-resource/angular-resource.min.js" %}" type="text/javascript"></script>
     <script src="{% static "angular-route/angular-route.min.js" %}" type="text/javascript"></script>
@@ -13,6 +13,8 @@
 
     <script src="{% static "app/utils/tasty-resource.js" %}" type="text/javascript"></script>
     <script src="{% static "app/pages/list/list.js" %}" type="text/javascript"></script>
+{% endblock %}
+{% block body %}
     <div class="container"  ng-app="UserToMovie">
         <div class="row" style="margin: 0;">
             <div class="col-md-3 text-center">

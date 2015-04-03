@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load i18n %}
 {% load static %}
-{% block body %}
+{% block head %}
     <link href="{% static "flag-icon-css/css/flag-icon.min.css" %}" rel="stylesheet">
     <script src="{% static "angular/angular.min.js" %}" type="text/javascript"></script>
     <script src="{% static "angular-resource/angular-resource.min.js" %}" type="text/javascript"></script>
@@ -13,6 +13,8 @@
     <script src="{% static "app/pages/movie/movie.js" %}" type="text/javascript"></script>
     <link href="{% static "app/pages/movie/movie.css" %}" rel="stylesheet">
     <link href="{% static "app/pages/user-score.css" %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
     <div class="container" ng-app="MoviePage">
         <div class="row">
             <div class="col-md-4">
