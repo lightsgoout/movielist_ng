@@ -51,9 +51,7 @@
                     {% if query|length < SEARCH_QUERY_MINIMUM_LENGTH %}
                         <p class="lead">Query is too short</p>
                     {% else %}
-                        <div ng-show="!loader.user_to_movies.length && loader.query && !loader.busy">
-                            <p class="lead text-muted text-center">{% trans 'No results' %}</p>
-                        </div>
+                        <p class="lead text-muted text-center">{% trans 'No results' %}</p>
                     {% endif %}
                 {% endif %}
             </div>
