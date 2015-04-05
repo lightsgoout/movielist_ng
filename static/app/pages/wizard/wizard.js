@@ -24,7 +24,7 @@ app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", "hotk
 
         this.suggestionLoader.suggestions.shift();
 
-        if (this.suggestionLoader.suggestions.length < 10) {
+        if (this.suggestionLoader.suggestions.length == 0) {
             this.suggestionLoader.nextBunch();
         }
     };

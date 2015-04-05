@@ -84,7 +84,6 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
 
     friends = models.ManyToManyField(
         'self',
-        null=True,
         blank=True,
         symmetrical=False
     )
