@@ -2,8 +2,12 @@
 <form class="navbar-form" action="{% url 'search' %}" method="get">
     <div class="form-group">
         <div class="icon-addon addon-md">
-            <input required="required" name="q" type="text" placeholder="{% trans 'Search' %}" class="form-control" id="search" style="border-radius: 16px;" value="{{ query }}">
-            <label for="search" class="glyphicon glyphicon-search" rel="tooltip" title="search"></label>
+            <input required="required" name="q" type="text"
+                   placeholder="{% trans 'Search' %}" class="form-control"
+                   id="search" style="border-radius: 16px;" value="{{ query }}"
+                   autocomplete="off">
+            <label for="search" class="glyphicon glyphicon-search"
+                   rel="tooltip" title="search"></label>
         </div>
     </div>
 </form>
