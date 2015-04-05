@@ -199,7 +199,7 @@ def search(request):
     if not query:
         return redirect('/')
 
-    query = query.strip()
+    query = query.strip().lower()
 
     if len(query) < settings.SEARCH_QUERY_MINIMUM_LENGTH:
         return render(

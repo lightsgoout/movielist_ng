@@ -20,10 +20,15 @@
     <div class="container"  ng-app="UserToMovie">
         <div class="row" style="margin: 0;">
             <div class="col-md-3 text-center">
-                <img src="{{ person.image_url }}" style="margin-top: 20px; max-width:180px;">
+                {% if person.image_url %}
+                    <img src="{{ person.image_url }}" style="margin-top: 20px; max-width:180px;">
+                {% endif %}
             </div>
             <div class="col-md-9">
-                <h1>{{ person.name }}</h1>
+                <h1 style="display: inline-block;">{{ person.name }}</h1>
+                {% if request.user.is_staff %}
+                    &nbsp;<a class="btn btn-mini btn-default" style="margin-bottom:10px;" href="{% url 'admin:movies_person_change' person.id %}">admin</a>
+                {% endif %}
                 <div class="row" style="margin: 0;">
                     <div class="col-md-8">
                         <table class="table table-striped table-condensed">
@@ -42,6 +47,7 @@
                     </div>
                 </div>
                 <div class="row" style="margin: 0;">
+                    <div class="col-md-12">
                     <table class="table table-striped table-condensed table-hover" ng-controller="ListController" ng-init="init({{ person.id }}, 'actor')" ng-show="movies.length">
                         <caption>{% trans 'Actor' %}</caption>
                         <thead>
@@ -73,6 +79,7 @@
                             </tr>
                         </tbody>
                     </table>
+                        </div>
                 </div>
 
                 <div class="row" ng-app="UserToMovie"  style="margin: 0;">

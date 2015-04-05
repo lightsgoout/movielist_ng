@@ -54,7 +54,10 @@
 
             </div>
             <div class="col-md-8">
-                <h1>{{ movie.title }}</h1>
+                <h1 style="display: inline-block;">{{ movie.title }}</h1>
+                {% if request.user.is_staff %}
+                    &nbsp;<a class="btn btn-mini btn-default" style="margin-bottom:10px;" href="{% url 'admin:movies_movie_change' movie.id %}">admin</a>
+                {% endif %}
                 <div class="row">
                     <div class="col-md-8">
                         <table class="table table-striped table-condensed">
@@ -207,7 +210,13 @@
                             </tr>
                             <tr>
                                 <th>{% trans 'Rotten Tomatoes' %}</th>
-                                <td>{{ movie.rating_tomatoes }}%</td>
+                                <td>
+                                    {% if movie.rating_tomatoes %}
+                                    {{ movie.rating_tomatoes }}%
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </td>
                             </tr>
                         </table>
                         {% if movie.kinopoisk_url or movie.imdb_url %}
