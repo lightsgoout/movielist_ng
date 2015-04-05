@@ -104,6 +104,8 @@
                                 <td>
                                     {% for person in movie.directors.all %}
                                         <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                        -
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -118,6 +120,8 @@
                                 <td>
                                     {% for person in movie.unique_writers %}
                                         <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                        -
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -168,7 +172,11 @@
                                     {% trans 'MPAA rating' %}
                                 </th>
                                 <td>
-                                    {{ movie.rated }}
+                                    {% if movie.rated %}
+                                        {{ movie.rated }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -176,7 +184,11 @@
                                     {% trans 'Runtime' %}
                                 </th>
                                 <td>
-                                    {{ movie.runtime }}
+                                    {% if movie.runtime %}
+                                        {{ movie.runtime }}
+                                    {% else %}
+                                        -
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -224,12 +236,12 @@
                             <caption>{% trans 'On other sites' %}</caption>
                             {% if movie.imdb_url %}
                                 <tr>
-                                    <td><a href="{{ movie.imdb_url }}">{{ movie.imdb_url }}</a></td>
+                                    <td><a href="http://{{ movie.imdb_url }}">{{ movie.imdb_url }}</a></td>
                                 </tr>
                             {% endif %}
                             {% if movie.kinopoisk_url %}
                                 <tr>
-                                    <td><a href="{{ movie.kinopoisk_url }}">{{ movie.kinopoisk_url }}</a></td>
+                                    <td><a href="http://{{ movie.kinopoisk_url }}">{{ movie.kinopoisk_url }}</a></td>
                                 </tr>
                             {% endif %}
                         </table>
