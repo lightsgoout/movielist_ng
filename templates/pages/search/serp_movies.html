@@ -14,7 +14,7 @@
             <div>
                 {{ movie.year }}
                 {% for country in movie.countries.all %}
-                    <span class="flag-icon flag-icon-{{ country.iso_code|lower }}" title="{{ country.name }}"></span>
+                    <span class="flag-wrapper flag-icon flag-icon-{{ country.iso_code|lower }}" title="{{ country.name }}"></span>
                 {% endfor %}
             </div>
             <div>

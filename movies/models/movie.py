@@ -159,6 +159,18 @@ class Movie(models.Model):
         return self.image_imdb
 
     @property
+    def imdb_url(self):
+        if self.imdb_id:
+            return u'www.imdb.com/title/{}/'.format(self.imdb_id)
+        return None
+
+    @property
+    def kinopoisk_url(self):
+        if self.kinopoisk_id:
+            return u'www.kinopoisk.ru/film/{}/'.format(self.kinopoisk_id)
+        return None
+
+    @property
     def unique_writers(self):
         return self.writers.all().distinct()
 

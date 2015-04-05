@@ -59,3 +59,7 @@ div.row {
 mark, .mark {
     background-color: #fcf8e3;
 }
+.flag-wrapper {
+  display: inline-block;
+  box-shadow: 0 0 1px black;
+}
