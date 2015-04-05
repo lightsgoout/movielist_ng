@@ -14,7 +14,7 @@
                     <div>
                         {{ user_to_movie.movie.year }}
                         <span ng-repeat="country in user_to_movie.movie.countries">
-                            <span class="flag-icon flag-icon-{{ country.iso_code|lowercase }}" title="{{ country.name }}"></span>
+                            <span class="flag-wrapper flag-icon flag-icon-{{ country.iso_code|lowercase }}" title="{{ country.name }}"></span>
                         </span>
                     </div>
                     <div>

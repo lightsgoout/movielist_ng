@@ -4,21 +4,22 @@
 <html>
     <head>
         <meta charset="utf-8">
-            <link href="{% static "app/theme_lumen.css" %}" rel="stylesheet">
-{#        <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">#}
-{#        <link href="{% static "app/bootstrap_theme.css" %}" rel="stylesheet">#}
+        <title>{% block title %}{% endblock %}</title>
+        <link href="{% static "app/theme_lumen.css" %}" rel="stylesheet">
         <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
         <link href="{% static "app/main.css" %}" rel="stylesheet">
         <link href="{% static "app/icon-addon.css" %}" rel="stylesheet">
-        <title>Movie list</title>
         <script src="{% static "jquery/dist/jquery.min.js" %}" type="text/javascript"></script>
         <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}" type="text/javascript"></script>
+
+        {% block head %}
+        {% endblock %}
     </head>
-<body>
-<div class="container">
-{% include 'navbar.html' %}
-{% block body %}
-{% endblock %}
-</div>
-</body>
+    <body>
+        <div class="container">
+            {% include 'navbar.html' %}
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
 </html>

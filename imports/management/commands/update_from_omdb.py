@@ -122,18 +122,26 @@ class Command(BaseCommand):
             if imdb_id in self.existing_movies:
                 continue
 
+            # Skip duplicates
+            if Movie.objects.filter(
+                title_en=get_value(title_en),
+                year=get_value(year),
+            ).exists():
+                log.info(u'Ignoring {}: duplicate'.format(imdb_id))
+                continue
+
             try:
                 imdb_votes = int(get_value(imdb_votes) or 0)
             except ValueError:
                 imdb_votes = 0
 
             if imdb_votes < min_imdb_votes:
-                log.info(u'Ignoring {}: less than {} votes'.format(
+                log.debug(u'Ignoring {}: less than {} votes'.format(
                     imdb_id, min_imdb_votes))
                 continue
 
             if 'Short' in genres or 'Documentary' in genres:
-                log.info(u'Ignoring {}: short or documentary'.format(
+                log.debug(u'Ignoring {}: short or documentary'.format(
                     imdb_id))
                 continue
 
@@ -202,7 +210,7 @@ class Command(BaseCommand):
     def load_dump(self, file_name, min_imdb_votes, disable_tomatoes, disable_main_dump):
         with zipfile.ZipFile(file_name) as z:
             if not disable_main_dump:
-                with z.open('omdb.txt') as dump_f:
+                with z.open('omdbMovies.txt') as dump_f:
                     self._load_omdb_dump(dump_f, min_imdb_votes)
             if not disable_tomatoes:
                 with z.open('tomatoes.txt') as dump_f:

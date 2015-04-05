@@ -120,8 +120,6 @@ class Movie(models.Model):
     votes_imdb = models.PositiveIntegerField(null=True, blank=True, db_index=True)
     votes_kinopoisk = models.PositiveIntegerField(null=True, blank=True, db_index=True)
 
-    is_trashed = models.BooleanField(default=False, db_index=True)
-
     objects = PassThroughManager.for_queryset_class(MovieQuerySet)()
     top = TopManager()
 
@@ -157,6 +155,18 @@ class Movie(models.Model):
     @property
     def image_url(self):
         return self.image_imdb
+
+    @property
+    def imdb_url(self):
+        if self.imdb_id:
+            return u'www.imdb.com/title/{}/'.format(self.imdb_id)
+        return None
+
+    @property
+    def kinopoisk_url(self):
+        if self.kinopoisk_id:
+            return u'www.kinopoisk.ru/film/{}/'.format(self.kinopoisk_id)
+        return None
 
     @property
     def unique_writers(self):

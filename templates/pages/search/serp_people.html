@@ -1,0 +1,29 @@
+{% load i18n %}
+{% for person in people %}
+<div class="media">
+    <div class="pull-left">
+        <div class="media-left">
+            <a href="{% url 'person' person.id %}">
+                <img class="media-object" src="{{ person.image_url }}" alt="{{ person.name }}" style="width: 64px;">
+            </a>
+        </div>
+        <div class="media-body">
+            <div>
+                <a href="{% url 'person' person.id %}"><h4 class="media-heading" style="display: inline-block;">{{ person.name }}</h4></a>
+            </div>
+            {% if person.age %}
+            <div>
+                {% trans 'Age' %}: {{ person.age }}
+            </div>
+            {% endif %}
+            <div>
+                {% trans 'Top movies' %}:
+                {% for movie_id, movie_title, rating_imdb in person.get_top_movies %}
+                    <a href="{% url 'movie' movie_id %}">{{ movie_title }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+{% endfor %}

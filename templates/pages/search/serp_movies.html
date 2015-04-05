@@ -1,66 +1,81 @@
 {% load i18n %}
 {% for movie in movies %}
-<div class="media">
-    <div class="pull-left">
-        <div class="media-left">
-            <a href="{% url 'movie' movie.id %}">
-                <img class="media-object" src="{{ movie.image_url }}" alt="{{ movie.title }}" style="width: 64px;">
-            </a>
-        </div>
-        <div class="media-body">
-            <div>
-                <a href="{% url 'movie' movie.id %}"><h4 class="media-heading" style="display: inline-block;">{{ movie.title }}</h4></a>
+    <div class="media" ng-controller="SerpController">
+        <div class="pull-left">
+            <div class="media-left">
+                <a href="{% url 'movie' movie.id %}">
+                    <img class="media-object" src="{{ movie.image_url }}"
+                         alt="{{ movie.title }}" style="width: 64px;">
+                </a>
             </div>
-            <div>
-                {{ movie.year }}
-                {% for country in movie.countries.all %}
-                    <span class="flag-icon flag-icon-{{ country.iso_code|lower }}" title="{{ country.name }}"></span>
-                {% endfor %}
-            </div>
-            <div>
-                {% if movie.directors.all|length == 1 %}
-                    {% trans 'Director' %}:
-                {% else %}
-                    {% trans 'Directors' %}:
-                {% endif %}
-                {% for person in movie.directors.all %}
-                    <a href="{% url 'person' person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </div>
-            <div>
-                {% trans 'Cast' %}:
-                {% for person in movie.get_short_cast %}
-                    <a href="{% url 'person' person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </div>
-            <div>
-                {% for genre in movie.genres.all %}
-                    <span class="label label-success">
+            <div class="media-body">
+                <div>
+                    <a href="{% url 'movie' movie.id %}">
+                        <h4
+                            class="media-heading"
+                            style="display: inline-block;">{{ movie.title }}
+                        </h4>
+                    </a>
+                    {% if request.user.is_authenticated %}
+                        {% if movie.id in watched_movies %}
+                            <span class="label label-info">{% trans 'Watched' %}</span>
+                        {% elif movie.id in plan_to_watch_movies %}
+                            <span class="label label-info">{% trans 'Plan to watch' %}</span>
+                        {% else %}
+                            <div style="display: inline-block; margin-left: 5px;" ng-show="!status">
+                                <div class="btn-group">
+                                    <button type="button"
+                                            class="btn btn-default dropdown-toggle btn-xs"
+                                            data-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <i class="fa fa-plus"></i> {% trans 'Add' %} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#" ng-click="addMovie({{ movie.id }}, '{{ constants.WATCHED }}')">{% trans 'Watched' %}</a></li>
+                                        <li><a href="#" ng-click="addMovie({{ movie.id }}, '{{ constants.PLAN_TO_WATCH }}')">{% trans 'Plan to watch' %}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <span class="label label-info" ng-show="status == '{{ constants.WATCHED }}'">{% trans 'Watched' %}</span>
+                            <span class="label label-info" ng-show="status == '{{ constants.PLAN_TO_WATCH }}'">{% trans 'Plan to watch' %}</span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div>
+                    {{ movie.year }}
+                    {% for country in movie.countries.all %}
+                        <span class="flag-wrapper flag-icon flag-icon-{{ country.iso_code|lower }}"
+                              title="{{ country.name }}"></span>
+                    {% endfor %}
+                </div>
+                <div>
+                    {% if movie.directors.all|length == 1 %}
+                        {% trans 'Director' %}:
+                    {% else %}
+                        {% trans 'Directors' %}:
+                    {% endif %}
+                    {% for person in movie.directors.all %}
+                        <a href="{% url 'person' person.id %}">{{ person.name }}</a>
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {% trans 'Cast' %}:
+                    {% for person in movie.get_short_cast %}
+                        <a href="{% url 'person' person.id %}">{{ person.name }}</a>
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+                <div>
+                    {% for genre in movie.genres.all %}
+                        <span class="label label-success">
                         {{ genre.name }}
                     </span>&nbsp;
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-{#    <div class="pull-left" style="margin-left: 15px; height: 100px;" ng-show="loader.status == 'W'">#}
-{#        <div class="user-score">#}
-{#            <div ng-show="editable">#}
-{#                <a href="#"#}
-{#                   title="IMDB: {{ movie.rating_imdb }}, RT: {{ movie.rating_tomatoes }}%"#}
-{#                   editable-select="score"#}
-{#                   e-name="score"#}
-{#                   e-ng-options="s as s for s in SCORE_CHOICES"#}
-{#                   buttons="no"#}
-{#                   onaftersave="setScore()">#}
-{#                    <span class="ng-scope user-score-digit user-score-{{ score }} lead">{{ showScore() }}</span>#}
-{#                </a>#}
-{#            </div>#}
-{#            <div ng-show="!editable">#}
-{#                <span class="ng-scope user-score-digit user-score-{{ score }} lead" title="IMDB: {{ movie.rating_imdb }}, RT: {{ movie.rating_tomatoes }}%">{{ score }}</span>#}
-{#                <span style="color: #555; font-size:22pt;" class="ng-scope" ng-show="score > 0 && my_score > 0" title="My score">({{ my_score }})</span>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-</div>
-<hr>
+    <hr>
 {% endfor %}

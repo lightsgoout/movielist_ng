@@ -1,6 +1,9 @@
 {% extends 'main.html' %}
 {% load static %}
 {% load i18n %}
+{% block title %}
+    {{ user.username }} &mdash; {% trans 'Followers' %}
+{% endblock %}
 {% block body %}
     <div class="row">
         <div class="col-md-10">

@@ -1,7 +1,10 @@
 {% extends 'main.html' %}
 {% load i18n %}
 {% load static %}
-{% block body %}
+{% block title %}
+    {% trans 'Add movies to the list' %}
+{% endblock %}
+{% block head %}
     <script src="{% static "angular/angular.min.js" %}" type="text/javascript"></script>
     <script src="{% static "angular-resource/angular-resource.min.js" %}" type="text/javascript"></script>
     <script src="{% static "angular-hotkeys/build/hotkeys.min.js" %}" type="text/javascript"></script>
@@ -10,6 +13,8 @@
 
     <script src="{% static "app/pages/wizard/wizard.js" %}"></script>
     <link href="{% static "app/pages/wizard/wizard.css" %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
     <div ng-app="Wizard" ng-controller="WizardController" ng-init="init()">
         <div class="row">
             <div ng-repeat="movie in suggestionLoader.suggestions | orderBy:'sort_order' |limitTo:1"

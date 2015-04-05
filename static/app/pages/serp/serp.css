@@ -1,0 +1,16 @@
+/*
+This fixes dropdowns at .media
+From: https://github.com/twbs/bootstrap/issues/6381
+*/
+.media-body,
+.media {
+    overflow: visible; /*overflow was set to hidden before */
+}
+
+.media-body:after,
+.media:after {
+    clear: both;
+    content: ' ';
+    display: block;
+    height: 0;
+}

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import Http404
@@ -148,7 +149,6 @@ def show_person(request, person_id):
         'pages/person/person.html',
         {
             'person': person,
-            'starred_movies': person.get_starred_movies(),
         }
     )
 
@@ -199,12 +199,12 @@ def search(request):
     if not query:
         return redirect('/')
 
-    query = query.strip()
+    query = query.strip().lower()
 
-    if len(query) < 3:
+    if len(query) < settings.SEARCH_QUERY_MINIMUM_LENGTH:
         return render(
             request,
-            'pages/search/search_results.html',
+            'pages/search/serp.html',
             {
                 'movies': [],
                 'people': [],
@@ -253,7 +253,7 @@ def search(request):
         ).filter(
             Q(title_en__icontains=query) |
             Q(title_ru__icontains=query)
-        ).order_by('-rating_imdb')
+        ).order_by('-rating_imdb')[:settings.SEARCH_RESULTS_PER_PAGE]
 
     """
     Person lookup.
@@ -264,7 +264,13 @@ def search(request):
         people = Person.objects.filter(
             Q(name_en__icontains=query) |
             Q(name_ru__icontains=query)
-        ).order_by('-sort_power')
+        ).prefetch_related(
+            'starred_movies',
+            'produced_movies',
+            'written_movies',
+            'composed_movies',
+            'directed_movies',
+        ).order_by('-sort_power')[:settings.SEARCH_RESULTS_PER_PAGE]
 
     """
     If only one movie found and no people then
@@ -279,12 +285,31 @@ def search(request):
     if len(movies) == 0 and len(people) == 1:
         return redirect('person', people[0].id)
 
+    """
+    Get information about user's watched movies to prepare frontend.
+    """
+    if request.user.is_authenticated:
+        watched_movies = set(request.user.\
+            get_movies(status=constants.WATCHED).\
+            values_list('id', flat=True))
+        plan_to_watch_movies = set(request.user.\
+            get_movies(status=constants.PLAN_TO_WATCH).\
+            values_list('id', flat=True))
+    else:
+        watched_movies = {}
+        plan_to_watch_movies = {}
+
     return render(
         request,
-        'pages/search/search_results.html',
+        'pages/search/serp.html',
         {
             'movies': movies,
             'people': people,
             'query': query,
+            'SEARCH_RESULTS_PER_PAGE': settings.SEARCH_RESULTS_PER_PAGE,
+            'SEARCH_QUERY_MINIMUM_LENGTH': settings.SEARCH_QUERY_MINIMUM_LENGTH,
+            'watched_movies': watched_movies,
+            'plan_to_watch_movies': plan_to_watch_movies,
+            'constants': constants,
         }
     )
