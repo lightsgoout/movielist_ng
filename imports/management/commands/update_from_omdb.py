@@ -122,6 +122,14 @@ class Command(BaseCommand):
             if imdb_id in self.existing_movies:
                 continue
 
+            # Skip duplicates
+            if Movie.objects.filter(
+                title_en=get_value(title_en),
+                year=get_value(year),
+            ).exists():
+                log.warning(u'Ignoring {}: duplicate'.format(imdb_id))
+                continue
+
             try:
                 imdb_votes = int(get_value(imdb_votes) or 0)
             except ValueError:

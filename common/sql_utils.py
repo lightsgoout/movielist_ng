@@ -29,3 +29,11 @@ def raw_fetch_list(sql, params=None, cursor=None, count=None, index=0, using=Non
     else:
         resultset = cursor.fetchall()
     return [row[index] for row in resultset]
+
+
+def raw_fetch(sql, params=None, cursor=None, count=None, index=0, using=None):
+    cursor = raw_execute(sql, cursor=cursor, params=params, using=None)
+    if count:
+        return cursor.fetchmany(size=count)
+    else:
+        return cursor.fetchall()
