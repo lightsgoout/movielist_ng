@@ -15,8 +15,6 @@ class MovieLookup(LookupChannel):
             results = models.Movie.search.query(query)
         else:
             results = models.Movie.objects.filter(
-                is_trashed=False,
-            ).filter(
                 Q(title_en__icontains=query) |
                 Q(title_ru__icontains=query)
             )

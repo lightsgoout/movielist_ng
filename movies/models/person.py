@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models import Sum, QuerySet
 import itertools
 from model_utils.managers import PassThroughManager
-from movies.models import Movie
 
 
 class PersonQuerySet(QuerySet):
@@ -17,6 +16,8 @@ class PersonQuerySet(QuerySet):
 
 
 class Person(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+
     name_en = models.CharField(max_length=255, unique=True)
     name_ru = models.CharField(max_length=255, blank=True)
     birth_date = models.DateField(null=True, blank=True)

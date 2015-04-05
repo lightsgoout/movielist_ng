@@ -120,8 +120,6 @@ class Movie(models.Model):
     votes_imdb = models.PositiveIntegerField(null=True, blank=True, db_index=True)
     votes_kinopoisk = models.PositiveIntegerField(null=True, blank=True, db_index=True)
 
-    is_trashed = models.BooleanField(default=False, db_index=True)
-
     objects = PassThroughManager.for_queryset_class(MovieQuerySet)()
     top = TopManager()
 
