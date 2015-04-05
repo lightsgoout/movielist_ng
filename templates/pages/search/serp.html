@@ -17,9 +17,14 @@
     <script src="{% static "app/pages/list/list.js" %}" type="text/javascript"></script>
     <link href="{% static "app/pages/user-score.css" %}" rel="stylesheet">
     <link href="{% static "app/pages/list/list.css" %}" rel="stylesheet">
+
+    {% if request.user.is_authenticated %}
+    <script src="{% static "app/pages/serp/serp.js" %}" type="text/javascript"></script>
+    <link href="{% static "app/pages/serp/serp.css" %}" rel="stylesheet">
+    {% endif %}
 {% endblock %}
 {% block body %}
-    <div class="row">
+    <div class="row" ng-app="Serp">
         <div class="col-md-12">
             <div class="row" style="">
                 <h3>{% blocktrans %}Search results for: <mark>{{ query }}</mark>{% endblocktrans %}</h3>
@@ -30,7 +35,7 @@
                             <span class=""><small>{% trans 'Maximum results limit reached, please narrow down your search' %}</small></span>
                         {% endif %}
                     </h4>
-                    <hr style="margin-top: 0px;">
+                    <hr style="margin-top: 0;">
                     {% include 'pages/search/serp_movies.html' %}
                 </div>
                 <div class="col-md-6">
@@ -39,7 +44,7 @@
                             <span class=""><small>{% trans 'Maximum results limit reached, please narrow down your search' %}</small></span>
                         {% endif %}
                     </h4>
-                    <hr style="margin-top: 0px;">
+                    <hr style="margin-top: 0;">
                     {% include 'pages/search/serp_people.html' %}
                 </div>
                 {% else %}

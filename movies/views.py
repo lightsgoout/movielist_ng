@@ -285,6 +285,20 @@ def search(request):
     if len(movies) == 0 and len(people) == 1:
         return redirect('person', people[0].id)
 
+    """
+    Get information about user's watched movies to prepare frontend.
+    """
+    if request.user.is_authenticated:
+        watched_movies = set(request.user.\
+            get_movies(status=constants.WATCHED).\
+            values_list('id', flat=True))
+        plan_to_watch_movies = set(request.user.\
+            get_movies(status=constants.PLAN_TO_WATCH).\
+            values_list('id', flat=True))
+    else:
+        watched_movies = {}
+        plan_to_watch_movies = {}
+
     return render(
         request,
         'pages/search/serp.html',
@@ -294,5 +308,8 @@ def search(request):
             'query': query,
             'SEARCH_RESULTS_PER_PAGE': settings.SEARCH_RESULTS_PER_PAGE,
             'SEARCH_QUERY_MINIMUM_LENGTH': settings.SEARCH_QUERY_MINIMUM_LENGTH,
+            'watched_movies': watched_movies,
+            'plan_to_watch_movies': plan_to_watch_movies,
+            'constants': constants,
         }
     )
