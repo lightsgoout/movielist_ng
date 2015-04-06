@@ -41,6 +41,10 @@ class UserToMovie(models.Model):
         default=constants.WATCHED,
         db_index=True)
 
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
     class Meta:
         app_label = 'movies'
         unique_together = (
