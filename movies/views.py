@@ -288,7 +288,7 @@ def search(request):
     """
     Get information about user's watched movies to prepare frontend.
     """
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         watched_movies = set(request.user.\
             get_movies(status=constants.WATCHED).\
             values_list('id', flat=True))

@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.conf.urls import url
 from tastypie import fields
-from tastypie.authentication import SessionAuthentication
+from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization
 from tastypie.constants import ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
@@ -56,7 +56,7 @@ class MovieResource(ModelResource):
     class Meta:
         queryset = Movie.objects.all()
         resource_name = 'movie'
-        authentication = SessionAuthentication()
+        authentication = Authentication()
         authorization = Authorization()
         list_allowed_methods = ['get']
         detail_allowed_methods = ['get']

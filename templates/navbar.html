@@ -32,7 +32,7 @@
       </ul>
       <ul class="nav navbar-nav pull-right">
         {% if request.user.is_authenticated %}
-          <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-signout"></i> {% trans 'Logout' %}</a></li>
+          <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> {% trans 'Logout' %}</a></li>
         {% endif %}
         <li>
             {% include '_blocks/language_selector.html' %}

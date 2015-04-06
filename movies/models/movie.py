@@ -192,10 +192,8 @@ class Movie(models.Model):
             prev_movie = None
             for index, movie in enumerate(movies):
                 if self == movie:
-                    try:
+                    if index > 0:
                         prev_movie = movies[index-1]
-                    except IndexError:
-                        pass
                     try:
                         next_movie = movies[index+1]
                     except IndexError:

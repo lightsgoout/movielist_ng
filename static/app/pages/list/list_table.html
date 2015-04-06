@@ -5,28 +5,28 @@
                 <tr>
                     <th>
                       <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
-                      Movie <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      Movie <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th>
                       <a ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
-                        Year <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        Year <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
 
                     <th ng-show="loader.status == 'W'">
                       <a ng-click="orderByField='score'; reverseSort = !reverseSort">
-                      Score <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      Score <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th ng-show="loader.status == 'W' && !editable">
                       <a ng-click="orderByField='my_score'; reverseSort = !reverseSort">
-                      My score <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      My score <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th>
                       <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
-                      IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                      IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                 </tr>
