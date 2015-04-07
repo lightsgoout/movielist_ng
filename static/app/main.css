@@ -63,3 +63,28 @@ mark, .mark {
   display: inline-block;
   box-shadow: 0 0 1px black;
 }
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    src: url(/static/fonts/SourceSansPro-Light.woff) format('woff');
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/static/fonts/SourceSansPro-Regular.woff) format('woff');
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    src: url(/static/fonts/SourceSansPro-Bold.woff) format('woff');
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: italic;
+    font-weight: 400;
+    src: url(/static/fonts/SourceSansPro-It.woff) format('woff');
+}
