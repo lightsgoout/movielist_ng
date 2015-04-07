@@ -29,6 +29,16 @@
                       IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
+                    <th>
+                      <a ng-click="orderByField='movie.votes_imdb'; reverseSort = !reverseSort">
+                      IMDB votes <span ng-show="orderByField == 'movie.votes_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      </a>
+                    </th>
+                    <th>
+                      <a ng-click="orderByField='created_at'; reverseSort = !reverseSort">
+                      Date added on <span ng-show="orderByField == 'created_at'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      </a>
+                    </th>
                 </tr>
             </thead>
             <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
@@ -56,9 +66,11 @@
                         {{ user_to_movie.my_score }}
                     </td>
                     <td>{{ user_to_movie.movie.rating_imdb }}</td>
+                    <td>{{ user_to_movie.movie.votes_imdb }}</td>
+                    <td>{{ user_to_movie.created_at|date:'d/M/yy' }}</td>
                 </tr>
-                <tr ng-show='loader.busy'><td colspan="999">Loading data...</td></tr>
             </tbody>
         </table>
+        <div ng-show='loader.busy' class="loader text-center"><p class="text-muted"><i class="fa fa-spinner fa-spin"></i></p></div>
     </section>
 </div>

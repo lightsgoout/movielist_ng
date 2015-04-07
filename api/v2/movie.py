@@ -77,6 +77,7 @@ class MovieResource(ModelResource):
             'rating_tomatoes',
             'tomatoes_fresh',
             'director',
+            'votes_imdb',
         ]
 
     def dehydrate_title(self, bundle):
