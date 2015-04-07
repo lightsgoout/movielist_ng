@@ -1,0 +1,66 @@
+{% extends 'pages/settings/settings.html' %}
+{% load i18n %}
+{% block settings_form %}
+<form class="form-horizontal" action="{% url 'settings_personal' %}" method="post">
+  <fieldset>
+    <legend>{% trans 'Settings' %}</legend>
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+    {{ error }}
+    {% empty %}
+        {% if saved %}
+            <div class="alert alert-success" role="alert">{% trans 'Saved' %}</div>
+        {% endif  %}
+    {% endfor %}
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">{% trans 'Email' %}</label>
+      <div class="col-lg-6">
+        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required="required" value="{{ request.user.email }}">
+          <span id="helpBlock" class="help-block">{% trans 'Email will not be visible to anyone.' %}</span>
+      </div>
+      {% for error in form.email.errors %}
+        <div class="alert alert-danger col-lg-offset-8">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+      <label for="inputCountry" class="col-lg-2 control-label">{% trans 'Country' %}</label>
+      <div class="col-lg-6">
+        <select class="form-control" id="inputCountry" name="country">
+            {% for country_id, country_name in countries %}
+            <option value="{{ country_id }}" {% if request.user.country_id == country_id %}selected="selected"{% endif %}>{{ country_name }}</option>
+            {% endfor %}
+        </select>
+          <span id="helpBlock" class="help-block">{% trans 'Will be visible to everyone, also used for suggestions.' %}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputGender" class="col-lg-2 control-label">{% trans 'Gender' %}</label>
+      <div class="col-lg-6">
+        <select class="form-control" id="inputGender" name="gender">
+            <option value="">{% trans 'Unknown' %}</option>
+            <option value="1" {% if request.user.gender == GENDER_MALE %}  selected="selected"{% endif %}>{% trans 'Male' %}</option>
+            <option value="0" {% if request.user.gender == GENDER_FEMALE %}selected="selected"{% endif %}>{% trans 'Female' %}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputBirthdate" class="col-lg-2 control-label">{% trans 'Birth date' %}</label>
+      <div class="col-lg-6">
+          <input type="date" name="date_of_birth" class="form-control" id="inputBirthdate" value="{{ request.user.date_of_birth|date:"Y-m-d" }}">
+      </div>
+      {% for error in form.date_of_birth.errors %}
+        <div class="alert alert-danger col-lg-offset-8">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-6 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary" name="save">{% trans 'Save' %}</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}

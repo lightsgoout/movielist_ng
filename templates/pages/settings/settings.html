@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load i18n %}
+{% load activeurl %}
+{% block title %}
+    {% trans 'Settings' %}
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-3">
+                    {% activeurl %}
+                    <ul class="nav nav-pills nav-stacked">
+                      <li role="presentation"><a href="{% url 'settings_personal' %}">Settings</a></li>
+                      <li role="presentation"><a href="{% url 'change_password' %}">Password</a></li>
+                    </ul>
+                    {% endactiveurl %}
+                </div>
+                <div class="col-md-6">
+                    {% block settings_form %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

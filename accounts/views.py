@@ -1,8 +1,13 @@
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.core.urlresolvers import reverse
+from django.forms import ModelForm
 from django.shortcuts import redirect, render
+from django.utils import translation
 from django.utils.translation import ugettext_lazy
+from accounts.models import MovielistUser
+from common.models import Country
 
 
 def login_page(request):
@@ -28,7 +33,6 @@ def login_page(request):
         request,
         'pages/login/login.html',
         {
-            'login_form': AuthenticationForm,
             'error': error,
         }
     )
@@ -37,3 +41,60 @@ def login_page(request):
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
+
+
+class MovielistUserForm(ModelForm):
+    class Meta:
+        model = MovielistUser
+        fields = ['country', 'gender', 'date_of_birth', 'email']
+
+    def clean_gender(self):
+        try:
+            return bool(int(self.data['gender']))
+        except (ValueError, TypeError):
+            return None
+
+
+@login_required
+def settings_personal(request):
+    saved = False
+    form = None
+    if request.method == 'POST':
+        form = MovielistUserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            saved = True
+
+    cur_language = translation.get_language()
+    sort_field = 'name_ru' if cur_language == 'ru' else 'name_en'
+    countries = Country.objects.all().order_by(sort_field).values_list('id', sort_field)
+    return render(
+        request,
+        'pages/settings/settings_personal.html',
+        {
+            'countries': countries,
+            'GENDER_MALE': MovielistUser.GENDER_MALE,
+            'GENDER_FEMALE': MovielistUser.GENDER_FEMALE,
+            'saved': saved,
+            'form': form,
+        }
+    )
+
+
+@login_required
+def change_password(request):
+    saved = False
+    form = None
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            saved = True
+    return render(
+        request,
+        'pages/settings/password_change.html',
+        {
+            'saved': saved,
+            'form': form,
+        }
+    )
