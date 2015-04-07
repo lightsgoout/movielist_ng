@@ -10,6 +10,24 @@
                 <div class="media-body">
                     <div>
                         <a href="{{ user_to_movie.movie.page_url }}"><h4 class="media-heading" style="display: inline-block;"><span ng-class="{'mark': loader.stringMatched(user_to_movie.movie.title)}">{{ user_to_movie.movie.title }}</span></h4></a>
+                        <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">Watched</span>
+                        <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">Plan to watch</span>
+                        <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">Ignored</span>
+                        <div style="display: inline-block; margin-left: 5px;" ng-show="!user_to_movie.my_status">
+                            <div class="btn-group" style="margin-bottom: 5px;">
+                                <button type="button"
+                                        class="btn btn-default dropdown-toggle btn-xs"
+                                        data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <i class="fa fa-plus"></i> Add <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'W')">Watched</a></li>
+                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'P')">Plan to watch</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         {{ user_to_movie.movie.year }}

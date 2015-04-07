@@ -32,6 +32,10 @@ class UserToMovieResource(ModelResource):
         null=True,
         readonly=True,
     )
+    my_status = fields.CharField(
+        null=True,
+        readonly=True,
+    )
 
     class Meta:
         queryset = UserToMovie.objects.all().\
@@ -100,12 +104,14 @@ class UserToMovieResource(ModelResource):
             shared_movies = UserToMovie.objects.filter(
                 user=bundle.request.user,
                 movie_id__in=objects.values_list('movie_id', flat=True),
-            ).values_list('movie_id', 'score')
+            ).values_list('movie_id', 'score', 'status')
             score_map = dict()
-            for movie_id, score in shared_movies:
-                score_map[movie_id] = score
+            for movie_id, score, status in shared_movies:
+                score_map[movie_id] = (score, status)
             for obj in objects:
-                setattr(obj, 'my_score', score_map.get(obj.movie.id))
+                score, status = score_map.get(obj.movie.id, (None, None))
+                setattr(obj, 'my_score', score)
+                setattr(obj, 'my_status', status)
 
         return objects
 
@@ -227,3 +233,12 @@ class UserToMovieResource(ModelResource):
         if bundle.obj.score:
             return float(bundle.obj.score)
         return bundle.obj.score
+
+    def dehydrate_my_status(self, bundle):
+        if bundle.request.user.is_authenticated():
+            """
+            obj.my_status is populated at self.obj_get_list.
+            """
+            if bundle.obj.my_status:
+                return bundle.obj.my_status
+        return None

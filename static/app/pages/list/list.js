@@ -44,6 +44,17 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
         });
     };
 
+    $scope.addMovie = function(movie_id, status) {
+        $http.post(
+        '/api/v2/user_to_movie/add_movie/',
+        {
+            movie_id: movie_id,
+            status: status
+        }).success(function(data, st, headers, config) {
+            $scope.user_to_movie.my_status = status;
+        });
+    };
+
     $scope.showScore = function() {
         //var selected = $filter('filter')($scope.SCORE_CHOICES, $scope.user_to_movie.score);
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
