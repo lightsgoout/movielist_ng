@@ -3,14 +3,14 @@
     <div class="media" ng-controller="SerpController">
         <div class="pull-left">
             <div class="media-left">
-                <a href="{% url 'movie' movie.id %}">
+                <a href="{% url 'movie' movie.id movie.slug %}">
                     <img class="media-object" src="{{ movie.image_url }}"
                          alt="{{ movie.title }}" style="width: 64px;">
                 </a>
             </div>
             <div class="media-body">
                 <div>
-                    <a href="{% url 'movie' movie.id %}">
+                    <a href="{% url 'movie' movie.id movie.slug %}">
                         <h4
                             class="media-heading"
                             style="display: inline-block;">{{ movie.title }}
@@ -56,14 +56,14 @@
                         {% trans 'Directors' %}:
                     {% endif %}
                     {% for person in movie.directors.all %}
-                        <a href="{% url 'person' person.id %}">{{ person.name }}</a>
+                        <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>
                         {% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 </div>
                 <div>
                     {% trans 'Cast' %}:
                     {% for person in movie.get_short_cast %}
-                        <a href="{% url 'person' person.id %}">{{ person.name }}</a>
+                        <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>
                         {% if not forloop.last %}, {% endif %}
                     {% endfor %}
                 </div>

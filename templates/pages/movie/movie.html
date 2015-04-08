@@ -75,13 +75,13 @@
                             {% if prev_movie %}
                             <tr>
                                 <th>{% trans 'Previous movie' %}</th>
-                                <td><a href="{% url 'movie' prev_movie.id %}">{{ prev_movie.title }}</a></td>
+                                <td><a href="{% url 'movie' prev_movie.id prev_movie.slug %}">{{ prev_movie.title }}</a></td>
                             </tr>
                             {% endif %}
                             {% if next_movie %}
                             <tr>
                                 <th>{% trans 'Next movie' %}</th>
-                                <td><a href="{% url 'movie' next_movie.id %}">{{ next_movie.title }}</a></td>
+                                <td><a href="{% url 'movie' next_movie.id next_movie.slug %}">{{ next_movie.title }}</a></td>
                             </tr>
                             {% endif %}
 
@@ -103,7 +103,7 @@
                                 </th>
                                 <td>
                                     {% for person in movie.directors.all %}
-                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                        <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
                                     {% empty %}
                                         -
                                     {% endfor %}
@@ -119,7 +119,7 @@
                                 </th>
                                 <td>
                                     {% for person in movie.unique_writers %}
-                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                        <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
                                     {% empty %}
                                         -
                                     {% endfor %}
@@ -135,7 +135,7 @@
                                 </th>
                                 <td>
                                     {% for person in movie.producers.all %}
-                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                        <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
                                     {% empty %}
                                         -
                                     {% endfor %}
@@ -151,7 +151,7 @@
                                 </th>
                                 <td>
                                     {% for person in movie.composers.all %}
-                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
+                                        <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>{% if not forloop.last %}, {% endif %}
                                     {% empty %}
                                         -
                                     {% endfor %}
@@ -253,7 +253,7 @@
                             {% for person in cast %}
                                 <tr>
                                     <td>
-                                        <a href="{% url 'person' person_id=person.id %}">{{ person.name }}</a>
+                                        <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>
                                     </td>
                                 </tr>
                             {% endfor %}

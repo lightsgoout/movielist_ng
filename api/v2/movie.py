@@ -87,7 +87,9 @@ class MovieResource(ModelResource):
         return bundle.obj.image_url
 
     def dehydrate_page_url(self, bundle):
-        return reverse('movie', kwargs={'movie_id': bundle.obj.pk})
+        return reverse(
+            'movie',
+            kwargs={'movie_id': bundle.obj.pk, 'slug': bundle.obj.slug})
 
     def dehydrate_genres(self, bundle):
         return [g.name for g in bundle.obj.genres.all()]

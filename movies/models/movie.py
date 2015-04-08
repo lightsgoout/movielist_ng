@@ -2,6 +2,7 @@ from django.core import validators
 from django.db import models
 from django.db.models import QuerySet
 from django.utils import translation
+from django.utils.text import slugify
 from model_utils.managers import PassThroughManager
 from common import fields
 
@@ -56,6 +57,7 @@ class Movie(models.Model):
     title_ru = models.CharField(max_length=255, blank=True)
     year = models.PositiveSmallIntegerField(null=True, db_index=True)
     date_released = models.DateField(null=True, blank=True, db_index=True)
+    slug = models.SlugField(blank=True)
 
     imdb_processed = models.BooleanField(default=False, db_index=True)
 
@@ -127,6 +129,10 @@ class Movie(models.Model):
         if self.title_ru:
             return u'{} ({}) - {}'.format(self.title_en, self.year, self.title_ru)
         return u'{} ({})'.format(self.title_en, self.year)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title_en)
+        return super(Movie, self).save(*args, **kwargs)
 
     @property
     def title(self):

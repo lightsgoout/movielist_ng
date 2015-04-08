@@ -28,4 +28,6 @@ class PersonResource(ModelResource):
         return bundle.obj.name
 
     def dehydrate_page_url(self, bundle):
-        return reverse('person', kwargs={'person_id': bundle.obj.pk})
+        return reverse(
+            'person',
+            kwargs={'person_id': bundle.obj.pk, 'slug': bundle.obj.slug})

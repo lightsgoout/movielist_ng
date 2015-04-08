@@ -2,6 +2,7 @@ from datetime import date
 from django.db import models
 from django.db.models import Sum, QuerySet
 import itertools
+from django.utils.text import slugify
 from model_utils.managers import PassThroughManager
 
 
@@ -20,6 +21,7 @@ class Person(models.Model):
 
     name_en = models.CharField(max_length=255, unique=True)
     name_ru = models.CharField(max_length=255, blank=True)
+    slug = models.SlugField(blank=True)
     birth_date = models.DateField(null=True, blank=True)
     birth_year = models.PositiveSmallIntegerField(null=True, blank=True)
     kinopoisk_id = models.IntegerField(null=True, blank=True, db_index=True)
@@ -36,6 +38,10 @@ class Person(models.Model):
 
     def __unicode__(self):
         return self.name_en
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name_en)
+        return super(Person, self).save(*args, **kwargs)
 
     @property
     def name(self):
@@ -55,15 +61,15 @@ class Person(models.Model):
     def get_top_movies(self):
         # Make use of prefetch_related
         starred_movies = [
-            (m.id, m.title, m.rating_imdb) for m in self.starred_movies.all()]
+            (m.id, m.title, m.slug, m.rating_imdb) for m in self.starred_movies.all()]
         directed_movies = [
-            (m.id, m.title, m.rating_imdb) for m in self.directed_movies.all()]
+            (m.id, m.title, m.slug, m.rating_imdb) for m in self.directed_movies.all()]
         written_movies = [
-            (m.id, m.title, m.rating_imdb) for m in self.written_movies.all()]
+            (m.id, m.title, m.slug, m.rating_imdb) for m in self.written_movies.all()]
         composed_movies = [
-            (m.id, m.title, m.rating_imdb) for m in self.composed_movies.all()]
+            (m.id, m.title, m.slug, m.rating_imdb) for m in self.composed_movies.all()]
         produced_movies = [
-            (m.id, m.title, m.rating_imdb) for m in self.produced_movies.all()]
+            (m.id, m.title, m.slug, m.rating_imdb) for m in self.produced_movies.all()]
 
         # Do manual sorting to avoid N queries for N people
         full_list = list(itertools.chain(
@@ -75,7 +81,7 @@ class Person(models.Model):
         ))
 
         # Sort by '-rating_imdb'
-        full_list.sort(key=lambda tup: tup[2], reverse=True)
+        full_list.sort(key=lambda tup: tup[3], reverse=True)
         return full_list[:4]
 
     def update_sort_power(self):

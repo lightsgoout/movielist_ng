@@ -3,13 +3,13 @@
 <div class="media">
     <div class="pull-left">
         <div class="media-left">
-            <a href="{% url 'person' person.id %}">
+            <a href="{% url 'person' person.id person.slug %}">
                 <img class="media-object" src="{{ person.image_url }}" alt="{{ person.name }}" style="width: 64px;">
             </a>
         </div>
         <div class="media-body">
             <div>
-                <a href="{% url 'person' person.id %}"><h4 class="media-heading" style="display: inline-block;">{{ person.name }}</h4></a>
+                <a href="{% url 'person' person.id person.slug %}"><h4 class="media-heading" style="display: inline-block;">{{ person.name }}</h4></a>
             </div>
             {% if person.age %}
             <div>
@@ -18,8 +18,8 @@
             {% endif %}
             <div>
                 {% trans 'Top movies' %}:
-                {% for movie_id, movie_title, rating_imdb in person.get_top_movies %}
-                    <a href="{% url 'movie' movie_id %}">{{ movie_title }}</a>{% if not forloop.last %}, {% endif %}
+                {% for movie_id, movie_title, movie_slug, rating_imdb in person.get_top_movies %}
+                    <a href="{% url 'movie' movie_id movie_slug %}">{{ movie_title }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </div>
         </div>

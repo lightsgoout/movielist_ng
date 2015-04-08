@@ -126,8 +126,8 @@ def list_user_achievements(request, username):
     )
 
 
-def show_movie(request, movie_id):
-    movie = get_object_or_404(Movie, pk=movie_id)
+def show_movie(request, movie_id, slug):
+    movie = get_object_or_404(Movie, pk=movie_id, slug=slug)
     series, next_movie, prev_movie = movie.get_series_information()
     return render(
         request,
@@ -142,8 +142,8 @@ def show_movie(request, movie_id):
     )
 
 
-def show_person(request, person_id):
-    person = get_object_or_404(Person, pk=person_id)
+def show_person(request, person_id, slug):
+    person = get_object_or_404(Person, pk=person_id, slug=slug)
     return render(
         request,
         'pages/person/person.html',
