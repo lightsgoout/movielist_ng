@@ -20,10 +20,13 @@
                   </div>
                 </div>
                 <small>
-                    <a href="{{ list_comparison_url }}">{% trans 'Compatibility' %}: {{ compatibility_power }}%</a>. {% trans 'Movies you share include' %}
-                    {% for shared_movie in shared_movies %}
-                        <a href="{% url 'movie' shared_movie.id shared_movie.slug %}">{{ shared_movie.title }}</a>{% if not forloop.last %},{% endif %}
-                    {% endfor %}
+                    <a href="{{ list_comparison_url }}">{% trans 'Compatibility' %}: {{ compatibility_power }}%</a>.
+                    {% if shared_movies|length > 0 %}
+                        {% trans 'Movies you share include' %}
+                        {% for shared_movie in shared_movies %}
+                            <a href="{% url 'movie' shared_movie.id shared_movie.slug %}">{{ shared_movie.title }}</a>{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    {% endif %}
                 {% if shared_movies_remainder > 0 %}
                     {% blocktrans %}
                         and <a href="{{ list_comparison_url }}">{{ shared_movies_remainder }} others</a>

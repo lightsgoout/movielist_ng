@@ -277,13 +277,15 @@ def search(request):
     redirect straight to the movie page.
     """
     if len(movies) == 1 and len(people) == 0:
-        return redirect('movie', movies[0].id)
+        movie = movies[0]
+        return redirect('movie', movie.id, movie.slug)
 
     """
     Same for people.
     """
     if len(movies) == 0 and len(people) == 1:
-        return redirect('person', people[0].id)
+        person = people[0]
+        return redirect('person', person.id, person.slug)
 
     """
     Get information about user's watched movies to prepare frontend.
