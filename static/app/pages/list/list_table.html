@@ -3,38 +3,43 @@
         <table class="table table-striped table-condensed table-hover">
             <thead>
                 <tr>
-                    <th>
+                    <th class="text-center">
+                      <a ng-click="orderByField='my_status'; reverseSort = !reverseSort">
+                      {{ T_MY_STATUS }} <span ng-show="orderByField == 'my_status'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      </a>
+                    </th>
+                    <th class="text-center">
                       <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
                       {{ T_MOVIE }} <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th>
+                    <th class="text-center">
                       <a ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
                         {{ T_YEAR }} <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
 
-                    <th ng-show="loader.status == 'W'">
+                    <th class="text-center" ng-show="loader.status == 'W'">
                       <a ng-click="orderByField='score'; reverseSort = !reverseSort">
                       {{ T_SCORE }} <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th ng-show="loader.status == 'W' && !editable">
+                    <th class="text-center" ng-show="loader.status == 'W' && !editable">
                       <a ng-click="orderByField='my_score'; reverseSort = !reverseSort">
                       {{ T_MY_SCORE }} <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th>
+                    <th class="text-center">
                       <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
                       {{ T_IMDB_RATING }} <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th>
+                    <th class="text-center">
                       <a ng-click="orderByField='movie.votes_imdb'; reverseSort = !reverseSort">
                       {{ T_IMDB_VOTES }} <span ng-show="orderByField == 'movie.votes_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th>
+                    <th class="text-center">
                       <a ng-click="orderByField='created_at'; reverseSort = !reverseSort">
                       {{ T_DATE_ADDED_ON }} <span ng-show="orderByField == 'created_at'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
@@ -43,7 +48,29 @@
             </thead>
             <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
                 <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
-                    <td><a href="{{ user_to_movie.movie.page_url }}">{{ user_to_movie.movie.title }}</a></td>
+                    <td class="text-right">
+                        <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">{{ T_WATCHED }}</span>
+                        <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TO_WATCH }}</span>
+                        <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">{{ T_IGNORED }}</span>
+                        <div style="display: inline-block; margin-left: 5px;" ng-show="!user_to_movie.my_status && !editable">
+                            <div class="btn-group">
+                                <button type="button"
+                                        class="btn btn-default dropdown-toggle btn-xs"
+                                        data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <i class="fa fa-plus"></i> {{ T_ADD }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'W')">{{ T_WATCHED }}</a></li>
+                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'P')">{{ T_PLAN_TO_WATCH }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="{{ user_to_movie.movie.page_url }}">{{ user_to_movie.movie.title }}</a>
+                    </td>
                     <td>{{ user_to_movie.movie.year }}</td>
                     <td ng-show="loader.status == 'W'">
                         <div ng-show="editable">
@@ -71,6 +98,6 @@
                 </tr>
             </tbody>
         </table>
-        <div ng-show='loader.busy' class="loader text-center"><p class="text-muted"><i class="fa fa-spinner fa-spin"></i></p></div>
     </section>
 </div>
+<div ng-show='loader.busy' class="loader text-center"><p class="text-muted"><i class="fa fa-spinner fa-spin"></i></p></div>

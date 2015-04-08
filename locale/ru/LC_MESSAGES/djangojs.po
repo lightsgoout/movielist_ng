@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-08 04:54+0000\n"
+"POT-Creation-Date: 2015-04-08 05:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,30 +54,34 @@ msgid "My score"
 msgstr "Моя оценка"
 
 #: static/app/pages/list/list.js:42
+msgid "My status"
+msgstr "Мой статус"
+
+#: static/app/pages/list/list.js:43
 msgid "Movie"
 msgstr "Фильм"
 
-#: static/app/pages/list/list.js:43
+#: static/app/pages/list/list.js:44
 msgid "Year"
 msgstr "Год"
 
-#: static/app/pages/list/list.js:44
+#: static/app/pages/list/list.js:45
 msgid "Score"
 msgstr "Оценка"
 
-#: static/app/pages/list/list.js:45
+#: static/app/pages/list/list.js:46
 msgid "IMDB rating"
 msgstr "Рейтинг IMDB"
 
-#: static/app/pages/list/list.js:46
+#: static/app/pages/list/list.js:47
 msgid "IMDB votes"
 msgstr "Голоса IMDB"
 
-#: static/app/pages/list/list.js:47
+#: static/app/pages/list/list.js:48
 msgid "Date added on"
 msgstr "Добавлен"
 
-#: static/app/pages/list/list.js:76 static/app/pages/movie/movie.js:34
+#: static/app/pages/list/list.js:77 static/app/pages/movie/movie.js:34
 msgid "Set score"
 msgstr "Поставить оценку"
 

@@ -39,6 +39,7 @@ app.run(function($rootScope, editableOptions) {
     $rootScope['T_DIRECTORS'] = gettext('Directors');
     $rootScope['T_CAST'] = gettext('Cast');
     $rootScope['T_MY_SCORE'] = gettext('My score');
+    $rootScope['T_MY_STATUS'] = gettext('My status');
     $rootScope['T_MOVIE'] = gettext('Movie');
     $rootScope['T_YEAR'] = gettext('Year');
     $rootScope['T_SCORE'] = gettext('Score');

@@ -101,17 +101,18 @@ class UserToMovieResource(ModelResource):
         We do it here to avoid N-count queries in dehydrate.
         """
         if bundle.request.user.is_authenticated():
-            shared_movies = UserToMovie.objects.filter(
-                user=bundle.request.user,
-                movie_id__in=objects.values_list('movie_id', flat=True),
-            ).values_list('movie_id', 'score', 'status')
-            score_map = dict()
-            for movie_id, score, status in shared_movies:
-                score_map[movie_id] = (score, status)
-            for obj in objects:
-                score, status = score_map.get(obj.movie.id, (None, None))
-                setattr(obj, 'my_score', score)
-                setattr(obj, 'my_status', status)
+            if bundle.request.user.username != bundle.request.GET.get('username'):
+                shared_movies = UserToMovie.objects.filter(
+                    user=bundle.request.user,
+                    movie_id__in=objects.values_list('movie_id', flat=True),
+                ).values_list('movie_id', 'score', 'status')
+                score_map = dict()
+                for movie_id, score, status in shared_movies:
+                    score_map[movie_id] = (score, status)
+                for obj in objects:
+                    score, status = score_map.get(obj.movie.id, (None, None))
+                    setattr(obj, 'my_score', score)
+                    setattr(obj, 'my_status', status)
 
         return objects
 
@@ -225,8 +226,9 @@ class UserToMovieResource(ModelResource):
             """
             obj.my_score is populated at self.obj_get_list.
             """
-            if bundle.obj.my_score:
-                return float(bundle.obj.my_score)
+            my_score = getattr(bundle.obj, 'my_score', None)
+            if my_score:
+                return float(my_score)
         return None
 
     def dehydrate_score(self, bundle):
@@ -239,6 +241,6 @@ class UserToMovieResource(ModelResource):
             """
             obj.my_status is populated at self.obj_get_list.
             """
-            if bundle.obj.my_status:
+            if hasattr(bundle.obj, 'my_status'):
                 return bundle.obj.my_status
         return None
