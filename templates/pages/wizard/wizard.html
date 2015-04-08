@@ -21,6 +21,9 @@
                  ng-include="'/static/app/pages/wizard/movie.html'">
             </div>
         </div>
+        <div class="row" ng-show="suggestionLoader.suggestions.length == 0" style="width: 100%; height: 400px;">
+            <p style="margin: 0 auto; width: 100px; margin-top: 12.5%;"><i class="fa fa-spinner fa-5x fa-spin"></i></p>
+        </div>
         <div class="row" ng-show="suggestionLoader.suggestions.length > 0" style="margin: 15px auto; width: 300px;">
             <div style="margin: 0 auto;">
             <p>{% trans 'Press <kbd><kbd>W</kbd> <kbd>W</kbd></kbd> to mark movie as watched' %}</p>
