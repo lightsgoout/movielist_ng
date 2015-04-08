@@ -137,7 +137,7 @@ BOWER_INSTALLED_APPS = (
     'font-awesome#4.2.0',
     'angular-xeditable#0.1.8',
     'flag-icon-css#0.7.0',
-    'bootstrap-hover-dropdown',
+    'bootstrap-hover-dropdown#2.1.3',
 )
 
 TEMPLATE_DIRS = (
