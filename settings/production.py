@@ -129,7 +129,6 @@ BOWER_INSTALLED_APPS = (
     'angular-ui-utils#0.2.2',
     'angular-resource#1.3.14',
     'angular-route#1.3.14',
-    'angular-hotkeys',
     'ngInfiniteScroll#1.2.0',
     'ng-tags-input#2.2.0',
     'bootstrap#3.3.2',
@@ -138,6 +137,7 @@ BOWER_INSTALLED_APPS = (
     'font-awesome#4.2.0',
     'angular-xeditable#0.1.8',
     'flag-icon-css#0.7.0',
+    'bootstrap-hover-dropdown',
 )
 
 TEMPLATE_DIRS = (
