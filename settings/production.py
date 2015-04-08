@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'djangobower',
     'django_nose',
     'django_activeurl',
+    'statici18n',
 
     'achievements',
     'accounts',
@@ -115,6 +116,10 @@ STATICFILES_FINDERS = (
 
 # noinspection PyUnresolvedReferences
 STATIC_ROOT = 'compiledstatic'
+STATICI18N_ROOT = 'static'
+STATICI18N_PACKAGES = (
+    ('app',)
+)
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
 

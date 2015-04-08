@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-08 04:54+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: static/app/pages/list/list.js:34 static/app/pages/movie/movie.js:63
+#: static/app/pages/wizard/wizard.js:16
+msgid "Watched"
+msgstr ""
+
+#: static/app/pages/list/list.js:35 static/app/pages/movie/movie.js:67
+#: static/app/pages/wizard/wizard.js:17
+msgid "Plan to watch"
+msgstr ""
+
+#: static/app/pages/list/list.js:36 static/app/pages/movie/movie.js:71
+msgid "Ignored"
+msgstr ""
+
+#: static/app/pages/list/list.js:37
+msgid "Add"
+msgstr ""
+
+#: static/app/pages/list/list.js:38 static/app/pages/wizard/wizard.js:13
+msgid "Director"
+msgstr ""
+
+#: static/app/pages/list/list.js:39 static/app/pages/wizard/wizard.js:14
+msgid "Directors"
+msgstr ""
+
+#: static/app/pages/list/list.js:40
+msgid "Cast"
+msgstr ""
+
+#: static/app/pages/list/list.js:41
+msgid "My score"
+msgstr ""
+
+#: static/app/pages/list/list.js:42
+msgid "Movie"
+msgstr ""
+
+#: static/app/pages/list/list.js:43
+msgid "Year"
+msgstr ""
+
+#: static/app/pages/list/list.js:44
+msgid "Score"
+msgstr ""
+
+#: static/app/pages/list/list.js:45
+msgid "IMDB rating"
+msgstr ""
+
+#: static/app/pages/list/list.js:46
+msgid "IMDB votes"
+msgstr ""
+
+#: static/app/pages/list/list.js:47
+msgid "Date added on"
+msgstr ""
+
+#: static/app/pages/list/list.js:76 static/app/pages/movie/movie.js:34
+msgid "Set score"
+msgstr ""
+
+#: static/app/pages/movie/movie.js:28
+msgid "Add to list"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:12
+msgid "Did you watch this movie?"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:15
+msgid "Starring"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:18
+msgid "Ignore"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:19
+msgid "This movie is suggested to you because"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:20
+msgid "Part of the series you watched"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:21
+msgid "Top 250 IMDB movie"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:50
+msgid "Mark movie as watched"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:60
+msgid "Mark movie as planned to watch"
+msgstr ""
+
+#: static/app/pages/wizard/wizard.js:70
+msgid "Mark movie as ignored"
+msgstr ""

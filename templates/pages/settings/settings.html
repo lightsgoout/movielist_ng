@@ -14,8 +14,8 @@
                 <div class="col-md-3">
                     {% activeurl %}
                     <ul class="nav nav-pills nav-stacked">
-                      <li role="presentation"><a href="{% url 'settings_personal' %}">Settings</a></li>
-                      <li role="presentation"><a href="{% url 'change_password' %}">Password</a></li>
+                      <li role="presentation"><a href="{% url 'settings_personal' %}">{% trans 'Settings' %}</a></li>
+                      <li role="presentation"><a href="{% url 'change_password' %}">{% trans 'Password' %}</a></li>
                     </ul>
                     {% endactiveurl %}
                 </div>
@@ -26,20 +26,4 @@
             </div>
         </div>
     </div>
-
-
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-

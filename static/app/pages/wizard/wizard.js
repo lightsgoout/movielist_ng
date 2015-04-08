@@ -8,6 +8,19 @@ app.factory("Suggestion", ["TastyResource", function(TastyResource) {
     })
 }]);
 
+app.run(function($rootScope) {
+    $rootScope['T_DID_YOU_WATCH_THIS_MOVIE'] = gettext('Did you watch this movie?');
+    $rootScope['T_DIRECTOR'] = gettext('Director');
+    $rootScope['T_DIRECTORS'] = gettext('Directors');
+    $rootScope['T_STARRING'] = gettext('Starring');
+    $rootScope['T_WATCHED'] = gettext('Watched');
+    $rootScope['T_PLAN_TO_WATCH'] = gettext('Plan to watch');
+    $rootScope['T_IGNORE'] = gettext('Ignore');
+    $rootScope['T_THIS_MOVIE_IS_SUGGESTED_TO_YOU_BECAUSE'] = gettext('This movie is suggested to you because');
+    $rootScope['T_PART_OF_THE_SERIES_YOU_WATCHED'] = gettext('Part of the series you watched');
+    $rootScope['T_TOP_250_IMDB_MOVIE'] = gettext('Top 250 IMDB movie');
+});
+
 app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", "hotkeys", function($scope, SuggestionLoader, $http, hotkeys) {
 
     $scope.init = function() {
@@ -29,10 +42,12 @@ app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", "hotk
         }
     };
 
+    $scope.gettext = gettext;
+
     hotkeys.bindTo($scope)
         .add({
           combo: 'w w',
-          description: 'Mark movie as watched',
+          description: gettext('Mark movie as watched'),
           callback: function() {
               var current_movie = $scope.suggestionLoader.suggestions[0];
               if (current_movie) {
@@ -42,7 +57,7 @@ app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", "hotk
         })
         .add({
           combo: 'p p',
-          description: 'Mark movie as planned to watch',
+          description: gettext('Mark movie as planned to watch'),
           callback: function() {
               var current_movie = $scope.suggestionLoader.suggestions[0];
               if (current_movie) {
@@ -52,7 +67,7 @@ app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", "hotk
         })
         .add({
           combo: 'space',
-          description: 'Mark movie as ignored',
+          description: gettext('Mark movie as ignored'),
           callback: function() {
               var current_movie = $scope.suggestionLoader.suggestions[0];
               if (current_movie) {

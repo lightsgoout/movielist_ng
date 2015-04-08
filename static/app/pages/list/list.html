@@ -10,20 +10,20 @@
                 <div class="media-body">
                     <div>
                         <a href="{{ user_to_movie.movie.page_url }}"><h4 class="media-heading" style="display: inline-block;"><span ng-class="{'mark': loader.stringMatched(user_to_movie.movie.title)}">{{ user_to_movie.movie.title }}</span></h4></a>
-                        <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">Watched</span>
-                        <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">Plan to watch</span>
-                        <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">Ignored</span>
+                        <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">{{ T_WATCHED }}</span>
+                        <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TOWATCH }}</span>
+                        <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">{{ T_IGNORED }}</span>
                         <div style="display: inline-block; margin-left: 5px;" ng-show="!user_to_movie.my_status">
-                            <div class="btn-group" style="margin-bottom: 5px;">
+                            <div class="btn-group">
                                 <button type="button"
                                         class="btn btn-default dropdown-toggle btn-xs"
                                         data-toggle="dropdown"
                                         aria-expanded="false">
-                                    <i class="fa fa-plus"></i> Add <span class="caret"></span>
+                                    <i class="fa fa-plus"></i> {{ T_ADD }} <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'W')">Watched</a></li>
-                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'P')">Plan to watch</a>
+                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'W')">{{ T_WATCHED }}</a></li>
+                                    <li><a href="" ng-click="addMovie(user_to_movie.movie.id, 'P')">{{ T_PLAN_TO_WATCH }}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -37,15 +37,15 @@
                     </div>
                     <div>
                         <span ng-switch="user_to_movie.movie.directors.length">
-                            <span ng-switch-when="1">Director:</span>
-                            <span ng-switch-default>Directors:</span>
+                            <span ng-switch-when="1">{{ T_DIRECTOR }}:</span>
+                            <span ng-switch-default>{{ T_DIRECTORS }}:</span>
                         </span>
                         <span ng-repeat="person in user_to_movie.movie.directors | orderBy:'name'">
                             <a href="{{ person.page_url }}"><span ng-class="{'mark': loader.stringMatched(person.name)}">{{ person.name }}</span></a><span ng-show="!$last">, </span>
                         </span>
                     </div>
                     <div>
-                        Cast:
+                        {{ T_CAST }}:
                         <span ng-repeat="person in user_to_movie.movie.cast | orderBy:'-sort_power' | limitTo:loader.cast_limit_to">
                             <a href="{{ person.page_url }}"><span ng-class="{'mark': loader.stringMatched(person.name)}">{{ person.name }}</span></a><span ng-show="!$last">, </span>
                         </span>
@@ -74,7 +74,7 @@
                     </div>
                     <div ng-show="!editable">
                         <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead" title="IMDB: {{ user_to_movie.movie.rating_imdb }}, RT: {{ user_to_movie.movie.rating_tomatoes }}%">{{ user_to_movie.score }}</span>
-                        <span style="color: #555; font-size:22pt;" class="ng-scope" ng-show="user_to_movie.score > 0 && user_to_movie.my_score > 0" title="My score">({{ user_to_movie.my_score }})</span>
+                        <span style="color: #555; font-size:22pt;" class="ng-scope" ng-show="user_to_movie.score > 0 && user_to_movie.my_score > 0" title="{{ T_MY_SCORE }}">({{ user_to_movie.my_score }})</span>
                     </div>
                 </div>
             </div>

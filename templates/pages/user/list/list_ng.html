@@ -29,13 +29,13 @@
                 <div class="row" ng-show="loader.user_to_movies.length || loader.query">
                     <div class="col-md-4">
                         <ul class="nav nav-pills nav-justified mode-selector" style="display: inline-block; margin-top: 20px;">
-                          <li role="presentation" ng-class="{active:isActive('/')}"><a href="#/">Standard mode</a></li>
-                          <li role="presentation" ng-class="{active:isActive('/table')}"><a href="#/table"><i class="fa fa-table"></i> As table</a></li>
+                          <li role="presentation" ng-class="{active:isActive('/')}"><a href="#/">{% trans 'Standard mode' %}</a></li>
+                          <li role="presentation" ng-class="{active:isActive('/table')}"><a href="#/table"><i class="fa fa-table"></i> {% trans 'As table' %}</a></li>
                         </ul>
                     </div>
                     <div class="col-md-8">
                         <div style="margin-top: 24px;">
-                            <input type="text" class="form-control search-query" placeholder="Filter" ng-model="query" ng-change="setFilter()" ng-model-options="{ debounce: 750 }" style="width: 255px; display: inline-block;">
+                            <input type="text" class="form-control search-query" placeholder="{% trans 'Filter' %}" ng-model="query" ng-change="setFilter()" ng-model-options="{ debounce: 750 }" style="width: 255px; display: inline-block;">
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="jumbotron col-md-4 animate-show text-center" style="margin: 0 auto; width: 50%; float: none; margin-bottom: 50px; margin-top: 50px;">
                         <h2>{% trans 'The list is empty' %}</h2>
                         <p>...</p>
-                        <p><a class="btn btn-primary btn-lg" href="{% url 'wizard' %}" role="button"><i class="fa fa-plus"></i> Add movies</a></p>
+                        <p><a class="btn btn-primary btn-lg" href="{% url 'wizard' %}" role="button"><i class="fa fa-plus"></i> {% trans 'Add movies' %}</a></p>
                     </div>
                 </div>
                 <div ng-view></div>

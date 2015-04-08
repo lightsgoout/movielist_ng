@@ -28,8 +28,23 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider) {
     .otherwise({redirectTo: '/'});
 }]);
 
-app.run(function(editableOptions) {
-  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+app.run(function($rootScope, editableOptions) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+
+    $rootScope['T_WATCHED'] = gettext('Watched');
+    $rootScope['T_PLAN_TO_WATCH'] = gettext('Plan to watch');
+    $rootScope['T_IGNORED'] = gettext('Ignored');
+    $rootScope['T_ADD'] = gettext('Add');
+    $rootScope['T_DIRECTOR'] = gettext('Director');
+    $rootScope['T_DIRECTORS'] = gettext('Directors');
+    $rootScope['T_CAST'] = gettext('Cast');
+    $rootScope['T_MY_SCORE'] = gettext('My score');
+    $rootScope['T_MOVIE'] = gettext('Movie');
+    $rootScope['T_YEAR'] = gettext('Year');
+    $rootScope['T_SCORE'] = gettext('Score');
+    $rootScope['T_IMDB_RATING'] = gettext('IMDB rating');
+    $rootScope['T_IMDB_VOTES'] = gettext('IMDB votes');
+    $rootScope['T_DATE_ADDED_ON'] = gettext('Date added on');
 });
 
 
@@ -58,7 +73,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
     $scope.showScore = function() {
         //var selected = $filter('filter')($scope.SCORE_CHOICES, $scope.user_to_movie.score);
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
-        return $scope.user_to_movie.score || 'Set score';
+        return $scope.user_to_movie.score || gettext('Set score');
     };
 }]);
 

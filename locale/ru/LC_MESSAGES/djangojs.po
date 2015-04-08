@@ -1,0 +1,128 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-08 04:54+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: static/app/pages/list/list.js:34 static/app/pages/movie/movie.js:63
+#: static/app/pages/wizard/wizard.js:16
+msgid "Watched"
+msgstr "Смотрел"
+
+#: static/app/pages/list/list.js:35 static/app/pages/movie/movie.js:67
+#: static/app/pages/wizard/wizard.js:17
+msgid "Plan to watch"
+msgstr "Собираюсь смотреть"
+
+#: static/app/pages/list/list.js:36 static/app/pages/movie/movie.js:71
+msgid "Ignored"
+msgstr "Игнор"
+
+#: static/app/pages/list/list.js:37
+msgid "Add"
+msgstr "Добавить"
+
+#: static/app/pages/list/list.js:38 static/app/pages/wizard/wizard.js:13
+msgid "Director"
+msgstr "Режиссер"
+
+#: static/app/pages/list/list.js:39 static/app/pages/wizard/wizard.js:14
+msgid "Directors"
+msgstr "Режиссеры"
+
+#: static/app/pages/list/list.js:40
+msgid "Cast"
+msgstr "Актеры"
+
+#: static/app/pages/list/list.js:41
+msgid "My score"
+msgstr "Моя оценка"
+
+#: static/app/pages/list/list.js:42
+msgid "Movie"
+msgstr "Фильм"
+
+#: static/app/pages/list/list.js:43
+msgid "Year"
+msgstr "Год"
+
+#: static/app/pages/list/list.js:44
+msgid "Score"
+msgstr "Оценка"
+
+#: static/app/pages/list/list.js:45
+msgid "IMDB rating"
+msgstr "Рейтинг IMDB"
+
+#: static/app/pages/list/list.js:46
+msgid "IMDB votes"
+msgstr "Голоса IMDB"
+
+#: static/app/pages/list/list.js:47
+msgid "Date added on"
+msgstr "Добавлен"
+
+#: static/app/pages/list/list.js:76 static/app/pages/movie/movie.js:34
+msgid "Set score"
+msgstr "Поставить оценку"
+
+#: static/app/pages/movie/movie.js:28
+msgid "Add to list"
+msgstr "Добавить в список"
+
+#: static/app/pages/wizard/wizard.js:12
+msgid "Did you watch this movie?"
+msgstr "Вы смотрели этот фильм?"
+
+#: static/app/pages/wizard/wizard.js:15
+msgid "Starring"
+msgstr "Актеры"
+
+#: static/app/pages/wizard/wizard.js:18
+msgid "Ignore"
+msgstr "Игнор"
+
+#: static/app/pages/wizard/wizard.js:19
+msgid "This movie is suggested to you because"
+msgstr "Этот фильм предложен вам потому-что"
+
+#: static/app/pages/wizard/wizard.js:20
+msgid "Part of the series you watched"
+msgstr "Часть франшизы, которую вы смотрели "
+
+#: static/app/pages/wizard/wizard.js:21
+msgid "Top 250 IMDB movie"
+msgstr "IMDB Топ-250 фильм"
+
+#: static/app/pages/wizard/wizard.js:50
+msgid "Mark movie as watched"
+msgstr "Добавить в список просмотренного"
+
+#: static/app/pages/wizard/wizard.js:60
+msgid "Mark movie as planned to watch"
+msgstr "Добавить в список планируемого к просмотру"
+
+#: static/app/pages/wizard/wizard.js:70
+msgid "Mark movie as ignored"
+msgstr "Пропустить фильм"
+
+#~ msgid "Following"
+#~ msgstr "Фолловинги"
+
+#~ msgid "Follow"
+#~ msgstr "Зафолловить"

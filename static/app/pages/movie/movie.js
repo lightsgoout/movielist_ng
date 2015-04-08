@@ -25,13 +25,13 @@ app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($
         } else {
             status_text = null;
         }
-        return status_text || 'Add to list';
+        return status_text || gettext('Add to list');
     };
 
     $scope.showScore = function() {
         //var selected = $filter('filter')($scope.SCORE_CHOICES, $scope.user_to_movie.score);
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
-        return $scope.user_to_movie.score || 'Set score';
+        return $scope.user_to_movie.score || gettext('Set score');
     };
 
     $scope.save = function() {
@@ -60,15 +60,15 @@ app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($
         $scope.STATUSES = [
             {
                 "id": "W",
-                "text": "Watched"
+                "text": gettext("Watched")
             },
             {
                 "id": "P",
-                "text": "Plan to watch"
+                "text": gettext("Plan to watch")
             },
             {
                 "id": "I",
-                "text": "Ignored"
+                "text": gettext("Ignored")
             }
         ];
 

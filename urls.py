@@ -6,6 +6,11 @@ from django.contrib import admin
 # from api import urls as api_urls
 admin.autodiscover()
 
+# js_info_dict = {
+#     'domain': 'djangojs',
+#     'packages': ('app',),
+# }
+
 urlpatterns = patterns('',
     url(r'^$', 'movies.views.index'),
     url(r'', include('social_auth.urls')),
@@ -17,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('accounts.urls')),
     url(r'^wizard/$', 'movies.views.wizard', name='wizard'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    # url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 )

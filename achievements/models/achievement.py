@@ -208,3 +208,13 @@ def unlock_movie_score_achievements(user, movie, score, **kwargs):
         if is_achievement_satisfied(movie_achievement, user, movie, score):
             user.add_achievement(movie_achievement)
 
+
+@receiver(signals.user_changed_score)
+@feature_framework.is_enabled(features.ACHIEVEMENTS)
+def recheck_movie_score_achievements(user, movie, new_score, old_score, **kwargs):
+    achievements = user.get_achievements(
+        Q(condition_movie=movie)
+    )
+    for achievement in achievements:
+        if not is_achievement_satisfied(achievement, user, movie, new_score):
+            user.remove_achievement(achievement)

@@ -1,0 +1,7 @@
+0. rm -Rf ./static/jsi18n
+1. set trans tags and gettext in js
+2. ./manage.py makemessages -a
+3. ./manage.py makemessages -a -d djangojs
+4. ... translate po files
+5. ./manage.py compilemessages
+6. ./manage.py compilejsi18n

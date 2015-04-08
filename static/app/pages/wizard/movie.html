@@ -1,6 +1,6 @@
 <div class="col-md-3">
     <div class="movie-question text-center" style="position: absolute; left: 30px; top: 300px;">
-        <p class="lead">Did you watch this movie?</p>
+        <p class="lead">{{ T_DID_YOU_WATCH_THIS_MOVIE }}</p>
     </div>
 </div>
 <div class="col-md-6 text-center">
@@ -20,15 +20,15 @@
                 </div>
                 <div class="movie-director movie-info-entry">
                     <span ng-switch="movie.directors.length">
-                        <span ng-switch-when="1">Director:</span>
-                        <span ng-switch-default>Directors:</span>
+                        <span ng-switch-when="1">{{ T_DIRECTOR }}:</span>
+                        <span ng-switch-default>{{ T_DIRECTORS }}:</span>
                     </span>
                     <span ng-repeat="person in movie.directors | orderBy:'name'">
                         <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
                     </span>
                 </div>
                 <div class="movie-actors movie-info-entry">
-                    Starring:
+                    {{ T_STARRING }}:
                     <span ng-repeat="person in movie.cast | orderBy:'-sort_power' | limitTo:4 ">
                         <a href="{{ person.page_url }}">{{ person.name }}</a><span ng-show="!$last">, </span>
                     </span>
@@ -38,25 +38,25 @@
                 <a class="btn btn-success add-to-list add-to-watched"
                    ng-click="nextMovie(movie.id, 'W');"
                    href="#">
-                    <i class="glyphicon glyphicon-plus"></i> Watched</a>
+                    <i class="glyphicon glyphicon-plus"></i> {{ T_WATCHED }}</a>
                 <a class="btn add-to-list add-to-ptw"
                    ng-click="nextMovie(movie.id, 'P');"
                    href="#">
-                    <i class="glyphicon glyphicon-plus"></i> Plan to watch</a>
+                    <i class="glyphicon glyphicon-plus"></i> {{ T_PLAN_TO_WATCH }}</a>
                 <a class="btn btn-link add-to-list add-to-ignored"
                    ng-click="nextMovie(movie.id, 'I');"
-                   href="#">Ignore</a>
+                   href="#">{{ T_IGNORE }}</a>
             </div>
         </div>
     </div>
 </div>
 <div class="col-md-3">
     <div class="movie-question text-center" style="position: absolute; left: 0px; top: 200px;">
-        <p class="text-muted lead">This movie is suggested to you because:</p>
+        <p class="text-muted lead">{{ T_THIS_MOVIE_IS_SUGGESTED_TO_YOU_BECAUSE }}:</p>
         <p class="lead">
             <span ng-switch="movie.suggestion_factor">
-                <span ng-switch-when="IMDB_TOP">Top 250 IMDB movie</span>
-                <span ng-switch-when="SAME_SERIES">Part of the series you watched</span>
+                <span ng-switch-when="IMDB_TOP">{{ T_TOP_250_IMDB_MOVIE }}</span>
+                <span ng-switch-when="SAME_SERIES">{{ T_PART_OF_THE_SERIES_YOU_WATCHED }}</span>
             </span>
         </p>
     </div>

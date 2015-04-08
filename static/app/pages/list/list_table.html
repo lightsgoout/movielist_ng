@@ -5,38 +5,38 @@
                 <tr>
                     <th>
                       <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
-                      Movie <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      {{ T_MOVIE }} <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th>
                       <a ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
-                        Year <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                        {{ T_YEAR }} <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
 
                     <th ng-show="loader.status == 'W'">
                       <a ng-click="orderByField='score'; reverseSort = !reverseSort">
-                      Score <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      {{ T_SCORE }} <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th ng-show="loader.status == 'W' && !editable">
                       <a ng-click="orderByField='my_score'; reverseSort = !reverseSort">
-                      My score <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      {{ T_MY_SCORE }} <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th>
                       <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
-                      IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      {{ T_IMDB_RATING }} <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th>
                       <a ng-click="orderByField='movie.votes_imdb'; reverseSort = !reverseSort">
-                      IMDB votes <span ng-show="orderByField == 'movie.votes_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      {{ T_IMDB_VOTES }} <span ng-show="orderByField == 'movie.votes_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th>
                       <a ng-click="orderByField='created_at'; reverseSort = !reverseSort">
-                      Date added on <span ng-show="orderByField == 'created_at'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+                      {{ T_DATE_ADDED_ON }} <span ng-show="orderByField == 'created_at'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                 </tr>
@@ -58,11 +58,11 @@
                                 </span>
                             </a>
                         </div>
-                        <div ng-show="!editable">
+                        <div ng-show="!editable" class="text-center">
                             <strong>{{ user_to_movie.score }}</strong>
                         </div>
                     </td>
-                    <td ng-show="loader.status == 'W' && !editable">
+                    <td ng-show="loader.status == 'W' && !editable" class="text-center">
                         {{ user_to_movie.my_score }}
                     </td>
                     <td>{{ user_to_movie.movie.rating_imdb }}</td>

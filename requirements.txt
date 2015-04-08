@@ -20,6 +20,7 @@ django-nose==1.3
 django-registration-redux==1.1
 django-shell-plus==1.1.5
 django-social-auth==0.7.28
+django-statici18n==1.1.2
 django-tastypie==0.12.1
 FormEncode==1.3.0
 freezegun==0.3.1

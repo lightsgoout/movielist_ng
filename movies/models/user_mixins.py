@@ -75,6 +75,10 @@ class UserMoviesMixin(models.Model):
                 user=self,
                 movie=movie
             )
+        except UserToMovie.DoesNotExist:
+            return
+
+        if u2m.score is None:
             u2m.score = score
             with transaction.atomic():
                 u2m.save(update_fields=('score',))
@@ -84,8 +88,24 @@ class UserMoviesMixin(models.Model):
                     movie=movie,
                     score=u2m.score,
                 )
-        except UserToMovie.DoesNotExist:
-            pass
+        else:
+            """
+            User is changing score: should re-test for score-related
+            achievements.
+            """
+            if u2m.score == score:
+                return
+
+            old_score = u2m.score
+            u2m.score = score
+            with transaction.atomic():
+                signals.user_changed_score.send(
+                    sender=self.__class__,
+                    user=self,
+                    movie=movie,
+                    new_score=score,
+                    old_score=old_score,
+                )
 
     def remove_movie(self, movie):
         """

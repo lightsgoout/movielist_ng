@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-10 21:27+0000\n"
+"POT-Creation-Date: 2015-04-07 05:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,89 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: accounts/views.py:23
+#: accounts/views.py:28
 msgid "Account is disabled"
 msgstr "Аккаунт заблокирован"
 
-#: accounts/views.py:25
+#: accounts/views.py:30
 msgid "Invalid login or password"
 msgstr "Неверный логин или пароль"
 
-#: api/v1/views.py:53
-msgid "Movie does not exist"
-msgstr "Фильм не существует"
-
-#: api/v1/views.py:55
-msgid "Movie added"
-msgstr "Фильм добавлен"
-
-#: api/v1/views.py:91
-msgid "No movies"
-msgstr "Нет фильмов"
-
-#: templates/accounts/login.html:48
-msgid "Connect with Facebook"
-msgstr "Зайти через Facebook"
-
-#: templates/accounts/login.html:49
-msgid "Connect with Github"
-msgstr "Зайти через Github"
-
-#: templates/accounts/login.html:50
-msgid "Connect with VK"
-msgstr "Зайти через VK"
-
-#: templates/accounts/login.html:51
-msgid "Connect with Twitter"
-msgstr "Зайти через Twitter"
-
-#: templates/landing.html:6
-msgid "Make your own movie list"
-msgstr "Создай свой список просмотренных фильмов"
-
-#: templates/landing.html:7
-msgid "If your list gets big you could brag about it."
-msgstr "Если список будет большим, ты сможешь им хвастаться."
-
-#: templates/landing.html:8
-msgid "Also achievements."
-msgstr "А еще у нас есть ачивки."
-
-#: templates/list/achievements.html:21
-msgid "List is empty"
-msgstr "Список пуст"
-
-#: templates/list/library_menu.html:4
-msgid "Covers"
-msgstr "Постеры"
-
-#: templates/list/library_menu.html:7
-msgid "Table"
-msgstr "Списком"
-
-#: templates/list/menu.html:4 templates/wizard/movie.html:28
-msgid "Watched"
-msgstr "Просмотренные"
-
-#: templates/list/menu.html:7 templates/wizard/movie.html:29
-msgid "Plan to watch"
-msgstr "Планирую посмотреть"
-
-#: templates/list/menu.html:10
-msgid "Ignored"
-msgstr "Игнорируемые"
-
-#: templates/list/menu.html:13
-msgid "Achievements"
-msgstr "Достижения"
-
-#: templates/list/stats.html:6
-msgid "Total runtime (days)"
-msgstr "Суммарная длительность (дни)"
-
-#: templates/list/stats.html:11
-msgid "Total entries"
-msgstr "Всего фильмов"
+#: templates/_blocks/search.html:6
+msgid "Search"
+msgstr "Поиск"
 
 #: templates/mailings/activation.txt:3
 #, python-format
@@ -126,25 +54,434 @@ msgid ""
 "Activate your movies.musdb.net account - you have %(expiration_days)s days!\n"
 msgstr ""
 
-#: templates/navbar.html:18
-msgid "Signed in as "
-msgstr "Зашел как"
+#: templates/navbar.html:22
+msgid "Login/Register"
+msgstr "Вход/Регистрация"
 
-#: templates/navbar.html:23
-msgid "My list"
-msgstr "Мой список"
-
-#: templates/navbar.html:24
+#: templates/navbar.html:24 templates/pages/wizard/wizard.html:5
 msgid "Add movies to the list"
 msgstr "Добавить фильмы"
 
-#: templates/navbar.html:25
+#: templates/navbar.html:41
+msgid "Home"
+msgstr "Домой"
+
+#: templates/navbar.html:42
+msgid "My list"
+msgstr "Мой список"
+
+#: templates/navbar.html:44 templates/pages/settings/settings.html:6
+#: templates/pages/settings/settings.html:17
+#: templates/pages/settings/settings_personal.html:6
+msgid "Settings"
+msgstr "Настройки"
+
+#: templates/navbar.html:46
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/navbar.html:27
-msgid "Login/Register"
-msgstr "Вход/Регистрация"
+#: templates/pages/dashboard/dashboard.html:5
+msgid "Dashboard"
+msgstr ""
+
+#: templates/pages/landing/landing.html:4
+msgid "Movielist"
+msgstr "Movielist"
+
+#: templates/pages/landing/landing.html:9
+msgid "Make your own movie list"
+msgstr "Создай свой список просмотренных фильмов"
+
+#: templates/pages/landing/landing.html:10
+msgid "If your list gets big you could brag about it."
+msgstr "Если список будет большим, ты сможешь им хвастаться."
+
+#: templates/pages/landing/landing.html:11
+msgid "Also achievements."
+msgstr "А еще у нас есть ачивки."
+
+#: templates/pages/login/login.html:5
+msgid "Login"
+msgstr "Войти"
+
+#: templates/pages/login/login.html:54
+msgid "Connect with Facebook"
+msgstr "Зайти через Facebook"
+
+#: templates/pages/login/login.html:55
+msgid "Connect with Github"
+msgstr "Зайти через Github"
+
+#: templates/pages/login/login.html:56
+msgid "Connect with VK"
+msgstr "Зайти через VK"
+
+#: templates/pages/login/login.html:57
+msgid "Connect with Twitter"
+msgstr "Зайти через Twitter"
+
+#: templates/pages/movie/movie.html:64
+msgid "Movie information"
+msgstr "Информация о фильме"
+
+#: templates/pages/movie/movie.html:66
+msgid "Year"
+msgstr "Год"
+
+#: templates/pages/movie/movie.html:71
+msgid "Series"
+msgstr "Серия"
+
+#: templates/pages/movie/movie.html:77
+msgid "Previous movie"
+msgstr "Предыдущий фильм"
+
+#: templates/pages/movie/movie.html:83
+msgid "Next movie"
+msgstr "Следующий фильм"
+
+#: templates/pages/movie/movie.html:89 templates/pages/person/person.html:41
+#: templates/pages/settings/settings_personal.html:27
+msgid "Country"
+msgstr "Страна"
+
+#: templates/pages/movie/movie.html:99
+#: templates/pages/search/serp_movies.html:56
+msgid "Directors"
+msgstr "Режиссеры"
+
+#: templates/pages/movie/movie.html:101 templates/pages/person/person.html:88
+#: templates/pages/search/serp_movies.html:54
+msgid "Director"
+msgstr "Режиссер"
+
+#: templates/pages/movie/movie.html:115
+msgid "Writers"
+msgstr "Сценаристы"
+
+#: templates/pages/movie/movie.html:117
+msgid "Writer"
+msgstr "Сценарист"
+
+#: templates/pages/movie/movie.html:131
+msgid "Producers"
+msgstr "Продюсеры"
+
+#: templates/pages/movie/movie.html:133
+msgid "Producer"
+msgstr "Продюсер"
+
+#: templates/pages/movie/movie.html:147
+msgid "Composers"
+msgstr "Композиторы"
+
+#: templates/pages/movie/movie.html:149 templates/pages/person/person.html:124
+msgid "Composer"
+msgstr "Композитор"
+
+#: templates/pages/movie/movie.html:162
+msgid "Genre"
+msgstr "Жанр"
+
+#: templates/pages/movie/movie.html:172
+msgid "MPAA rating"
+msgstr "Рейтинг MPAA"
+
+#: templates/pages/movie/movie.html:184
+msgid "Runtime"
+msgstr "Продолжительность"
+
+#: templates/pages/movie/movie.html:196
+msgid "Tagline"
+msgstr "Слоган"
+
+#: templates/pages/movie/movie.html:208
+msgid "Movie ratings"
+msgstr "Рейтинги"
+
+#: templates/pages/movie/movie.html:210
+msgid "IMDB rating"
+msgstr "Рейтинг IMDB"
+
+#: templates/pages/movie/movie.html:211
+msgid "votes"
+msgstr "голосов"
+
+#: templates/pages/movie/movie.html:214
+msgid "Metascore"
+msgstr "Metascore"
+
+#: templates/pages/movie/movie.html:224
+msgid "Rotten Tomatoes"
+msgstr "Rotten Tomatoes"
+
+#: templates/pages/movie/movie.html:236
+msgid "On other sites"
+msgstr "На других сайтах"
+
+#: templates/pages/movie/movie.html:252
+#: templates/pages/search/serp_movies.html:64
+msgid "Cast"
+msgstr "Актеры"
+
+#: templates/pages/person/person.html:35
+msgid "Personal information"
+msgstr "Информация"
+
+#: templates/pages/person/person.html:37
+#: templates/pages/settings/settings_personal.html:50
+msgid "Birth date"
+msgstr "Дата рождения"
+
+#: templates/pages/person/person.html:52
+msgid "Actor"
+msgstr "Актер"
+
+#: templates/pages/search/serp.html:5
+msgid "Search results for"
+msgstr "Результаты поиска &mdash;"
+
+#: templates/pages/search/serp.html:30
+#, python-format
+msgid "Search results for: <mark>%(query)s</mark>"
+msgstr "Результаты поиска &mdash; <mark>%(query)s</mark>"
+
+#: templates/pages/search/serp.html:33
+msgid "Movies"
+msgstr "Фильмы"
+
+#: templates/pages/search/serp.html:35 templates/pages/search/serp.html:44
+msgid "Maximum results limit reached, please narrow down your search"
+msgstr "Показано максимальное количество результатов, уточните свой запрос"
+
+#: templates/pages/search/serp.html:42
+msgid "People"
+msgstr "Люди"
+
+#: templates/pages/search/serp.html:54
+#: templates/pages/user/list/list_ng.html:44
+msgid "No results"
+msgstr "Ничего не найдено"
+
+#: templates/pages/search/serp_movies.html:21
+#: templates/pages/search/serp_movies.html:34
+#: templates/pages/search/serp_movies.html:40
+#: templates/pages/user/list/menu.html:5
+msgid "Watched"
+msgstr "Смотрел"
+
+#: templates/pages/search/serp_movies.html:23
+#: templates/pages/search/serp_movies.html:35
+#: templates/pages/search/serp_movies.html:41
+#: templates/pages/user/list/menu.html:8
+msgid "Plan to watch"
+msgstr "Планирую посмотреть"
+
+#: templates/pages/search/serp_movies.html:31
+msgid "Add"
+msgstr "Добавить"
+
+#: templates/pages/search/serp_people.html:16
+msgid "Age"
+msgstr "Возраст"
+
+#: templates/pages/search/serp_people.html:20
+msgid "Top movies"
+msgstr "Лучшие фильмы"
+
+#: templates/pages/settings/password_change.html:6
+#: templates/pages/settings/password_change.html:45
+msgid "Change password"
+msgstr "Поменять пароль"
+
+#: templates/pages/settings/password_change.html:12
+msgid "Password changed"
+msgstr "Пароль изменен"
+
+#: templates/pages/settings/password_change.html:16
+msgid "Current password"
+msgstr "Текущий пароль"
+
+#: templates/pages/settings/password_change.html:25
+msgid "New password"
+msgstr "Новый пароль"
+
+#: templates/pages/settings/password_change.html:34
+msgid "Confirm new password"
+msgstr "Подтвердите новый пароль"
+
+#: templates/pages/settings/settings.html:18
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/pages/settings/settings_personal.html:12
+msgid "Saved"
+msgstr "Сохранено"
+
+#: templates/pages/settings/settings_personal.html:16
+msgid "Email"
+msgstr "Электронная почта"
+
+#: templates/pages/settings/settings_personal.html:19
+msgid "Email will not be visible to anyone."
+msgstr "Не будет видна никому"
+
+#: templates/pages/settings/settings_personal.html:34
+msgid "Will be visible to everyone, also used for suggestions."
+msgstr "Будет видна всем, может использоваться для рекомендаций"
+
+#: templates/pages/settings/settings_personal.html:39
+msgid "Gender"
+msgstr "Пол"
+
+#: templates/pages/settings/settings_personal.html:42
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: templates/pages/settings/settings_personal.html:43
+#: templates/pages/user/followers/user_list.html:11
+#: templates/pages/user/header.html:16
+msgid "Male"
+msgstr "М"
+
+#: templates/pages/settings/settings_personal.html:44
+#: templates/pages/user/followers/user_list.html:13
+#: templates/pages/user/header.html:18
+msgid "Female"
+msgstr "Ж"
+
+#: templates/pages/settings/settings_personal.html:61
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/pages/user/followers/followers.html:5
+#: templates/pages/user/followers/followers.html:20
+#: templates/pages/user/header.html:27
+msgid "Followers"
+msgstr "Фолловеры"
+
+#: templates/pages/user/followers/followers.html:13
+#: templates/pages/user/list/user_info.html:11
+msgid "Following"
+msgstr "Фолловит"
+
+#: templates/pages/user/followers/user_list.html:21
+msgid "Last watched:"
+msgstr "Последний фильм:"
+
+#: templates/pages/user/followers/user_list.html:23
+msgid "User hasn't added any movies yet"
+msgstr "Пользователь еще не добавил ни одного фильма"
+
+#: templates/pages/user/header.html:24
+msgid "joined on"
+msgstr "присоединился"
+
+#: templates/pages/user/header.html:28
+msgid "Charts"
+msgstr "Статистика"
+
+#: templates/pages/user/header.html:29
+msgid "Favorites"
+msgstr "Избранное"
+
+#: templates/pages/user/list/achievements.html:5
+#: templates/pages/user/list/menu.html:14
+msgid "Achievements"
+msgstr "Достижения"
+
+#: templates/pages/user/list/achievements.html:46
+msgid "List is empty"
+msgstr "Список пуст"
+
+#: templates/pages/user/list/list_ng.html:5
+msgid "Movie list"
+msgstr "Movie list"
+
+#: templates/pages/user/list/list_ng.html:32
+msgid "Standard mode"
+msgstr "Обычный вид"
+
+#: templates/pages/user/list/list_ng.html:33
+msgid "As table"
+msgstr "Таблица"
+
+#: templates/pages/user/list/list_ng.html:38
+msgid "Filter"
+msgstr "Фильтр"
+
+#: templates/pages/user/list/list_ng.html:48
+msgid "The list is empty"
+msgstr "Список пуст"
+
+#: templates/pages/user/list/list_ng.html:50
+#: templates/registration/activation_complete.html:7
+msgid "Add movies"
+msgstr "Добавить фильмы"
+
+#: templates/pages/user/list/menu.html:11
+msgid "Ignored"
+msgstr "Игнорируемые"
+
+#: templates/pages/user/list/stats.html:6
+msgid "Total runtime (days)"
+msgstr "Суммарная длительность (дни)"
+
+#: templates/pages/user/list/stats.html:11
+msgid "Total entries"
+msgstr "Всего фильмов"
+
+#: templates/pages/user/list/user_info.html:8
+msgid "Follow"
+msgstr "Зафолловить"
+
+#: templates/pages/user/list/user_info.html:11
+msgid "Unfollow"
+msgstr "Расфолловить"
+
+#: templates/pages/user/list/user_info.html:23
+msgid "Compatibility"
+msgstr "Совместимость"
+
+#: templates/pages/user/list/user_info.html:23
+msgid "Movies you share include"
+msgstr "Среди фильмов которые вам нравятся"
+
+#: templates/pages/user/list/user_info.html:28
+#, python-format
+msgid ""
+"\n"
+"                        and <a href=\"%(list_comparison_url)s\">"
+"%(shared_movies_remainder)s others</a>\n"
+"                    "
+msgstr ""
+"\n"
+"                        и еще <a href=\"%(list_comparison_url)s\">"
+"%(shared_movies_remainder)s</a>\n"
+"                    "
+
+#: templates/pages/user/list/user_info.html:36
+msgid ""
+"Compatibility unavailable: either one or both of you haven't scored enough "
+"movies"
+msgstr ""
+"Счетчик совместимости недоступен: один из вас не поставил достаточно "
+"положительных оценок"
+
+#: templates/pages/wizard/wizard.html:26
+msgid "Press <kbd><kbd>W</kbd> <kbd>W</kbd></kbd> to mark movie as watched"
+msgstr "Нажмите <kbd><kbd>W</kbd> <kbd>W</kbd></kbd> если смотрели этот фильм"
+
+#: templates/pages/wizard/wizard.html:27
+msgid ""
+"Press <kbd><kbd>P</kbd> <kbd>P</kbd></kbd> to mark movie as planned to watch"
+msgstr ""
+"Нажмите <kbd><kbd>P</kbd> <kbd>P</kbd></kbd> если планируете смотреть этот "
+"фильм"
+
+#: templates/pages/wizard/wizard.html:28
+msgid "Press <kbd>space</kbd> to ignore movie"
+msgstr "Нажмите <kbd>пробел</kbd> чтобы пропустить фильм"
 
 #: templates/registration/activate.html:6
 msgid "Account activated"
@@ -181,10 +518,6 @@ msgid ""
 "Your registration is now complete. You can now add some movies to your list."
 msgstr ""
 
-#: templates/registration/activation_complete.html:7
-msgid "Add movies"
-msgstr ""
-
 #: templates/registration/registration_complete.html:5
 msgid "Check your email"
 msgstr ""
@@ -195,35 +528,17 @@ msgid ""
 "with instructions for activating your account."
 msgstr ""
 
-#: templates/wizard/list.html:10
-msgid "Top by rating"
-msgstr ""
+#~ msgid "No movies"
+#~ msgstr "Нет фильмов"
 
-#: templates/wizard/list.html:11
-msgid "Top by genre"
-msgstr ""
+#~ msgid "Movie does not exist"
+#~ msgstr "Фильм не существует"
 
-#: templates/wizard/list.html:12
-msgid "Top by actors"
-msgstr ""
+#~ msgid "Movie added"
+#~ msgstr "Фильм добавлен"
 
-#: templates/wizard/list.html:13
-msgid "Top by director"
-msgstr ""
+#~ msgid "Covers"
+#~ msgstr "Постеры"
 
-#: templates/wizard/movie.html:15
-msgid "Director"
-msgstr ""
-
-#: templates/wizard/movie.html:21
-msgid "Starring"
-msgstr ""
-
-#: templates/wizard/movie.html:28 templates/wizard/movie.html.py:29
-#: templates/wizard/movie.html:30
-msgid "Working..."
-msgstr ""
-
-#: templates/wizard/movie.html:30
-msgid "Ignore"
-msgstr ""
+#~ msgid "Signed in as "
+#~ msgstr "Зашел как"
