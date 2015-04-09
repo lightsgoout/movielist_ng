@@ -123,6 +123,11 @@ class UserToMovieResource(ModelResource):
                 trailing_slash()),
                 self.wrap_view('add_movie'),
                 name="api_add_movie"),
+            url(r"^(?P<resource_name>%s)/remove_movie%s$" % (
+                self._meta.resource_name,
+                trailing_slash()),
+                self.wrap_view('remove_movie'),
+                name="api_remove_movie"),
             url(r"^(?P<resource_name>%s)/movie_status%s$" % (
                 self._meta.resource_name,
                 trailing_slash()),
@@ -157,6 +162,28 @@ class UserToMovieResource(ModelResource):
 
         result = {
             'id': u2m.id,
+        }
+
+        return self.create_response(request, result)
+
+    def remove_movie(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        self.is_authenticated(request)
+
+        try:
+            raw_json = json.loads(request.body)
+        except ValueError:
+            raise BadRequest('Invalid json')
+
+        try:
+            movie = Movie.objects.get(pk=raw_json.get('movie_id'))
+        except Movie.DoesNotExist:
+            raise Http404('Movie does not exist')
+
+        request.user.remove_movie(movie)
+
+        result = {
+            'ok': True,
         }
 
         return self.create_response(request, result)

@@ -1,6 +1,6 @@
 <section class="col-md-12" infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
     <div ng-repeat="user_to_movie in loader.user_to_movies | orderBy:'-id'" ng-controller="UserToMovieController"  ng-mouseenter="hover(user_to_movie)" ng-mouseleave="hover(user_to_movie)" >
-        <div class="media">
+        <div class="media" ng-show="!user_to_movie._deleted">
             <div class="pull-left" style="width: 65%;">
                 <div class="media-left">
                     <a href="{{ user_to_movie.movie.page_url }}">
@@ -76,6 +76,17 @@
                         <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead" title="IMDB: {{ user_to_movie.movie.rating_imdb }}, RT: {{ user_to_movie.movie.rating_tomatoes }}%">{{ user_to_movie.score }}</span>
                         <span style="color: #555; font-size:22pt;" class="ng-scope" ng-show="user_to_movie.score > 0 && user_to_movie.my_score > 0" title="{{ T_MY_SCORE }}">({{ user_to_movie.my_score }})</span>
                     </div>
+                </div>
+            </div>
+            <div class="pull-right" ng-show="user_to_movie._hovered && editable" style="margin-top: 35px; margin-right: 100px;">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                    {{ T_ACTIONS }}
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="removeMovie(user_to_movie.movie.id)"><i class="fa fa-trash"></i> {{ T_DELETE }}</a></li>
+                  </ul>
                 </div>
             </div>
         </div>

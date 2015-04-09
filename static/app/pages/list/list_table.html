@@ -3,52 +3,55 @@
         <table class="table table-striped table-condensed table-hover">
             <thead>
                 <tr>
-                    <th class="text-center">
+                    <th ng-show="!editable">
                       <a ng-click="orderByField='my_status'; reverseSort = !reverseSort">
                       {{ T_MY_STATUS }} <span ng-show="orderByField == 'my_status'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th class="text-center">
+                    <th style="width: 350px;">
                       <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
                       {{ T_MOVIE }} <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th class="text-center">
+                    <th>
                       <a ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
                         {{ T_YEAR }} <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
 
-                    <th class="text-center" ng-show="loader.status == 'W'">
+                    <th ng-show="loader.status == 'W'">
                       <a ng-click="orderByField='score'; reverseSort = !reverseSort">
                       {{ T_SCORE }} <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th class="text-center" ng-show="loader.status == 'W' && !editable">
+                    <th ng-show="loader.status == 'W' && !editable">
                       <a ng-click="orderByField='my_score'; reverseSort = !reverseSort">
                       {{ T_MY_SCORE }} <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th class="text-center">
+                    <th>
                       <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
                       {{ T_IMDB_RATING }} <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th class="text-center">
+                    <th>
                       <a ng-click="orderByField='movie.votes_imdb'; reverseSort = !reverseSort">
                       {{ T_IMDB_VOTES }} <span ng-show="orderByField == 'movie.votes_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
-                    <th class="text-center">
+                    <th>
                       <a ng-click="orderByField='created_at'; reverseSort = !reverseSort">
                       {{ T_DATE_ADDED_ON }} <span ng-show="orderByField == 'created_at'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
+                    <th ng-show="editable" style="width:100px;">
+                        {{ T_ACTIONS }}
+                    </th>
                 </tr>
             </thead>
             <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-                <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController">
-                    <td class="text-right">
+                <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController" ng-mouseenter="hover(user_to_movie)" ng-mouseleave="hover(user_to_movie)" ng-show="!user_to_movie._deleted">
+                    <td class="text-right" ng-show="!editable">
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">{{ T_WATCHED }}</span>
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TO_WATCH }}</span>
                         <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">{{ T_IGNORED }}</span>
@@ -75,6 +78,7 @@
                     <td ng-show="loader.status == 'W'">
                         <div ng-show="editable">
                             <a href="#"
+                               class="score-wrapper"
                                editable-select="user_to_movie.score"
                                e-name="score"
                                buttons="no"
@@ -95,6 +99,17 @@
                     <td>{{ user_to_movie.movie.rating_imdb }}</td>
                     <td>{{ user_to_movie.movie.votes_imdb }}</td>
                     <td>{{ user_to_movie.created_at|date:'d/M/yy' }}</td>
+                    <td ng-show="editable">
+                        <div class="dropdown" ng-show="user_to_movie._hovered && editable">
+                          <button class="btn btn-default dropdown-toggle btn-xs table-actions" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            {{ T_ACTIONS }}
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="removeMovie(user_to_movie.movie.id)"><i class="fa fa-trash"></i> {{ T_DELETE }}</a></li>
+                          </ul>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

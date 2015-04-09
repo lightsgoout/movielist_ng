@@ -111,10 +111,13 @@ class UserMoviesMixin(models.Model):
         """
         @type movie movies.models.Movie
         """
-        u2m = UserToMovie.objects.get(
-            user=self,
-            movie=movie
-        )
+        try:
+            u2m = UserToMovie.objects.get(
+                user=self,
+                movie=movie
+            )
+        except UserToMovie.DoesNotExist:
+            return
         with transaction.atomic():
             u2m.delete()
             signals.user_removed_movie.send(

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-08 05:36+0000\n"
+"POT-Creation-Date: 2015-04-09 09:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,15 @@ msgstr ""
 msgid "Date added on"
 msgstr ""
 
-#: static/app/pages/list/list.js:77 static/app/pages/movie/movie.js:34
+#: static/app/pages/list/list.js:49
+msgid "Actions"
+msgstr ""
+
+#: static/app/pages/list/list.js:50
+msgid "Delete"
+msgstr ""
+
+#: static/app/pages/list/list.js:89 static/app/pages/movie/movie.js:34
 msgid "Set score"
 msgstr ""
 

@@ -46,6 +46,8 @@ app.run(function($rootScope, editableOptions) {
     $rootScope['T_IMDB_RATING'] = gettext('IMDB rating');
     $rootScope['T_IMDB_VOTES'] = gettext('IMDB votes');
     $rootScope['T_DATE_ADDED_ON'] = gettext('Date added on');
+    $rootScope['T_ACTIONS'] = gettext('Actions');
+    $rootScope['T_DELETE'] = gettext('Delete');
 });
 
 
@@ -71,10 +73,25 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
         });
     };
 
+    $scope.removeMovie = function(movie_id, index) {
+        $http.post(
+        '/api/v2/user_to_movie/remove_movie/',
+        {
+            movie_id: movie_id
+        }).success(function(data, st, headers, config) {
+            $scope.user_to_movie._deleted = true;
+        });
+    };
+
     $scope.showScore = function() {
         //var selected = $filter('filter')($scope.SCORE_CHOICES, $scope.user_to_movie.score);
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
         return $scope.user_to_movie.score || gettext('Set score');
+    };
+
+    $scope.hover = function(user_to_movie) {
+        // Shows/hides the delete button on hover
+        return user_to_movie._hovered = ! user_to_movie._hovered;
     };
 }]);
 

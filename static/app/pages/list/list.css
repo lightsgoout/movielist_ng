@@ -1,3 +1,28 @@
 div.loader {
     font-size: 18pt;
 }
+
+a.score-wrapper {
+    text-decoration: none !important;
+}
+
+/*
+    DROPDOWN OVERFLOW FIX
+    FROM https://github.com/twbs/bootstrap/issues/6381
+*/
+.media-body,
+.media {
+    overflow: visible; /*overflow was set to hidden before */
+}
+
+.media-body:after,
+.media:after {
+    clear: both;
+    content: ' ';
+    display: block;
+    height: 0;
+}
+
+.table-actions {
+    line-height: 0.8;
+}
