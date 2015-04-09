@@ -35,11 +35,10 @@ def show_list(request, username, status):
     user = get_object_or_404(MovielistUser, username=username)
     if request.user.is_authenticated():
         compatibility_power, shared_movies = request.user.get_compatibility(user)
-        shared_movies = Movie.objects.filter(pk__in=shared_movies)
+        total_shared_counter = Movie.objects.filter(pk__in=shared_movies).count()
         shared_movies = Movie.objects.filter(
             pk__in=shared_movies
         ).order_by('id')[:constants.COMPATIBILITY_SHARED_MOVIES_COUNT]
-        total_shared_counter = len(shared_movies)
 
         if request.user != user:
             following = request.user.is_following(user)

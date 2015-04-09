@@ -35,13 +35,9 @@
                 </small>
 
             {% else %}
-                <div class="alert alert-warning">
-                    <p>&nbsp;<i class="fa fa-exclamation-triangle"></i> {% trans "Compatibility unavailable: either one or both of you haven't scored enough movies" %}</p>
-                </div>
-
+                    <p>&nbsp;<i class="fa fa-exclamation-triangle"></i> {% trans "<strong>Compatibility unavailable</strong>: either one or both of you haven't scored enough movies" %}. <a href="{{ list_comparison_url }}">{% trans 'Compare your lists' %}</a></p>
             {% endif %}
         </div>
-
     </div>
     <hr>
 {% endif %}
