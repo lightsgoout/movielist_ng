@@ -36,10 +36,13 @@ class UserMoviesMixin(models.Model):
             user=self,
             status=constants.WATCHED
         ).aggregate(avg_score=models.Avg('score'))['avg_score']
-        return round(avg_score, 1)
+        return round(avg_score, 1) if avg_score else None
 
     def get_movies(self, status=constants.WATCHED, **kwargs):
         return self.movies.filter(usertomovie__status=status, **kwargs)
+
+    def get_total_watched_movies(self):
+        return self.get_movies(status=constants.WATCHED).count()
 
     def add_movie(self, movie, status=constants.WATCHED, score=None):
         """
@@ -182,3 +185,10 @@ class UserMoviesMixin(models.Model):
             values_list('status').\
             annotate(Count('status'))
         return dict(values)
+
+    def get_score_counters(self):
+        values = UserToMovie.objects.\
+            filter(user=self, score__gt=0).\
+            values_list('score').\
+            annotate(Count('score'))
+        return {str(k): v for k, v in values}

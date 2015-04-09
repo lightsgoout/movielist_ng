@@ -190,7 +190,17 @@ def wizard(request, mode=M_IMDB_TOP):
 
 
 def compare_list(request, first_username, second_username):
-    raise NotImplementedError
+    first_user = get_object_or_404(MovielistUser, username=first_username)
+    second_user = get_object_or_404(MovielistUser, username=second_username)
+
+    return render(
+        request,
+        'pages/user/compare/compare.html',
+        {
+            'first_user': first_user,
+            'second_user': second_user,
+        }
+    )
 
 
 def search(request):

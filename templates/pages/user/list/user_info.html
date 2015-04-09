@@ -12,8 +12,8 @@
             </a>
         </div>
         <div class="col-xs-6">
+            {% url 'list_comparison' request.user.username user.username as list_comparison_url %}
             {% if compatibility_power >= 0 %}
-                {% url 'list_comparison' request.user.username user.username as list_comparison_url %}
                 <div class="progress" style="margin-bottom: 0;">
                   <div class="progress-bar" role="progressbar" aria-valuenow="{{ compatibility_power }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ compatibility_power }}%; min-width: 2em;">
                       {{ compatibility_power }}%

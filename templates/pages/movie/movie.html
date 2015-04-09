@@ -172,11 +172,7 @@
                                     {% trans 'MPAA rating' %}
                                 </th>
                                 <td>
-                                    {% if movie.rated %}
-                                        {{ movie.rated }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
+                                    {{ movie.rated|default:'-' }}
                                 </td>
                             </tr>
                             <tr>
@@ -184,11 +180,7 @@
                                     {% trans 'Runtime' %}
                                 </th>
                                 <td>
-                                    {% if movie.runtime %}
-                                        {{ movie.runtime }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
+                                    {{ movie.runtime|default:'-' }}
                                 </td>
                             </tr>
                             <tr>
@@ -196,11 +188,7 @@
                                     {% trans 'Tagline' %}
                                 </th>
                                 <td>
-                                    {% if movie.tagline %}
-                                        {{ movie.tagline }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
+                                    {{ movie.tagline|default:'-' }}
                                 </td>
                             </tr>
                         </table>
@@ -213,21 +201,13 @@
                             <tr>
                                 <th>{% trans 'Metascore' %}</th>
                                 <td>
-                                    {% if movie.rating_metacritic %}
-                                    {{ movie.rating_metacritic }}
-                                    {% else %}
-                                    -
-                                    {% endif %}
+                                    {{ movie.rating_metacritic|default:'-' }}
                                 </td>
                             </tr>
                             <tr>
                                 <th>{% trans 'Rotten Tomatoes' %}</th>
                                 <td>
-                                    {% if movie.rating_tomatoes %}
-                                    {{ movie.rating_tomatoes }}%
-                                    {% else %}
-                                    -
-                                    {% endif %}
+                                    {{ movie.rating_tomatoes|default:'-' }}%
                                 </td>
                             </tr>
                         </table>

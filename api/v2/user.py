@@ -57,6 +57,11 @@ class UserResource(ModelResource):
                 trailing_slash()),
                 self.wrap_view('unfollow_user'),
                 name="api_unfollow_user"),
+            url(r"^(?P<resource_name>%s)/stats%s$" % (
+                self._meta.resource_name,
+                trailing_slash()),
+                self.wrap_view('stats'),
+                name="api_user_stats"),
         ]
 
     def follow_user(self, request, **kwargs):
@@ -100,5 +105,17 @@ class UserResource(ModelResource):
         result = {
             'ok': True,
         }
+
+        return self.create_response(request, result)
+
+    def stats(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+
+        try:
+            user = MovielistUser.objects.get(username=request.GET.get('username'))
+        except MovielistUser.DoesNotExist:
+            raise Http404('User does not exist')
+
+        result = user.get_score_counters()
 
         return self.create_response(request, result)

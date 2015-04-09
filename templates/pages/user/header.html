@@ -1,28 +1,13 @@
 {% load i18n %}
-<div class="row" style="margin: 0; margin-left: 15px;">
-    <h1 style="display: table-cell; vertical-align: middle;  font-size: 28px;">
+<div class="row" style="margin: 0; margin-left: 15px; margin-top: 15px;">
+    <h1 style="display: table-cell; font-size: 28px;">
         {% if '/list/' in request.path %}
             {{ user.username }}
         {% else %}
             <a href="{% url 'list_watched' user.username %}">{{ user.username }}</a>
         {% endif %}
     </h1>
-    <p class="text-muted" style="font-size: 10pt; margin-top: 0; display: table-cell; vertical-align: middle; padding-left: 20px;">
-        {% if user.age %}
-            {{ user.age }},
-        {% endif %}
-        {% if user.gender != None %}
-            {% if user.gender %}
-                {% trans 'Male' %},
-            {% else %}
-                {% trans 'Female' %},
-            {% endif %}
-        {% endif %}
-        {% if user.country  %}
-            {{ user.country.name }},
-        {% endif %}
-        {% trans 'joined on' %} {{ user.date_joined }}
-    </p>
+    {% include 'pages/user/personal_info.html' with user=user %}
     <ul class="nav nav-pills" style="display: table-cell; vertical-align: middle; padding-left: 10px;">
         <li class="{% if '/followers/' in request.path %} active {% endif %}"><a href="{% url 'followers' user.username %}">{% trans 'Followers' %}</a></li>
         <li><a href="#">{% trans 'Charts' %}</a></li>

@@ -1,0 +1,17 @@
+{% load i18n %}
+<p class="text-muted" style="font-size: 10pt; margin-top: 0; display: table-cell; vertical-align: middle; padding-left: 20px;">
+    {% if user.age %}
+        {{ user.age }},
+    {% endif %}
+    {% if user.gender != None %}
+        {% if user.gender %}
+            {% trans 'Male' %},
+        {% else %}
+            {% trans 'Female' %},
+        {% endif %}
+    {% endif %}
+    {% if user.country  %}
+        {{ user.country.name }},
+    {% endif %}
+    {% trans 'joined on' %} {{ user.date_joined }}
+</p>
