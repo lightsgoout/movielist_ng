@@ -62,6 +62,11 @@ class UserResource(ModelResource):
                 trailing_slash()),
                 self.wrap_view('stats'),
                 name="api_user_stats"),
+            url(r"^(?P<resource_name>%s)/stats_comparison%s$" % (
+                self._meta.resource_name,
+                trailing_slash()),
+                self.wrap_view('stats_comparison'),
+                name="api_user_stats_comparison"),
         ]
 
     def follow_user(self, request, **kwargs):
@@ -119,3 +124,29 @@ class UserResource(ModelResource):
         result = user.get_score_counters()
 
         return self.create_response(request, result)
+
+    def stats_comparison(self, request, **kwargs):
+        self.method_check(request, allowed=['get'])
+
+        try:
+            first_user = MovielistUser.objects.get(username=request.GET.get('first_username'))
+        except MovielistUser.DoesNotExist:
+            raise Http404('User does not exist')
+
+        try:
+            second_user = MovielistUser.objects.get(username=request.GET.get('second_username'))
+        except MovielistUser.DoesNotExist:
+            raise Http404('User does not exist')
+
+        first_user_stats = first_user.get_score_counters()
+        second_user_stats = second_user.get_score_counters()
+
+        result = {
+            first_user.username: first_user_stats,
+            second_user.username: second_user_stats,
+        }
+
+        return self.create_response(request, result)
+
+
+
