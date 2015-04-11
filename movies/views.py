@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -13,7 +14,7 @@ from settings import features
 
 def index(request):
     if request.user.is_authenticated():
-        return render(request, 'pages/dashboard/dashboard.html')
+        return redirect(reverse('list_watched', args=[request.user.username]))
     else:
         return render(request, 'pages/landing/landing.html')
 
