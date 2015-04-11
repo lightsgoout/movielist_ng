@@ -21,9 +21,13 @@
 {% block body %}
     <div class="row" ng-app="CompareList">
         <div class="col-md-12">
-            <h1><a href="{% url 'list_watched' first_user.username %}">{{ first_user.username }}</a> {% trans 'and' %} <a href="{% url 'list_watched' second_user.username %}">{{ second_user.username }}</a></h1>
-            <hr style="margin-top: 0;">
-            {% include 'pages/user/compare/stats.html' %}
+            <div class="col-md-6">
+                {% include 'pages/user/compare/blocks/personal_stats.html' with user=first_user %}
+            </div>
+            <div class="col-md-6">
+                {% include 'pages/user/compare/blocks/personal_stats.html' with user=second_user %}
+            </div>
+            {% include 'pages/user/compare/blocks/stats.html' %}
         </div>
     </div>
 {% endblock %}

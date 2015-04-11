@@ -17,32 +17,46 @@ app.controller("StatsController", ["$scope", "$http", function ($scope, $http) {
                 data: []
             };
 
+            var SCORES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
             var dataPoints = [];
-            for (var key in data[first_username]) {
-                if (data[first_username].hasOwnProperty(key)) {
-                    dataPoints.push(String(data[first_username][key]));
+            var tooltips = [];
+
+            for (var key in SCORES) {
+                var score = SCORES[key];
+                if (data[first_username].hasOwnProperty(score)) {
+                    dataPoints.push(String(data[first_username][score]));
+                    tooltips.push(String(score) + ' used ' + data[first_username][score] + ' times');
+                } else {
+                    dataPoints.push(0);
+                    tooltips.push('0');
                 }
-                $scope.scores_data.data.push({
-                    x: first_username,
-                    y: dataPoints
-                });
             }
+            $scope.scores_data.data.push({
+                x: first_username,
+                y: dataPoints,
+                tooltip: tooltips
+            });
 
             dataPoints = [];
+            tooltips = [];
 
-            for (var key in data[second_username]) {
-                if (data[second_username].hasOwnProperty(key)) {
-                    dataPoints.push(String(data[second_username][key]));
+            for (key in SCORES) {
+                score = SCORES[key];
+                if (data[second_username].hasOwnProperty(score)) {
+                    dataPoints.push(String(data[second_username][score]));
+                    tooltips.push(String(score) + ' used ' + data[second_username][score] + ' times');
+                } else {
+                    dataPoints.push(0);
+                    tooltips.push('0');
                 }
-                $scope.scores_data.data.push({
-                    x: second_username,
-                    y: dataPoints
-                });
             }
 
-
-
+            $scope.scores_data.data.push({
+                x: second_username,
+                y: dataPoints,
+                tooltip: tooltips
+            });
         });
 
 
@@ -54,7 +68,7 @@ app.controller("StatsController", ["$scope", "$http", function ($scope, $http) {
             display: true,
             //could be 'left, right'
             position: 'right',
-            htmlEnabled: true,
+            htmlEnabled: true
           },
           innerRadius: 0, // applicable on pieCharts, can be a percentage like '50%'
           lineLegend: 'lineEnd', // can be also 'traditional'

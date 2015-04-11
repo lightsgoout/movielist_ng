@@ -445,7 +445,7 @@ msgstr "Совместимость"
 
 #: templates/pages/user/list/user_info.html:23
 msgid "Movies you share include"
-msgstr "Среди фильмов которые вам нравятся"
+msgstr "Среди фильмов, которые вам нравятся"
 
 #: templates/pages/user/list/user_info.html:28
 #, python-format
@@ -457,7 +457,7 @@ msgid ""
 msgstr ""
 "\n"
 "                        и еще <a href=\"%(list_comparison_url)s\">"
-"%(shared_movies_remainder)s</a>\n"
+"%(shared_movies_remainder)s фильма</a>\n"
 "                    "
 
 #: templates/pages/user/list/user_info.html:36
