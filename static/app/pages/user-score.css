@@ -58,3 +58,55 @@
 .user-score-digit {
     font-size: 16pt;
 }
+
+
+
+
+.label-user-score-10 {
+    background-color: #12c100;
+}
+
+.label-user-score-9 {
+    background-color: #21a500;
+}
+
+.label-user-score-8 {
+    background-color: #439300;
+}
+
+.label-user-score-7 {
+    background-color: #659300;
+}
+
+.label-user-score-6 {
+    background-color: #7f9300;
+}
+
+.label-user-score-5 {
+    background-color: #d4a300;
+}
+
+.label-user-score-4 {
+    background-color: #FF8C00;
+}
+
+.label-user-score-3 {
+    background-color: #FF5700;
+}
+
+.label-user-score-2 {
+    background-color: #FF3400;
+}
+
+.label-user-score-1 {
+    background-color: #FF0000;
+}
+
+/*.user-score {*/
+    /*font-size: 18pt;*/
+    /*line-height:90px;*/
+/*}*/
+
+/*.user-score-digit {*/
+    /*font-size: 16pt;*/
+/*}*/
