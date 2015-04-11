@@ -45,12 +45,11 @@
                       </a>
                     </th>
                     <th ng-show="editable" style="width:100px;">
-                        {{ T_ACTIONS }}
                     </th>
                 </tr>
             </thead>
             <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-                <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController" ng-mouseenter="hover(user_to_movie)" ng-mouseleave="hover(user_to_movie)" ng-show="!user_to_movie._deleted">
+                <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController" ng-show="!user_to_movie._deleted">
                     <td class="text-right" ng-show="!editable">
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">{{ T_WATCHED }}</span>
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TO_WATCH }}</span>
@@ -100,8 +99,8 @@
                     <td>{{ user_to_movie.movie.votes_imdb }}</td>
                     <td>{{ user_to_movie.created_at|date:'d/M/yy' }}</td>
                     <td ng-show="editable">
-                        <div class="dropdown" ng-show="user_to_movie._hovered && editable">
-                          <button class="btn btn-default dropdown-toggle btn-xs table-actions" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        <div class="dropdown" ng-show="editable">
+                          <button class="btn btn-default dropdown-toggle btn-xs table-actions" type="button" data-toggle="dropdown" aria-expanded="true" style="text-transform: none;">
                             {{ T_ACTIONS }}
                             <span class="caret"></span>
                           </button>

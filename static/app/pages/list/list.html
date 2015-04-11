@@ -1,5 +1,5 @@
 <section class="col-md-12" infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-    <div ng-repeat="user_to_movie in loader.user_to_movies | orderBy:'-id'" ng-controller="UserToMovieController"  ng-mouseenter="hover(user_to_movie)" ng-mouseleave="hover(user_to_movie)" >
+    <div ng-repeat="user_to_movie in loader.user_to_movies | orderBy:'-id'" ng-controller="UserToMovieController">
         <div class="media" ng-show="!user_to_movie._deleted">
             <div class="pull-left" style="width: 65%;">
                 <div class="media-left">
@@ -78,9 +78,9 @@
                     </div>
                 </div>
             </div>
-            <div class="pull-right" ng-show="user_to_movie._hovered && editable" style="margin-top: 35px; margin-right: 100px;">
+            <div class="pull-right" ng-show="editable" style="margin-top: 35px; margin-right: 100px;">
                 <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" style="text-transform: none;">
                     {{ T_ACTIONS }}
                     <span class="caret"></span>
                   </button>
