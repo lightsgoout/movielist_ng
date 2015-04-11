@@ -13,6 +13,13 @@ class TestUserToMovieResource(ResourceTestCase):
         self.user.set_password('123')
         self.user.save()
 
+        self.assertTrue(
+            self.api_client.client.login(
+                username=self.user.username,
+                password='123'
+            )
+        )
+
     # def test_put_movie_readonly(self):
     #     movie = movie_recipes.movie.make(year=2005)
     #     user_to_movie = self.user.add_movie(movie)
@@ -52,14 +59,12 @@ class TestUserToMovieResource(ResourceTestCase):
     #     self.assertHttpUnauthorized(resp)
 
     def test_add_movie(self):
-        self.assertTrue(
-            self.api_client.client.login(username=self.user.username, password='123')
-        )
         movie = movie_recipes.movie.make()
-
+        user_to_movie = movie_recipes.user_to_movie.make()
         url = reverse('api_add_movie', kwargs={'resource_name': 'user_to_movie'})
 
         with mock.patch('accounts.models.MovielistUser.add_movie') as m_add_movie:
+            m_add_movie.return_value = user_to_movie
             resp = self.api_client.post(url, data={
                 'movie_id': movie.id,
                 'status': constants.WATCHED,
