@@ -75,8 +75,6 @@ class MovieResource(ModelResource):
             'rating_imdb',
             'rating_metacritic',
             'rating_tomatoes',
-            'tomatoes_fresh',
-            'director',
             'votes_imdb',
         ]
 

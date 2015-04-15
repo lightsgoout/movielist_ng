@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load activeurl %}
+    {% activeurl %}
+    <ul class="nav nav-pills nav-justified">
+      <li>
+        <a href="{% url "list_comparison" first_user.username second_user.username %}">{% trans 'Shared' %} <span class="badge">{{ total_shared }}</span></a>
+      </li>
+      <li>
+          <a href="{% url "list_comparison_unique_left" first_user.username second_user.username %}">{% blocktrans with username=first_user.username%}Unique for {{ username }}{% endblocktrans %}<span class="badge">{{ total_unique_for_left }}</span></a>
+      </li>
+      <li>
+          <a href="{% url "list_comparison_unique_right" first_user.username second_user.username %}">{% blocktrans with username=second_user.username%}Unique for {{ username }}{% endblocktrans %}<span class="badge">{{ total_unique_for_right }}</span></a>
+      </li>
+    </ul>
+    {% endactiveurl %}
+

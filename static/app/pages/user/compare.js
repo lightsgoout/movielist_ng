@@ -78,6 +78,24 @@ app.controller("StatsController", ["$scope", "$http", function ($scope, $http) {
         };
 
     };
-
 }]);
 
+app.controller("ListController", function($scope, $http) {
+
+    $scope.init = function(first_username, second_username) {
+        // relation can be one of 'actor' 'director' 'composer' 'writer'
+        $http.get(
+        '/api/v2/list_comparison/shared_with/',
+        {
+            params: {
+                first_username: first_username,
+                second_username: second_username
+            }
+        }).success(function(data, st, headers, config) {
+            $scope.user_to_movies = data;
+        });
+
+    };
+
+
+});

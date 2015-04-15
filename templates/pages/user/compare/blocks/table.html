@@ -1,0 +1,44 @@
+{% load i18n %}
+<table class="table table-striped table-condensed table-hover" ng-controller="ListController" ng-init="init('{{ first_user.username }}', '{{ second_user.username }}')" ng-show="user_to_movies.length">
+    <caption>{% trans 'Shared' %}</caption>
+    <thead>
+        <tr>
+            <th>
+              <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
+              Movie <span ng-show="orderByField == 'movie.title'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="orderByField='movie.year'; reverseSort = !reverseSort">
+                Year <span ng-show="orderByField == 'movie.year'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="orderByField='my_score'; reverseSort = !reverseSort">
+              {{ first_user.username }} <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="orderByField='score'; reverseSort = !reverseSort">
+              {{ second_user.username }} <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="orderByField='movie.rating_imdb'; reverseSort = !reverseSort">
+              IMDB rating <span ng-show="orderByField == 'movie.rating_imdb'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
+              </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user_to_movie in user_to_movies | filter:query | orderBy:orderByField:reverseSort">
+            {% verbatim %}
+            <td style="width: 25%;"><a href="{{ user_to_movie.movie.page_url }}">{{ user_to_movie.movie.title }}</a></td>
+            <td style="width: 5%;">{{ user_to_movie.movie.year }}</td>
+            <td><span class="label label-user-score-{{ user_to_movie.my_score }}" ng-show="user_to_movie.my_score">{{ user_to_movie.my_score }}</span></td>
+            <td><span class="label label-user-score-{{ user_to_movie.score }}" ng-show="user_to_movie.score">{{ user_to_movie.score }}</span></td>
+            <td>{{ user_to_movie.movie.rating_imdb }}</td>
+            {% endverbatim %}
+        </tr>
+    </tbody>
+</table>

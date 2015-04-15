@@ -143,6 +143,35 @@ class UserMoviesMixin(models.Model):
         except UserToMovie.DoesNotExist:
             return None
 
+    def get_shared_movies(self, user, status=constants.WATCHED, from_queryset=None):
+        """
+        @type user accounts.models.MovielistUser
+        """
+        my_movie_map = dict(UserToMovie.objects.filter(
+            user=self,
+            status=status
+        ).values_list('movie_id', 'score'))
+
+        """
+        from_queryset is used for prefetch_related querysets from APIs.
+        """
+        if not from_queryset:
+            queryset = UserToMovie.objects.select_related('movie')
+        else:
+            queryset = from_queryset._clone()
+
+        his_movies = queryset.filter(
+            user=user,
+            status=status,
+            movie_id__in=my_movie_map.keys()
+        )
+
+        for his_movie in his_movies:
+            setattr(his_movie, 'my_score', my_movie_map[his_movie.movie_id])
+            setattr(his_movie, 'my_status', status)
+
+        return his_movies
+
     def get_compatibility(self, user):
         """
         @type user accounts.models.MovielistUser
