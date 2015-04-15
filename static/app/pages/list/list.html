@@ -13,6 +13,7 @@
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">{{ T_WATCHED }}</span>
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TO_WATCH }}</span>
                         <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">{{ T_IGNORED }}</span>
+                        <span class="label label-user-score-{{ user_to_movie.my_score }}" ng-show="user_to_movie.my_score" title="{{ T_MY_SCORE }}">{{ user_to_movie.my_score }}</span>
                         <div style="display: inline-block; margin-left: 5px;" ng-show="!user_to_movie.my_status && !editable">
                             <div class="btn-group dropdown-toggle" style="margin-bottom: 5px;">
                                 <button type="button"
@@ -69,18 +70,17 @@
                            e-ng-options="s as s for s in SCORE_CHOICES"
                            buttons="no"
                            onaftersave="setScore()">
-                            <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
+                            <span class="ng-scope label user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
                         </a>
                     </div>
                     <div ng-show="!editable">
-                        <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead" title="IMDB: {{ user_to_movie.movie.rating_imdb }}, RT: {{ user_to_movie.movie.rating_tomatoes }}%">{{ user_to_movie.score }}</span>
-                        <span style="color: #555; font-size:22pt;" class="ng-scope" ng-show="user_to_movie.score > 0 && user_to_movie.my_score > 0" title="{{ T_MY_SCORE }}">({{ user_to_movie.my_score }})</span>
+                        <span class="ng-scope label user-score-digit user-score-{{ user_to_movie.score }} lead" title="IMDB: {{ user_to_movie.movie.rating_imdb }}, RT: {{ user_to_movie.movie.rating_tomatoes }}%">{{ user_to_movie.score }}</span>
                     </div>
                 </div>
             </div>
             <div class="pull-right" ng-show="editable" style="margin-top: 35px; margin-right: 100px;">
                 <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" style="text-transform: none;">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
                     {{ T_ACTIONS }}
                     <span class="caret"></span>
                   </button>

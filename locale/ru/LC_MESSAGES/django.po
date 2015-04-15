@@ -457,7 +457,7 @@ msgid ""
 msgstr ""
 "\n"
 "                        и еще <a href=\"%(list_comparison_url)s\">"
-"%(shared_movies_remainder)s фильма</a>\n"
+"%(shared_movies_remainder)s фильмов</a>\n"
 "                    "
 
 #: templates/pages/user/list/user_info.html:36
