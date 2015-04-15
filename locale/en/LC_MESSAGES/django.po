@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-07 05:04+0000\n"
+"POT-Creation-Date: 2015-04-15 22:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,16 +52,12 @@ msgid ""
 "Activate your movies.musdb.net account - you have %(expiration_days)s days!\n"
 msgstr ""
 
-#: templates/navbar.html:22
+#: templates/navbar.html:26
 msgid "Login/Register"
 msgstr ""
 
-#: templates/navbar.html:24 templates/pages/wizard/wizard.html:5
+#: templates/navbar.html:28 templates/pages/wizard/wizard.html:5
 msgid "Add movies to the list"
-msgstr ""
-
-#: templates/navbar.html:41
-msgid "Home"
 msgstr ""
 
 #: templates/navbar.html:42
@@ -118,106 +114,112 @@ msgstr ""
 msgid "Connect with Twitter"
 msgstr ""
 
-#: templates/pages/movie/movie.html:64
+#: templates/pages/movie/movie.html:78
 msgid "Movie information"
 msgstr ""
 
-#: templates/pages/movie/movie.html:66
+#: templates/pages/movie/movie.html:80 templates/pages/person/person.html:63
+#: templates/pages/person/person.html:99
+#: templates/pages/person/person.html:135
+#: templates/pages/user/compare/blocks/table.html:14
 msgid "Year"
 msgstr ""
 
-#: templates/pages/movie/movie.html:71
+#: templates/pages/movie/movie.html:85
 msgid "Series"
 msgstr ""
 
-#: templates/pages/movie/movie.html:77
+#: templates/pages/movie/movie.html:91
 msgid "Previous movie"
 msgstr ""
 
-#: templates/pages/movie/movie.html:83
+#: templates/pages/movie/movie.html:97
 msgid "Next movie"
 msgstr ""
 
-#: templates/pages/movie/movie.html:89 templates/pages/person/person.html:41
+#: templates/pages/movie/movie.html:103 templates/pages/person/person.html:41
 #: templates/pages/settings/settings_personal.html:27
 msgid "Country"
 msgstr ""
 
-#: templates/pages/movie/movie.html:99
+#: templates/pages/movie/movie.html:113
 #: templates/pages/search/serp_movies.html:56
 msgid "Directors"
 msgstr ""
 
-#: templates/pages/movie/movie.html:101 templates/pages/person/person.html:88
+#: templates/pages/movie/movie.html:115 templates/pages/person/person.html:89
 #: templates/pages/search/serp_movies.html:54
 msgid "Director"
 msgstr ""
 
-#: templates/pages/movie/movie.html:115
+#: templates/pages/movie/movie.html:129
 msgid "Writers"
 msgstr ""
 
-#: templates/pages/movie/movie.html:117
+#: templates/pages/movie/movie.html:131
 msgid "Writer"
 msgstr ""
 
-#: templates/pages/movie/movie.html:131
+#: templates/pages/movie/movie.html:145
 msgid "Producers"
 msgstr ""
 
-#: templates/pages/movie/movie.html:133
+#: templates/pages/movie/movie.html:147
 msgid "Producer"
 msgstr ""
 
-#: templates/pages/movie/movie.html:147
+#: templates/pages/movie/movie.html:161
 msgid "Composers"
 msgstr ""
 
-#: templates/pages/movie/movie.html:149 templates/pages/person/person.html:124
+#: templates/pages/movie/movie.html:163 templates/pages/person/person.html:125
 msgid "Composer"
 msgstr ""
 
-#: templates/pages/movie/movie.html:162
+#: templates/pages/movie/movie.html:176
 msgid "Genre"
 msgstr ""
 
-#: templates/pages/movie/movie.html:172
+#: templates/pages/movie/movie.html:186
 msgid "MPAA rating"
 msgstr ""
 
-#: templates/pages/movie/movie.html:184
+#: templates/pages/movie/movie.html:194
 msgid "Runtime"
 msgstr ""
 
-#: templates/pages/movie/movie.html:196
+#: templates/pages/movie/movie.html:202
 msgid "Tagline"
 msgstr ""
 
-#: templates/pages/movie/movie.html:208
+#: templates/pages/movie/movie.html:210
 msgid "Movie ratings"
 msgstr ""
 
-#: templates/pages/movie/movie.html:210
+#: templates/pages/movie/movie.html:212 templates/pages/person/person.html:68
+#: templates/pages/person/person.html:104
+#: templates/pages/person/person.html:140
+#: templates/pages/user/compare/blocks/table.html:29
 msgid "IMDB rating"
 msgstr ""
 
-#: templates/pages/movie/movie.html:211
+#: templates/pages/movie/movie.html:213
 msgid "votes"
 msgstr ""
 
-#: templates/pages/movie/movie.html:214
+#: templates/pages/movie/movie.html:216
 msgid "Metascore"
 msgstr ""
 
-#: templates/pages/movie/movie.html:224
+#: templates/pages/movie/movie.html:222
 msgid "Rotten Tomatoes"
 msgstr ""
 
-#: templates/pages/movie/movie.html:236
+#: templates/pages/movie/movie.html:230
 msgid "On other sites"
 msgstr ""
 
-#: templates/pages/movie/movie.html:252
+#: templates/pages/movie/movie.html:246
 #: templates/pages/search/serp_movies.html:64
 msgid "Cast"
 msgstr ""
@@ -231,8 +233,14 @@ msgstr ""
 msgid "Birth date"
 msgstr ""
 
-#: templates/pages/person/person.html:52
+#: templates/pages/person/person.html:53
 msgid "Actor"
+msgstr ""
+
+#: templates/pages/person/person.html:58 templates/pages/person/person.html:94
+#: templates/pages/person/person.html:130
+#: templates/pages/user/compare/blocks/table.html:9
+msgid "Movie"
 msgstr ""
 
 #: templates/pages/search/serp.html:5
@@ -257,7 +265,7 @@ msgid "People"
 msgstr ""
 
 #: templates/pages/search/serp.html:54
-#: templates/pages/user/list/list_ng.html:44
+#: templates/pages/user/list/list_ng.html:45
 msgid "No results"
 msgstr ""
 
@@ -337,14 +345,12 @@ msgid "Unknown"
 msgstr ""
 
 #: templates/pages/settings/settings_personal.html:43
-#: templates/pages/user/followers/user_list.html:11
-#: templates/pages/user/header.html:16
+#: templates/pages/user/personal_info.html:8
 msgid "Male"
 msgstr ""
 
 #: templates/pages/settings/settings_personal.html:44
-#: templates/pages/user/followers/user_list.html:13
-#: templates/pages/user/header.html:18
+#: templates/pages/user/personal_info.html:10
 msgid "Female"
 msgstr ""
 
@@ -352,9 +358,49 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: templates/pages/user/compare/blocks/menu.html:6
+msgid "Shared"
+msgstr ""
+
+#: templates/pages/user/compare/blocks/menu.html:9
+#: templates/pages/user/compare/blocks/menu.html:12
+#, python-format
+msgid "Unique for %(username)s"
+msgstr ""
+
+#: templates/pages/user/compare/blocks/menu.html:15
+msgid "Score distribution"
+msgstr ""
+
+#: templates/pages/user/compare/blocks/personal_stats.html:6
+msgid "Total runtime"
+msgstr ""
+
+#: templates/pages/user/compare/blocks/personal_stats.html:7
+msgid "days"
+msgstr ""
+
+#: templates/pages/user/compare/blocks/personal_stats.html:8
+#: templates/pages/user/list/stats.html:6
+msgid "Movies watched"
+msgstr ""
+
+#: templates/pages/user/compare/blocks/personal_stats.html:10
+#: templates/pages/user/list/stats.html:8
+msgid "Average score"
+msgstr ""
+
+#: templates/pages/user/compare/blocks/table.html:46
+msgid "No movies"
+msgstr ""
+
+#: templates/pages/user/compare/compare.html:5
+msgid "List comparison"
+msgstr ""
+
 #: templates/pages/user/followers/followers.html:5
 #: templates/pages/user/followers/followers.html:20
-#: templates/pages/user/header.html:27
+#: templates/pages/user/header.html:12
 msgid "Followers"
 msgstr ""
 
@@ -363,23 +409,19 @@ msgstr ""
 msgid "Following"
 msgstr ""
 
-#: templates/pages/user/followers/user_list.html:21
+#: templates/pages/user/followers/user_list.html:9
 msgid "Last watched:"
 msgstr ""
 
-#: templates/pages/user/followers/user_list.html:23
+#: templates/pages/user/followers/user_list.html:11
 msgid "User hasn't added any movies yet"
 msgstr ""
 
-#: templates/pages/user/header.html:24
-msgid "joined on"
-msgstr ""
-
-#: templates/pages/user/header.html:28
+#: templates/pages/user/header.html:13
 msgid "Charts"
 msgstr ""
 
-#: templates/pages/user/header.html:29
+#: templates/pages/user/header.html:14
 msgid "Favorites"
 msgstr ""
 
@@ -396,23 +438,23 @@ msgstr ""
 msgid "Movie list"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:32
+#: templates/pages/user/list/list_ng.html:33
 msgid "Standard mode"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:33
+#: templates/pages/user/list/list_ng.html:34
 msgid "As table"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:38
+#: templates/pages/user/list/list_ng.html:39
 msgid "Filter"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:48
+#: templates/pages/user/list/list_ng.html:49
 msgid "The list is empty"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:50
+#: templates/pages/user/list/list_ng.html:51
 #: templates/registration/activation_complete.html:7
 msgid "Add movies"
 msgstr ""
@@ -421,12 +463,8 @@ msgstr ""
 msgid "Ignored"
 msgstr ""
 
-#: templates/pages/user/list/stats.html:6
+#: templates/pages/user/list/stats.html:4
 msgid "Total runtime (days)"
-msgstr ""
-
-#: templates/pages/user/list/stats.html:11
-msgid "Total entries"
 msgstr ""
 
 #: templates/pages/user/list/user_info.html:8
@@ -441,11 +479,11 @@ msgstr ""
 msgid "Compatibility"
 msgstr ""
 
-#: templates/pages/user/list/user_info.html:23
+#: templates/pages/user/list/user_info.html:25
 msgid "Movies you share include"
 msgstr ""
 
-#: templates/pages/user/list/user_info.html:28
+#: templates/pages/user/list/user_info.html:31
 #, python-format
 msgid ""
 "\n"
@@ -454,22 +492,30 @@ msgid ""
 "                    "
 msgstr ""
 
-#: templates/pages/user/list/user_info.html:36
+#: templates/pages/user/list/user_info.html:38
 msgid ""
-"Compatibility unavailable: either one or both of you haven't scored enough "
-"movies"
+"<strong>Compatibility unavailable</strong>: either one or both of you "
+"haven't scored enough movies"
 msgstr ""
 
-#: templates/pages/wizard/wizard.html:26
+#: templates/pages/user/list/user_info.html:38
+msgid "Compare your lists"
+msgstr ""
+
+#: templates/pages/user/personal_info.html:16
+msgid "joined on"
+msgstr ""
+
+#: templates/pages/wizard/wizard.html:29
 msgid "Press <kbd><kbd>W</kbd> <kbd>W</kbd></kbd> to mark movie as watched"
 msgstr ""
 
-#: templates/pages/wizard/wizard.html:27
+#: templates/pages/wizard/wizard.html:30
 msgid ""
 "Press <kbd><kbd>P</kbd> <kbd>P</kbd></kbd> to mark movie as planned to watch"
 msgstr ""
 
-#: templates/pages/wizard/wizard.html:28
+#: templates/pages/wizard/wizard.html:31
 msgid "Press <kbd>space</kbd> to ignore movie"
 msgstr ""
 

@@ -167,8 +167,62 @@ class UserMoviesMixin(models.Model):
         )
 
         for his_movie in his_movies:
-            setattr(his_movie, 'my_score', my_movie_map[his_movie.movie_id])
-            setattr(his_movie, 'my_status', status)
+            setattr(his_movie, 'score_left', my_movie_map[his_movie.movie_id])
+            setattr(his_movie, 'score_right', his_movie.score)
+
+        return his_movies
+
+    def get_my_unique_movies(self, user, status=constants.WATCHED, from_queryset=None):
+        """
+        @type user accounts.models.MovielistUser
+        """
+        his_movies = user.get_movies(status).values_list('id', flat=True)
+
+        """
+        from_queryset is used for prefetch_related querysets from APIs.
+        """
+        if not from_queryset:
+            queryset = UserToMovie.objects.select_related('movie')
+        else:
+            queryset = from_queryset._clone()
+
+        my_movies = queryset.filter(
+            user=self,
+            status=status,
+        ).exclude(
+            movie_id__in=his_movies
+        )
+
+        for my_movie in my_movies:
+            setattr(my_movie, 'score_left', my_movie.score)
+            setattr(my_movie, 'score_right', None)
+
+        return my_movies
+
+    def get_his_unique_movies(self, user, status=constants.WATCHED, from_queryset=None):
+        """
+        @type user accounts.models.MovielistUser
+        """
+        my_movies = self.get_movies(status).values_list('id', flat=True)
+
+        """
+        from_queryset is used for prefetch_related querysets from APIs.
+        """
+        if not from_queryset:
+            queryset = UserToMovie.objects.select_related('movie')
+        else:
+            queryset = from_queryset._clone()
+
+        his_movies = queryset.filter(
+            user=user,
+            status=status,
+        ).exclude(
+            movie_id__in=my_movies
+        )
+
+        for his_movie in his_movies:
+            setattr(his_movie, 'score_left', None)
+            setattr(his_movie, 'score_right', his_movie.score)
 
         return his_movies
 

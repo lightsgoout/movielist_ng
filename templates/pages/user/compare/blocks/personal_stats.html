@@ -3,8 +3,8 @@
 <hr style="margin-top: 0;">
 <div class="col-md-6">
     <dl class="dl-horizontal">
-      <dt>{% trans 'Total runtime (days)' %}:</dt>
-      <dd><span class="badge">{{ user.get_total_movie_runtime_days }}</span></dd>
+      <dt>{% trans 'Total runtime' %}:</dt>
+      <dd><span class="badge">{{ user.get_total_movie_runtime_days }} {% trans 'days' %}</span></dd>
       <dt>{% trans 'Movies watched' %}:</dt>
       <dd><span class="badge">{{ user.get_total_watched_movies }}</span></dd>
       <dt>{% trans 'Average score' %}:</dt>

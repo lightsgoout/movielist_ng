@@ -40,7 +40,11 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                {% include 'pages/user/compare/blocks/table.html' %}
+                {% if mode == constants.COMPARE_MODE_SCORE_DISTRIBUTION %}
+                    {% include 'pages/user/compare/blocks/stats.html' %}
+                {% else %}
+                    {% include 'pages/user/compare/blocks/table.html' %}
+                {% endif %}
             </div>
         </div>
     </div>

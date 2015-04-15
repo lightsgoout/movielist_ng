@@ -82,10 +82,21 @@ app.controller("StatsController", ["$scope", "$http", function ($scope, $http) {
 
 app.controller("ListController", function($scope, $http) {
 
-    $scope.init = function(first_username, second_username) {
-        // relation can be one of 'actor' 'director' 'composer' 'writer'
+    $scope.init = function(first_username, second_username, mode) {
+        // mode can be one of 'S' 'L' 'R'
+        var url = '';
+        if (mode == 'S') {
+            url = '/api/v2/list_comparison/shared_with/';
+        } else if(mode == 'L') {
+            url = '/api/v2/list_comparison/unique_left/'
+        } else if(mode == 'R') {
+            url = '/api/v2/list_comparison/unique_right/'
+        }
+
+        $scope.loading = true;
+
         $http.get(
-        '/api/v2/list_comparison/shared_with/',
+        url,
         {
             params: {
                 first_username: first_username,
@@ -93,7 +104,10 @@ app.controller("ListController", function($scope, $http) {
             }
         }).success(function(data, st, headers, config) {
             $scope.user_to_movies = data;
+            $scope.loading = false;
         });
+
+        $scope.mode = mode;
 
     };
 

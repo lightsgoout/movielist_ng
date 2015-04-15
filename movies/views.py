@@ -194,11 +194,6 @@ def compare_list(request, first_username, second_username, mode=constants.COMPAR
     first_user = get_object_or_404(MovielistUser, username=first_username)
     second_user = get_object_or_404(MovielistUser, username=second_username)
 
-    if mode == constants.COMPARE_MODE_SHARED:
-        user_to_movies = first_user.get_shared_movies(second_user)
-    else:
-        user_to_movies = []
-
     return render(
         request,
         'pages/user/compare/compare.html',
@@ -206,7 +201,7 @@ def compare_list(request, first_username, second_username, mode=constants.COMPAR
             'first_user': first_user,
             'second_user': second_user,
             'mode': mode,
-            'user_to_movies': user_to_movies
+            'constants': constants,
         }
     )
 

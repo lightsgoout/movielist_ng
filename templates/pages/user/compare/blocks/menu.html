@@ -11,6 +11,9 @@
       <li>
           <a href="{% url "list_comparison_unique_right" first_user.username second_user.username %}">{% blocktrans with username=second_user.username%}Unique for {{ username }}{% endblocktrans %}<span class="badge">{{ total_unique_for_right }}</span></a>
       </li>
+      <li>
+          <a href="{% url "list_comparison_score_distribution" first_user.username second_user.username %}">{% trans 'Score distribution' %}</a>
+      </li>
     </ul>
     {% endactiveurl %}
 
