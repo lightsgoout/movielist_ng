@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^api/', include('api.urls')),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^wizard/$', 'movies.views.wizard', name='wizard'),
+    url(r'^add/$', 'movies.views.wizard', name='wizard'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     # url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 )
