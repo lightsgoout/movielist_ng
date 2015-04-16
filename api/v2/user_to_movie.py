@@ -46,7 +46,7 @@ class UserToMovieResource(ModelResource):
                 'movie__directors',
                 'movie__cast',
                 'movie__composers',
-            ).order_by('-id')
+            ).order_by('-created_at')
         resource_name = 'user_to_movie'
         authentication = Authentication()
         authorization = UserObjectsOnlyAuthorization()
@@ -57,6 +57,13 @@ class UserToMovieResource(ModelResource):
         filtering = {
             'status': ('exact',),
         }
+        ordering = [
+            'created_at',
+            'score',
+            'movie',
+            'movie__rating_imdb',
+            'movie__title',
+        ]
 
     def build_filters(self, filters=None):
         username = filters.get('username')

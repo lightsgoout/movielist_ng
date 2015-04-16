@@ -34,9 +34,22 @@
                           <li role="presentation" ng-class="{active:isActive('/table')}"><a href="#/table"><i class="fa fa-table"></i> {% trans 'As table' %}</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <div style="margin-top: 24px;">
                             <input type="text" class="form-control search-query" placeholder="{% trans 'Filter' %}" ng-model="query" ng-change="setFilter()" ng-model-options="{ debounce: 750 }" style="width: 255px; display: inline-block;">
+                        </div>
+                    </div>
+                    <div class="col-md-4" ng-show="!isActive('/table')">
+                        <p style="margin-top: 24px; display: inline-block;">{% trans 'Sort order' %}&nbsp;</p>
+                        <div style="margin-top: 24px; display: inline-block;">
+                            <select class="form-control" ng-model="ordering" ng-change="setOrdering()" id="sorting-control">
+                                <option value="-created_at">{% trans 'Latest' %}</option>
+                                <option value="created_at">{% trans 'Earliest' %}</option>
+                                <option value="-score">{% trans "User's best" %}</option>
+                                <option value="score">{% trans "User's worst" %}</option>
+                                <option value="-movie__rating_imdb">{% trans "IMDB best" %}</option>
+                                <option value="movie__rating_imdb">{% trans "IMDB worst" %}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -44,7 +57,7 @@
                 <div ng-show="!loader.user_to_movies.length && loader.query && !loader.busy">
                     <p class="lead text-muted text-center">{% trans 'No results' %}</p>
                 </div>
-                <div ng-show="!loader.user_to_movies.length && !loader.first_loading && !loader.query">
+                <div ng-show="!loader.user_to_movies.length && !loader.first_loading && !loader.query && !loader.ordering">
                     <div class="jumbotron col-md-4 animate-show text-center" style="margin: 0 auto; width: 50%; float: none; margin-bottom: 50px; margin-top: 50px;">
                         <h2>{% trans 'The list is empty' %}</h2>
                         <p>...</p>

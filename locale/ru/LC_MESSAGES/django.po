@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 22:55+0000\n"
+"POT-Creation-Date: 2015-04-16 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,22 @@ msgstr "Аккаунт заблокирован"
 #: accounts/views.py:30
 msgid "Invalid login or password"
 msgstr "Неверный логин или пароль"
+
+#: templates/404.html:4
+msgid "404 - Page not found"
+msgstr "404 - Страница не найдена"
+
+#: templates/404.html:9
+msgid "Page does not exist."
+msgstr "Страница не существует"
+
+#: templates/500.html:5 templates/500.html.py:10
+msgid "Internal server error"
+msgstr "Внутренняя ошибка сервера"
+
+#: templates/500.html:16
+msgid "You haven't seen it"
+msgstr "Вы ничего не видели"
 
 #: templates/_blocks/search.html:6
 msgid "Search"
@@ -267,7 +283,7 @@ msgid "People"
 msgstr "Люди"
 
 #: templates/pages/search/serp.html:54
-#: templates/pages/user/list/list_ng.html:45
+#: templates/pages/user/list/list_ng.html:58
 msgid "No results"
 msgstr "Ничего не найдено"
 
@@ -452,11 +468,39 @@ msgstr "Таблица"
 msgid "Filter"
 msgstr "Фильтр"
 
+#: templates/pages/user/list/list_ng.html:43
+msgid "Sort order"
+msgstr "Сортировка"
+
+#: templates/pages/user/list/list_ng.html:46
+msgid "Latest"
+msgstr "Последние"
+
+#: templates/pages/user/list/list_ng.html:47
+msgid "Earliest"
+msgstr "Первые"
+
+#: templates/pages/user/list/list_ng.html:48
+msgid "User's best"
+msgstr "Лучшие оценки"
+
 #: templates/pages/user/list/list_ng.html:49
+msgid "User's worst"
+msgstr "Худшие оценки"
+
+#: templates/pages/user/list/list_ng.html:50
+msgid "IMDB best"
+msgstr "Лучшее IMDB"
+
+#: templates/pages/user/list/list_ng.html:51
+msgid "IMDB worst"
+msgstr "Худшее IMDB"
+
+#: templates/pages/user/list/list_ng.html:62
 msgid "The list is empty"
 msgstr "Список пуст"
 
-#: templates/pages/user/list/list_ng.html:51
+#: templates/pages/user/list/list_ng.html:64
 #: templates/registration/activation_complete.html:7
 msgid "Add movies"
 msgstr "Добавить фильмы"
@@ -579,9 +623,6 @@ msgstr ""
 
 #~ msgid "Total entries"
 #~ msgstr "Всего фильмов"
-
-#~ msgid "Movie does not exist"
-#~ msgstr "Фильм не существует"
 
 #~ msgid "Covers"
 #~ msgstr "Постеры"

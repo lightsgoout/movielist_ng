@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 22:55+0000\n"
+"POT-Creation-Date: 2015-04-16 19:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,22 @@ msgstr ""
 
 #: accounts/views.py:30
 msgid "Invalid login or password"
+msgstr ""
+
+#: templates/404.html:4
+msgid "404 - Page not found"
+msgstr ""
+
+#: templates/404.html:9
+msgid "Page does not exist."
+msgstr ""
+
+#: templates/500.html:5 templates/500.html.py:10
+msgid "Internal server error"
+msgstr ""
+
+#: templates/500.html:16
+msgid "You haven't seen it"
 msgstr ""
 
 #: templates/_blocks/search.html:6
@@ -265,7 +281,7 @@ msgid "People"
 msgstr ""
 
 #: templates/pages/search/serp.html:54
-#: templates/pages/user/list/list_ng.html:45
+#: templates/pages/user/list/list_ng.html:58
 msgid "No results"
 msgstr ""
 
@@ -450,11 +466,39 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
+#: templates/pages/user/list/list_ng.html:43
+msgid "Sort order"
+msgstr ""
+
+#: templates/pages/user/list/list_ng.html:46
+msgid "Latest"
+msgstr ""
+
+#: templates/pages/user/list/list_ng.html:47
+msgid "Earliest"
+msgstr ""
+
+#: templates/pages/user/list/list_ng.html:48
+msgid "User's best"
+msgstr ""
+
 #: templates/pages/user/list/list_ng.html:49
-msgid "The list is empty"
+msgid "User's worst"
+msgstr ""
+
+#: templates/pages/user/list/list_ng.html:50
+msgid "IMDB best"
 msgstr ""
 
 #: templates/pages/user/list/list_ng.html:51
+msgid "IMDB worst"
+msgstr ""
+
+#: templates/pages/user/list/list_ng.html:62
+msgid "The list is empty"
+msgstr ""
+
+#: templates/pages/user/list/list_ng.html:64
 #: templates/registration/activation_complete.html:7
 msgid "Add movies"
 msgstr ""

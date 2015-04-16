@@ -1,11 +1,14 @@
 <section class="col-md-12" infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-    <div ng-repeat="user_to_movie in loader.user_to_movies | orderBy:'-id'" ng-controller="UserToMovieController">
+    <div ng-repeat="user_to_movie in loader.user_to_movies" ng-controller="UserToMovieController">
         <div class="media" ng-show="!user_to_movie._deleted">
             <div class="pull-left" style="width: 65%;">
                 <div class="media-left">
                     <a href="{{ user_to_movie.movie.page_url }}">
                         <img class="media-object" src="{{ user_to_movie.movie.image_url }}" alt="{{ user_to_movie.movie.title }}" style="width: 64px;">
                     </a>
+                    <div class="text-center">
+                        <span class="label label-default" title="{{ T_DATE_ADDED_ON }}">{{ user_to_movie.created_at|date:'dd.MM.yy' }}</span>
+                    </div>
                 </div>
                 <div class="media-body">
                     <div>

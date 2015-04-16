@@ -85,7 +85,7 @@
                     </td>
                     <td>{{ user_to_movie.movie.rating_imdb }}</td>
                     <td>{{ user_to_movie.movie.votes_imdb }}</td>
-                    <td>{{ user_to_movie.created_at|date:'d/M/yy' }}</td>
+                    <td>{{ user_to_movie.created_at|date:'dd.MM.yy' }}</td>
                     <td ng-show="editable">
                         <div class="dropdown" ng-show="editable">
                           <button class="btn btn-default dropdown-toggle btn-xs table-actions" type="button" data-toggle="dropdown" aria-expanded="true" style="text-transform: none;">

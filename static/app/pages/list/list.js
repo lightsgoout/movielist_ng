@@ -140,7 +140,7 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
     $scope.init = function(username, status, editable) {
         //This function is sort of private constructor for controller
         $scope.loader = new Loader(username, status);
-        $scope.orderByField = '-id';
+        $scope.ordering = '-created_at';
 
         $scope.SCORE_CHOICES = [
             1,
@@ -165,6 +165,10 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
     $scope.setFilter = function() {
         $scope.loader.setFilter($scope.query);
     };
+
+    $scope.setOrdering = function() {
+        $scope.loader.setOrdering($scope.ordering);
+    }
 });
 
 
@@ -207,6 +211,7 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
         this.status = status;
         this.first_loading = true;
         this.query = "";
+        this.ordering = "";
         this.cast_limit_to = 4;
     };
 
@@ -230,6 +235,10 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
 
         if (self.query) {
             kwargs['query'] = self.query;
+        }
+
+        if (self.ordering) {
+            kwargs['order_by'] = self.ordering;
         }
 
         UserToMovie.query(kwargs, function(response) {
@@ -256,6 +265,13 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
         } else {
             this.cast_limit_to = 4;
         }
+        this.nextPage();
+    };
+
+    Loader.prototype.setOrdering = function(ordering) {
+        this.ordering = ordering;
+        this.exhausted = false;
+        this.user_to_movies = [];
         this.nextPage();
     };
 
