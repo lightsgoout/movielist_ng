@@ -17,7 +17,7 @@
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TO_WATCH }}</span>
                         <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">{{ T_IGNORED }}</span>
                         <span class="label label-user-score-{{ user_to_movie.my_score }}" ng-show="user_to_movie.my_score" title="{{ T_MY_SCORE }}">{{ user_to_movie.my_score }}</span>
-                        <div style="display: inline-block; margin-left: 5px;" ng-show="!user_to_movie.my_status && !editable">
+                        <div style="display: inline-block; margin-left: 5px;" ng-show="!user_to_movie.my_status && !editable && logged_in">
                             <div class="btn-group dropdown-toggle" style="margin-bottom: 5px;">
                                 <button type="button"
                                         class="btn btn-default btn-xs"

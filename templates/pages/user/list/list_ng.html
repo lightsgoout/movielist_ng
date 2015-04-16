@@ -26,7 +26,7 @@
             {% include 'pages/user/header.html' %}
             {% include 'pages/user/list/user_info.html' %}
             {% include 'pages/user/list/menu.html' %}
-            <div ng-controller="UserToMovieListController" ng-init="init('{{ user.username }}', '{{ status }}', {{ editable }})">
+            <div ng-controller="UserToMovieListController" ng-init="init('{{ user.username }}', '{{ status }}', {{ editable }}, {{ logged_in }})">
                 <div class="row" ng-show="loader.user_to_movies.length || loader.query">
                     <div class="col-md-4">
                         <ul class="nav nav-pills nav-justified mode-selector" style="display: inline-block; margin-top: 20px;">

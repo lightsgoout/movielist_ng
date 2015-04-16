@@ -137,7 +137,7 @@ app.controller("FriendshipController", ["$scope", "$http", function($scope, $htt
 
 app.controller("UserToMovieListController", function($scope, Loader, $location) {
 
-    $scope.init = function(username, status, editable) {
+    $scope.init = function(username, status, editable, logged_in) {
         //This function is sort of private constructor for controller
         $scope.loader = new Loader(username, status);
         $scope.ordering = '-created_at';
@@ -156,6 +156,7 @@ app.controller("UserToMovieListController", function($scope, Loader, $location) 
         ];
 
         $scope.editable = editable;
+        $scope.logged_in = logged_in;
     };
 
     $scope.isActive = function(route) {

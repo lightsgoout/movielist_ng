@@ -54,7 +54,13 @@ class MovieResource(ModelResource):
     )
 
     class Meta:
-        queryset = Movie.objects.all()
+        queryset = Movie.objects.all().prefetch_related(
+            'genres',
+            'countries',
+            'directors',
+            'cast',
+            'composers',
+        )
         resource_name = 'movie'
         authentication = Authentication()
         authorization = Authorization()

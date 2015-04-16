@@ -3,7 +3,7 @@
         <table class="table table-striped table-condensed table-hover">
             <thead>
                 <tr>
-                    <th ng-show="!editable">
+                    <th ng-show="!editable && logged_in">
                     </th>
                     <th style="width: 350px;">
                       <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
@@ -42,7 +42,7 @@
             </thead>
             <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
                 <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController" ng-show="!user_to_movie._deleted">
-                    <td class="text-right" ng-show="!editable">
+                    <td class="text-right" ng-show="!editable && logged_in">
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">{{ T_WATCHED }}</span>
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TO_WATCH }}</span>
                         <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">{{ T_IGNORED }}</span>

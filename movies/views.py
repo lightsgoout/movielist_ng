@@ -69,6 +69,7 @@ def show_list(request, username, status):
                 total_shared_counter - constants.COMPATIBILITY_SHARED_MOVIES_COUNT
             ),
             'editable': 'true' if request.user == user else 'false',
+            'logged_in': 'true' if request.user.is_authenticated() else 'false',
             'following': 'true' if following else 'false',
             'total_watched': total_watched,
             'total_plan_to_watch': total_plan_to_watch,
