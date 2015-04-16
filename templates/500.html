@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+    {% trans 'Internal server error' %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div>
+            <h3 class="text-center">{% trans 'Internal server error' %}</h3>
+            <br>
+            <div class="text-center">
+              <img src="{% static 'app/pages/img500.jpg' %}">
+            </div>
+
+            <p class="lead text-center" style="margin-top: 20px;">&mdash; "{% trans "You haven't seen it" %}"</p>
+        </div>
+   </div>
+{% endblock %}

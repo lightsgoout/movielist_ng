@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% block title %}
+    {% trans '404 - Page not found' %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div>
+            <h3 class="text-center">{% trans 'Page does not exist.' %}</h3>
+            <p class="text-center" style="font-size: 100pt;">404</p>
+        </div>
+   </div>
+{% endblock %}
