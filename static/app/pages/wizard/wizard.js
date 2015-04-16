@@ -1,5 +1,5 @@
 "use strict";
-var app = angular.module("Wizard", ["tastyResource", "ngResource", 'cfp.hotkeys']);
+var app = angular.module("Wizard", ["tastyResource", "ngResource", 'cfp.hotkeys', 'ngCookies']);
 
 app.factory("Suggestion", ["TastyResource", function(TastyResource) {
     return TastyResource({
@@ -8,7 +8,7 @@ app.factory("Suggestion", ["TastyResource", function(TastyResource) {
     })
 }]);
 
-app.run(function($rootScope) {
+app.run(function($rootScope, $http, $cookies) {
     $rootScope['T_DID_YOU_WATCH_THIS_MOVIE'] = gettext('Did you watch this movie?');
     $rootScope['T_DIRECTOR'] = gettext('Director');
     $rootScope['T_DIRECTORS'] = gettext('Directors');
@@ -19,6 +19,8 @@ app.run(function($rootScope) {
     $rootScope['T_THIS_MOVIE_IS_SUGGESTED_TO_YOU_BECAUSE'] = gettext('This movie is suggested to you because');
     $rootScope['T_PART_OF_THE_SERIES_YOU_WATCHED'] = gettext('Part of the series you watched');
     $rootScope['T_TOP_250_IMDB_MOVIE'] = gettext('Top 250 IMDB movie');
+
+    $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
 });
 
 app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", "hotkeys", function($scope, SuggestionLoader, $http, hotkeys) {
@@ -32,7 +34,7 @@ app.controller("WizardController", ["$scope", "SuggestionLoader", "$http", "hotk
         // TODO: success/error callbacks?
         // https://docs.angularjs.org/api/ng/service/$http
         $http.post(
-            '/api/v2/user_to_movie/add_movie/',
+            '/api/v2/movie_actions/add_movie/',
             {'movie_id': movie_id, 'status': status});
 
         this.suggestionLoader.suggestions.shift();

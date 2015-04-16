@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url, include
 from api.v2.genre import GenreResource
 from api.v2.list_comparison import ListComparisonResource
 from api.v2.movie import MovieResource
+from api.v2.movie_actions import MovieActionsResource
 from api.v2.movie_short import MovieShortResource
 from api.v2.user import UserResource
 from api.v2.user_to_movie import UserToMovieResource
@@ -12,6 +13,7 @@ list_comparison = ListComparisonResource()
 genres = GenreResource()
 movies = MovieResource()
 movies_short = MovieShortResource()
+movie_actions = MovieActionsResource()
 users = UserResource()
 
 urlpatterns = patterns(
@@ -22,4 +24,5 @@ urlpatterns = patterns(
     url(r'', include(movies_short.urls)),
     url(r'', include(users.urls)),
     url(r'', include(list_comparison.urls)),
+    url(r'', include(movie_actions.urls)),
 )

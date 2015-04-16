@@ -102,6 +102,7 @@ class UserMoviesMixin(models.Model):
             old_score = u2m.score
             u2m.score = score
             with transaction.atomic():
+                u2m.save(update_fields=('score',))
                 signals.user_changed_score.send(
                     sender=self.__class__,
                     user=self,
@@ -109,6 +110,35 @@ class UserMoviesMixin(models.Model):
                     new_score=score,
                     old_score=old_score,
                 )
+
+    class CannotCommentUnwatchedMovie(Exception):
+        pass
+
+    class CommentTooLong(Exception):
+        pass
+
+    def set_movie_comments(self, movie, comments):
+        """
+        @type movie movies.models.Movie
+        @type comments str
+        """
+        if len(comments) > 140:
+            raise self.CommentTooLong
+
+        try:
+            u2m = UserToMovie.objects.get(
+                user=self,
+                movie=movie
+            )
+        except UserToMovie.DoesNotExist:
+            return
+
+        if u2m.status != constants.WATCHED:
+            raise self.CannotCommentUnwatchedMovie
+
+        u2m.comments = comments
+        with transaction.atomic():
+            u2m.save(update_fields=('comments',))
 
     def remove_movie(self, movie):
         """
@@ -261,6 +291,18 @@ class UserMoviesMixin(models.Model):
         )
 
         return compatibility_power, shared_movies
+
+    def get_following_opinions_about_movie(self, movie):
+        """
+        @type movie movies.models.Movie
+        """
+        return UserToMovie.objects.filter(
+            movie=movie,
+            status=constants.WATCHED,
+            user_id__in=self.get_following().values_list('id', flat=True)
+        ).select_related('user').exclude(
+            comments=''
+        ).values_list('user__username', 'score', 'comments')
 
     def get_status_counters(self):
         values = UserToMovie.objects.\

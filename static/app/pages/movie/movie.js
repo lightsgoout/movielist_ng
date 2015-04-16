@@ -1,4 +1,4 @@
-app = angular.module("MoviePage", ["tastyResource", "ngResource", 'xeditable']);
+app = angular.module("MoviePage", ["tastyResource", "ngResource", 'xeditable', 'ngCookies']);
 
 app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
     return TastyResource({
@@ -7,8 +7,11 @@ app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
     });
 }]);
 
-app.run(function(editableOptions) {
-  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+app.run(function($rootScope, editableOptions, $http, $cookies) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
+
+    $rootScope['T_NO_COMMENTS'] = gettext('No comments');
 });
 
 
@@ -36,22 +39,56 @@ app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($
 
     $scope.save = function() {
         if ($scope.user_to_movie.id) {
-            $http.post(
-            '/api/v2/user_to_movie/set_score/',
-            {
-                movie_id: $scope.user_to_movie.movie_id,
-                score: $scope.user_to_movie.score
-            });
+            $scope.setStatus();
         } else {
-            $http.post(
-            '/api/v2/user_to_movie/add_movie/',
-            {
-                'movie_id': $scope.user_to_movie.movie_id,
-                'status': $scope.user_to_movie.status
-            }).success(function(data, status, headers, config) {
-                $scope.user_to_movie.id = data.id;
-            });
+            $scope.addMovie();
         }
+    };
+
+    $scope.addMovie = function() {
+        $http.post(
+        '/api/v2/movie_actions/add_movie/',
+        {
+            movie_id: $scope.user_to_movie.movie_id,
+            status: $scope.user_to_movie.status
+        }).success(function(data, status, headers, config) {
+            $scope.user_to_movie.id = data.id;
+        });
+    };
+
+    $scope.setStatus = function() {
+        $http.post(
+        '/api/v2/movie_actions/set_status/',
+        {
+            movie_id: $scope.user_to_movie.movie_id,
+            status: $scope.user_to_movie.status
+        });
+    };
+
+    $scope.setScore = function() {
+        $http.post(
+        '/api/v2/movie_actions/set_score/',
+        {
+            movie_id: $scope.user_to_movie.movie_id,
+            score: $scope.user_to_movie.score
+        });
+    };
+
+    $scope.setComments = function() {
+        $http.post(
+        '/api/v2/movie_actions/set_comments/',
+        {
+            movie_id: $scope.user_to_movie.movie_id,
+            comments: $scope.user_to_movie.comments
+        });
+    };
+
+    $scope.showCommentsHelp = function() {
+        $scope.show_comments_help = true;
+    };
+
+    $scope.hideCommentsHelp = function() {
+        $scope.show_comments_help = false;
     };
 
     $scope.init = function(movie_id) {
@@ -86,7 +123,7 @@ app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($
         ];
 
         $http.get(
-            '/api/v2/user_to_movie/movie_status/',
+            '/api/v2/movie_actions/movie_status/',
             {
                 params: {
                     'movie_id': movie_id
@@ -95,6 +132,7 @@ app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($
         ).success(function(data, status, headers, config) {
             $scope.user_to_movie = UserToMovie;
             if (data) {
+                $scope.user_to_movie.comments = data.comments;
                 $scope.user_to_movie.status = data.status;
                 $scope.user_to_movie.score = data.score;
                 $scope.user_to_movie.id = data.id;
@@ -102,6 +140,7 @@ app.controller("ScoreController", ["$scope", "UserToMovie", "$http", function ($
             } else{
                 $scope.user_to_movie.status = null;
                 $scope.user_to_movie.score = null;
+                $scope.user_to_movie.comments = null;
                 $scope.user_to_movie.id = null;
                 $scope.user_to_movie.movie_id = movie_id;
             }
