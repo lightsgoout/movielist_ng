@@ -20,7 +20,6 @@ class UserObjectsOnlyAuthorization(Authorization):
 
 
 class UserToMovieResource(ModelResource):
-    movie_id = fields.IntegerField()
     movie = fields.ToOneField(
         MovieResource,
         'movie',
@@ -63,6 +62,11 @@ class UserToMovieResource(ModelResource):
             'movie',
             'movie__rating_imdb',
             'movie__title',
+        ]
+        fields = [
+            'created_at',
+            'score',
+            'status',
         ]
 
     def build_filters(self, filters=None):
