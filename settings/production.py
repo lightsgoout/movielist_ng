@@ -139,7 +139,6 @@ BOWER_INSTALLED_APPS = (
     'flag-icon-css#0.7.0',
     'bootstrap-hover-dropdown#2.1.3',
     'd3#3.5.5',
-    'angular-google-chart',
 )
 
 TEMPLATE_DIRS = (
