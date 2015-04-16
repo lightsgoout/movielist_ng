@@ -1,6 +1,5 @@
 import json
 from django.conf.urls import url
-from django.http import Http404
 from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization
 from tastypie.exceptions import BadRequest, NotFound
@@ -71,7 +70,7 @@ class UserResource(ModelResource):
         try:
             user = MovielistUser.objects.get(username=raw_json.get('username'))
         except MovielistUser.DoesNotExist:
-            raise Http404('User does not exist')
+            raise NotFound('User does not exist')
 
         request.user.follow_user(user)
 
@@ -93,7 +92,7 @@ class UserResource(ModelResource):
         try:
             user = MovielistUser.objects.get(username=raw_json.get('username'))
         except MovielistUser.DoesNotExist:
-            raise Http404('User does not exist')
+            raise NotFound('User does not exist')
 
         request.user.unfollow_user(user)
 

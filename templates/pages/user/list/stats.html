@@ -1,17 +1,12 @@
 {% load i18n %}
-{% if movies %}
-<table class="table" border="0" cellpadding="0" cellspacing="2" width="100%">
-	<tbody>
-    <tr>
-		<td width="190" style="border-top: none;"><span class="lightLink">{% trans 'Total runtime (days)' %}</span></td>
-		<td width="28"  style="border-top: none;" nowrap="" align="center"><span title="Days">{{ days }}</span></td>
-		<td style="border-top: none;"><div style="width: 100%; padding-left: 0;"><div style="width: 10%; background-color:#8aa7d8;">&nbsp;</div></div></td>
-	</tr>
-	<tr>
-		<td width="190"><span class="lightLink">{% trans 'Total entries' %}</span></td>
-		<td align="center">{{ movies|length }}</td>
-		<td><div style="width: 100%; padding-left: 0;"><div style="width: 29%; background-color:#b0c4e8;">&nbsp;</div></div></td>
-	</tr>
-	</tbody>
-</table>
-{% endif %}
+<div ng-controller="StatsController" ng-init="init('{{ user.username }}')">
+<dl class="dl-horizontal">
+  <dt>{% trans 'Total runtime (days)' %}:</dt>
+  <dd>{{ user.get_total_movie_runtime_days }}</dd>
+  <dt>{% trans 'Movies watched' %}:</dt>
+  <dd>{{ user.get_total_watched_movies }}</dd>
+  <dt>{% trans 'Average score' %}:</dt>
+  <dd>{{ user.get_average_movie_score|default:'-'}}</dd>
+</dl>
+    <div data-ac-chart="'bar'" data-ac-data="data" data-ac-config="config" style="width: 500px; height: 500px;"></div>
+</div>

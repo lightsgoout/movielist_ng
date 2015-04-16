@@ -1,0 +1,6 @@
+{% load i18n %}
+<div ng-controller="StatsController" ng-init="init('{{ first_user.username }}', '{{ second_user.username }}')">
+    <div class="row">
+        <div data-ac-chart="'bar'" data-ac-data="scores_data" data-ac-config="scores_config" style="width: 90%; height: 350px; margin: 0 auto;"></div>
+    </div>
+</div>

@@ -46,10 +46,24 @@
                                e-ng-options="s as s for s in SCORE_CHOICES"
                                onaftersave="save()">
                                 {% verbatim %}
-                                <span class="ng-scope user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
+                                <span class="ng-scope label user-score-digit user-score-{{ user_to_movie.score }} lead">{{ showScore() }}</span>
                                  {% endverbatim %}
                             </a>
                         </div>
+                </div>
+                <div class="row">
+                    <blockquote>
+                        Хуита
+                        <footer>zsd <span class="label label-user-score-5">5</span></footer>
+                    </blockquote>
+                    <blockquote>
+                        А мне норм
+                        <footer>ender <span class="label label-user-score-8">8</span></footer>
+                    </blockquote>
+                    <blockquote>
+                        Честно говоря, ожидал от фильма большего, сценарий в начале дал большие надежды, лалала длинный блогпост от штакета
+                        <footer>Shtaket <span class="label label-user-score-6">6</span></footer>
+                    </blockquote>
                 </div>
 
             </div>
@@ -172,11 +186,7 @@
                                     {% trans 'MPAA rating' %}
                                 </th>
                                 <td>
-                                    {% if movie.rated %}
-                                        {{ movie.rated }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
+                                    {{ movie.rated|default:'-' }}
                                 </td>
                             </tr>
                             <tr>
@@ -184,11 +194,7 @@
                                     {% trans 'Runtime' %}
                                 </th>
                                 <td>
-                                    {% if movie.runtime %}
-                                        {{ movie.runtime }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
+                                    {{ movie.runtime|default:'-' }}
                                 </td>
                             </tr>
                             <tr>
@@ -196,11 +202,7 @@
                                     {% trans 'Tagline' %}
                                 </th>
                                 <td>
-                                    {% if movie.tagline %}
-                                        {{ movie.tagline }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
+                                    {{ movie.tagline|default:'-' }}
                                 </td>
                             </tr>
                         </table>
@@ -213,21 +215,13 @@
                             <tr>
                                 <th>{% trans 'Metascore' %}</th>
                                 <td>
-                                    {% if movie.rating_metacritic %}
-                                    {{ movie.rating_metacritic }}
-                                    {% else %}
-                                    -
-                                    {% endif %}
+                                    {{ movie.rating_metacritic|default:'-' }}
                                 </td>
                             </tr>
                             <tr>
                                 <th>{% trans 'Rotten Tomatoes' %}</th>
                                 <td>
-                                    {% if movie.rating_tomatoes %}
-                                    {{ movie.rating_tomatoes }}%
-                                    {% else %}
-                                    -
-                                    {% endif %}
+                                    {{ movie.rating_tomatoes|default:'-' }}%
                                 </td>
                             </tr>
                         </table>

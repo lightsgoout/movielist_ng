@@ -36,10 +36,13 @@ class UserMoviesMixin(models.Model):
             user=self,
             status=constants.WATCHED
         ).aggregate(avg_score=models.Avg('score'))['avg_score']
-        return round(avg_score, 1)
+        return round(avg_score, 1) if avg_score else None
 
     def get_movies(self, status=constants.WATCHED, **kwargs):
         return self.movies.filter(usertomovie__status=status, **kwargs)
+
+    def get_total_watched_movies(self):
+        return self.get_movies(status=constants.WATCHED).count()
 
     def add_movie(self, movie, status=constants.WATCHED, score=None):
         """
@@ -140,6 +143,89 @@ class UserMoviesMixin(models.Model):
         except UserToMovie.DoesNotExist:
             return None
 
+    def get_shared_movies(self, user, status=constants.WATCHED, from_queryset=None):
+        """
+        @type user accounts.models.MovielistUser
+        """
+        my_movie_map = dict(UserToMovie.objects.filter(
+            user=self,
+            status=status
+        ).values_list('movie_id', 'score'))
+
+        """
+        from_queryset is used for prefetch_related querysets from APIs.
+        """
+        if not from_queryset:
+            queryset = UserToMovie.objects.select_related('movie')
+        else:
+            queryset = from_queryset._clone()
+
+        his_movies = queryset.filter(
+            user=user,
+            status=status,
+            movie_id__in=my_movie_map.keys()
+        )
+
+        for his_movie in his_movies:
+            setattr(his_movie, 'score_left', my_movie_map[his_movie.movie_id])
+            setattr(his_movie, 'score_right', his_movie.score)
+
+        return his_movies
+
+    def get_my_unique_movies(self, user, status=constants.WATCHED, from_queryset=None):
+        """
+        @type user accounts.models.MovielistUser
+        """
+        his_movies = user.get_movies(status).values_list('id', flat=True)
+
+        """
+        from_queryset is used for prefetch_related querysets from APIs.
+        """
+        if not from_queryset:
+            queryset = UserToMovie.objects.select_related('movie')
+        else:
+            queryset = from_queryset._clone()
+
+        my_movies = queryset.filter(
+            user=self,
+            status=status,
+        ).exclude(
+            movie_id__in=his_movies
+        )
+
+        for my_movie in my_movies:
+            setattr(my_movie, 'score_left', my_movie.score)
+            setattr(my_movie, 'score_right', None)
+
+        return my_movies
+
+    def get_his_unique_movies(self, user, status=constants.WATCHED, from_queryset=None):
+        """
+        @type user accounts.models.MovielistUser
+        """
+        my_movies = self.get_movies(status).values_list('id', flat=True)
+
+        """
+        from_queryset is used for prefetch_related querysets from APIs.
+        """
+        if not from_queryset:
+            queryset = UserToMovie.objects.select_related('movie')
+        else:
+            queryset = from_queryset._clone()
+
+        his_movies = queryset.filter(
+            user=user,
+            status=status,
+        ).exclude(
+            movie_id__in=my_movies
+        )
+
+        for his_movie in his_movies:
+            setattr(his_movie, 'score_left', None)
+            setattr(his_movie, 'score_right', his_movie.score)
+
+        return his_movies
+
     def get_compatibility(self, user):
         """
         @type user accounts.models.MovielistUser
@@ -182,3 +268,10 @@ class UserMoviesMixin(models.Model):
             values_list('status').\
             annotate(Count('status'))
         return dict(values)
+
+    def get_score_counters(self):
+        values = UserToMovie.objects.\
+            filter(user=self, score__gt=0).\
+            values_list('score').\
+            annotate(Count('score'))
+        return {str(k): v for k, v in values}

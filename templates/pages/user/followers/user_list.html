@@ -2,21 +2,9 @@
 {% for user in users %}
     <div>
         <h4 style="display: table-cell;"><a href={% url 'list_watched' user.username %}>{{ user.username }}</a></h4>
-        <p class="text-muted" style="font-size: 10pt; margin-top: 0; display: table-cell; padding-left: 5px;">
-            {% if user.age %}
-                {{ user.age }},
-            {% endif %}
-            {% if user.gender != None %}
-                {% if user.gender %}
-                    {% trans 'Male' %},
-                {% else %}
-                    {% trans 'Female' %},
-                {% endif %}
-            {% endif %}
-            {% if user.country  %}
-                {{ user.country.name }}
-            {% endif %}
-        </p>
+        <div style="font-size: 10pt; margin-top: 0; display: table-cell; padding-left: 5px;"
+            {% include 'pages/user/personal_info.html' with user=user %}
+        </div>
         {% if user.last_watched_movie %}
             <p style="margin-top: 10px;">{% trans 'Last watched:' %} <a href="{% url 'movie' user.last_watched_movie.id user.last_watched_movie.slug %}">{{ user.last_watched_movie.title }}</a></p>
         {% else %}

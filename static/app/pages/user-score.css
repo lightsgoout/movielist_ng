@@ -1,60 +1,107 @@
 .user-score-10 {
-    color: #12c100;
-    font-size: 48pt !important;
+    background-color: #12c100;
 }
 
 .user-score-9 {
-    color: #21a500;
-    font-size: 48pt !important;
+    background-color: #21a500;
 }
 
 .user-score-8 {
-    color: #439300;
-    font-size: 48pt !important;
+    background-color: #439300;
 }
 
 .user-score-7 {
-    color: #659300;
-    font-size: 48pt !important;
+    background-color: #659300;
 }
 
 .user-score-6 {
-    color: #7f9300;
-    font-size: 48pt !important;
+    background-color: #7f9300;
 }
 
 .user-score-5 {
-    color: #936e00;
-    font-size: 48pt !important;
+    background-color: #d4a300;
 }
 
 .user-score-4 {
-    color: #FF8C00;
-    font-size: 48pt !important;
+    background-color: #FF8C00;
 }
 
 .user-score-3 {
-    color: #FF5700;
-    font-size: 48pt !important;
+    background-color: #FF5700;
 
 }
 
 .user-score-2 {
-    color: #FF3400;
-    font-size: 48pt !important;
+    background-color: #FF3400;
 
 }
 
 .user-score-1 {
-    color: #FF0000;
-    font-size: 48pt !important;
+    background-color: #FF0000;
 }
 
 .user-score {
     font-size: 18pt;
-    line-height:90px;
+    line-height:100px;
+}
+
+.user-score- {
+    color: black;
+    padding: 0;
+    font-size: 12pt;
+}
+
+
+.label-user-score-10 {
+    background-color: #12c100;
+}
+
+.label-user-score-9 {
+    background-color: #21a500;
+}
+
+.label-user-score-8 {
+    background-color: #439300;
+}
+
+.label-user-score-7 {
+    background-color: #659300;
+}
+
+.label-user-score-6 {
+    background-color: #7f9300;
+}
+
+.label-user-score-5 {
+    background-color: #d4a300;
+}
+
+.label-user-score-4 {
+    background-color: #FF8C00;
+}
+
+.label-user-score-3 {
+    background-color: #FF5700;
+}
+
+.label-user-score-2 {
+    background-color: #FF3400;
+}
+
+.label-user-score-1 {
+    background-color: #FF0000;
+}
+
+.label-user-score- {
+    color: black;
+    font-size: 12pt;
 }
 
 .user-score-digit {
-    font-size: 16pt;
+    font-size: 24pt;
+}
+
+
+.user-score-.user-score-digit {
+    font-size: 12pt;
 }

@@ -4,9 +4,6 @@
             <thead>
                 <tr>
                     <th ng-show="!editable">
-                      <a ng-click="orderByField='my_status'; reverseSort = !reverseSort">
-                      {{ T_MY_STATUS }} <span ng-show="orderByField == 'my_status'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
-                      </a>
                     </th>
                     <th style="width: 350px;">
                       <a ng-click="orderByField='movie.title'; reverseSort = !reverseSort">
@@ -22,11 +19,6 @@
                     <th ng-show="loader.status == 'W'">
                       <a ng-click="orderByField='score'; reverseSort = !reverseSort">
                       {{ T_SCORE }} <span ng-show="orderByField == 'score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
-                      </a>
-                    </th>
-                    <th ng-show="loader.status == 'W' && !editable">
-                      <a ng-click="orderByField='my_score'; reverseSort = !reverseSort">
-                      {{ T_MY_SCORE }} <span ng-show="orderByField == 'my_score'"><span ng-show="!reverseSort"><i class="fa fa-sort-asc"></i></span><span ng-show="reverseSort"><i class="fa fa-sort-desc"></i></span></span>
                       </a>
                     </th>
                     <th>
@@ -45,16 +37,16 @@
                       </a>
                     </th>
                     <th ng-show="editable" style="width:100px;">
-                        {{ T_ACTIONS }}
                     </th>
                 </tr>
             </thead>
             <tbody infinite-scroll='loader.nextPage()' infinite-scroll-disabled='loader.busy' infinite-scroll-distance='1'>
-                <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController" ng-mouseenter="hover(user_to_movie)" ng-mouseleave="hover(user_to_movie)" ng-show="!user_to_movie._deleted">
+                <tr ng-repeat="user_to_movie in loader.user_to_movies | orderBy:orderByField:reverseSort" ng-controller="UserToMovieController" ng-show="!user_to_movie._deleted">
                     <td class="text-right" ng-show="!editable">
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'W'">{{ T_WATCHED }}</span>
                         <span class="label label-info" ng-show="user_to_movie.my_status == 'P'">{{ T_PLAN_TO_WATCH }}</span>
                         <span class="label label-default" ng-show="user_to_movie.my_status == 'I'">{{ T_IGNORED }}</span>
+                        <span class="label label-user-score-{{ user_to_movie.my_score }}" ng-show="user_to_movie.my_score" title="{{ T_MY_SCORE }}">{{ user_to_movie.my_score }}</span>
                         <div style="display: inline-block; margin-left: 5px;" ng-show="!user_to_movie.my_status && !editable">
                             <div class="btn-group">
                                 <button type="button"
@@ -84,24 +76,19 @@
                                buttons="no"
                                e-ng-options="s as s for s in SCORE_CHOICES"
                                onaftersave="setScore()">
-                                <span class="ng-scope score_{{ user_to_movie.score }}">
-                                    {{ showScore() }}
-                                </span>
+                                <span class="ng-scope label label-user-score-{{ user_to_movie.score }}">{{ showScore() }}</span>
                             </a>
                         </div>
                         <div ng-show="!editable" class="text-center">
-                            <strong>{{ user_to_movie.score }}</strong>
+                            <span class="ng-scope label label-user-score-{{ user_to_movie.score }}">{{ user_to_movie.score }}</span>
                         </div>
-                    </td>
-                    <td ng-show="loader.status == 'W' && !editable" class="text-center">
-                        {{ user_to_movie.my_score }}
                     </td>
                     <td>{{ user_to_movie.movie.rating_imdb }}</td>
                     <td>{{ user_to_movie.movie.votes_imdb }}</td>
                     <td>{{ user_to_movie.created_at|date:'d/M/yy' }}</td>
                     <td ng-show="editable">
-                        <div class="dropdown" ng-show="user_to_movie._hovered && editable">
-                          <button class="btn btn-default dropdown-toggle btn-xs table-actions" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        <div class="dropdown" ng-show="editable">
+                          <button class="btn btn-default dropdown-toggle btn-xs table-actions" type="button" data-toggle="dropdown" aria-expanded="true" style="text-transform: none;">
                             {{ T_ACTIONS }}
                             <span class="caret"></span>
                           </button>

@@ -88,11 +88,6 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
         //return ($scope.user_to_movie.score && selected.length) ? selected[0].text : 'Not set';
         return $scope.user_to_movie.score || gettext('Set score');
     };
-
-    $scope.hover = function(user_to_movie) {
-        // Shows/hides the delete button on hover
-        return user_to_movie._hovered = ! user_to_movie._hovered;
-    };
 }]);
 
 app.controller("FriendshipController", ["$scope", "$http", function($scope, $http) {
@@ -190,7 +185,10 @@ app.controller("ListController", function($scope, Movie) {
             kwargs['composers'] = person_id;
         }
 
-        $scope.movies = Movie.query(kwargs);
+        $scope.loading = true;
+        $scope.movies = Movie.query(kwargs, function(response) {
+            $scope.loading = false;
+        });
     };
 
     $scope.isActive = function(route) {
@@ -200,6 +198,7 @@ app.controller("ListController", function($scope, Movie) {
 
 app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, UserToMovie) {
     var Loader = function(username, status) {
+
         this.user_to_movies = [];
         this.busy = false;
         this.offset = 0;
@@ -266,18 +265,3 @@ app.factory('Loader', ["TastyResource", "UserToMovie", function(TastyResource, U
 
     return Loader;
 }]);
-
-app.filter('filterByGenre', function () {
-    return function (items, genres) {
-        var filtered = []; // Put here only items that match
-        (items || []).forEach(function (item) { // Check each item
-            var matches = genres.some(function (genre) {          // If there is some tag
-                return (item.movie.genres.indexOf(tag.text) > -1);
-            });                                               // we have a match
-            if (matches) {           // If it matches
-                filtered.push(item); // put it into the `filtered` array
-            }
-        });
-        return filtered; // Return the array with items that match any tag
-    };
-});
