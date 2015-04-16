@@ -5,7 +5,7 @@ app.controller("StatsController", ["$scope", "$http", function ($scope, $http) {
     $scope.init = function(first_username, second_username) {
 
         $http.get(
-        '/api/v2/user/stats_comparison/',
+        '/api/v2/list_comparison/stats_comparison/',
         {
             params: {
                 first_username: first_username,
