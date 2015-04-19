@@ -1,4 +1,4 @@
-app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable', "ngRoute"]);
+app = angular.module("UserToMovie", ["tastyResource", "ngResource", 'infinite-scroll', 'xeditable', "ngRoute", "ngCookies"]);
 
 app.factory("UserToMovie", ["TastyResource", function (TastyResource) {
     return TastyResource({
@@ -28,7 +28,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider) {
     .otherwise({redirectTo: '/'});
 }]);
 
-app.run(function($rootScope, editableOptions) {
+app.run(function($rootScope, editableOptions, $http, $cookies) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 
     $rootScope['T_WATCHED'] = gettext('Watched');
@@ -48,6 +48,8 @@ app.run(function($rootScope, editableOptions) {
     $rootScope['T_DATE_ADDED_ON'] = gettext('Date added on');
     $rootScope['T_ACTIONS'] = gettext('Actions');
     $rootScope['T_DELETE'] = gettext('Delete');
+
+    $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
 });
 
 
@@ -55,7 +57,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
 
     $scope.setScore = function() {
         $http.post(
-        '/api/v2/user_to_movie/set_score/',
+        '/api/v2/movie_actions/set_score/',
         {
             movie_id: $scope.user_to_movie.movie.id,
             score: $scope.user_to_movie.score
@@ -64,7 +66,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
 
     $scope.addMovie = function(movie_id, status) {
         $http.post(
-        '/api/v2/user_to_movie/add_movie/',
+        '/api/v2/movie_actions/add_movie/',
         {
             movie_id: movie_id,
             status: status
@@ -75,7 +77,7 @@ app.controller("UserToMovieController", ["$scope", "UserToMovie", "$http", funct
 
     $scope.removeMovie = function(movie_id, index) {
         $http.post(
-        '/api/v2/user_to_movie/remove_movie/',
+        '/api/v2/movie_actions/remove_movie/',
         {
             movie_id: movie_id
         }).success(function(data, st, headers, config) {

@@ -130,6 +130,10 @@ def list_user_achievements(request, username):
 def show_movie(request, movie_id, slug):
     movie = get_object_or_404(Movie, pk=movie_id, slug=slug)
     series, next_movie, prev_movie = movie.get_series_information()
+    if request.user.is_authenticated:
+        opinions = request.user.get_following_opinions_about_movie(movie)
+    else:
+        opinions = []
     return render(
         request,
         'pages/movie/movie.html',
@@ -139,6 +143,7 @@ def show_movie(request, movie_id, slug):
             'series': series,
             'next_movie': next_movie,
             'prev_movie': prev_movie,
+            'opinions': opinions,
         }
     )
 

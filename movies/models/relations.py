@@ -46,6 +46,8 @@ class UserToMovie(models.Model):
         db_index=True
     )
 
+    comments = models.CharField(max_length=140, blank=True)
+
     class Meta:
         app_label = 'movies'
         unique_together = (
