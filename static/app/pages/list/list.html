@@ -39,7 +39,7 @@
                             <span class="flag-wrapper flag-icon flag-icon-{{ country.iso_code|lowercase }}" title="{{ country.name }}"></span>
                         </span>
                     </div>
-                    <div>
+                    <div ng-show="user_to_movie.movie.directors.length">
                         <span ng-switch="user_to_movie.movie.directors.length">
                             <span ng-switch-when="1">{{ T_DIRECTOR }}:</span>
                             <span ng-switch-default>{{ T_DIRECTORS }}:</span>
@@ -48,7 +48,7 @@
                             <a href="{{ person.page_url }}"><span ng-class="{'mark': loader.stringMatched(person.name)}">{{ person.name }}</span></a><span ng-show="!$last">, </span>
                         </span>
                     </div>
-                    <div>
+                    <div ng-show="user_to_movie.movie.cast.length">
                         {{ T_CAST }}:
                         <span ng-repeat="person in user_to_movie.movie.cast | orderBy:'-sort_power' | limitTo:loader.cast_limit_to">
                             <a href="{{ person.page_url }}"><span ng-class="{'mark': loader.stringMatched(person.name)}">{{ person.name }}</span></a><span ng-show="!$last">, </span>
