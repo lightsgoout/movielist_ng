@@ -17,7 +17,8 @@ class UserMoviesMixin(models.Model):
         'movies.Movie',
         null=True,
         blank=True,
-        related_name='users_last_watched'
+        related_name='users_last_watched',
+        on_delete=models.SET_NULL,
     )
 
     def get_total_movie_runtime(self, status=constants.WATCHED):
@@ -44,19 +45,25 @@ class UserMoviesMixin(models.Model):
     def get_total_watched_movies(self):
         return self.get_movies(status=constants.WATCHED).count()
 
-    def add_movie(self, movie, status=constants.WATCHED, score=None):
+    def add_movie(self, movie, status=constants.WATCHED, score=None, created_at=None):
         """
         @type movie movies.models.Movie
         @type status str
         @type score decimal.Decimal
         """
+        if UserToMovie.objects.filter(movie=movie, user=self).exists():
+            return
+
         with transaction.atomic():
-            u2m = UserToMovie.objects.create(
+            u2m_kwargs = dict(
                 user=self,
                 movie=movie,
                 status=status,
                 score=score,
             )
+            if created_at:
+                u2m_kwargs['created_at'] = created_at
+            u2m = UserToMovie.objects.create(**u2m_kwargs)
             signals.user_added_movie.send(
                 sender=self.__class__,
                 user=self,

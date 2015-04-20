@@ -1,5 +1,7 @@
 from HTMLParser import HTMLParser
 import logging
+from accounts.models import MovielistUser
+from imports.kinopoisk_convert import convert
 from movies.celery import app
 from movies.models import Movie, Person
 from kinopoisk.movie import Movie as KinopoiskMovie
@@ -25,7 +27,8 @@ def kinopoisk_fetch_movie_info(movie_id, *args, **kwargs):
 
     movie.title_ru = decoder.unescape(guess.title)
     movie.kinopoisk_id = guess.id
-    movie.save(update_fields=('title_ru', 'kinopoisk_id',))
+    movie.rating_kinopoisk = round(guess.rating, 1) if guess.rating else None
+    movie.save(update_fields=('title_ru', 'kinopoisk_id', 'rating_kinopoisk'))
 
 
 @app.task()
@@ -46,3 +49,14 @@ def kinopoisk_fetch_person_info(person_id, *args, **kwargs):
     person.birth_year = guess.year_birth
     person.kinopoisk_id = guess.id
     person.save(update_fields=('name_ru', 'birth_year', 'kinopoisk_id'))
+
+
+@app.task()
+def kinopoisk_import_list(user_id, kinopoisk_id, *args, **kwargs):
+    try:
+        user = MovielistUser.objects.get(id=user_id)
+    except MovielistUser.DoesNotExist:
+        log.error('User with id {} does not exist'.format(user_id))
+        return
+
+    convert(user, kinopoisk_id)

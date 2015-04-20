@@ -1,0 +1,40 @@
+{% extends 'pages/settings/settings.html' %}
+{% load i18n %}
+{% block settings_form %}
+{% if current_job %}
+    <h1>{% trans 'Import in progress...' %}</h1>
+    <div class="progress" style="margin-bottom: 0;">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ current_job.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ current_job.progress }}%; min-width: 2em;">
+          {{ current_job.progress }}%
+      </div>
+    </div>
+    <p class="text-muted">{% trans 'This will take a couple of time depending on the size of your Kinopoisk list. Feel free to press <kbd>F5</kbd>.' %}</p>
+{% else  %}
+    <div class="well">
+        <p>{% trans 'If you have a Kinopoisk.ru profile, you can import it here. Please provide a link to your Kinopoisk profile.' %} </p>
+    </div>
+    <form class="form-horizontal" action="{% url 'import_kinopoisk' %}" method="post">
+      <fieldset>
+        <legend>{% trans 'Import from Kinopoisk' %}</legend>
+        {% csrf_token %}
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+        <div class="form-group">
+            <label for="inputKinopoiskUrl" class="col-lg-4 control-label">{% trans 'Kinopoisk url' %}</label>
+            <div class="col-lg-7">
+                <input type="text" name="kinopoisk_id" class="form-control" id="inputKinopoiskUrl" required="required" autofocus="autofocus" placeholder="http://www.kinopoisk.ru/user/2589131/">
+            </div>
+              {% for error in form.kinopoisk_id.errors %}
+                <p class="text-danger col-lg-8 col-lg-offset-4">{{ error }}</p>
+              {% endfor %}
+        </div>
+        <div class="form-group">
+          <div class="col-lg-6 col-lg-offset-4">
+            <button type="submit" class="btn btn-primary" name="save">{% trans 'Go' %}</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+{% endif %}
+{% endblock %}

@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from movies import constants
 
@@ -42,11 +43,15 @@ class UserToMovie(models.Model):
         db_index=True)
 
     created_at = models.DateTimeField(
-        auto_now_add=True,
         db_index=True
     )
 
     comments = models.CharField(max_length=140, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.created_at:
+            self.created_at = datetime.datetime.now()
+        return super(UserToMovie, self).save(*args, **kwargs)
 
     class Meta:
         app_label = 'movies'
