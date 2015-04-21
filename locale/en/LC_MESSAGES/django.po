@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-16 19:27+0000\n"
+"POT-Creation-Date: 2015-04-21 00:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 
 #: accounts/views.py:30
 msgid "Invalid login or password"
+msgstr ""
+
+#: imports/views.py:18 imports/views.py:29
+msgid "Invalid url"
 msgstr ""
 
 #: templates/404.html:4
@@ -130,131 +134,147 @@ msgstr ""
 msgid "Connect with Twitter"
 msgstr ""
 
-#: templates/pages/movie/movie.html:78
+#: templates/pages/movie/movie.html:57
+msgid "My comments"
+msgstr ""
+
+#: templates/pages/movie/movie.html:71
+msgid "140 characters max."
+msgstr ""
+
+#: templates/pages/movie/movie.html:85
+msgid "No one has commented on this yet among the people you follow."
+msgstr ""
+
+#: templates/pages/movie/movie.html:99
 msgid "Movie information"
 msgstr ""
 
-#: templates/pages/movie/movie.html:80 templates/pages/person/person.html:63
-#: templates/pages/person/person.html:99
-#: templates/pages/person/person.html:135
+#: templates/pages/movie/movie.html:101 templates/pages/person/person.html:64
+#: templates/pages/person/person.html:100
+#: templates/pages/person/person.html:136
 #: templates/pages/user/compare/blocks/table.html:14
 msgid "Year"
 msgstr ""
 
-#: templates/pages/movie/movie.html:85
+#: templates/pages/movie/movie.html:106
 msgid "Series"
 msgstr ""
 
-#: templates/pages/movie/movie.html:91
+#: templates/pages/movie/movie.html:112
 msgid "Previous movie"
 msgstr ""
 
-#: templates/pages/movie/movie.html:97
+#: templates/pages/movie/movie.html:118
 msgid "Next movie"
 msgstr ""
 
-#: templates/pages/movie/movie.html:103 templates/pages/person/person.html:41
+#: templates/pages/movie/movie.html:124 templates/pages/person/person.html:42
 #: templates/pages/settings/settings_personal.html:27
 msgid "Country"
 msgstr ""
 
-#: templates/pages/movie/movie.html:113
+#: templates/pages/movie/movie.html:136
 #: templates/pages/search/serp_movies.html:56
 msgid "Directors"
 msgstr ""
 
-#: templates/pages/movie/movie.html:115 templates/pages/person/person.html:89
+#: templates/pages/movie/movie.html:138 templates/pages/person/person.html:90
 #: templates/pages/search/serp_movies.html:54
 msgid "Director"
 msgstr ""
 
-#: templates/pages/movie/movie.html:129
+#: templates/pages/movie/movie.html:152
 msgid "Writers"
 msgstr ""
 
-#: templates/pages/movie/movie.html:131
+#: templates/pages/movie/movie.html:154
 msgid "Writer"
 msgstr ""
 
-#: templates/pages/movie/movie.html:145
+#: templates/pages/movie/movie.html:168
 msgid "Producers"
 msgstr ""
 
-#: templates/pages/movie/movie.html:147
+#: templates/pages/movie/movie.html:170
 msgid "Producer"
 msgstr ""
 
-#: templates/pages/movie/movie.html:161
+#: templates/pages/movie/movie.html:184
 msgid "Composers"
 msgstr ""
 
-#: templates/pages/movie/movie.html:163 templates/pages/person/person.html:125
+#: templates/pages/movie/movie.html:186 templates/pages/person/person.html:126
 msgid "Composer"
 msgstr ""
 
-#: templates/pages/movie/movie.html:176
+#: templates/pages/movie/movie.html:199
 msgid "Genre"
 msgstr ""
 
-#: templates/pages/movie/movie.html:186
+#: templates/pages/movie/movie.html:211
 msgid "MPAA rating"
 msgstr ""
 
-#: templates/pages/movie/movie.html:194
+#: templates/pages/movie/movie.html:219
 msgid "Runtime"
 msgstr ""
 
-#: templates/pages/movie/movie.html:202
+#: templates/pages/movie/movie.html:227
 msgid "Tagline"
 msgstr ""
 
-#: templates/pages/movie/movie.html:210
+#: templates/pages/movie/movie.html:235
 msgid "Movie ratings"
 msgstr ""
 
-#: templates/pages/movie/movie.html:212 templates/pages/person/person.html:68
-#: templates/pages/person/person.html:104
-#: templates/pages/person/person.html:140
+#: templates/pages/movie/movie.html:237 templates/pages/person/person.html:69
+#: templates/pages/person/person.html:105
+#: templates/pages/person/person.html:141
 #: templates/pages/user/compare/blocks/table.html:29
 msgid "IMDB rating"
 msgstr ""
 
-#: templates/pages/movie/movie.html:213
+#: templates/pages/movie/movie.html:240
 msgid "votes"
 msgstr ""
 
-#: templates/pages/movie/movie.html:216
+#: templates/pages/movie/movie.html:245
 msgid "Metascore"
 msgstr ""
 
-#: templates/pages/movie/movie.html:222
+#: templates/pages/movie/movie.html:251
 msgid "Rotten Tomatoes"
 msgstr ""
 
-#: templates/pages/movie/movie.html:230
+#: templates/pages/movie/movie.html:260
 msgid "On other sites"
 msgstr ""
 
-#: templates/pages/movie/movie.html:246
+#: templates/pages/movie/movie.html:276
 #: templates/pages/search/serp_movies.html:64
 msgid "Cast"
 msgstr ""
 
-#: templates/pages/person/person.html:35
+#: templates/pages/movie/movie.html:284
+msgid "No information"
+msgstr ""
+
+#: templates/pages/person/person.html:36
 msgid "Personal information"
 msgstr ""
 
-#: templates/pages/person/person.html:37
+#: templates/pages/person/person.html:38
 #: templates/pages/settings/settings_personal.html:50
 msgid "Birth date"
 msgstr ""
 
-#: templates/pages/person/person.html:53
+#: templates/pages/person/person.html:54
 msgid "Actor"
 msgstr ""
 
-#: templates/pages/person/person.html:58 templates/pages/person/person.html:94
-#: templates/pages/person/person.html:130
+#: templates/pages/person/person.html:59 templates/pages/person/person.html:95
+#: templates/pages/person/person.html:131
 #: templates/pages/user/compare/blocks/table.html:9
 msgid "Movie"
 msgstr ""
@@ -263,25 +283,25 @@ msgstr ""
 msgid "Search results for"
 msgstr ""
 
-#: templates/pages/search/serp.html:30
+#: templates/pages/search/serp.html:31
 #, python-format
 msgid "Search results for: <mark>%(query)s</mark>"
 msgstr ""
 
-#: templates/pages/search/serp.html:33
+#: templates/pages/search/serp.html:34
 msgid "Movies"
 msgstr ""
 
-#: templates/pages/search/serp.html:35 templates/pages/search/serp.html:44
+#: templates/pages/search/serp.html:36 templates/pages/search/serp.html:45
 msgid "Maximum results limit reached, please narrow down your search"
 msgstr ""
 
-#: templates/pages/search/serp.html:42
+#: templates/pages/search/serp.html:43
 msgid "People"
 msgstr ""
 
-#: templates/pages/search/serp.html:54
-#: templates/pages/user/list/list_ng.html:58
+#: templates/pages/search/serp.html:55
+#: templates/pages/user/list/list_ng.html:59
 msgid "No results"
 msgstr ""
 
@@ -309,6 +329,62 @@ msgstr ""
 
 #: templates/pages/search/serp_people.html:20
 msgid "Top movies"
+msgstr ""
+
+#: templates/pages/settings/import_imdb.html:5
+#: templates/pages/settings/import_kinopoisk.html:5
+msgid "Import in progress..."
+msgstr ""
+
+#: templates/pages/settings/import_imdb.html:11
+msgid ""
+"This will take a couple of minutes depending on the size of your IMDB list. "
+"Feel free to press <kbd>F5</kbd>."
+msgstr ""
+
+#: templates/pages/settings/import_imdb.html:14
+msgid ""
+"If you have an IMDB.com profile, you can import it here. Please provide a "
+"link to your IMDB profile. <strong>Make sure your profile is publicly "
+"visible.</strong>"
+msgstr ""
+
+#: templates/pages/settings/import_imdb.html:18
+#: templates/pages/settings/settings.html:20
+#: templates/pages/user/list/list_ng.html:68
+msgid "Import from IMDB"
+msgstr ""
+
+#: templates/pages/settings/import_imdb.html:24
+msgid "Link to IMDB profile"
+msgstr ""
+
+#: templates/pages/settings/import_imdb.html:34
+#: templates/pages/settings/import_kinopoisk.html:34
+msgid "Go"
+msgstr ""
+
+#: templates/pages/settings/import_kinopoisk.html:11
+msgid ""
+"This will take a couple of minutes depending on the size of your Kinopoisk "
+"list. Feel free to press <kbd>F5</kbd>."
+msgstr ""
+
+#: templates/pages/settings/import_kinopoisk.html:14
+msgid ""
+"If you have a Kinopoisk.ru profile, you can import it here. Please provide a "
+"link to your Kinopoisk profile. <strong>Make sure your profile is publicly "
+"visible.</strong>"
+msgstr ""
+
+#: templates/pages/settings/import_kinopoisk.html:18
+#: templates/pages/settings/settings.html:19
+#: templates/pages/user/list/list_ng.html:67
+msgid "Import from Kinopoisk"
+msgstr ""
+
+#: templates/pages/settings/import_kinopoisk.html:24
+msgid "Link to Kinopoisk profile"
 msgstr ""
 
 #: templates/pages/settings/password_change.html:6
@@ -446,7 +522,7 @@ msgstr ""
 msgid "Achievements"
 msgstr ""
 
-#: templates/pages/user/list/achievements.html:46
+#: templates/pages/user/list/achievements.html:47
 msgid "List is empty"
 msgstr ""
 
@@ -454,53 +530,57 @@ msgstr ""
 msgid "Movie list"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:33
+#: templates/pages/user/list/list_ng.html:34
 msgid "Standard mode"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:34
+#: templates/pages/user/list/list_ng.html:35
 msgid "As table"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:39
+#: templates/pages/user/list/list_ng.html:40
 msgid "Filter"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:43
+#: templates/pages/user/list/list_ng.html:44
 msgid "Sort order"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:46
+#: templates/pages/user/list/list_ng.html:47
 msgid "Latest"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:47
+#: templates/pages/user/list/list_ng.html:48
 msgid "Earliest"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:48
+#: templates/pages/user/list/list_ng.html:49
 msgid "User's best"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:49
+#: templates/pages/user/list/list_ng.html:50
 msgid "User's worst"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:50
+#: templates/pages/user/list/list_ng.html:51
 msgid "IMDB best"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:51
+#: templates/pages/user/list/list_ng.html:52
 msgid "IMDB worst"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:62
+#: templates/pages/user/list/list_ng.html:63
 msgid "The list is empty"
 msgstr ""
 
-#: templates/pages/user/list/list_ng.html:64
+#: templates/pages/user/list/list_ng.html:65
 #: templates/registration/activation_complete.html:7
 msgid "Add movies"
+msgstr ""
+
+#: templates/pages/user/list/list_ng.html:66
+msgid "or"
 msgstr ""
 
 #: templates/pages/user/list/menu.html:11
@@ -550,16 +630,16 @@ msgstr ""
 msgid "joined on"
 msgstr ""
 
-#: templates/pages/wizard/wizard.html:29
+#: templates/pages/wizard/wizard.html:30
 msgid "Press <kbd><kbd>W</kbd> <kbd>W</kbd></kbd> to mark movie as watched"
 msgstr ""
 
-#: templates/pages/wizard/wizard.html:30
+#: templates/pages/wizard/wizard.html:31
 msgid ""
 "Press <kbd><kbd>P</kbd> <kbd>P</kbd></kbd> to mark movie as planned to watch"
 msgstr ""
 
-#: templates/pages/wizard/wizard.html:31
+#: templates/pages/wizard/wizard.html:32
 msgid "Press <kbd>space</kbd> to ignore movie"
 msgstr ""
 

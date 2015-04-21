@@ -8,14 +8,14 @@
           {{ current_job.progress }}%
       </div>
     </div>
-    <p class="text-muted">{% trans 'This will take a couple of time depending on the size of your Kinopoisk list. Feel free to press <kbd>F5</kbd>.' %}</p>
+    <p class="text-muted">{% trans 'This may take a couple of minutes depending on the size of your IMDB profile. Feel free to press <kbd>F5</kbd>.' %}</p>
 {% else  %}
     <div class="well">
         <p>{% trans 'If you have an IMDB.com profile, you can import it here. Please provide a link to your IMDB profile. <strong>Make sure your profile is publicly visible.</strong>' %} </p>
     </div>
     <form class="form-horizontal" action="{% url 'import_imdb' %}" method="post">
       <fieldset>
-        <legend>{% trans 'Import from Kinopoisk' %}</legend>
+        <legend>{% trans 'Import from IMDB' %}</legend>
         {% csrf_token %}
         {% for error in form.non_field_errors %}
         {{ error }}
