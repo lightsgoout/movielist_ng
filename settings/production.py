@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'djangobower',
     'django_activeurl',
     'statici18n',
+    'django_nose',
 
     'achievements',
     'accounts',
