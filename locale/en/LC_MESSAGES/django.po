@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-21 00:24+0000\n"
+"POT-Creation-Date: 2015-04-21 00:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -338,8 +338,8 @@ msgstr ""
 
 #: templates/pages/settings/import_imdb.html:11
 msgid ""
-"This will take a couple of minutes depending on the size of your IMDB list. "
-"Feel free to press <kbd>F5</kbd>."
+"This may take a couple of minutes depending on the size of your IMDB "
+"profile. Feel free to press <kbd>F5</kbd>."
 msgstr ""
 
 #: templates/pages/settings/import_imdb.html:14
@@ -366,8 +366,8 @@ msgstr ""
 
 #: templates/pages/settings/import_kinopoisk.html:11
 msgid ""
-"This will take a couple of minutes depending on the size of your Kinopoisk "
-"list. Feel free to press <kbd>F5</kbd>."
+"This may take a couple of minutes depending on the size of your Kinopoisk "
+"profile. Feel free to press <kbd>F5</kbd>."
 msgstr ""
 
 #: templates/pages/settings/import_kinopoisk.html:14
