@@ -61,8 +61,12 @@
                 <div ng-show="!loader.user_to_movies.length && !loader.first_loading && !loader.query && !loader.ordering">
                     <div class="jumbotron col-md-4 animate-show text-center" style="margin: 0 auto; width: 50%; float: none; margin-bottom: 50px; margin-top: 50px;">
                         <h2>{% trans 'The list is empty' %}</h2>
-                        <p>...</p>
-                        <p><a class="btn btn-primary btn-lg" href="{% url 'wizard' %}" role="button"><i class="fa fa-plus"></i> {% trans 'Add movies' %}</a></p>
+                        <div ng-show="editable">
+                            <p style="margin-top: 20px;"><a class="btn btn-primary btn-lg" href="{% url 'wizard' %}" role="button"><i class="fa fa-plus"></i> {% trans 'Add movies' %}</a></p>
+                            <p>{% trans 'or' %}</p>
+                            <p><a class="btn btn-info btn-lg" href="{% url 'import_kinopoisk' %}" role="button"><i class="fa fa-plus"></i> {% trans 'Import from Kinopoisk' %}</a></p>
+                            <p><a class="btn btn-info btn-lg" href="{% url 'import_imdb' %}" role="button"><i class="fa fa-plus"></i> {% trans 'Import from IMDB' %}</a></p>
+                        </div>
                     </div>
                 </div>
                 <div ng-view></div>

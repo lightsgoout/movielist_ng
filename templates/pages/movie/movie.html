@@ -73,7 +73,9 @@
                         </div>
 
                     <div class="row">
+                        {% if opinions %}
                         <p class="text-muted" style="margin-bottom: 5px;">My followers' comments</p>
+                            {% endif %}
                         {% for username, score, comments in opinions %}
                         <blockquote class="text-left">
                             {{ comments }}
@@ -123,6 +125,8 @@
                                 <td>
                                     {% for country in movie.countries.all %}
                                         <span class="flag-wrapper flag-icon flag-icon-{{ country.iso_code|lower }}" title="{{ country.name }}"></span>
+                                    {% empty %}
+                                        -
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -197,6 +201,8 @@
                                 <td>
                                     {% for genre in movie.genres.all %}
                                         <a href="#">{{ genre.name|lower }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% empty %}
+                                        -
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -229,7 +235,11 @@
                             <caption>{% trans 'Movie ratings' %}</caption>
                             <tr>
                                 <th>{% trans 'IMDB rating' %}</th>
-                                <td>{{ movie.rating_imdb }} <small>({{ movie.votes_imdb }} {% trans 'votes' %}</small>)</td>
+                                <td>{{ movie.rating_imdb|default:'-' }}
+                                    {% if movie.votes_imdb %}
+                                        <small>({{ movie.votes_imdb }} {% trans 'votes' %}</small>)
+                                    {% endif %}
+                                </td>
                             </tr>
                             <tr>
                                 <th>{% trans 'Metascore' %}</th>
@@ -240,7 +250,8 @@
                             <tr>
                                 <th>{% trans 'Rotten Tomatoes' %}</th>
                                 <td>
-                                    {{ movie.rating_tomatoes|default:'-' }}%
+                                    {{ movie.rating_tomatoes|default:'-' }}
+                                    {% if movie.rating_tomatoes %}%{% endif %}
                                 </td>
                             </tr>
                         </table>
@@ -269,6 +280,8 @@
                                         <a href="{% url 'person' person.id person.slug %}">{{ person.name }}</a>
                                     </td>
                                 </tr>
+                            {% empty %}
+                                <tr><td>{% trans 'No information' %}</td></tr>
                             {% endfor %}
                         </table>
                     </div>

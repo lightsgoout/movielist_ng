@@ -18,7 +18,7 @@ urlpatterns = patterns(
     url(r'^list/(?P<username>[\w.@+-]+)/achievements/$',
         'movies.views.list_user_achievements',
         name='list_user_achievements'),
-    url(r'^movie/(?P<movie_id>[\d]+)/(?P<slug>[\w-]+)/$',
+    url(r'^movie/(?P<movie_id>[\d]+)/(?P<slug>[\w-]*)/$',
         'movies.views.show_movie',
         name='movie'),
     url(r'^person/(?P<person_id>[\d]+)/(?P<slug>[\w-]+)/$',

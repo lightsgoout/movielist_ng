@@ -1,4 +1,4 @@
-from movies import tasks
+from imports import tasks
 
 
 def kinopoisk_fetch_movie_info(modeladmin, request, queryset):

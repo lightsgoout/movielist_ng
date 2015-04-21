@@ -1,3 +1,4 @@
+import datetime
 from django.core import validators
 from django.db import models
 from django.db.models import QuerySet
@@ -62,7 +63,7 @@ class Movie(models.Model):
     imdb_processed = models.BooleanField(default=False, db_index=True)
 
     kinopoisk_id = models.IntegerField(unique=True, null=True, blank=True)
-    imdb_id = models.CharField(max_length=16, unique=True)
+    imdb_id = models.CharField(max_length=16, unique=True, null=True)
     omdb_id = models.IntegerField(unique=True, null=True, blank=True)
 
     directors = models.ManyToManyField('movies.Person', related_name='directed_movies', blank=True)
@@ -140,7 +141,7 @@ class Movie(models.Model):
         if cur_language == 'ru':
             return self.title_ru or self.title_en
         else:
-            return self.title_en
+            return self.title_en or self.title_ru
 
     @property
     def plot(self):
@@ -160,7 +161,10 @@ class Movie(models.Model):
 
     @property
     def image_url(self):
-        return self.image_imdb
+        if self.image_imdb:
+            return self.image_imdb
+        elif self.kinopoisk_id:
+            return u'http://st.kp.yandex.net/images/film_iphone/iphone360_{}.jpg'.format(self.kinopoisk_id)
 
     @property
     def imdb_url(self):

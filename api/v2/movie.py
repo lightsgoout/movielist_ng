@@ -91,7 +91,7 @@ class MovieResource(ModelResource):
         return bundle.obj.image_url
 
     def dehydrate_rating_imdb(self, bundle):
-        return float(bundle.obj.rating_imdb)
+        return float(bundle.obj.rating_imdb) if bundle.obj.rating_imdb else None
 
     def dehydrate_page_url(self, bundle):
         return reverse(

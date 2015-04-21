@@ -19,6 +19,7 @@ class MovieAdmin(SphinxModelAdmin):
         'movie_cast',
     )
     list_filter = (
+        'source',
         'countries',
         'rated',
         'genres',
