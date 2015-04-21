@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'ajax_select',
     'django_extensions',
     'djangobower',
-    'django_nose',
     'django_activeurl',
     'statici18n',
 
@@ -67,6 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -188,3 +188,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 
 SEARCH_RESULTS_PER_PAGE = 100
 SEARCH_QUERY_MINIMUM_LENGTH = 3
+
+X_FRAME_OPTIONS = 'DENY'
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
