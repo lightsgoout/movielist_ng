@@ -118,6 +118,8 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
 
     @property
     def age(self):
+        if not self.date_of_birth:
+            return None
         today = date.today()
         born = self.date_of_birth
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
