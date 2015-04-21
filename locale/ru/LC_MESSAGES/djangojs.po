@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-09 09:05+0000\n"
+"POT-Creation-Date: 2015-04-21 00:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: static/app/pages/list/list.js:34 static/app/pages/movie/movie.js:63
+#: static/app/pages/list/list.js:34 static/app/pages/movie/movie.js:100
 #: static/app/pages/wizard/wizard.js:16
 msgid "Watched"
 msgstr "Смотрел"
 
-#: static/app/pages/list/list.js:35 static/app/pages/movie/movie.js:67
+#: static/app/pages/list/list.js:35 static/app/pages/movie/movie.js:104
 #: static/app/pages/wizard/wizard.js:17
 msgid "Plan to watch"
 msgstr "Собираюсь смотреть"
 
-#: static/app/pages/list/list.js:36 static/app/pages/movie/movie.js:71
+#: static/app/pages/list/list.js:36 static/app/pages/movie/movie.js:108
 msgid "Ignored"
 msgstr "Игнор"
 
@@ -89,11 +89,15 @@ msgstr "Действия"
 msgid "Delete"
 msgstr "Удалить"
 
-#: static/app/pages/list/list.js:89 static/app/pages/movie/movie.js:34
+#: static/app/pages/list/list.js:91 static/app/pages/movie/movie.js:37
 msgid "Set score"
 msgstr "Поставить оценку"
 
-#: static/app/pages/movie/movie.js:28
+#: static/app/pages/movie/movie.js:14
+msgid "No comments"
+msgstr "Нет комментариев"
+
+#: static/app/pages/movie/movie.js:31
 msgid "Add to list"
 msgstr "Добавить в список"
 
@@ -121,15 +125,15 @@ msgstr "Часть франшизы, которую вы смотрели "
 msgid "Top 250 IMDB movie"
 msgstr "IMDB Топ-250 фильм"
 
-#: static/app/pages/wizard/wizard.js:50
+#: static/app/pages/wizard/wizard.js:52
 msgid "Mark movie as watched"
 msgstr "Добавить в список просмотренного"
 
-#: static/app/pages/wizard/wizard.js:60
+#: static/app/pages/wizard/wizard.js:62
 msgid "Mark movie as planned to watch"
 msgstr "Добавить в список планируемого к просмотру"
 
-#: static/app/pages/wizard/wizard.js:70
+#: static/app/pages/wizard/wizard.js:72
 msgid "Mark movie as ignored"
 msgstr "Пропустить фильм"
 

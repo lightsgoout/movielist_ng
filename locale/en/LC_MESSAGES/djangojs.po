@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-09 09:05+0000\n"
+"POT-Creation-Date: 2015-04-21 00:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: static/app/pages/list/list.js:34 static/app/pages/movie/movie.js:63
+#: static/app/pages/list/list.js:34 static/app/pages/movie/movie.js:100
 #: static/app/pages/wizard/wizard.js:16
 msgid "Watched"
 msgstr ""
 
-#: static/app/pages/list/list.js:35 static/app/pages/movie/movie.js:67
+#: static/app/pages/list/list.js:35 static/app/pages/movie/movie.js:104
 #: static/app/pages/wizard/wizard.js:17
 msgid "Plan to watch"
 msgstr ""
 
-#: static/app/pages/list/list.js:36 static/app/pages/movie/movie.js:71
+#: static/app/pages/list/list.js:36 static/app/pages/movie/movie.js:108
 msgid "Ignored"
 msgstr ""
 
@@ -87,11 +87,15 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: static/app/pages/list/list.js:89 static/app/pages/movie/movie.js:34
+#: static/app/pages/list/list.js:91 static/app/pages/movie/movie.js:37
 msgid "Set score"
 msgstr ""
 
-#: static/app/pages/movie/movie.js:28
+#: static/app/pages/movie/movie.js:14
+msgid "No comments"
+msgstr ""
+
+#: static/app/pages/movie/movie.js:31
 msgid "Add to list"
 msgstr ""
 
@@ -119,14 +123,14 @@ msgstr ""
 msgid "Top 250 IMDB movie"
 msgstr ""
 
-#: static/app/pages/wizard/wizard.js:50
+#: static/app/pages/wizard/wizard.js:52
 msgid "Mark movie as watched"
 msgstr ""
 
-#: static/app/pages/wizard/wizard.js:60
+#: static/app/pages/wizard/wizard.js:62
 msgid "Mark movie as planned to watch"
 msgstr ""
 
-#: static/app/pages/wizard/wizard.js:70
+#: static/app/pages/wizard/wizard.js:72
 msgid "Mark movie as ignored"
 msgstr ""
