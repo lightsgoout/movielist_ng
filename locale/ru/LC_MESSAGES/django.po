@@ -146,7 +146,7 @@ msgstr "Максимум 140 символов"
 
 #: templates/pages/movie/movie.html:85
 msgid "No one has commented on this yet among the people you follow."
-msgstr "Никто из тех кого вы фолловите не оставил комментариев."
+msgstr "Никто из тех, кого вы фолловите не оставил комментариев."
 
 #: templates/pages/movie/movie.html:99
 msgid "Movie information"
