@@ -75,6 +75,11 @@ def convert(user, kinopoisk_user_id):
             raise KinopoiskLayoutChanged('Could not find div.pagesFromTo')
 
         total_movies = int(total_movies.next_element.split(' ')[-1])
+        if total_movies == 0:
+            job.finished = True
+            job.save(update_fields=('finished',))
+            return True
+
         job.progress = int(round(movies_added / float(total_movies) * 100))
         if job.progress > 0:
             job.save(update_fields=('progress',))

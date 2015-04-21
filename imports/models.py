@@ -8,5 +8,6 @@ class ImportListJob(models.Model):
 
     user = models.ForeignKey('accounts.MovielistUser')
     kinopoisk_id = models.CharField(blank=True, max_length=16)
+    imdb_id = models.CharField(blank=True, max_length=32)
     finished = models.BooleanField(default=False, db_index=True)
     progress = models.PositiveSmallIntegerField(default=0)

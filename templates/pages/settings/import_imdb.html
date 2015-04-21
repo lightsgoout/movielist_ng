@@ -11,9 +11,9 @@
     <p class="text-muted">{% trans 'This will take a couple of time depending on the size of your Kinopoisk list. Feel free to press <kbd>F5</kbd>.' %}</p>
 {% else  %}
     <div class="well">
-        <p>{% trans 'If you have a Kinopoisk.ru profile, you can import it here. Please provide a link to your Kinopoisk profile. <strong>Make sure your profile is publicly visible.</strong>' %} </p>
+        <p>{% trans 'If you have an IMDB.com profile, you can import it here. Please provide a link to your IMDB profile. <strong>Make sure your profile is publicly visible.</strong>' %} </p>
     </div>
-    <form class="form-horizontal" action="{% url 'import_kinopoisk' %}" method="post">
+    <form class="form-horizontal" action="{% url 'import_imdb' %}" method="post">
       <fieldset>
         <legend>{% trans 'Import from Kinopoisk' %}</legend>
         {% csrf_token %}
@@ -21,11 +21,11 @@
         {{ error }}
         {% endfor %}
         <div class="form-group">
-            <label for="inputKinopoiskUrl" class="col-lg-4 control-label">{% trans 'Link to Kinopoisk profile' %}</label>
+            <label for="inputIMDBUrl" class="col-lg-4 control-label">{% trans 'Link to IMDB profile' %}</label>
             <div class="col-lg-8">
-                <input type="text" name="kinopoisk_id" class="form-control" id="inputKinopoiskUrl" required="required" autofocus="autofocus" placeholder="http://www.kinopoisk.ru/user/255233/">
+                <input type="text" name="imdb_id" class="form-control" id="inputIMDBUrl" required="required" autofocus="autofocus" placeholder="http://www.imdb.com/user/ur22063331/watchlist">
             </div>
-              {% for error in form.kinopoisk_id.errors %}
+              {% for error in form.imdb_id.errors %}
                 <p class="text-danger col-lg-8 col-lg-offset-4">{{ error }}</p>
               {% endfor %}
         </div>

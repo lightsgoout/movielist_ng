@@ -1,7 +1,8 @@
 from HTMLParser import HTMLParser
 import logging
 from accounts.models import MovielistUser
-from imports.kinopoisk_convert import convert
+from imports.kinopoisk_convert import convert as kinopoisk_convert
+from imports.imdb_convert import convert as imdb_convert
 from movies.celery import app
 from movies.models import Movie, Person
 from kinopoisk.movie import Movie as KinopoiskMovie
@@ -59,4 +60,15 @@ def kinopoisk_import_list(user_id, kinopoisk_id, *args, **kwargs):
         log.error('User with id {} does not exist'.format(user_id))
         return
 
-    convert(user, kinopoisk_id)
+    kinopoisk_convert(user, kinopoisk_id)
+
+
+@app.task()
+def imdb_import_list(user_id, imdb_id, *args, **kwargs):
+    try:
+        user = MovielistUser.objects.get(id=user_id)
+    except MovielistUser.DoesNotExist:
+        log.error('User with id {} does not exist'.format(user_id))
+        return
+
+    imdb_convert(user, imdb_id)
