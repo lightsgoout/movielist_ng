@@ -61,7 +61,7 @@ class TestUserToMovieResource(ResourceTestCase):
     def test_add_movie(self):
         movie = movie_recipes.movie.make()
         user_to_movie = movie_recipes.user_to_movie.make()
-        url = reverse('api_add_movie', kwargs={'resource_name': 'user_to_movie'})
+        url = reverse('api_add_movie', kwargs={'resource_name': 'movie_actions'})
 
         with mock.patch('accounts.models.MovielistUser.add_movie') as m_add_movie:
             m_add_movie.return_value = user_to_movie
