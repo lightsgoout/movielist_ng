@@ -16,7 +16,7 @@ def index(request):
     if request.user.is_authenticated():
         return redirect(reverse('list_watched', args=[request.user.username]))
     else:
-        return render(request, 'pages/landing/landing.html')
+        return redirect(reverse('login'))
 
 
 def show_followers(request, username):
