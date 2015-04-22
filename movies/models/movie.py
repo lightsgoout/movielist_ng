@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models import QuerySet
 from django.utils import translation
 from django.utils.text import slugify
+from djangosphinx.models import SphinxSearch
 from model_utils.managers import PassThroughManager
 from common import fields
 
@@ -38,6 +39,14 @@ class TopManager(models.Manager):
 
 
 class Movie(models.Model):
+
+    search = SphinxSearch(
+        index='movies',
+        weights={
+            'title_en': 100,
+            'title_ru': 100,
+        }
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

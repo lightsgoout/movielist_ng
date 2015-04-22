@@ -201,3 +201,7 @@ RAVEN_CONFIG = {
     'dsn': 'http://25f57152c4f04fff913a8b38eba4a1ad:a8241cce14f84b33bbea9fad5ea4117d@sentry.mvlst.com/2',
     'release': raven.fetch_git_sha(BASE_DIR),
 }
+
+SPHINX_API_VERSION = 0x116
+SPHINX_PORT = 9312
+SPHINX_SERVER = '127.0.0.1'
