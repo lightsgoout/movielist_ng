@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'django_activeurl',
     'statici18n',
     'django_nose',
+    'raven.contrib.django.raven_compat',
 
     'achievements',
     'accounts',
@@ -194,3 +195,9 @@ SEARCH_QUERY_MINIMUM_LENGTH = 3
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
+import raven
+RAVEN_CONFIG = {
+    'dsn': 'http://25f57152c4f04fff913a8b38eba4a1ad:a8241cce14f84b33bbea9fad5ea4117d@sentry.mvlst.com/2',
+    'release': raven.fetch_git_sha(BASE_DIR),
+}
