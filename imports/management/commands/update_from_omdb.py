@@ -152,6 +152,8 @@ class Command(BaseCommand):
                 movie.title_en = get_value(title_en)
                 movie.year = get_value(year)
                 movie.rated = get_value(rated) or ''
+                if movie.rated.lower() in {'unrated', 'not rated', 'approved'}:
+                    movie.rated = ''
                 movie.runtime = parse_runtime(runtime)
                 movie.date_released = get_value(released)
                 movie.rating_metacritic = get_value(metacritic)

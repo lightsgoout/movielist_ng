@@ -58,7 +58,7 @@ class Movie(models.Model):
     title_ru = models.CharField(max_length=255, blank=True)
     year = models.PositiveSmallIntegerField(null=True, db_index=True)
     date_released = models.DateField(null=True, blank=True, db_index=True)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, max_length=105)
 
     imdb_processed = models.BooleanField(default=False, db_index=True)
 
@@ -132,7 +132,7 @@ class Movie(models.Model):
         return u'{} ({})'.format(self.title_en, self.year)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title_en)
+        self.slug = slugify(self.title_en)[:105]
         return super(Movie, self).save(*args, **kwargs)
 
     @property
