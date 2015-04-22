@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-21 00:26+0000\n"
+"POT-Creation-Date: 2015-04-22 01:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,19 +118,37 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: templates/pages/login/login.html:54
+#: templates/pages/login/login.html:17 templates/pages/login/login.html:33
+msgid "Sign in"
+msgstr ""
+
+#: templates/pages/login/login.html:24
+msgid "Username or email"
+msgstr ""
+
+#: templates/pages/login/login.html:25
+msgid "Please enter you username or email"
+msgstr ""
+
+#: templates/pages/login/login.html:29
+#: templates/pages/settings/settings.html:18
+#: templates/registration/registration_form.html:17
+msgid "Password"
+msgstr ""
+
+#: templates/pages/login/login.html:47
 msgid "Connect with Facebook"
 msgstr ""
 
-#: templates/pages/login/login.html:55
+#: templates/pages/login/login.html:48
 msgid "Connect with Github"
 msgstr ""
 
-#: templates/pages/login/login.html:56
+#: templates/pages/login/login.html:49
 msgid "Connect with VK"
 msgstr ""
 
-#: templates/pages/login/login.html:57
+#: templates/pages/login/login.html:50
 msgid "Connect with Twitter"
 msgstr ""
 
@@ -408,15 +426,12 @@ msgstr ""
 msgid "Confirm new password"
 msgstr ""
 
-#: templates/pages/settings/settings.html:18
-msgid "Password"
-msgstr ""
-
 #: templates/pages/settings/settings_personal.html:12
 msgid "Saved"
 msgstr ""
 
 #: templates/pages/settings/settings_personal.html:16
+#: templates/registration/registration_form.html:7
 msgid "Email"
 msgstr ""
 
@@ -686,4 +701,34 @@ msgstr ""
 msgid ""
 "An activation link has been sent to the email address you supplied, along "
 "with instructions for activating your account."
+msgstr ""
+
+#: templates/registration/registration_form.html:5
+#: templates/registration/registration_form.html:26
+msgid "Sign up"
+msgstr ""
+
+#: templates/registration/registration_form.html:8
+msgid "Please enter you email"
+msgstr ""
+
+#: templates/registration/registration_form.html:12
+msgid "Username"
+msgstr ""
+
+#: templates/registration/registration_form.html:13
+msgid "Please enter you username"
+msgstr ""
+
+#: templates/registration/registration_form.html:18
+#: templates/registration/registration_form.html:23
+msgid "Please enter your password"
+msgstr ""
+
+#: templates/registration/registration_form.html:22
+msgid "Confirm password"
+msgstr ""
+
+#: templates/registration/registration_form.html:24
+msgid "Please confirm password"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-21 00:26+0000\n"
+"POT-Creation-Date: 2015-04-22 01:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,19 +120,37 @@ msgstr "А еще у нас есть ачивки."
 msgid "Login"
 msgstr "Войти"
 
-#: templates/pages/login/login.html:54
+#: templates/pages/login/login.html:17
+msgid "Sign in"
+msgstr "Зашел как"
+
+#: templates/pages/login/login.html:24
+msgid "Username or email"
+msgstr "Имя пользователя или e-mail"
+
+#: templates/pages/login/login.html:25
+msgid "Please enter you username or email"
+msgstr "Пожалуйста, введите имя пользователя или e-mail"
+
+#: templates/pages/login/login.html:29
+#: templates/pages/settings/settings.html:18
+#: templates/registration/registration_form.html:17
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/pages/login/login.html:47
 msgid "Connect with Facebook"
 msgstr "Зайти через Facebook"
 
-#: templates/pages/login/login.html:55
+#: templates/pages/login/login.html:48
 msgid "Connect with Github"
 msgstr "Зайти через Github"
 
-#: templates/pages/login/login.html:56
+#: templates/pages/login/login.html:49
 msgid "Connect with VK"
 msgstr "Зайти через VK"
 
-#: templates/pages/login/login.html:57
+#: templates/pages/login/login.html:50
 msgid "Connect with Twitter"
 msgstr "Зайти через Twitter"
 
@@ -418,15 +436,12 @@ msgstr "Новый пароль"
 msgid "Confirm new password"
 msgstr "Подтвердите новый пароль"
 
-#: templates/pages/settings/settings.html:18
-msgid "Password"
-msgstr "Пароль"
-
 #: templates/pages/settings/settings_personal.html:12
 msgid "Saved"
 msgstr "Сохранено"
 
 #: templates/pages/settings/settings_personal.html:16
+#: templates/registration/registration_form.html:7
 msgid "Email"
 msgstr "Электронная почта"
 
@@ -706,6 +721,36 @@ msgid ""
 "with instructions for activating your account."
 msgstr ""
 
+#: templates/registration/registration_form.html:5
+#: templates/registration/registration_form.html:26
+msgid "Sign up"
+msgstr "Зарегистрироваться"
+
+#: templates/registration/registration_form.html:8
+msgid "Please enter you email"
+msgstr "Пожалуйста, введите e-mail"
+
+#: templates/registration/registration_form.html:12
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/registration/registration_form.html:13
+msgid "Please enter you username"
+msgstr "Пожалуйста, введите имя пользователя"
+
+#: templates/registration/registration_form.html:18
+#: templates/registration/registration_form.html:23
+msgid "Please enter your password"
+msgstr "Пожалуйста, введите пароль"
+
+#: templates/registration/registration_form.html:22
+msgid "Confirm password"
+msgstr "Подтвердите пароль"
+
+#: templates/registration/registration_form.html:24
+msgid "Please confirm password"
+msgstr "Подтвердите новый пароль"
+
 #~ msgid "Home"
 #~ msgstr "Домой"
 
@@ -714,6 +759,3 @@ msgstr ""
 
 #~ msgid "Covers"
 #~ msgstr "Постеры"
-
-#~ msgid "Signed in as "
-#~ msgstr "Зашел как"

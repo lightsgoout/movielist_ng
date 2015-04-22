@@ -14,31 +14,24 @@
               <form method="POST" action="{% url 'login' %}" novalidate="novalidate">
                   {% csrf_token %}
                   <fieldset>
-                  <legend class="">Sign in</legend>
+                  <legend class="">{% trans 'Sign in' %}</legend>
                     {% if error %}
                         <div class="alert alert-danger" style="width: 265px;">
                         <p>{{ error }}</p>
                         </div>
                     {% endif %}
                   <div class="form-group">
-                      <label for="signin-username" class="control-label">Username or email</label>
-                      <input id="signin-username" autofocus="autofocus" type="text" class="form-control" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                      <label for="signin-username" class="control-label">{% trans 'Username or email' %}</label>
+                      <input id="signin-username" autofocus="autofocus" type="text" class="form-control" name="username" value="" required="" title="{% trans 'Please enter you username or email' %}" placeholder="example@gmail.com">
                       <span class="help-block"></span>
                   </div>
                   <div class="form-group">
-                      <label for="signin-password" class="control-label">Password</label>
+                      <label for="signin-password" class="control-label">{% trans 'Password' %}</label>
                       <input id="signin-password" type="password" class="form-control" name="password" value="" required="" title="Please enter your password">
                       <span class="help-block"></span>
                   </div>
-                  <div class="alert alert-error hide">Wrong username og password</div>
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" name="remember"> Remember me
-                      </label>
-                      <p class="help-block">(if this is a private computer)</p>
-                  </div>
-                  <button type="submit" class="btn btn-success ">Sign in</button>
-                      </fieldset>
+                  <button type="submit" class="btn btn-success ">{% trans 'Sign in' %}</button>
+                  </fieldset>
               </form>
           </div>
       </div>
