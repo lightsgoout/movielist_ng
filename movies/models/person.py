@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Sum, QuerySet
 import itertools
 from django.utils.text import slugify
+from djangosphinx.models import SphinxSearch
 from model_utils.managers import PassThroughManager
 
 
@@ -17,6 +18,15 @@ class PersonQuerySet(QuerySet):
 
 
 class Person(models.Model):
+
+    search = SphinxSearch(
+        index='people',
+        weights={
+            'name_en': 100,
+            'name_ru': 100,
+        }
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     name_en = models.CharField(max_length=255, unique=True)
