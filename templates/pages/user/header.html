@@ -10,8 +10,8 @@
     {% include 'pages/user/personal_info.html' with user=user %}
     <ul class="nav nav-pills" style="display: table-cell; vertical-align: middle; padding-left: 10px;">
         <li class="{% if '/followers/' in request.path %} active {% endif %}"><a href="{% url 'followers' user.username %}">{% trans 'Followers' %}</a></li>
-        <li><a href="#">{% trans 'Charts' %}</a></li>
-        <li><a href="#">{% trans 'Favorites' %}</a></li>
+{#        <li><a href="#">{% trans 'Charts' %}</a></li>#}
+{#        <li><a href="#">{% trans 'Favorites' %}</a></li>#}
     </ul>
 </div>
 <hr>
