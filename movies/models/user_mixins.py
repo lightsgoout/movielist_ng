@@ -323,4 +323,4 @@ class UserMoviesMixin(models.Model):
             filter(user=self, score__gt=0).\
             values_list('score').\
             annotate(Count('score'))
-        return {str(k): v for k, v in values}
+        return {str(int(k)): v for k, v in values}
