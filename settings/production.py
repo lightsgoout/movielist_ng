@@ -205,3 +205,6 @@ RAVEN_CONFIG = {
 SPHINX_API_VERSION = 0x116
 SPHINX_PORT = 9312
 SPHINX_SERVER = '127.0.0.1'
+
+POSTER_FETCH_DIR = os.path.join(os.path.dirname(BASE_DIR), 'posters')
+POSTER_BASE_URL = 'http://mvlst.com/posters/'

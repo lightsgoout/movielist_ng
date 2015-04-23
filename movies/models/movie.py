@@ -126,6 +126,7 @@ class Movie(models.Model):
     tomatoes_fresh = models.NullBooleanField(blank=True)
 
     image_imdb = models.URLField(blank=True, max_length=512)
+    image_mvlst = models.URLField(blank=True, max_length=512)
 
     rated = fields.MovieRatedField(blank=True, db_index=True)
 
@@ -169,11 +170,17 @@ class Movie(models.Model):
             return self.full_plot_en
 
     @property
+    def image_kinopoisk(self):
+        return u'http://st.kp.yandex.net/images/film_iphone/iphone360_{}.jpg'.format(self.kinopoisk_id)
+
+    @property
     def image_url(self):
+        if self.image_mvlst:
+            return self.image_mvlst
         if self.image_imdb:
             return self.image_imdb
         elif self.kinopoisk_id:
-            return u'http://st.kp.yandex.net/images/film_iphone/iphone360_{}.jpg'.format(self.kinopoisk_id)
+            return self.image_kinopoisk
 
     @property
     def imdb_url(self):
