@@ -27,6 +27,7 @@
       <label for="inputCountry" class="col-lg-3 control-label">{% trans 'Country' %}</label>
       <div class="col-lg-6">
         <select class="form-control" id="inputCountry" name="country">
+            <option value="">{% trans 'Unknown' %}</option>
             {% for country_id, country_name in countries %}
             <option value="{{ country_id }}" {% if request.user.country_id == country_id %}selected="selected"{% endif %}>{{ country_name }}</option>
             {% endfor %}
