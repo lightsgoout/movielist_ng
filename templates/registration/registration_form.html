@@ -1,28 +1,60 @@
+{% extends 'main.html' %}
 {% load i18n %}
-<form method="POST">
-    {% csrf_token %}
-    <fieldset>
-    <legend class="">{% trans 'Sign up' %}</legend>
-    <div class="form-group">
-        <label for="signup-email" class="control-label">{% trans 'Email' %}</label>
-        <input id="signup-email" type="email" class="form-control" name="email"  value="" required="" title="{% trans 'Please enter you email' %}" placeholder="example@gmail.com">
-        <span class="help-block"></span>
+{% load static %}
+{% block title %}
+    {% trans 'Registration' %}
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static "bootstrap-social/bootstrap-social.css" %}">
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-xs-4 col-xs-offset-4" style="margin-top: 50px;">
+        <div class="well">
+            <form method="POST" action="{% url 'registration_register' %}">
+                {% csrf_token %}
+                <fieldset>
+                <legend>{% trans 'Sign up' %}</legend>
+                {% for error in form.non_field_errors %}
+                <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="signup-email" class="control-label">{% trans 'Email' %}</label>
+                    <input id="signup-email" type="email" class="form-control" name="email"  value="{{ form.email.value|default:'' }}" required="required" autofocus="autofocus" title="{% trans 'Please enter you email' %}" placeholder="example@gmail.com">
+                    <span class="help-block"></span>
+                      {% for error in form.email.errors %}
+                        <p class="text-danger">^ {{ error }}</p>
+                      {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="signup-username" class="control-label">{% trans 'Username' %}</label>
+                    <input id="signup-username" type="text" class="form-control" name="username"  value="{{ form.username.value|default:'' }}" required="required" title="{% trans 'Please enter you username' %}" placeholder="">
+                    <span class="help-block"></span>
+                      {% for error in form.username.errors %}
+                        <p class="text-danger">^ {{ error }}</p>
+                      {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="signup-password" class="control-label">{% trans 'Password' %}</label>
+                    <input id="signup-password" type="password" class="form-control" name="password1" value="" required="" title="{% trans 'Please enter your password' %}">
+                    <span class="help-block"></span>
+                      {% for error in form.password1.errors %}
+                        <p class="text-danger">^ {{ error }}</p>
+                      {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="signup-password2" class="control-label">{% trans 'Confirm password' %}</label>
+                    <input id="signup-password2" type="password" class="form-control" name="password2" value="" required="" title="{% trans 'Please enter your password' %}">
+                      {% for error in form.password2.errors %}
+                        <p class="text-danger">^ {{ error }}</p>
+                      {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-success ">{% trans 'Sign up' %}</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="signup-username" class="control-label">{% trans 'Username' %}</label>
-        <input id="signup-username" type="text" class="form-control" name="username"  value="" required="" title="{% trans 'Please enter you username' %}" placeholder="">
-        <span class="help-block"></span>
-    </div>
-    <div class="form-group">
-        <label for="signup-password" class="control-label">{% trans 'Password' %}</label>
-        <input id="signup-password" type="password" class="form-control" name="password" value="" required="" title="{% trans 'Please enter your password' %}">
-        <span class="help-block"></span>
-    </div>
-    <div class="form-group">
-        <label for="signup-password2" class="control-label">{% trans 'Confirm password' %}</label>
-        <input id="signup-password2" type="password" class="form-control" name="password2" value="" required="" title="{% trans 'Please enter your password' %}">
-        <span class="help-block">{% trans 'Please confirm password' %}</span>
-    </div>
-    <button type="submit" class="btn btn-success ">{% trans 'Sign up' %}</button>
-    </fieldset>
-</form>
+</div>
+<hr>
+{% include '_social_buttons.html' %}
+{% endblock %}

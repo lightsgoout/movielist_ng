@@ -9,44 +9,37 @@
 {% endblock %}
 {% block body %}
 <div class="row">
-      <div class="col-xs-4">
-          <div class="well">
+    <div class="col-xs-4 col-xs-offset-4" style="margin-top: 50px;">
+        <div class="well">
               <form method="POST" action="{% url 'login' %}" novalidate="novalidate">
                   {% csrf_token %}
                   <fieldset>
                   <legend class="">{% trans 'Sign in' %}</legend>
                     {% if error %}
-                        <div class="alert alert-danger" style="width: 265px;">
+                        <div class="alert alert-danger">
                         <p>{{ error }}</p>
                         </div>
                     {% endif %}
                   <div class="form-group">
                       <label for="signin-username" class="control-label">{% trans 'Username or email' %}</label>
-                      <input id="signin-username" autofocus="autofocus" type="text" class="form-control" name="username" value="" required="" title="{% trans 'Please enter you username or email' %}" placeholder="example@gmail.com">
+                      <input id="signin-username" autofocus="autofocus" type="text" class="form-control" name="username" value="" required="required" title="{% trans 'Please enter you username or email' %}" placeholder="example@gmail.com">
                       <span class="help-block"></span>
                   </div>
                   <div class="form-group">
                       <label for="signin-password" class="control-label">{% trans 'Password' %}</label>
-                      <input id="signin-password" type="password" class="form-control" name="password" value="" required="" title="Please enter your password">
+                      <input id="signin-password" type="password" class="form-control" name="password" value="" required="required" title="Please enter your password">
                       <span class="help-block"></span>
                   </div>
                   <button type="submit" class="btn btn-success ">{% trans 'Sign in' %}</button>
                   </fieldset>
               </form>
-          </div>
-      </div>
-        <div class="col-xs-4">
-            <div class="well">
-                {% include 'registration/registration_form.html' %}
-            </div>
         </div>
+        <p class="text-center lead text-muted">{% trans "Don't have an account?" %}</p>
+        <p class="text-center">
+            <a class="btn btn-info" href="{% url 'registration_register' %}">{% trans 'Sign up' %}</a>
+        </p>
+      </div>
     </div>
     <hr>
-    <div class="row" style="margin-bottom: 15px;">
-
-    <a class="btn btn-facebook" href="{% url "socialauth_begin" "facebook" %}"><i class="fa fa-facebook"></i> | {% trans 'Connect with Facebook' %}</a>
-    <a class="btn btn-github" href="{% url "socialauth_begin" "github" %}"><i class="fa fa-github"></i> | {% trans 'Connect with Github' %}</a>
-    <a class="btn btn-vk" href="{% url "socialauth_begin" "vk-oauth" %}"><i class="fa fa-vk"></i> | {% trans 'Connect with VK' %}</a>
-    <a class="btn btn-twitter" href="{% url "socialauth_begin" "twitter" %}"><i class="fa fa-twitter"></i> | {% trans 'Connect with Twitter' %}</a>
-    </div>
+    {% include '_social_buttons.html' %}
 {% endblock %}

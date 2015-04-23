@@ -1,0 +1,8 @@
+{% load i18n %}
+<div class="row text-center" style="margin-bottom: 15px;">
+    <p class="lead text-muted" style="margin-top: 0;">{% trans 'These buttons work too.' %}</p>
+    <a class="btn btn-facebook" href="{% url "socialauth_begin" "facebook" %}"><i class="fa fa-facebook"></i> | {% trans 'Connect with Facebook' %}</a>
+    <a class="btn btn-github" href="{% url "socialauth_begin" "github" %}"><i class="fa fa-github"></i> | {% trans 'Connect with Github' %}</a>
+    <a class="btn btn-vk" href="{% url "socialauth_begin" "vk-oauth" %}"><i class="fa fa-vk"></i> | {% trans 'Connect with VK' %}</a>
+    <a class="btn btn-twitter" href="{% url "socialauth_begin" "twitter" %}"><i class="fa fa-twitter"></i> | {% trans 'Connect with Twitter' %}</a>
+</div>
