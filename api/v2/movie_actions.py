@@ -202,7 +202,7 @@ class MovieActionsResource(Resource):
         if u2m:
             result = {
                 'status': u2m.status,
-                'score': u2m.score,
+                'score': int(u2m.score) if u2m.score else None,
                 'comments': u2m.comments,
                 'id': u2m.id,
             }
