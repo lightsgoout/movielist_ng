@@ -214,4 +214,4 @@ SPHINX_SERVER = '127.0.0.1'
 POSTER_FETCH_DIR = os.path.join(os.path.dirname(BASE_DIR), 'posters')
 POSTER_BASE_URL = 'http://mvlst.com/posters/'
 
-
+BROKER_URL = 'redis://localhost:6379/4'
