@@ -23,9 +23,7 @@ class Command(BaseCommand):
             if r.status_code == 200:
                 m = hashlib.md5()
                 m.update(str(movie.pk) + 'salty salt')
-                file_name = '{}.jpg'.format(
-                    settings.POSTER_FETCH_DIR,
-                    m.hexdigest())
+                file_name = '{}.jpg'.format(m.hexdigest())
                 full_path = '{}/{}'.format(settings.POSTER_FETCH_DIR, file_name)
                 with open(full_path, 'wb') as img:
                     r.raw.decode_content = True
