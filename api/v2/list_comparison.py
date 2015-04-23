@@ -188,10 +188,10 @@ class ListComparisonResource(ModelResource):
 
     def dehydrate_score_left(self, bundle):
         if bundle.obj.score_left:
-            return float(bundle.obj.score_left)
+            return int(bundle.obj.score_left)
         return bundle.obj.score_left
 
     def dehydrate_score_right(self, bundle):
         if bundle.obj.score_right:
-            return float(bundle.obj.score_right)
+            return int(bundle.obj.score_right)
         return bundle.obj.score_right

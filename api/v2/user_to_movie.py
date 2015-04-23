@@ -122,12 +122,12 @@ class UserToMovieResource(ModelResource):
             """
             my_score = getattr(bundle.obj, 'my_score', None)
             if my_score:
-                return float(my_score)
+                return int(my_score)
         return None
 
     def dehydrate_score(self, bundle):
         if bundle.obj.score:
-            return float(bundle.obj.score)
+            return int(bundle.obj.score)
         return bundle.obj.score
 
     def dehydrate_my_status(self, bundle):
