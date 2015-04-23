@@ -10,7 +10,7 @@ from movies.models.user_mixins import UserMoviesMixin
 
 
 class MovielistUserManager(BaseUserManager):
-    def create_user(self, username, email, date_of_birth, password=None):
+    def create_user(self, username, email, date_of_birth=None, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
