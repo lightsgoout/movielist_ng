@@ -175,6 +175,9 @@ AJAX_LOOKUP_CHANNELS = {
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailBackend',
+
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.contrib.github.GithubBackend',
 )
 
 LANGUAGES = (
@@ -208,3 +211,5 @@ SPHINX_SERVER = '127.0.0.1'
 
 POSTER_FETCH_DIR = os.path.join(os.path.dirname(BASE_DIR), 'posters')
 POSTER_BASE_URL = 'http://mvlst.com/posters/'
+
+
