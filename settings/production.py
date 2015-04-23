@@ -175,13 +175,12 @@ AJAX_LOOKUP_CHANNELS = {
 }
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'accounts.backends.EmailBackend',
-
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.contrib.github.GithubBackend',
     'social_auth.backends.contrib.vk.VKOAuth2Backend',
     'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailBackend',
 )
 
 LANGUAGES = (
