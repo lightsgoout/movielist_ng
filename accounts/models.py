@@ -19,7 +19,7 @@ class MovielistUserManager(BaseUserManager):
             raise ValueError('Users must have a username')
 
         user = self.model(
-            email=self.normalize_email(email),
+            email=self.normalize_email(email) or None,
             date_of_birth=date_of_birth,
             username=username,
         )
