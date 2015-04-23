@@ -1,5 +1,6 @@
 from datetime import date
 from django.core import validators
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
@@ -10,7 +11,7 @@ from movies.models.user_mixins import UserMoviesMixin
 
 
 class MovielistUserManager(BaseUserManager):
-    def create_user(self, username, email=None, date_of_birth=None, password=None):
+    def create_user(self, username, email=None, password=None, date_of_birth=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -28,7 +29,7 @@ class MovielistUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, date_of_birth, password):
+    def create_superuser(self, username, email, password, date_of_birth):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -100,19 +101,19 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
     # noinspection PyUnusedLocal
     def has_perm(self, perm, obj=None):
         """Does the user have a specific permission?"""
-        # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
         """Does the user have permissions to view the app `app_label`?"""
-        # Simplest possible answer: Yes, always
         return True
 
     @property
     def is_staff(self):
         """Is the user a member of staff?"""
-        # Simplest possible answer: All admins are staff
         return self.is_admin
+
+    def get_absolute_url(self):
+        return reverse('list_watched', args=[self.username])
 
     @property
     def age(self):

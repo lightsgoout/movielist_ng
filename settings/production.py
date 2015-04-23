@@ -44,7 +44,6 @@ INSTALLED_APPS = (
 
     'shell_plus',
     'social_auth',
-    'registration',
     'ajax_select',
     'django_extensions',
     'djangobower',
@@ -166,8 +165,6 @@ SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 OMDB_LOGIN = 'enderstd@gmail.com'
-
-ACCOUNT_ACTIVATION_DAYS = 7
 
 AJAX_LOOKUP_CHANNELS = {
     'movie': ('movies.lookups', 'MovieLookup'),

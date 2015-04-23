@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm
+from django import forms
 from django.shortcuts import redirect, render
 from django.utils import translation
 from django.utils.translation import ugettext_lazy
@@ -38,12 +38,74 @@ def login_page(request):
     )
 
 
+class RegistrationForm(forms.Form):
+    email = forms.EmailField(required=True)
+    username = forms.CharField(max_length=30, required=True)
+    password1 = forms.CharField(required=True)
+    password2 = forms.CharField(required=True)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if MovielistUser.objects.filter(email=email).exists():
+            raise forms.ValidationError(ugettext_lazy(u'Email already exists'))
+
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if MovielistUser.objects.filter(username=username).exists():
+            raise forms.ValidationError(ugettext_lazy(u'Username already exists'))
+
+        return username
+
+    def clean(self):
+        cleaned_data = super(RegistrationForm, self).clean()
+        if cleaned_data['password1'] != cleaned_data['password2']:
+            raise forms.ValidationError(ugettext_lazy(u'Passwords do not match'))
+
+        return cleaned_data
+
+
+def register(request):
+
+    if request.user.is_authenticated():
+        return redirect('/')
+
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            MovielistUser.objects.create_user(
+                username=form.cleaned_data['username'],
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password1'],
+            )
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1']
+            )
+            login(request, user)
+            return redirect(user.get_absolute_url())
+        else:
+            return render(
+                request,
+                'registration/registration_form.html',
+                {
+                    'form': form,
+                }
+            )
+    return render(
+        request,
+        'registration/registration_form.html'
+    )
+
+
+@login_required
 def logout_view(request):
     logout(request)
     return redirect(reverse('login'))
 
 
-class MovielistUserForm(ModelForm):
+class MovielistUserForm(forms.ModelForm):
     class Meta:
         model = MovielistUser
         fields = ['country', 'gender', 'date_of_birth', 'email']
