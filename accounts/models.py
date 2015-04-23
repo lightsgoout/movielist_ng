@@ -10,14 +10,11 @@ from movies.models.user_mixins import UserMoviesMixin
 
 
 class MovielistUserManager(BaseUserManager):
-    def create_user(self, username, email, date_of_birth=None, password=None):
+    def create_user(self, username, email=None, date_of_birth=None, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
         """
-        if not email:
-            raise ValueError('Users must have an email address')
-
         if not username:
             raise ValueError('Users must have a username')
 
@@ -66,6 +63,7 @@ class MovielistUser(AbstractBaseUser, UserMoviesMixin, UserAchievementsMixin):
         verbose_name='email address',
         max_length=255,
         unique=True,
+        null=True,
     )
     date_of_birth = models.DateField(null=True, blank=True)
     date_joined = models.DateField(auto_now_add=True)
