@@ -216,3 +216,5 @@ POSTER_FETCH_DIR = os.path.join(os.path.dirname(BASE_DIR), 'posters')
 POSTER_BASE_URL = 'http://mvlst.com/posters/'
 
 BROKER_URL = 'redis://localhost:6379/4'
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
