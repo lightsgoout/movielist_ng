@@ -260,7 +260,9 @@ def search(request):
     Movie lookup.
     """
     if feature_enabled(features.SPHINX_SEARCH):
-        movies = Movie.search.query(query).order_by('-rating_imdb')
+        movies = Movie.search.query(
+            query
+        ).order_by('-rating_imdb')[:settings.SEARCH_RESULTS_PER_PAGE]
     else:
         movies = Movie.objects.prefetch_related(
             'genres',
@@ -277,7 +279,9 @@ def search(request):
     Person lookup.
     """
     if feature_enabled(features.SPHINX_SEARCH):
-        people = Person.search.query(query).order_by('-sort_power')
+        people = Person.search.query(
+            query
+        ).order_by('-sort_power')[:settings.SEARCH_RESULTS_PER_PAGE]
     else:
         people = Person.objects.filter(
             Q(name_en__icontains=query) |

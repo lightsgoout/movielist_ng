@@ -42,7 +42,7 @@ class AbstractSuggester(object):
             return result[:limit]
 
         # Top 250 IMDB suggestions
-        top_250_imdb_movies = Movie.top.imdb()[:250]
+        top_250_imdb_movies = Movie.top.imdb()
         for movie in top_250_imdb_movies:
             if movie.id in exclude_ids:
                 continue
