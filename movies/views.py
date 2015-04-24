@@ -281,7 +281,7 @@ def search(request):
     if feature_enabled(features.SPHINX_SEARCH):
         people = Person.search.query(
             query
-        ).order_by('-sort_power')[:settings.SEARCH_RESULTS_PER_PAGE]
+        ).order_by('-sort_power')
     else:
         people = Person.objects.filter(
             Q(name_en__icontains=query) |
@@ -292,7 +292,7 @@ def search(request):
             'written_movies',
             'composed_movies',
             'directed_movies',
-        ).order_by('-sort_power')[:settings.SEARCH_RESULTS_PER_PAGE]
+        ).order_by('-sort_power')
 
     """
     If only one movie found and no people then
