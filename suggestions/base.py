@@ -41,11 +41,9 @@ class AbstractSuggester(object):
         if len(result) > limit:
             return result[:limit]
 
-        # Top 250 IMDB suggestions
-        top_250_imdb_movies = Movie.top.imdb()
-        for movie in top_250_imdb_movies:
-            if movie.id in exclude_ids:
-                continue
+        # Top IMDB suggestions
+        top_imdb_movies = Movie.top.imdb().exclude(pk__in=list(exclude_ids))[:50]
+        for movie in top_imdb_movies:
             result.append((movie, factors.FACTOR_IMDB_TOP))
             exclude_ids.add(movie.id)
 
