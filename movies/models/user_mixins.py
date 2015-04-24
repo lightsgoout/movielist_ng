@@ -303,13 +303,15 @@ class UserMoviesMixin(models.Model):
         """
         @type movie movies.models.Movie
         """
-        return UserToMovie.objects.filter(
+        opinions = UserToMovie.objects.filter(
             movie=movie,
             status=constants.WATCHED,
             user_id__in=self.get_following().values_list('id', flat=True)
         ).select_related('user').exclude(
             comments=''
         ).values_list('user__username', 'score', 'comments')
+
+        return [(x[0], int(x[1]) if x[1] else None, x[2]) for x in opinions]
 
     def get_status_counters(self):
         values = UserToMovie.objects.\
