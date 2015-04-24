@@ -323,10 +323,10 @@ def search(request):
         watched_movies = {}
         plan_to_watch_movies = {}
 
-    if movies:
+    if len(movies):
         movies = movies[:settings.SEARCH_RESULTS_PER_PAGE]
 
-    if people:
+    if len(people):
         people = people[:settings.SEARCH_RESULTS_PER_PAGE]
 
     return render(
