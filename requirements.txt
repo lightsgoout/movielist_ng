@@ -31,7 +31,7 @@ IMDbPY==5.0
 ipdb==0.8
 ipython==2.4.1
 kinopoiskpy==0.6.0
-kombu==3.0.24
+kombu==3.0.30
 lxml==3.4.2
 mechanize==0.2.5
 mock==1.0.1
