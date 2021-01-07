@@ -32,7 +32,7 @@ ipdb==0.8
 ipython==2.4.1
 kinopoiskpy==0.6.0
 kombu==3.0.30
-lxml==3.4.2
+lxml==4.6.2
 mechanize==0.2.5
 mock==1.0.1
 model-mommy==1.2.3
